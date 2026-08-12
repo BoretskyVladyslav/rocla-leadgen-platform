@@ -5,6 +5,11 @@ export interface ProductSpec {
   value: string;
 }
 
+export interface ProductImage {
+  src: string;
+  alt: string;
+}
+
 export interface ProductVariant {
   id: ProductVariantId;
   name: string;
@@ -20,6 +25,10 @@ export interface Product {
   description?: string;
   imageSrc?: string;
   imageAlt?: string;
+  images?: ProductImage[];
+  priceLabel?: string;
+  compareAtPriceLabel?: string;
+  discountLabel?: string;
   variants?: ProductVariant[];
   specs?: ProductSpec[];
 }

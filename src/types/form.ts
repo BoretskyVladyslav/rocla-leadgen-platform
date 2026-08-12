@@ -18,6 +18,7 @@ export interface LeadFormData {
   phone?: string;
   company?: string;
   message?: string;
+  files?: FilePayload[];
 }
 
 export interface ProductOrderFormData extends LeadFormData {

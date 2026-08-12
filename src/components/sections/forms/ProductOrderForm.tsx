@@ -50,13 +50,14 @@ export function ProductOrderForm({
   }
 
   return (
-    <section className="bg-surface">
+    <section id="order" className="bg-surface">
       <div className="mx-auto w-full max-w-xl px-4 py-16 sm:px-6">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
           Request a quote
         </h2>
         <p className="mt-2 text-sm text-muted">
-          Attach drawings or specs (.pdf, .jpg, .png) with your inquiry.
+          Attach corporate requisites or drawings (.pdf, .jpg, .png) with your
+          inquiry.
         </p>
         <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
           <Input
@@ -113,7 +114,7 @@ export function ProductOrderForm({
             />
           </label>
           <FileUpload
-            label="Upload specs or drawings"
+            label="Corporate requisites"
             hint="Accepted: .pdf, .jpg, .png"
             onFilesChange={handleFilesChange}
           />

@@ -11,6 +11,8 @@ const DEFAULT_LOGOS: ClientLogo[] = [
   { name: "Apex Logistics" },
   { name: "Harbor Works" },
   { name: "Summit Industrial" },
+  { name: "Polar Warehousing" },
+  { name: "Cascade Materials" },
 ];
 
 export function ClientLogos({ logos = DEFAULT_LOGOS }: ClientLogosProps) {
@@ -20,11 +22,11 @@ export function ClientLogos({ logos = DEFAULT_LOGOS }: ClientLogosProps) {
         <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted">
           Trusted by operations teams
         </p>
-        <ul className="mt-6 flex flex-wrap gap-x-10 gap-y-4">
+        <ul className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
           {logos.map((logo) => (
             <li
               key={logo.name}
-              className="text-sm font-medium text-foreground/70"
+              className="flex h-16 items-center justify-center border border-border bg-white px-3 text-center text-xs font-medium text-foreground/70"
             >
               {logo.name}
             </li>

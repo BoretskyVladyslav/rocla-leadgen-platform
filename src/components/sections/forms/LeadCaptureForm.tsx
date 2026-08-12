@@ -2,10 +2,11 @@
 
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
+import { FileUpload } from "@/components/ui/FileUpload";
 import { Input } from "@/components/ui/Input";
-import type { LeadFormData } from "@/types/form";
+import type { FilePayload, LeadFormData } from "@/types/form";
 
-const INITIAL_STATE: LeadFormData = {
+const INITIAL_STATE: Omit<LeadFormData, "files"> = {
   fullName: "",
   email: "",
   phone: "",
@@ -14,12 +15,21 @@ const INITIAL_STATE: LeadFormData = {
 };
 
 export function LeadCaptureForm() {
-  const [form, setForm] = useState<LeadFormData>(INITIAL_STATE);
+  const [form, setForm] = useState(INITIAL_STATE);
+  const [files, setFiles] = useState<FilePayload[]>([]);
+  const [rawFiles, setRawFiles] = useState<File[]>([]);
+
+  function handleFilesChange(next: FilePayload[], raw: File[]) {
+    setFiles(next);
+    setRawFiles(raw);
+  }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    // Placeholder: wire to API / CRM later
-    console.info("lead-capture", form);
+    // Placeholder: wire to API / CRM later; attach rawFiles to FormData
+    console.info("lead-capture", { ...form, files }, {
+      fileCount: rawFiles.length,
+    });
   }
 
   return (
@@ -29,7 +39,7 @@ export function LeadCaptureForm() {
           Request a consultation
         </h2>
         <p className="mt-2 text-sm text-muted">
-          Share contact details and we will route your inquiry.
+          Share contact details and corporate requisites (.pdf, .jpg, .png).
         </p>
         <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
           <Input
@@ -72,6 +82,11 @@ export function LeadCaptureForm() {
               }
             />
           </label>
+          <FileUpload
+            label="Corporate requisites"
+            hint="Accepted: .pdf, .jpg, .png"
+            onFilesChange={handleFilesChange}
+          />
           <Button type="submit" className="w-full sm:w-auto">
             Submit inquiry
           </Button>
