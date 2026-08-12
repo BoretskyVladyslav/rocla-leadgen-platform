@@ -74,16 +74,6 @@ export interface Dictionary {
       fileType: string;
       fileSize: string;
     };
-    meta: {
-      phoneLabel: string;
-      phoneValue: string;
-      hoursLabel: string;
-      hoursValue: string;
-      addressLabel: string;
-      addressValue: string;
-      messengersLabel: string;
-      messengers: Array<{ label: string; href: string }>;
-    };
   };
   product: {
     eyebrow: string;
@@ -227,19 +217,6 @@ const DICTIONARY_UK: Dictionary = {
       fileType: "Лише PDF, JPG або PNG.",
       fileSize: "Файл перевищує 10 МБ.",
     },
-    meta: {
-      phoneLabel: "Телефон",
-      phoneValue: "+380 XX XXX XX XX",
-      hoursLabel: "Графік роботи",
-      hoursValue: "Пн–Пт, 09:00–18:00",
-      addressLabel: "Адреса",
-      addressValue: "м. Київ, вул. Прикладна, 1 (демо)",
-      messengersLabel: "Месенджери",
-      messengers: [
-        { label: "Telegram", href: "https://t.me/" },
-        { label: "Viber", href: "viber://chat" },
-      ],
-    },
   },
   product: {
     eyebrow: "Товар",
@@ -382,19 +359,6 @@ const DICTIONARY_RU: Dictionary = {
       phone: "Укажите телефон в формате +380… или 0…",
       fileType: "Только PDF, JPG или PNG.",
       fileSize: "Файл превышает 10 МБ.",
-    },
-    meta: {
-      phoneLabel: "Телефон",
-      phoneValue: "+380 XX XXX XX XX",
-      hoursLabel: "График работы",
-      hoursValue: "Пн–Пт, 09:00–18:00",
-      addressLabel: "Адрес",
-      addressValue: "г. Киев, ул. Примерная, 1 (демо)",
-      messengersLabel: "Мессенджеры",
-      messengers: [
-        { label: "Telegram", href: "https://t.me/" },
-        { label: "Viber", href: "viber://chat" },
-      ],
     },
   },
   product: {
