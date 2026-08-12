@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import type { Dictionary } from "@/data/dictionary";
 
@@ -12,7 +11,7 @@ export function ClientLogos({ copy, reviews }: ClientLogosProps) {
     <section className="bg-surface">
       <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
         <ScrollReveal>
-          <div className="rounded-md border border-border bg-white px-6 py-10 sm:px-10">
+          <div className="rounded-md border border-border bg-white px-6 py-10 shadow-sm sm:px-10">
             <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-accent-alt">
               {copy.eyebrow}
             </p>
@@ -23,15 +22,11 @@ export function ClientLogos({ copy, reviews }: ClientLogosProps) {
               {copy.logos.map((logo) => (
                 <li
                   key={logo.name}
-                  className="relative flex h-20 items-center justify-center overflow-hidden border border-border bg-surface"
+                  className="flex h-20 items-center justify-center border border-border bg-surface px-3 text-center"
                 >
-                  <Image
-                    src={logo.imageSrc}
-                    alt={logo.name}
-                    fill
-                    className="object-cover opacity-90"
-                    sizes="160px"
-                  />
+                  <span className="badge-status-outline max-w-full truncate">
+                    {logo.name}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -47,7 +42,7 @@ export function ClientLogos({ copy, reviews }: ClientLogosProps) {
                 {reviews.items.map((review) => (
                   <li
                     key={`${review.company}-${review.author}`}
-                    className="border border-border bg-surface p-5"
+                    className="border border-border bg-surface p-5 shadow-sm"
                   >
                     <p className="badge-status w-fit">{review.company}</p>
                     <p className="mt-3 text-sm leading-relaxed text-muted">

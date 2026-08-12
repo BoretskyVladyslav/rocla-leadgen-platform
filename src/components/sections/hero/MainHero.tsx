@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { MotionLink } from "@/components/motion/MotionLink";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
 import { cn } from "@/lib/utils";
 
@@ -73,16 +73,12 @@ export function MainHero({ copy }: MainHeroProps) {
           </ScrollReveal>
 
           <ScrollReveal delay={0.1}>
-            <div className="relative aspect-[4/3] w-full overflow-hidden border-2 border-accent bg-surface">
-              <Image
-                src="/images/hero/rokla-hero.jpg"
-                alt={copy.imageAlt}
-                fill
-                priority
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
+            <MediaPlaceholder
+              aspect="16/9"
+              label="Hero Photo Placeholder"
+              sizeHint="1600×900"
+              className="border-2 border-accent shadow-sm"
+            />
           </ScrollReveal>
         </div>
       </div>

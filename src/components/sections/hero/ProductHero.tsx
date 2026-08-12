@@ -1,65 +1,20 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { MotionLink } from "@/components/motion/MotionLink";
+import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
 import { cn } from "@/lib/utils";
-import type { Product, ProductImage } from "@/types/product";
+import type { Product } from "@/types/product";
 
 export interface ProductHeroProps {
   product: Product;
   copy: Dictionary["product"];
 }
 
-function GalleryPlaceholder({
-  image,
-  size,
-  copy,
-}: {
-  image: ProductImage;
-  size: "main" | "thumb";
-  copy: Dictionary["product"];
-}) {
-  const isMain = size === "main";
-
-  if (image.src) {
-    return (
-      <Image
-        src={image.src}
-        alt={image.alt}
-        fill
-        className="object-cover"
-        sizes={isMain ? "(max-width: 768px) 100vw, 50vw" : "96px"}
-      />
-    );
-  }
-
-  return (
-    <span
-      className={cn(
-        "absolute inset-0 flex items-center justify-center text-muted",
-        isMain ? "text-sm font-medium" : "px-1 text-center text-[10px]",
-      )}
-    >
-      {isMain ? copy.imagePlaceholder : copy.thumbPlaceholder}
-    </span>
-  );
-}
-
 export function ProductHero({ product, copy }: ProductHeroProps) {
-  const images =
-    product.images && product.images.length > 0
-      ? product.images
-      : [
-          {
-            src: product.imageSrc ?? "",
-            alt: product.imageAlt ?? `${product.name}`,
-          },
-        ];
-
+  const thumbCount = Math.max(product.images?.length ?? 2, 2);
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeImage = images[activeIndex] ?? images[0];
   const hasDiscount = Boolean(
     product.compareAtPriceLabel && product.priceLabel,
   );
@@ -68,30 +23,36 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
     <section className="bg-white">
       <div className="mx-auto grid w-full max-w-6xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:py-20">
         <div className="flex flex-col gap-3">
-          <div className="relative aspect-[4/3] w-full overflow-hidden border-2 border-accent bg-surface">
-            <GalleryPlaceholder image={activeImage} size="main" copy={copy} />
-          </div>
-          {images.length > 1 ? (
-            <ul className="grid grid-cols-4 gap-2 sm:grid-cols-5">
-              {images.map((image, index) => (
-                <li key={`${image.alt}-${index}`}>
-                  <button
-                    type="button"
-                    onClick={() => setActiveIndex(index)}
-                    aria-label={image.alt}
-                    className={cn(
-                      "relative aspect-square w-full overflow-hidden border bg-surface transition-colors hover:border-accent",
-                      index === activeIndex
-                        ? "border-accent"
-                        : "border-border",
-                    )}
-                  >
-                    <GalleryPlaceholder image={image} size="thumb" copy={copy} />
-                  </button>
-                </li>
-              ))}
-            </ul>
-          ) : null}
+          <MediaPlaceholder
+            aspect="4/3"
+            label="Product Photo Placeholder"
+            sizeHint="800×600"
+            className="border-2 border-accent shadow-sm"
+          />
+          <ul className="grid grid-cols-4 gap-2 sm:grid-cols-5">
+            {Array.from({ length: Math.min(thumbCount, 4) }).map((_, index) => (
+              <li key={index}>
+                <button
+                  type="button"
+                  onClick={() => setActiveIndex(index)}
+                  aria-label={`${copy.thumbPlaceholder} ${index + 1}`}
+                  className={cn(
+                    "w-full overflow-hidden transition-colors",
+                    index === activeIndex
+                      ? "ring-2 ring-accent ring-offset-1"
+                      : "opacity-80 hover:opacity-100",
+                  )}
+                >
+                  <MediaPlaceholder
+                    aspect="1/1"
+                    label={copy.thumbPlaceholder}
+                    sizeHint={`${index + 1}`}
+                    bordered
+                  />
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="flex flex-col gap-8">

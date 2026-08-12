@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
 import type { Product } from "@/types/product";
 
@@ -27,11 +27,6 @@ export function ProductGrid({ lang, products, copy }: ProductGridProps) {
         </ScrollReveal>
         <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product, index) => {
-            const cover = product.images?.[0]?.src || product.imageSrc || "";
-            const coverAlt =
-              product.images?.[0]?.alt ||
-              product.imageAlt ||
-              product.name;
             const badges = (product.specs ?? []).slice(0, 3);
 
             return (
@@ -39,24 +34,16 @@ export function ProductGrid({ lang, products, copy }: ProductGridProps) {
                 <ScrollReveal delay={index * 0.06}>
                   <Link
                     href={`/${lang}/product/${product.slug}`}
-                    className="group flex h-full flex-col overflow-hidden border-2 border-border bg-white transition-colors hover:border-accent"
+                    className="group flex h-full flex-col overflow-hidden border-2 border-border bg-white shadow-sm transition-colors hover:border-accent hover:shadow-md"
                   >
-                    <div className="relative aspect-[16/10] border-b border-border bg-surface">
-                      {cover ? (
-                        <Image
-                          src={cover}
-                          alt={coverAlt}
-                          fill
-                          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        />
-                      ) : (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="badge-status-outline">
-                            {copy.imageFallback}
-                          </span>
-                        </div>
-                      )}
+                    <div className="border-b border-border">
+                      <MediaPlaceholder
+                        aspect="4/3"
+                        label="Product Photo Placeholder"
+                        sizeHint="800×600"
+                        bordered={false}
+                        className="transition-[filter] duration-300 group-hover:brightness-[0.98]"
+                      />
                     </div>
                     <div className="flex flex-1 flex-col gap-3 p-5">
                       <h3 className="text-lg font-bold tracking-tight text-foreground">
