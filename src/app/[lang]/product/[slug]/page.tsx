@@ -4,20 +4,20 @@ import { ProductHero } from "@/components/sections/hero/ProductHero";
 import {
   getProductBySlug,
   LOCALES,
-  PRODUCTS,
+  PRODUCT_SLUGS,
 } from "@/data/products";
 
 export function generateStaticParams() {
   return LOCALES.flatMap((lang) =>
-    PRODUCTS.map((product) => ({ lang, slug: product.slug })),
+    PRODUCT_SLUGS.map((slug) => ({ lang, slug })),
   );
 }
 
 export default async function ProductPage({
   params,
 }: PageProps<"/[lang]/product/[slug]">) {
-  const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const { lang, slug } = await params;
+  const product = getProductBySlug(slug, lang);
 
   if (!product) {
     notFound();

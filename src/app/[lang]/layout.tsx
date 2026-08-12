@@ -1,7 +1,6 @@
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-
-const LOCALES = ["en", "uk"] as const;
+import { LOCALES } from "@/lib/i18n";
 
 export function generateStaticParams() {
   return LOCALES.map((lang) => ({ lang }));

@@ -1,72 +1,160 @@
 import type { Product } from "@/types/product";
+import {
+  DEFAULT_LOCALE,
+  LOCALES,
+  resolveLocale,
+  type Locale,
+} from "@/lib/i18n";
 
-export const LOCALES = ["en", "uk"] as const;
+export { LOCALES, DEFAULT_LOCALE, resolveLocale };
+export type { Locale };
 
-export const PRODUCTS: Product[] = [
+const PRODUCTS_UK: Product[] = [
   {
-    slug: "reach-truck",
-    name: "Reach Truck",
-    summary: "High-bay warehouse handling with narrow-aisle precision.",
+    slug: "hydraulic-pallet-truck-2t",
+    name: "Гідравлічна рохля 2 т",
+    summary:
+      "Універсальна рокла для складів і рамп — вантажопідйомність 2000 кг.",
     description:
-      "Placeholder product detail for reach truck configurations and inquiry capture.",
-    priceLabel: "€42,500",
-    compareAtPriceLabel: "€48,900",
-    discountLabel: "13% off",
+      "Базова гідравлічна рохля для щоденного переміщення палет на складі, у логістичному центрі чи на завантажувальній рампі.",
+    priceLabel: "від 8 900 ₴",
+    compareAtPriceLabel: "9 900 ₴",
+    discountLabel: "−10%",
     images: [
-      { src: "", alt: "Reach truck front view placeholder" },
-      { src: "", alt: "Reach truck side view placeholder" },
-      { src: "", alt: "Reach truck cabin placeholder" },
+      { src: "", alt: "Гідравлічна рохля 2 т — загальний вигляд" },
+      { src: "", alt: "Гідравлічна рохля 2 т — вила" },
     ],
     specs: [
-      { label: "Lift height", value: "Up to 12.5 m" },
-      { label: "Load capacity", value: "1,600 kg" },
-      { label: "Aisle width", value: "From 2.7 m" },
-      { label: "Battery", value: "Li-ion / lead-acid" },
+      { label: "Вантажопідйомність", value: "2000 кг" },
+      { label: "Довжина вил", value: "1150 мм" },
+      { label: "Ширина вил", value: "550 мм" },
+      { label: "Гарантія", value: "12 місяців" },
     ],
   },
   {
-    slug: "counterbalance-forklift",
-    name: "Counterbalance Forklift",
-    summary: "Versatile indoor/outdoor load handling for mixed fleets.",
+    slug: "hydraulic-pallet-truck-long-fork",
+    name: "Рохля з довгими вилами",
+    summary:
+      "Подовжені вила 1500 мм для нестандартних і подвійних палет.",
     description:
-      "Placeholder product detail for counterbalance forklift configurations.",
-    priceLabel: "€36,200",
-    compareAtPriceLabel: "€39,800",
-    discountLabel: "9% off",
+      "Гідравлічна рокла з подовженими вилами для роботи з європалетами в ряді, довгими вантажами та подвійними піддонами.",
+    priceLabel: "від 11 500 ₴",
+    compareAtPriceLabel: "12 800 ₴",
+    discountLabel: "−10%",
     images: [
-      { src: "", alt: "Counterbalance forklift front placeholder" },
-      { src: "", alt: "Counterbalance forklift side placeholder" },
+      { src: "", alt: "Рохля з довгими вилами — загальний вигляд" },
+      { src: "", alt: "Рохля з довгими вилами — деталь вил" },
     ],
     specs: [
-      { label: "Lift height", value: "Up to 6.5 m" },
-      { label: "Load capacity", value: "2,500 kg" },
-      { label: "Drive", value: "Electric / LPG" },
-      { label: "Tire type", value: "Pneumatic / cushion" },
+      { label: "Вантажопідйомність", value: "2000 кг" },
+      { label: "Довжина вил", value: "1500 мм" },
+      { label: "Ширина вил", value: "550 мм" },
+      { label: "Гарантія", value: "12 місяців" },
     ],
   },
   {
-    slug: "pallet-truck",
-    name: "Pallet Truck",
-    summary: "Compact horizontal transport for docks and staging areas.",
-    description: "Placeholder product detail for pallet truck configurations.",
-    priceLabel: "€4,850",
+    slug: "hydraulic-pallet-truck-heavy-duty",
+    name: "Посилена рохля 2.5 т",
+    summary:
+      "Підсилена конструкція для інтенсивного складського навантаження.",
+    description:
+      "Важка гідравлічна рокла з посиленою рамою та гідравлічним вузлом для безперервної роботи на великих складах.",
+    priceLabel: "від 14 200 ₴",
     images: [
-      { src: "", alt: "Pallet truck overview placeholder" },
-      { src: "", alt: "Pallet truck fork detail placeholder" },
+      { src: "", alt: "Посилена рохля 2.5 т — загальний вигляд" },
+      { src: "", alt: "Посилена рохля 2.5 т — гідравлічний вузол" },
     ],
     specs: [
-      { label: "Load capacity", value: "2,000 kg" },
-      { label: "Fork length", value: "1,150 mm" },
-      { label: "Travel speed", value: "Up to 6 km/h" },
-      { label: "Battery", value: "Maintenance-free" },
+      { label: "Вантажопідйомність", value: "2500 кг" },
+      { label: "Довжина вил", value: "1150 мм" },
+      { label: "Ширина вил", value: "570 мм" },
+      { label: "Гарантія", value: "24 місяці" },
     ],
   },
 ];
 
-export const PRODUCTS_BY_SLUG: Record<string, Product> = Object.fromEntries(
-  PRODUCTS.map((product) => [product.slug, product]),
-);
+const PRODUCTS_RU: Product[] = [
+  {
+    slug: "hydraulic-pallet-truck-2t",
+    name: "Гидравлическая рохля 2 т",
+    summary:
+      "Универсальная рокла для складов и рамп — грузоподъёмность 2000 кг.",
+    description:
+      "Базовая гидравлическая рохля для ежедневного перемещения паллет на складе, в логистическом центре или на погрузочной рампе.",
+    priceLabel: "от 8 900 ₴",
+    compareAtPriceLabel: "9 900 ₴",
+    discountLabel: "−10%",
+    images: [
+      { src: "", alt: "Гидравлическая рохля 2 т — общий вид" },
+      { src: "", alt: "Гидравлическая рохля 2 т — вилы" },
+    ],
+    specs: [
+      { label: "Грузоподъёмность", value: "2000 кг" },
+      { label: "Длина вил", value: "1150 мм" },
+      { label: "Ширина вил", value: "550 мм" },
+      { label: "Гарантия", value: "12 месяцев" },
+    ],
+  },
+  {
+    slug: "hydraulic-pallet-truck-long-fork",
+    name: "Рохля с длинными вилами",
+    summary:
+      "Удлинённые вилы 1500 мм для нестандартных и двойных паллет.",
+    description:
+      "Гидравлическая рокла с удлинёнными вилами для работы с европаллетами в ряд, длинными грузами и двойными поддонами.",
+    priceLabel: "от 11 500 ₴",
+    compareAtPriceLabel: "12 800 ₴",
+    discountLabel: "−10%",
+    images: [
+      { src: "", alt: "Рохля с длинными вилами — общий вид" },
+      { src: "", alt: "Рохля с длинными вилами — деталь вил" },
+    ],
+    specs: [
+      { label: "Грузоподъёмность", value: "2000 кг" },
+      { label: "Длина вил", value: "1500 мм" },
+      { label: "Ширина вил", value: "550 мм" },
+      { label: "Гарантия", value: "12 месяцев" },
+    ],
+  },
+  {
+    slug: "hydraulic-pallet-truck-heavy-duty",
+    name: "Усиленная рохля 2.5 т",
+    summary:
+      "Усиленная конструкция для интенсивной складской нагрузки.",
+    description:
+      "Тяжёлая гидравлическая рокла с усиленной рамой и гидравлическим узлом для непрерывной работы на крупных складах.",
+    priceLabel: "от 14 200 ₴",
+    images: [
+      { src: "", alt: "Усиленная рохля 2.5 т — общий вид" },
+      { src: "", alt: "Усиленная рохля 2.5 т — гидравлический узел" },
+    ],
+    specs: [
+      { label: "Грузоподъёмность", value: "2500 кг" },
+      { label: "Длина вил", value: "1150 мм" },
+      { label: "Ширина вил", value: "570 мм" },
+      { label: "Гарантия", value: "24 месяца" },
+    ],
+  },
+];
 
-export function getProductBySlug(slug: string): Product | undefined {
-  return PRODUCTS_BY_SLUG[slug];
+const PRODUCTS_BY_LOCALE: Record<Locale, Product[]> = {
+  uk: PRODUCTS_UK,
+  ru: PRODUCTS_RU,
+};
+
+/** Shared slugs across locales (for static params). */
+export const PRODUCT_SLUGS = PRODUCTS_UK.map((product) => product.slug);
+
+/** Default-locale catalog (uk) for callers that need a flat list. */
+export const PRODUCTS = PRODUCTS_BY_LOCALE[DEFAULT_LOCALE];
+
+export function getProducts(lang: string): Product[] {
+  return PRODUCTS_BY_LOCALE[resolveLocale(lang)];
+}
+
+export function getProductBySlug(
+  slug: string,
+  lang: string = DEFAULT_LOCALE,
+): Product | undefined {
+  return getProducts(lang).find((product) => product.slug === slug);
 }
