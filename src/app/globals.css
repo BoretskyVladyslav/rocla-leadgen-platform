@@ -4,7 +4,7 @@
   --color-white: #ffffff;
   --color-surface: #f4f5f7;
   --color-graphite: #111827;
-  --color-muted: #6b7280;
+  --color-muted: #4b5563;
   --color-border: #e5e7eb;
   --color-accent: #111827;
   --color-accent-hover: #000000;
@@ -28,4 +28,6 @@ body {
   background: var(--color-white);
   color: var(--color-graphite);
   font-family: var(--font-geist-sans), ui-sans-serif, sans-serif;
+  line-height: 1.625;
+  letter-spacing: -0.011em;
 }

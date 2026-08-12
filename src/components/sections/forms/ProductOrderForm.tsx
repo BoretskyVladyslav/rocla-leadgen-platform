@@ -11,6 +11,9 @@ export interface ProductOrderFormProps {
   variantId?: string;
 }
 
+const fieldControlClass =
+  "w-full rounded-md border border-border bg-white px-3.5 py-3 text-foreground shadow-sm placeholder:text-muted/80 transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/15 focus-visible:ring-offset-1";
+
 export function ProductOrderForm({
   productSlug,
   variantId,
@@ -43,7 +46,6 @@ export function ProductOrderForm({
       files,
     };
 
-    // Placeholder: attach `rawFiles` to FormData when wiring the API
     console.info("product-order", payload, {
       fileCount: rawFiles.length,
     });
@@ -51,15 +53,18 @@ export function ProductOrderForm({
 
   return (
     <section id="order" className="bg-surface">
-      <div className="mx-auto w-full max-w-xl px-4 py-16 sm:px-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+      <div className="mx-auto w-full max-w-xl px-4 py-16 sm:px-6 lg:py-24">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
           Request a quote
         </h2>
-        <p className="mt-2 text-sm text-muted">
+        <p className="mt-3 text-base leading-relaxed text-muted">
           Attach corporate requisites or drawings (.pdf, .jpg, .png) with your
           inquiry.
         </p>
-        <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
+        <form
+          onSubmit={handleSubmit}
+          className="mt-10 flex flex-col gap-5 rounded-md border border-border bg-white p-6 shadow-sm sm:p-8"
+        >
           <Input
             label="Full name"
             name="fullName"
@@ -102,11 +107,13 @@ export function ProductOrderForm({
             }
           />
           <label className="flex flex-col gap-1.5 text-sm">
-            <span className="font-medium text-foreground">Notes</span>
+            <span className="font-medium tracking-tight text-foreground">
+              Notes
+            </span>
             <textarea
               name="message"
               rows={4}
-              className="w-full rounded-md border border-border bg-white px-3 py-2 text-foreground placeholder:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20"
+              className={fieldControlClass}
               value={form.message}
               onChange={(e) =>
                 setForm((s) => ({ ...s, message: e.target.value }))
@@ -118,7 +125,7 @@ export function ProductOrderForm({
             hint="Accepted: .pdf, .jpg, .png"
             onFilesChange={handleFilesChange}
           />
-          <Button type="submit" className="w-full sm:w-auto">
+          <Button type="submit" size="lg" className="mt-2 w-full">
             Send order inquiry
           </Button>
         </form>

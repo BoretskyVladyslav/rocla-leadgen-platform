@@ -32,22 +32,22 @@ export function FaqAccordion({ items = DEFAULT_ITEMS }: FaqAccordionProps) {
 
   return (
     <section className="bg-white">
-      <div className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+      <div className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 lg:py-24">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
           FAQ
         </h2>
-        <ul className="mt-8 divide-y divide-border border-y border-border">
+        <ul className="mt-10 divide-y divide-border border-y border-border">
           {items.map((item, index) => {
             const isOpen = openIndex === index;
             return (
               <li key={item.question}>
                 <button
                   type="button"
-                  className="flex w-full items-center justify-between gap-4 py-4 text-left"
+                  className="flex w-full items-center justify-between gap-4 py-5 text-left"
                   aria-expanded={isOpen}
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                 >
-                  <span className="text-sm font-medium text-foreground">
+                  <span className="text-sm font-medium tracking-tight text-foreground sm:text-base">
                     {item.question}
                   </span>
                   <span
@@ -61,7 +61,9 @@ export function FaqAccordion({ items = DEFAULT_ITEMS }: FaqAccordionProps) {
                   </span>
                 </button>
                 {isOpen ? (
-                  <p className="pb-4 text-sm text-muted">{item.answer}</p>
+                  <p className="pb-5 text-sm leading-relaxed text-muted">
+                    {item.answer}
+                  </p>
                 ) : null}
               </li>
             );

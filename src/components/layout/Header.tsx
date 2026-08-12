@@ -6,7 +6,7 @@ export interface HeaderProps {
 
 export function Header({ lang }: HeaderProps) {
   return (
-    <header className="border-b border-border bg-white">
+    <header className="sticky top-0 z-40 border-b border-border bg-white/95 backdrop-blur-sm">
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           href={`/${lang}`}
@@ -17,15 +17,15 @@ export function Header({ lang }: HeaderProps) {
         <nav aria-label="Primary" className="flex items-center gap-6 text-sm">
           <Link
             href={`/${lang}#catalog`}
-            className="text-muted transition-colors hover:text-foreground"
+            className="font-medium text-muted transition-colors hover:text-foreground"
           >
             Catalog
           </Link>
           <Link
             href={`/${lang}#contact`}
-            className="text-muted transition-colors hover:text-foreground"
+            className="inline-flex h-9 items-center rounded-md bg-accent px-3.5 text-sm font-medium text-accent-fg transition-colors hover:bg-accent-hover"
           >
-            Contact
+            Request quote
           </Link>
         </nav>
       </div>

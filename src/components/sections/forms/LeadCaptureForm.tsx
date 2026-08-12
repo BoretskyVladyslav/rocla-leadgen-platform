@@ -14,6 +14,9 @@ const INITIAL_STATE: Omit<LeadFormData, "files"> = {
   message: "",
 };
 
+const fieldControlClass =
+  "w-full rounded-md border border-border bg-white px-3.5 py-3 text-foreground shadow-sm placeholder:text-muted/80 transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/15 focus-visible:ring-offset-1";
+
 export function LeadCaptureForm() {
   const [form, setForm] = useState(INITIAL_STATE);
   const [files, setFiles] = useState<FilePayload[]>([]);
@@ -26,7 +29,6 @@ export function LeadCaptureForm() {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    // Placeholder: wire to API / CRM later; attach rawFiles to FormData
     console.info("lead-capture", { ...form, files }, {
       fileCount: rawFiles.length,
     });
@@ -34,14 +36,17 @@ export function LeadCaptureForm() {
 
   return (
     <section id="contact" className="bg-surface">
-      <div className="mx-auto w-full max-w-xl px-4 py-16 sm:px-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+      <div className="mx-auto w-full max-w-xl px-4 py-16 sm:px-6 lg:py-24">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
           Request a consultation
         </h2>
-        <p className="mt-2 text-sm text-muted">
+        <p className="mt-3 text-base leading-relaxed text-muted">
           Share contact details and corporate requisites (.pdf, .jpg, .png).
         </p>
-        <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
+        <form
+          onSubmit={handleSubmit}
+          className="mt-10 flex flex-col gap-5 rounded-md border border-border bg-white p-6 shadow-sm sm:p-8"
+        >
           <Input
             label="Full name"
             name="fullName"
@@ -71,11 +76,13 @@ export function LeadCaptureForm() {
             onChange={(e) => setForm((s) => ({ ...s, company: e.target.value }))}
           />
           <label className="flex flex-col gap-1.5 text-sm">
-            <span className="font-medium text-foreground">Message</span>
+            <span className="font-medium tracking-tight text-foreground">
+              Message
+            </span>
             <textarea
               name="message"
               rows={4}
-              className="w-full rounded-md border border-border bg-white px-3 py-2 text-foreground placeholder:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20"
+              className={fieldControlClass}
               value={form.message}
               onChange={(e) =>
                 setForm((s) => ({ ...s, message: e.target.value }))
@@ -87,7 +94,7 @@ export function LeadCaptureForm() {
             hint="Accepted: .pdf, .jpg, .png"
             onFilesChange={handleFilesChange}
           />
-          <Button type="submit" className="w-full sm:w-auto">
+          <Button type="submit" size="lg" className="mt-2 w-full">
             Submit inquiry
           </Button>
         </form>
