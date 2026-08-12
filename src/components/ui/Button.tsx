@@ -15,7 +15,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-accent text-accent-fg hover:bg-accent-hover focus-visible:ring-accent font-bold uppercase tracking-wide",
+    "bg-accent text-accent-fg hover:bg-accent-hover focus-visible:ring-accent font-bold uppercase tracking-wide cta-glow cta-shine",
   secondary:
     "bg-dark text-white hover:bg-graphite focus-visible:ring-dark font-bold uppercase tracking-wide",
   ghost:
@@ -46,7 +46,7 @@ export function Button({
       <button
         type={type}
         className={cn(
-          "inline-flex w-full items-center justify-center gap-2 rounded-md font-medium transition-colors shadow-sm hover:shadow-md",
+          "inline-flex w-full items-center justify-center gap-2 rounded-md font-medium transition-colors",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
           "disabled:pointer-events-none disabled:opacity-50",
           variantClasses[variant],

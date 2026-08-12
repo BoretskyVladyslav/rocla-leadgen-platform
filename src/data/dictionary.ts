@@ -60,7 +60,30 @@ export interface Dictionary {
     quantity: string;
     filesLabel: string;
     filesHint: string;
+    filesBrowse: string;
+    filesDrag: string;
+    filesMaxSize: string;
     submit: string;
+    successTitle: string;
+    successBody: string;
+    successReset: string;
+    errors: {
+      fullName: string;
+      email: string;
+      phone: string;
+      fileType: string;
+      fileSize: string;
+    };
+    meta: {
+      phoneLabel: string;
+      phoneValue: string;
+      hoursLabel: string;
+      hoursValue: string;
+      addressLabel: string;
+      addressValue: string;
+      messengersLabel: string;
+      messengers: Array<{ label: string; href: string }>;
+    };
   };
   product: {
     eyebrow: string;
@@ -190,7 +213,33 @@ const DICTIONARY_UK: Dictionary = {
     quantity: "Кількість",
     filesLabel: "Корпоративні реквізити",
     filesHint: "Приймаємо: .pdf, .jpg, .png",
+    filesBrowse: "Обрати файли",
+    filesDrag: "Перетягніть файли сюди",
+    filesMaxSize: "До 10 МБ на файл",
     submit: "Надіслати заявку",
+    successTitle: "Заявка успішно відправлена",
+    successBody: "Менеджер зв’яжеться з вами найближчим часом у робочі години.",
+    successReset: "Надіслати ще одну заявку",
+    errors: {
+      fullName: "Вкажіть ім’я (мінімум 2 символи).",
+      email: "Вкажіть коректний email.",
+      phone: "Вкажіть телефон у форматі +380… або 0…",
+      fileType: "Лише PDF, JPG або PNG.",
+      fileSize: "Файл перевищує 10 МБ.",
+    },
+    meta: {
+      phoneLabel: "Телефон",
+      phoneValue: "+380 XX XXX XX XX",
+      hoursLabel: "Графік роботи",
+      hoursValue: "Пн–Пт, 09:00–18:00",
+      addressLabel: "Адреса",
+      addressValue: "м. Київ, вул. Прикладна, 1 (демо)",
+      messengersLabel: "Месенджери",
+      messengers: [
+        { label: "Telegram", href: "https://t.me/" },
+        { label: "Viber", href: "viber://chat" },
+      ],
+    },
   },
   product: {
     eyebrow: "Товар",
@@ -320,7 +369,33 @@ const DICTIONARY_RU: Dictionary = {
     quantity: "Количество",
     filesLabel: "Корпоративные реквизиты",
     filesHint: "Принимаем: .pdf, .jpg, .png",
+    filesBrowse: "Выбрать файлы",
+    filesDrag: "Перетащите файлы сюда",
+    filesMaxSize: "До 10 МБ на файл",
     submit: "Отправить заявку",
+    successTitle: "Заявка успешно отправлена",
+    successBody: "Менеджер свяжется с вами в ближайшее время в рабочие часы.",
+    successReset: "Отправить ещё одну заявку",
+    errors: {
+      fullName: "Укажите имя (минимум 2 символа).",
+      email: "Укажите корректный email.",
+      phone: "Укажите телефон в формате +380… или 0…",
+      fileType: "Только PDF, JPG или PNG.",
+      fileSize: "Файл превышает 10 МБ.",
+    },
+    meta: {
+      phoneLabel: "Телефон",
+      phoneValue: "+380 XX XXX XX XX",
+      hoursLabel: "График работы",
+      hoursValue: "Пн–Пт, 09:00–18:00",
+      addressLabel: "Адрес",
+      addressValue: "г. Киев, ул. Примерная, 1 (демо)",
+      messengersLabel: "Мессенджеры",
+      messengers: [
+        { label: "Telegram", href: "https://t.me/" },
+        { label: "Viber", href: "viber://chat" },
+      ],
+    },
   },
   product: {
     eyebrow: "Товар",

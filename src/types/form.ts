@@ -37,3 +37,23 @@ export const ACCEPTED_UPLOAD_EXTENSIONS: AcceptedUploadExtension[] = [
 
 export const ACCEPTED_UPLOAD_ACCEPT =
   ".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png";
+
+export const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
+
+export const ACCEPTED_UPLOAD_MIME_SET = new Set<string>([
+  "application/pdf",
+  "image/jpeg",
+  "image/png",
+]);
+
+export function isAcceptedUploadFile(file: File): boolean {
+  const name = file.name.toLowerCase();
+  const extOk =
+    name.endsWith(".pdf") ||
+    name.endsWith(".jpg") ||
+    name.endsWith(".jpeg") ||
+    name.endsWith(".png");
+  const mimeOk =
+    !file.type || ACCEPTED_UPLOAD_MIME_SET.has(file.type);
+  return extOk && mimeOk;
+}

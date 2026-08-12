@@ -18,7 +18,13 @@ export function MotionLink({
 }: ComponentProps<typeof Link> & { children: ReactNode }) {
   return (
     <motion.div className="inline-flex" {...motionHover}>
-      <Link className={cn("shadow-sm transition-shadow hover:shadow-md", className)} {...props}>
+      <Link
+        className={cn(
+          "relative cta-glow cta-shine shadow-sm transition-shadow",
+          className,
+        )}
+        {...props}
+      >
         {children}
       </Link>
     </motion.div>

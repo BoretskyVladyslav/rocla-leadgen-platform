@@ -27,11 +27,12 @@ export function Input({
         className={cn(
           "h-12 w-full rounded-md border border-border bg-white px-3.5 text-foreground shadow-sm",
           "placeholder:text-muted/80",
-          "transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/15 focus-visible:ring-offset-1",
+          "transition-[border-color,box-shadow] focus-visible:outline-none focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/45 focus-visible:ring-offset-1",
           "disabled:cursor-not-allowed disabled:opacity-50",
-          error && "border-red-500 focus-visible:ring-red-500/30",
+          error && "border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/30",
           className,
         )}
+        aria-invalid={error ? true : undefined}
         {...props}
       />
       {error ? <span className="text-xs text-red-600">{error}</span> : null}
