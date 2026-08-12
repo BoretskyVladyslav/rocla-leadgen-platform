@@ -11,7 +11,7 @@ export function Header({ lang }: HeaderProps) {
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
         <Link
           href={`/${lang}`}
-          className="text-lg font-semibold tracking-tight text-foreground"
+          className="text-lg font-bold tracking-tight text-heading"
         >
           Rocla
         </Link>
@@ -19,13 +19,13 @@ export function Header({ lang }: HeaderProps) {
           <LocaleSwitcher lang={lang} />
           <Link
             href={`/${lang}#catalog`}
-            className="hidden font-medium text-muted transition-colors hover:text-foreground sm:inline"
+            className="hidden font-bold uppercase tracking-wide text-muted transition-colors hover:text-accent-alt sm:inline"
           >
             Catalog
           </Link>
           <Link
             href={`/${lang}#contact`}
-            className="inline-flex h-9 items-center rounded-md bg-accent px-3.5 text-sm font-medium text-accent-fg transition-colors hover:bg-accent-hover"
+            className="inline-flex h-9 items-center rounded-md bg-accent px-3.5 text-xs font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover"
           >
             Request quote
           </Link>

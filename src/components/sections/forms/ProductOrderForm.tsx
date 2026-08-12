@@ -52,18 +52,21 @@ export function ProductOrderForm({
   }
 
   return (
-    <section id="order" className="bg-surface">
-      <div className="mx-auto w-full max-w-xl px-4 py-16 sm:px-6 lg:py-24">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+    <section id="order" className="bg-surface-muted">
+      <div className="mx-auto w-full max-w-xl px-4 py-16 sm:px-6 lg:py-20">
+        <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-accent-alt">
+          Order
+        </p>
+        <h2 className="mt-3 text-center text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">
           Request a quote
         </h2>
-        <p className="mt-3 text-base leading-relaxed text-muted">
+        <p className="mt-3 text-center text-base leading-relaxed text-muted">
           Attach corporate requisites or drawings (.pdf, .jpg, .png) with your
           inquiry.
         </p>
         <form
           onSubmit={handleSubmit}
-          className="mt-10 flex flex-col gap-5 rounded-md border border-border bg-white p-6 shadow-sm sm:p-8"
+          className="mt-10 flex flex-col gap-5 border-2 border-accent bg-white p-6 sm:p-8"
         >
           <Input
             label="Full name"

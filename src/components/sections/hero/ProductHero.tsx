@@ -114,9 +114,7 @@ export function ProductHero({ product }: ProductHeroProps) {
                     {product.compareAtPriceLabel}
                   </p>
                   {product.discountLabel ? (
-                    <p className="rounded-md bg-surface px-2 py-0.5 text-sm font-medium text-foreground">
-                      {product.discountLabel}
-                    </p>
+                    <p className="badge-status">{product.discountLabel}</p>
                   ) : null}
                 </>
               ) : null}
@@ -125,7 +123,7 @@ export function ProductHero({ product }: ProductHeroProps) {
 
           <Link
             href="#order"
-            className="inline-flex h-12 w-fit items-center justify-center rounded-md bg-accent px-6 text-base font-medium text-accent-fg transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            className="inline-flex h-12 w-fit items-center justify-center rounded-md bg-accent px-6 text-sm font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             Request a quote
           </Link>

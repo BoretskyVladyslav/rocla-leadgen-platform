@@ -12,14 +12,15 @@ export default async function HomePage({
   const { lang } = await params;
   const products = getProducts(lang);
 
+  /* Archiv-ltd content order: hero → catalog → advantages → clients → form → reviews/FAQ */
   return (
     <>
       <MainHero />
-      <TrustBadges />
       <ProductGrid lang={lang} products={products} />
+      <TrustBadges />
       <ClientLogos />
-      <FaqAccordion />
       <LeadCaptureForm />
+      <FaqAccordion />
     </>
   );
 }

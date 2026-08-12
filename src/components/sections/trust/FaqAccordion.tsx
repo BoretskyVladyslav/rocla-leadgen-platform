@@ -31,9 +31,13 @@ export function FaqAccordion({ items = DEFAULT_ITEMS }: FaqAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="bg-white">
-      <div className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 lg:py-24">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+    <section className="bg-surface">
+      <div className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 lg:py-20">
+        <div className="rounded-md border border-border bg-white px-6 py-10 sm:px-10">
+        <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-accent-alt">
+          Support
+        </p>
+        <h2 className="mt-3 text-center text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">
           FAQ
         </h2>
         <ul className="mt-10 divide-y divide-border border-y border-border">
@@ -69,6 +73,7 @@ export function FaqAccordion({ items = DEFAULT_ITEMS }: FaqAccordionProps) {
             );
           })}
         </ul>
+        </div>
       </div>
     </section>
   );
