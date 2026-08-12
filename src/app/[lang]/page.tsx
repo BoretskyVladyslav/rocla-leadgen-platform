@@ -4,6 +4,7 @@ import { MainHero } from "@/components/sections/hero/MainHero";
 import { ClientLogos } from "@/components/sections/trust/ClientLogos";
 import { FaqAccordion } from "@/components/sections/trust/FaqAccordion";
 import { TrustBadges } from "@/components/sections/trust/TrustBadges";
+import { getDictionary } from "@/data/dictionary";
 import { getProducts } from "@/data/products";
 
 export default async function HomePage({
@@ -11,16 +12,16 @@ export default async function HomePage({
 }: PageProps<"/[lang]">) {
   const { lang } = await params;
   const products = getProducts(lang);
+  const dict = getDictionary(lang);
 
-  /* Archiv-ltd content order: hero → catalog → advantages → clients → form → reviews/FAQ */
   return (
     <>
-      <MainHero />
-      <ProductGrid lang={lang} products={products} />
-      <TrustBadges />
-      <ClientLogos />
-      <LeadCaptureForm />
-      <FaqAccordion />
+      <MainHero copy={dict.hero} />
+      <ProductGrid lang={lang} products={products} copy={dict.catalog} />
+      <TrustBadges copy={dict.advantages} />
+      <ClientLogos copy={dict.clients} reviews={dict.reviews} />
+      <LeadCaptureForm copy={dict.leadForm} />
+      <FaqAccordion copy={dict.faq} />
     </>
   );
 }

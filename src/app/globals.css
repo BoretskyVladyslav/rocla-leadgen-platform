@@ -41,6 +41,10 @@ body {
   letter-spacing: -0.011em;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* Status / CTA badge primitives (archiv gold + dark-grey) */
 .badge-status {
   display: inline-flex;

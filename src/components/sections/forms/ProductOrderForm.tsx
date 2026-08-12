@@ -4,11 +4,13 @@ import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
 import { FileUpload } from "@/components/ui/FileUpload";
 import { Input } from "@/components/ui/Input";
+import type { Dictionary } from "@/data/dictionary";
 import type { FilePayload, ProductOrderFormData } from "@/types/form";
 
 export interface ProductOrderFormProps {
   productSlug: string;
   variantId?: string;
+  copy: Dictionary["leadForm"];
 }
 
 const fieldControlClass =
@@ -17,6 +19,7 @@ const fieldControlClass =
 export function ProductOrderForm({
   productSlug,
   variantId,
+  copy,
 }: ProductOrderFormProps) {
   const [form, setForm] = useState<
     Omit<ProductOrderFormData, "files" | "productSlug" | "variantId">
@@ -55,28 +58,27 @@ export function ProductOrderForm({
     <section id="order" className="bg-surface-muted">
       <div className="mx-auto w-full max-w-xl px-4 py-16 sm:px-6 lg:py-20">
         <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-accent-alt">
-          Order
+          {copy.eyebrow}
         </p>
         <h2 className="mt-3 text-center text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">
-          Request a quote
+          {copy.title}
         </h2>
         <p className="mt-3 text-center text-base leading-relaxed text-muted">
-          Attach corporate requisites or drawings (.pdf, .jpg, .png) with your
-          inquiry.
+          {copy.subtitle}
         </p>
         <form
           onSubmit={handleSubmit}
           className="mt-10 flex flex-col gap-5 border-2 border-accent bg-white p-6 sm:p-8"
         >
           <Input
-            label="Full name"
+            label={copy.fullName}
             name="fullName"
             required
             value={form.fullName}
             onChange={(e) => setForm((s) => ({ ...s, fullName: e.target.value }))}
           />
           <Input
-            label="Email"
+            label={copy.email}
             name="email"
             type="email"
             required
@@ -84,20 +86,20 @@ export function ProductOrderForm({
             onChange={(e) => setForm((s) => ({ ...s, email: e.target.value }))}
           />
           <Input
-            label="Phone"
+            label={copy.phone}
             name="phone"
             type="tel"
             value={form.phone}
             onChange={(e) => setForm((s) => ({ ...s, phone: e.target.value }))}
           />
           <Input
-            label="Company"
+            label={copy.company}
             name="company"
             value={form.company}
             onChange={(e) => setForm((s) => ({ ...s, company: e.target.value }))}
           />
           <Input
-            label="Quantity"
+            label={copy.quantity}
             name="quantity"
             type="number"
             min={1}
@@ -111,7 +113,7 @@ export function ProductOrderForm({
           />
           <label className="flex flex-col gap-1.5 text-sm">
             <span className="font-medium tracking-tight text-foreground">
-              Notes
+              {copy.message}
             </span>
             <textarea
               name="message"
@@ -124,12 +126,12 @@ export function ProductOrderForm({
             />
           </label>
           <FileUpload
-            label="Corporate requisites"
-            hint="Accepted: .pdf, .jpg, .png"
+            label={copy.filesLabel}
+            hint={copy.filesHint}
             onFilesChange={handleFilesChange}
           />
           <Button type="submit" size="lg" className="mt-2 w-full">
-            Send order inquiry
+            {copy.submit}
           </Button>
         </form>
       </div>

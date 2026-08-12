@@ -1,4 +1,7 @@
+"use client";
+
 import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost";
@@ -34,19 +37,26 @@ export function Button({
   ...props
 }: ButtonProps) {
   return (
-    <button
-      type={type}
-      className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-md font-medium transition-colors",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
-        "disabled:pointer-events-none disabled:opacity-50",
-        variantClasses[variant],
-        sizeClasses[size],
-        className,
-      )}
-      {...props}
+    <motion.div
+      className="inline-flex w-full max-w-full"
+      whileHover={{ scale: 1.03, y: -1 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ type: "spring", stiffness: 420, damping: 24 }}
     >
-      {children}
-    </button>
+      <button
+        type={type}
+        className={cn(
+          "inline-flex w-full items-center justify-center gap-2 rounded-md font-medium transition-colors shadow-sm hover:shadow-md",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+          "disabled:pointer-events-none disabled:opacity-50",
+          variantClasses[variant],
+          sizeClasses[size],
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </button>
+    </motion.div>
   );
 }

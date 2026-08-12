@@ -1,5 +1,6 @@
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { getDictionary } from "@/data/dictionary";
 import { LOCALES } from "@/lib/i18n";
 
 export function generateStaticParams() {
@@ -11,12 +12,13 @@ export default async function LangLayout({
   params,
 }: LayoutProps<"/[lang]">) {
   const { lang } = await params;
+  const dict = getDictionary(lang);
 
   return (
     <>
-      <Header lang={lang} />
+      <Header lang={lang} copy={dict.header} />
       <main className="flex-1">{children}</main>
-      <Footer lang={lang} />
+      <Footer lang={lang} copy={dict.footer} />
     </>
   );
 }

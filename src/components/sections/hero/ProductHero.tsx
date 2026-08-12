@@ -1,21 +1,25 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
+import { MotionLink } from "@/components/motion/MotionLink";
+import type { Dictionary } from "@/data/dictionary";
 import { cn } from "@/lib/utils";
 import type { Product, ProductImage } from "@/types/product";
 
 export interface ProductHeroProps {
   product: Product;
+  copy: Dictionary["product"];
 }
 
 function GalleryPlaceholder({
   image,
   size,
+  copy,
 }: {
   image: ProductImage;
   size: "main" | "thumb";
+  copy: Dictionary["product"];
 }) {
   const isMain = size === "main";
 
@@ -38,19 +42,19 @@ function GalleryPlaceholder({
         isMain ? "text-sm font-medium" : "px-1 text-center text-[10px]",
       )}
     >
-      {isMain ? "Image placeholder" : "Thumb"}
+      {isMain ? copy.imagePlaceholder : copy.thumbPlaceholder}
     </span>
   );
 }
 
-export function ProductHero({ product }: ProductHeroProps) {
+export function ProductHero({ product, copy }: ProductHeroProps) {
   const images =
     product.images && product.images.length > 0
       ? product.images
       : [
           {
             src: product.imageSrc ?? "",
-            alt: product.imageAlt ?? `${product.name} placeholder`,
+            alt: product.imageAlt ?? `${product.name}`,
           },
         ];
 
@@ -62,10 +66,10 @@ export function ProductHero({ product }: ProductHeroProps) {
 
   return (
     <section className="bg-white">
-      <div className="mx-auto grid w-full max-w-6xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:py-24">
+      <div className="mx-auto grid w-full max-w-6xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:py-20">
         <div className="flex flex-col gap-3">
-          <div className="relative aspect-[4/3] w-full overflow-hidden border border-border bg-surface">
-            <GalleryPlaceholder image={activeImage} size="main" />
+          <div className="relative aspect-[4/3] w-full overflow-hidden border-2 border-accent bg-surface">
+            <GalleryPlaceholder image={activeImage} size="main" copy={copy} />
           </div>
           {images.length > 1 ? (
             <ul className="grid grid-cols-4 gap-2 sm:grid-cols-5">
@@ -74,15 +78,15 @@ export function ProductHero({ product }: ProductHeroProps) {
                   <button
                     type="button"
                     onClick={() => setActiveIndex(index)}
-                    aria-label={`Show ${image.alt}`}
+                    aria-label={image.alt}
                     className={cn(
-                      "relative aspect-square w-full overflow-hidden border bg-surface transition-colors hover:border-foreground/40",
+                      "relative aspect-square w-full overflow-hidden border bg-surface transition-colors hover:border-accent",
                       index === activeIndex
-                        ? "border-foreground"
+                        ? "border-accent"
                         : "border-border",
                     )}
                   >
-                    <GalleryPlaceholder image={image} size="thumb" />
+                    <GalleryPlaceholder image={image} size="thumb" copy={copy} />
                   </button>
                 </li>
               ))}
@@ -92,10 +96,10 @@ export function ProductHero({ product }: ProductHeroProps) {
 
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted">
-              Product
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-accent-alt">
+              {copy.eyebrow}
             </p>
-            <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl sm:leading-[1.1]">
+            <h1 className="text-4xl font-bold tracking-tight text-heading sm:text-5xl sm:leading-[1.1]">
               {product.name}
             </h1>
             <p className="text-base leading-relaxed text-muted sm:text-lg">
@@ -105,7 +109,7 @@ export function ProductHero({ product }: ProductHeroProps) {
 
           {product.priceLabel ? (
             <div className="flex flex-wrap items-baseline gap-3 border-y border-border py-5">
-              <p className="text-3xl font-semibold tracking-tight text-foreground">
+              <p className="text-3xl font-bold tracking-tight text-foreground">
                 {product.priceLabel}
               </p>
               {hasDiscount ? (
@@ -121,17 +125,17 @@ export function ProductHero({ product }: ProductHeroProps) {
             </div>
           ) : null}
 
-          <Link
+          <MotionLink
             href="#order"
             className="inline-flex h-12 w-fit items-center justify-center rounded-md bg-accent px-6 text-sm font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
-            Request a quote
-          </Link>
+            {copy.requestQuote}
+          </MotionLink>
 
           {product.specs && product.specs.length > 0 ? (
             <div>
-              <h2 className="text-sm font-semibold tracking-tight text-foreground">
-                Specifications
+              <h2 className="text-sm font-bold tracking-tight text-foreground">
+                {copy.specifications}
               </h2>
               <table className="mt-4 w-full text-left text-sm">
                 <tbody>

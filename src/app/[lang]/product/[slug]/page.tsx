@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { ProductOrderForm } from "@/components/sections/forms/ProductOrderForm";
 import { ProductHero } from "@/components/sections/hero/ProductHero";
+import { getDictionary } from "@/data/dictionary";
 import {
   getProductBySlug,
   LOCALES,
@@ -18,6 +19,7 @@ export default async function ProductPage({
 }: PageProps<"/[lang]/product/[slug]">) {
   const { lang, slug } = await params;
   const product = getProductBySlug(slug, lang);
+  const dict = getDictionary(lang);
 
   if (!product) {
     notFound();
@@ -25,8 +27,8 @@ export default async function ProductPage({
 
   return (
     <>
-      <ProductHero product={product} />
-      <ProductOrderForm productSlug={product.slug} />
+      <ProductHero product={product} copy={dict.product} />
+      <ProductOrderForm productSlug={product.slug} copy={dict.leadForm} />
     </>
   );
 }

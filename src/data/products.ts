@@ -21,8 +21,14 @@ const PRODUCTS_UK: Product[] = [
     compareAtPriceLabel: "9 900 ₴",
     discountLabel: "−10%",
     images: [
-      { src: "", alt: "Гідравлічна рохля 2 т — загальний вигляд" },
-      { src: "", alt: "Гідравлічна рохля 2 т — вила" },
+      {
+        src: "/images/products/pallet-truck-2t-1.jpg",
+        alt: "Гідравлічна рохля 2 т — загальний вигляд",
+      },
+      {
+        src: "/images/products/pallet-truck-2t-2.jpg",
+        alt: "Гідравлічна рохля 2 т — вила",
+      },
     ],
     specs: [
       { label: "Вантажопідйомність", value: "2000 кг" },
@@ -42,8 +48,14 @@ const PRODUCTS_UK: Product[] = [
     compareAtPriceLabel: "12 800 ₴",
     discountLabel: "−10%",
     images: [
-      { src: "", alt: "Рохля з довгими вилами — загальний вигляд" },
-      { src: "", alt: "Рохля з довгими вилами — деталь вил" },
+      {
+        src: "/images/products/pallet-truck-long-1.jpg",
+        alt: "Рохля з довгими вилами — загальний вигляд",
+      },
+      {
+        src: "/images/products/pallet-truck-long-2.jpg",
+        alt: "Рохля з довгими вилами — деталь вил",
+      },
     ],
     specs: [
       { label: "Вантажопідйомність", value: "2000 кг" },
@@ -61,8 +73,14 @@ const PRODUCTS_UK: Product[] = [
       "Важка гідравлічна рокла з посиленою рамою та гідравлічним вузлом для безперервної роботи на великих складах.",
     priceLabel: "від 14 200 ₴",
     images: [
-      { src: "", alt: "Посилена рохля 2.5 т — загальний вигляд" },
-      { src: "", alt: "Посилена рохля 2.5 т — гідравлічний вузол" },
+      {
+        src: "/images/products/pallet-truck-heavy-1.jpg",
+        alt: "Посилена рохля 2.5 т — загальний вигляд",
+      },
+      {
+        src: "/images/products/pallet-truck-heavy-2.jpg",
+        alt: "Посилена рохля 2.5 т — гідравлічний вузол",
+      },
     ],
     specs: [
       { label: "Вантажопідйомність", value: "2500 кг" },
@@ -85,8 +103,14 @@ const PRODUCTS_RU: Product[] = [
     compareAtPriceLabel: "9 900 ₴",
     discountLabel: "−10%",
     images: [
-      { src: "", alt: "Гидравлическая рохля 2 т — общий вид" },
-      { src: "", alt: "Гидравлическая рохля 2 т — вилы" },
+      {
+        src: "/images/products/pallet-truck-2t-1.jpg",
+        alt: "Гидравлическая рохля 2 т — общий вид",
+      },
+      {
+        src: "/images/products/pallet-truck-2t-2.jpg",
+        alt: "Гидравлическая рохля 2 т — вилы",
+      },
     ],
     specs: [
       { label: "Грузоподъёмность", value: "2000 кг" },
@@ -106,8 +130,14 @@ const PRODUCTS_RU: Product[] = [
     compareAtPriceLabel: "12 800 ₴",
     discountLabel: "−10%",
     images: [
-      { src: "", alt: "Рохля с длинными вилами — общий вид" },
-      { src: "", alt: "Рохля с длинными вилами — деталь вил" },
+      {
+        src: "/images/products/pallet-truck-long-1.jpg",
+        alt: "Рохля с длинными вилами — общий вид",
+      },
+      {
+        src: "/images/products/pallet-truck-long-2.jpg",
+        alt: "Рохля с длинными вилами — деталь вил",
+      },
     ],
     specs: [
       { label: "Грузоподъёмность", value: "2000 кг" },
@@ -125,8 +155,14 @@ const PRODUCTS_RU: Product[] = [
       "Тяжёлая гидравлическая рокла с усиленной рамой и гидравлическим узлом для непрерывной работы на крупных складах.",
     priceLabel: "от 14 200 ₴",
     images: [
-      { src: "", alt: "Усиленная рохля 2.5 т — общий вид" },
-      { src: "", alt: "Усиленная рохля 2.5 т — гидравлический узел" },
+      {
+        src: "/images/products/pallet-truck-heavy-1.jpg",
+        alt: "Усиленная рохля 2.5 т — общий вид",
+      },
+      {
+        src: "/images/products/pallet-truck-heavy-2.jpg",
+        alt: "Усиленная рохля 2.5 т — гидравлический узел",
+      },
     ],
     specs: [
       { label: "Грузоподъёмность", value: "2500 кг" },
