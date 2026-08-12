@@ -1,0 +1,2 @@
+[GIT COMMIT RULE]
+After completing any major code modification or section build, verify that 'npm run build' passes, and then execute the 'git-auto-commit' skill to push changes to https://github.com/BoretskyVladyslav/rocla-leadgen-platform.git.
