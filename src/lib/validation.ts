@@ -56,7 +56,9 @@ export function validateLeadFields(
 ): LeadFieldErrors {
   const errors: LeadFieldErrors = {};
   if (!isValidFullName(values.fullName)) errors.fullName = messages.fullName;
-  if (!isValidEmail(values.email)) errors.email = messages.email;
+  if (values.email.trim() && !isValidEmail(values.email)) {
+    errors.email = messages.email;
+  }
   if (!isValidUaPhone(values.phone)) errors.phone = messages.phone;
   return errors;
 }

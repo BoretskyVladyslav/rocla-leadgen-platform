@@ -57,6 +57,16 @@ export function MainHero({ copy }: MainHeroProps) {
             <p className="text-lg font-bold uppercase tracking-[0.08em] text-heading sm:text-xl">
               {copy.subtitle}
             </p>
+            <ul className="mt-1 flex flex-wrap gap-2">
+              {copy.trustBadges.map((badge) => (
+                <li
+                  key={badge}
+                  className="inline-flex items-center rounded-full border border-gray-200 bg-surface px-3 py-1.5 text-xs font-bold tracking-tight text-heading sm:text-sm"
+                >
+                  {badge}
+                </li>
+              ))}
+            </ul>
           </div>
 
           <form

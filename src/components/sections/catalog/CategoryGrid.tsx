@@ -152,7 +152,29 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
               : `/${lang}#contact`;
             const hiddenOnMobile = !expanded && index >= MOBILE_PREVIEW;
             const tileClassName =
-              "group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md";
+              "group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-[transform,box-shadow] duration-200 hover:scale-[1.03] hover:shadow-md";
+
+            const cardBody = (
+              <>
+                <MediaPlaceholder
+                  aspect="4/3"
+                  label={item.imageAlt}
+                  sizeHint="4:3"
+                  bordered={false}
+                  icon={CATEGORY_ICONS[index]}
+                  className="min-h-0"
+                />
+                <div className="flex flex-col gap-1 px-4 py-3 sm:px-5">
+                  <h3 className="text-sm font-bold tracking-tight text-heading sm:text-base">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-muted">{item.subtitle}</p>
+                  <p className="text-sm font-bold text-accent-alt">
+                    {item.priceLabel}
+                  </p>
+                </div>
+              </>
+            );
 
             return (
               <li
@@ -162,31 +184,11 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
                 <ScrollReveal delay={Math.min(index, 7) * 0.03}>
                   {isProduct ? (
                     <Link href={href} className={tileClassName}>
-                      <MediaPlaceholder
-                        aspect="4/3"
-                        label={item.imageAlt}
-                        sizeHint="4:3"
-                        bordered={false}
-                        icon={CATEGORY_ICONS[index]}
-                        className="min-h-0"
-                      />
-                      <h3 className="px-4 py-3 text-sm font-bold tracking-tight text-heading sm:px-5 sm:text-base">
-                        {item.title}
-                      </h3>
+                      {cardBody}
                     </Link>
                   ) : (
                     <HashLink href={href} className={tileClassName}>
-                      <MediaPlaceholder
-                        aspect="4/3"
-                        label={item.imageAlt}
-                        sizeHint="4:3"
-                        bordered={false}
-                        icon={CATEGORY_ICONS[index]}
-                        className="min-h-0"
-                      />
-                      <h3 className="px-4 py-3 text-sm font-bold tracking-tight text-heading sm:px-5 sm:text-base">
-                        {item.title}
-                      </h3>
+                      {cardBody}
                     </HashLink>
                   )}
                 </ScrollReveal>

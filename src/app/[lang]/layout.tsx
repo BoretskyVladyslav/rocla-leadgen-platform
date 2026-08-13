@@ -1,6 +1,7 @@
 import { Footer } from "@/components/layout/Footer";
 import { HashScrollRestorer } from "@/components/layout/HashScrollRestorer";
 import { Header } from "@/components/layout/Header";
+import { MobileStickyCta } from "@/components/layout/MobileStickyCta";
 import { getDictionary } from "@/data/dictionary";
 import { LOCALES } from "@/lib/i18n";
 
@@ -19,8 +20,15 @@ export default async function LangLayout({
     <>
       <HashScrollRestorer />
       <Header lang={lang} copy={dict.header} />
-      <main className="flex-1">{children}</main>
-      <Footer lang={lang} copy={dict.footer} />
+      <div className="flex flex-1 flex-col pb-[calc(4.75rem+env(safe-area-inset-bottom))] md:pb-0">
+        <main className="flex-1">{children}</main>
+        <Footer lang={lang} copy={dict.footer} />
+      </div>
+      <MobileStickyCta
+        lang={lang}
+        phone={dict.header.phone}
+        copy={dict.stickyCta}
+      />
     </>
   );
 }

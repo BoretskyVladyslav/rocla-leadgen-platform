@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type FormEvent, type FocusEvent } from "react";
+import { useState, type FormEvent, type FocusEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Button } from "@/components/ui/Button";
@@ -13,18 +13,15 @@ import {
   type LeadFieldErrors,
 } from "@/lib/validation";
 import type { FilePayload, LeadFormData } from "@/types/form";
-import { cn } from "@/lib/utils";
+
+const VIBER_HREF = "viber://chat?number=%2B380981540982";
+const TELEGRAM_HREF = "https://t.me/+380981540982";
 
 const INITIAL_STATE: Omit<LeadFormData, "files"> & { phone: string } = {
   fullName: "",
   email: "",
   phone: "",
-  company: "",
-  message: "",
 };
-
-const fieldControlClass =
-  "w-full rounded-md border border-border bg-white px-3.5 py-3 text-foreground shadow-sm placeholder:text-muted/80 transition-[border-color,box-shadow] focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
 
 export interface LeadCaptureFormProps {
   copy: Dictionary["leadForm"];
@@ -32,17 +29,10 @@ export interface LeadCaptureFormProps {
 
 export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
   const [form, setForm] = useState(INITIAL_STATE);
-  const [city, setCity] = useState("");
   const [files, setFiles] = useState<FilePayload[]>([]);
   const [rawFiles, setRawFiles] = useState<File[]>([]);
   const [errors, setErrors] = useState<LeadFieldErrors>({});
   const [status, setStatus] = useState<"idle" | "success">("idle");
-  const cityInputRef = useRef<HTMLInputElement>(null);
-
-  function selectCity(label: string) {
-    setCity(label);
-    requestAnimationFrame(() => cityInputRef.current?.focus());
-  }
 
   function handleFilesChange(next: FilePayload[], raw: File[]) {
     setFiles(next);
@@ -81,7 +71,7 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
-    console.info("lead-capture", { ...form, city, files }, {
+    console.info("lead-capture", { ...form, files }, {
       fileCount: rawFiles.length,
     });
     setStatus("success");
@@ -89,7 +79,6 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
 
   function resetForm() {
     setForm(INITIAL_STATE);
-    setCity("");
     setFiles([]);
     setRawFiles([]);
     setErrors({});
@@ -105,7 +94,7 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
             {copy.subtitle}
           </p>
 
-          <div className="relative mt-10 overflow-hidden rounded-xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+          <div className="relative mx-auto mt-10 max-w-xl overflow-hidden rounded-xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
             <AnimatePresence mode="wait">
               {status === "success" ? (
                 <motion.div
@@ -139,102 +128,43 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
                   exit={{ opacity: 0, y: -6 }}
                   transition={{ duration: 0.25 }}
                   onSubmit={handleSubmit}
-                  className="grid gap-8 lg:grid-cols-2"
+                  className="flex flex-col gap-4"
                   noValidate
                 >
-                  <div className="flex flex-col gap-4">
-                    <Input
-                      label={copy.fullName}
-                      name="fullName"
-                      required
-                      value={form.fullName}
-                      error={errors.fullName}
-                      onBlur={handleBlur}
-                      onChange={(e) =>
-                        setForm((s) => ({ ...s, fullName: e.target.value }))
-                      }
-                    />
-                    <Input
-                      label={copy.email}
-                      name="email"
-                      type="email"
-                      required
-                      value={form.email}
-                      error={errors.email}
-                      onBlur={handleBlur}
-                      onChange={(e) =>
-                        setForm((s) => ({ ...s, email: e.target.value }))
-                      }
-                    />
-                    <PhoneInput
-                      label={copy.phone}
-                      name="phone"
-                      required
-                      value={form.phone}
-                      error={errors.phone}
-                      onBlur={handleBlur}
-                      onValueChange={(phone) =>
-                        setForm((s) => ({ ...s, phone }))
-                      }
-                    />
-                    <Input
-                      label={copy.company}
-                      name="company"
-                      value={form.company}
-                      onChange={(e) =>
-                        setForm((s) => ({ ...s, company: e.target.value }))
-                      }
-                    />
-                    <Input
-                      ref={cityInputRef}
-                      label={copy.citiesLabel}
-                      name="city"
-                      value={city}
-                      onChange={(e) => setCity(e.target.value)}
-                    />
-                    <div>
-                      <p className="mb-2 text-sm font-medium tracking-tight text-foreground">
-                        {copy.citiesHint}
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {copy.cities.map((item) => (
-                          <button
-                            key={item.id}
-                            type="button"
-                            onClick={() => selectCity(item.label)}
-                            className={cn(
-                              "cursor-pointer rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors",
-                              city === item.label
-                                ? "border-accent bg-accent text-accent-fg"
-                                : "border-transparent bg-gray-100 text-heading hover:bg-accent hover:text-accent-fg",
-                            )}
-                          >
-                            {item.label}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-4">
-                    <div className="flex flex-col gap-1.5 text-sm">
-                      <label
-                        htmlFor="lead-message"
-                        className="font-medium tracking-tight text-foreground"
-                      >
-                        {copy.message}
-                      </label>
-                      <textarea
-                        id="lead-message"
-                        name="message"
-                        rows={4}
-                        className={fieldControlClass}
-                        value={form.message}
-                        onChange={(e) =>
-                          setForm((s) => ({ ...s, message: e.target.value }))
-                        }
-                      />
-                    </div>
+                  <Input
+                    label={copy.fullName}
+                    name="fullName"
+                    required
+                    value={form.fullName}
+                    error={errors.fullName}
+                    onBlur={handleBlur}
+                    onChange={(e) =>
+                      setForm((s) => ({ ...s, fullName: e.target.value }))
+                    }
+                  />
+                  <PhoneInput
+                    label={copy.phone}
+                    name="phone"
+                    required
+                    value={form.phone}
+                    error={errors.phone}
+                    onBlur={handleBlur}
+                    onValueChange={(phone) =>
+                      setForm((s) => ({ ...s, phone }))
+                    }
+                  />
+                  <Input
+                    label={copy.email}
+                    name="email"
+                    type="email"
+                    value={form.email}
+                    error={errors.email}
+                    onBlur={handleBlur}
+                    onChange={(e) =>
+                      setForm((s) => ({ ...s, email: e.target.value }))
+                    }
+                  />
+                  <div className="flex flex-col gap-2">
                     <FileUpload
                       label={copy.filesLabel}
                       hint={copy.filesHint}
@@ -246,10 +176,28 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
                       sizeError={copy.errors.fileSize}
                       onFilesChange={handleFilesChange}
                     />
-                    <Button type="submit" size="lg" className="mt-auto w-full">
-                      {copy.submit}
-                    </Button>
+                    <p className="text-sm text-muted">
+                      {copy.messengerHint}{" "}
+                      <a
+                        href={VIBER_HREF}
+                        className="font-semibold text-heading underline decoration-accent underline-offset-2 hover:text-accent-alt"
+                      >
+                        {copy.messengerViber}
+                      </a>
+                      {" / "}
+                      <a
+                        href={TELEGRAM_HREF}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-heading underline decoration-accent underline-offset-2 hover:text-accent-alt"
+                      >
+                        {copy.messengerTelegram}
+                      </a>
+                    </p>
                   </div>
+                  <Button type="submit" size="lg" className="mt-2 w-full">
+                    {copy.submit}
+                  </Button>
                 </motion.form>
               )}
             </AnimatePresence>

@@ -21,6 +21,7 @@ export interface Dictionary {
   hero: {
     title: string;
     subtitle: string;
+    trustBadges: string[];
     name: string;
     phone: string;
     submit: string;
@@ -36,6 +37,8 @@ export interface Dictionary {
     showAll: string;
     items: Array<{
       title: string;
+      subtitle: string;
+      priceLabel: string;
       imageSrc: string;
       imageAlt: string;
       productSlug?: string;
@@ -124,6 +127,9 @@ export interface Dictionary {
     filesDrag: string;
     filesMaxSize: string;
     filesRemove: string;
+    messengerHint: string;
+    messengerViber: string;
+    messengerTelegram: string;
     submit: string;
     successTitle: string;
     successBody: string;
@@ -135,6 +141,10 @@ export interface Dictionary {
       fileType: string;
       fileSize: string;
     };
+  };
+  stickyCta: {
+    call: string;
+    order: string;
   };
   product: {
     eyebrow: string;
@@ -216,8 +226,13 @@ const DICTIONARY_UK: Dictionary = {
     closeMenu: "Закрити меню",
   },
   hero: {
-    title: "Купити роклу, рохлі німецька якість",
+    title: "Купити роклу (рохлю) — німецька якість KAISER",
     subtitle: "20 років на ринку в Україні",
+    trustBadges: [
+      "🚀 Відвантаження за 30 хв",
+      "📄 Оплата з ПДВ",
+      "🛡️ Гарантія 24 міс",
+    ],
     name: "Ім’я",
     phone: "Телефон",
     submit: "Підібрати",
@@ -234,42 +249,58 @@ const DICTIONARY_UK: Dictionary = {
     items: [
       {
         title: "Гідравлічні візки (рохлі)",
+        subtitle: "від 2000 до 2500 кг",
+        priceLabel: "від 8 900 ₴",
         imageSrc: CATEGORY_IMAGES.pallet,
         imageAlt: "Гідравлічна рохля",
         productSlug: "hydraulic-pallet-truck-2t",
       },
       {
         title: "Штабелери",
+        subtitle: "від 1 000 до 2 000 кг",
+        priceLabel: "від 12 500 ₴",
         imageSrc: CATEGORY_IMAGES.stacker,
         imageAlt: "Штабелер",
       },
       {
         title: "Гідравлічні столи",
+        subtitle: "від 500 до 2 000 кг",
+        priceLabel: "від 12 500 ₴",
         imageSrc: CATEGORY_IMAGES.table,
         imageAlt: "Гідравлічний стіл",
       },
       {
         title: "Обслуговування / колеса",
+        subtitle: "ремонт, колеса, ТО",
+        priceLabel: "за запитом",
         imageSrc: CATEGORY_IMAGES.service,
         imageAlt: "Обслуговування складської техніки",
       },
       {
         title: "Річтраки",
+        subtitle: "від 1 400 до 2 500 кг",
+        priceLabel: "під замовлення",
         imageSrc: CATEGORY_IMAGES.reach,
         imageAlt: "Річтрак",
       },
       {
         title: "Навантажувачі",
+        subtitle: "від 1 500 до 3 500 кг",
+        priceLabel: "під замовлення",
         imageSrc: CATEGORY_IMAGES.forklift,
         imageAlt: "Навантажувач",
       },
       {
         title: "Підйомники / вишки",
+        subtitle: "висота до 12 м",
+        priceLabel: "під замовлення",
         imageSrc: CATEGORY_IMAGES.lift,
         imageAlt: "Підйомник",
       },
       {
         title: "Запчастини та аксесуари",
+        subtitle: "гідравліка, ролики, вила",
+        priceLabel: "за запитом",
         imageSrc: CATEGORY_IMAGES.parts,
         imageAlt: "Запчастини для рокл",
       },
@@ -508,6 +539,9 @@ const DICTIONARY_UK: Dictionary = {
     filesDrag: "Перетягніть файли сюди",
     filesMaxSize: "До 10 МБ на файл",
     filesRemove: "Видалити файл",
+    messengerHint: "Або надішліть на",
+    messengerViber: "Viber",
+    messengerTelegram: "Telegram",
     submit: "Надіслати заявку",
     successTitle: "Заявка успішно відправлена",
     successBody: "Менеджер зв’яжеться з вами найближчим часом у робочі години.",
@@ -519,6 +553,10 @@ const DICTIONARY_UK: Dictionary = {
       fileType: "Лише PDF, JPG або PNG.",
       fileSize: "Файл перевищує 10 МБ.",
     },
+  },
+  stickyCta: {
+    call: "Зателефонувати",
+    order: "Замовити",
   },
   product: {
     eyebrow: "Товар",
@@ -583,8 +621,13 @@ const DICTIONARY_RU: Dictionary = {
     closeMenu: "Закрыть меню",
   },
   hero: {
-    title: "Купить роклу, рохли немецкое качество",
+    title: "Купить роклу (рохлю) — немецкое качество KAISER",
     subtitle: "20 лет на рынке в Украине",
+    trustBadges: [
+      "🚀 Отгрузка за 30 мин",
+      "📄 Оплата с НДС",
+      "🛡️ Гарантия 24 мес",
+    ],
     name: "Имя",
     phone: "Телефон",
     submit: "Подобрать",
@@ -601,42 +644,58 @@ const DICTIONARY_RU: Dictionary = {
     items: [
       {
         title: "Гидравлические тележки (рохли)",
+        subtitle: "от 2000 до 2500 кг",
+        priceLabel: "от 8 900 ₴",
         imageSrc: CATEGORY_IMAGES.pallet,
         imageAlt: "Гидравлическая рохля",
         productSlug: "hydraulic-pallet-truck-2t",
       },
       {
         title: "Штабелёры",
+        subtitle: "от 1 000 до 2 000 кг",
+        priceLabel: "от 12 500 ₴",
         imageSrc: CATEGORY_IMAGES.stacker,
         imageAlt: "Штабелёр",
       },
       {
         title: "Гидравлические столы",
+        subtitle: "от 500 до 2 000 кг",
+        priceLabel: "от 12 500 ₴",
         imageSrc: CATEGORY_IMAGES.table,
         imageAlt: "Гидравлический стол",
       },
       {
         title: "Обслуживание / колёса",
+        subtitle: "ремонт, колёса, ТО",
+        priceLabel: "по запросу",
         imageSrc: CATEGORY_IMAGES.service,
         imageAlt: "Обслуживание складской техники",
       },
       {
         title: "Ричтраки",
+        subtitle: "от 1 400 до 2 500 кг",
+        priceLabel: "под заказ",
         imageSrc: CATEGORY_IMAGES.reach,
         imageAlt: "Ричтрак",
       },
       {
         title: "Погрузчики",
+        subtitle: "от 1 500 до 3 500 кг",
+        priceLabel: "под заказ",
         imageSrc: CATEGORY_IMAGES.forklift,
         imageAlt: "Погрузчик",
       },
       {
         title: "Подъёмники / вышки",
+        subtitle: "высота до 12 м",
+        priceLabel: "под заказ",
         imageSrc: CATEGORY_IMAGES.lift,
         imageAlt: "Подъёмник",
       },
       {
         title: "Запчасти и аксессуары",
+        subtitle: "гидравлика, ролики, вилы",
+        priceLabel: "по запросу",
         imageSrc: CATEGORY_IMAGES.parts,
         imageAlt: "Запчасти для рокл",
       },
@@ -869,6 +928,9 @@ const DICTIONARY_RU: Dictionary = {
     filesDrag: "Перетащите файлы сюда",
     filesMaxSize: "До 10 МБ на файл",
     filesRemove: "Удалить файл",
+    messengerHint: "Или отправьте в",
+    messengerViber: "Viber",
+    messengerTelegram: "Telegram",
     submit: "Отправить заявку",
     successTitle: "Заявка успешно отправлена",
     successBody: "Менеджер свяжется с вами в ближайшее время в рабочие часы.",
@@ -880,6 +942,10 @@ const DICTIONARY_RU: Dictionary = {
       fileType: "Только PDF, JPG или PNG.",
       fileSize: "Файл превышает 10 МБ.",
     },
+  },
+  stickyCta: {
+    call: "Позвонить",
+    order: "Заказать",
   },
   product: {
     eyebrow: "Товар",
