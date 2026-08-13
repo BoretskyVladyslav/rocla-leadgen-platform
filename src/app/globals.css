@@ -23,6 +23,7 @@
   --color-surface: var(--color-surface);
   --color-surface-muted: var(--color-surface-muted);
   --color-dark: var(--color-dark);
+  --color-graphite: var(--color-graphite);
   --color-muted: var(--color-muted);
   --color-border: var(--color-border);
   --color-accent: var(--color-accent);
@@ -43,6 +44,7 @@ body {
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 /* Status / CTA badge primitives (archiv gold + dark-grey) */

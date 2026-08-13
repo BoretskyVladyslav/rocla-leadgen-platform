@@ -1,21 +1,41 @@
 import { resolveLocale, type Locale } from "@/lib/i18n";
 
-export type AdvantageIcon = "delivery" | "warranty" | "service";
-
 export interface Dictionary {
   header: {
-    catalog: string;
-    requestQuote: string;
+    brand: string;
+    tagline: string;
+    nav: {
+      about: string;
+      catalog: string;
+      promos: string;
+      services: string;
+      reviews: string;
+      contacts: string;
+    };
+    phone: string;
+    requestCall: string;
     language: string;
   };
   hero: {
-    brand: string;
     title: string;
     subtitle: string;
-    browseCatalog: string;
-    requestQuote: string;
-    badges: Array<{ label: string; value: string; tone: "gold" | "dark" }>;
+    name: string;
+    phone: string;
+    submit: string;
+    success: string;
     imageAlt: string;
+    errors: {
+      fullName: string;
+      phone: string;
+    };
+  };
+  categories: {
+    items: Array<{
+      title: string;
+      imageSrc: string;
+      imageAlt: string;
+      productSlug?: string;
+    }>;
   };
   catalog: {
     eyebrow: string;
@@ -25,26 +45,42 @@ export interface Dictionary {
     imageFallback: string;
   };
   advantages: {
-    eyebrow: string;
     title: string;
     items: Array<{
-      icon: AdvantageIcon;
       label: string;
       description: string;
     }>;
   };
   clients: {
-    eyebrow: string;
     title: string;
-    logos: Array<{ name: string; imageSrc: string }>;
+    logos: Array<{ name: string }>;
+  };
+  caseStudy: {
+    title: string;
+    paragraphs: string[];
+    readMore: string;
+    imageSrc: string;
+    imageAlt: string;
+  };
+  delivery: {
+    title: string;
+    from: string;
+    to: string;
+    submit: string;
+    success: string;
+    partners: string[];
   };
   reviews: {
-    eyebrow: string;
     title: string;
-    items: Array<{ company: string; author: string; text: string }>;
+    items: Array<{
+      company: string;
+      author: string;
+      text: string;
+      imageSrc: string;
+      imageAlt: string;
+    }>;
   };
   faq: {
-    eyebrow: string;
     title: string;
     items: Array<{ question: string; answer: string }>;
   };
@@ -58,6 +94,8 @@ export interface Dictionary {
     company: string;
     message: string;
     quantity: string;
+    citiesLabel: string;
+    cities: Array<{ id: string; label: string }>;
     filesLabel: string;
     filesHint: string;
     filesBrowse: string;
@@ -83,31 +121,119 @@ export interface Dictionary {
     thumbPlaceholder: string;
   };
   footer: {
-    tagline: string;
-    locale: string;
+    brand: string;
+    phone: string;
+    email: string;
+    catalogTitle: string;
+    catalogLinks: Array<{ label: string; href: string }>;
+    navTitle: string;
+    navLinks: Array<{ label: string; href: string }>;
+    addressTitle: string;
+    address: string;
+    copyright: string;
   };
 }
 
+const LEAD_CITIES_UK: Dictionary["leadForm"]["cities"] = [
+  { id: "dnipro", label: "Дніпро" },
+  { id: "kharkiv", label: "Харків" },
+  { id: "kyiv", label: "Київ" },
+  { id: "odesa", label: "Одеса" },
+  { id: "zaporizhzhia", label: "Запоріжжя" },
+];
+
+const LEAD_CITIES_RU: Dictionary["leadForm"]["cities"] = [
+  { id: "dnipro", label: "Днепр" },
+  { id: "kharkiv", label: "Харьков" },
+  { id: "kyiv", label: "Киев" },
+  { id: "odesa", label: "Одесса" },
+  { id: "zaporizhzhia", label: "Запорожье" },
+];
+
+const CATEGORY_IMAGES = {
+  pallet: "/images/products/pallet-truck-2t-1.jpg",
+  stacker: "/images/products/pallet-truck-long-1.jpg",
+  table: "/images/products/pallet-truck-2t-2.jpg",
+  service: "/images/products/pallet-truck-long-2.jpg",
+  reach: "/images/products/pallet-truck-heavy-1.jpg",
+  forklift: "/images/products/pallet-truck-heavy-2.jpg",
+  lift: "/images/products/pallet-truck-2t-1.jpg",
+  parts: "/images/products/pallet-truck-long-2.jpg",
+} as const;
+
 const DICTIONARY_UK: Dictionary = {
   header: {
-    catalog: "Каталог",
-    requestQuote: "Запит ціни",
+    brand: "KAISER",
+    tagline: "Складська техніка",
+    nav: {
+      about: "Про компанію",
+      catalog: "Каталог",
+      promos: "Акції",
+      services: "Послуги",
+      reviews: "Відгуки",
+      contacts: "Контакти",
+    },
+    phone: "+38 044 000 00 00",
+    requestCall: "Замовити дзвінок",
     language: "Мова",
   },
   hero: {
-    brand: "Rocla",
-    title: "Купити роклу — німецька якість для складу",
-    subtitle:
-      "Гідравлічні рохлі, штабелери та складська техніка з доставкою по Україні, гарантією та офіційним сервісом.",
-    browseCatalog: "Перейти до каталогу",
-    requestQuote: "Запит ціни",
-    badges: [
-      { label: "Вантаж", value: "до 2.5 т", tone: "gold" },
-      { label: "Вила", value: "1150–1500 мм", tone: "dark" },
-      { label: "Гарантія", value: "до 24 міс.", tone: "gold" },
-      { label: "Відповідь", value: "за 24 год", tone: "dark" },
+    title: "Купити роклу, рохлі німецька якість",
+    subtitle: "20 років на ринку в Україні",
+    name: "Ім’я",
+    phone: "Телефон",
+    submit: "Підібрати",
+    success: "Заявку прийнято. Менеджер зателефонує.",
+    imageAlt: "Складська техніка KAISER",
+    errors: {
+      fullName: "Вкажіть ім’я (мінімум 2 символи).",
+      phone: "Вкажіть телефон у форматі +380… або 0…",
+    },
+  },
+  categories: {
+    items: [
+      {
+        title: "Гідравлічні візки (рохлі)",
+        imageSrc: CATEGORY_IMAGES.pallet,
+        imageAlt: "Гідравлічна рохля",
+        productSlug: "hydraulic-pallet-truck-2t",
+      },
+      {
+        title: "Штабелери",
+        imageSrc: CATEGORY_IMAGES.stacker,
+        imageAlt: "Штабелер",
+      },
+      {
+        title: "Гідравлічні столи",
+        imageSrc: CATEGORY_IMAGES.table,
+        imageAlt: "Гідравлічний стіл",
+      },
+      {
+        title: "Обслуговування / колеса",
+        imageSrc: CATEGORY_IMAGES.service,
+        imageAlt: "Обслуговування складської техніки",
+      },
+      {
+        title: "Річтраки",
+        imageSrc: CATEGORY_IMAGES.reach,
+        imageAlt: "Річтрак",
+      },
+      {
+        title: "Навантажувачі",
+        imageSrc: CATEGORY_IMAGES.forklift,
+        imageAlt: "Навантажувач",
+      },
+      {
+        title: "Підйомники / вишки",
+        imageSrc: CATEGORY_IMAGES.lift,
+        imageAlt: "Підйомник",
+      },
+      {
+        title: "Запчастини та аксесуари",
+        imageSrc: CATEGORY_IMAGES.parts,
+        imageAlt: "Запчастини для рокл",
+      },
     ],
-    imageAlt: "Гідравлічна рохля на складі",
   },
   catalog: {
     eyebrow: "Каталог",
@@ -117,91 +243,148 @@ const DICTIONARY_UK: Dictionary = {
     imageFallback: "Зображення",
   },
   advantages: {
-    eyebrow: "Переваги",
-    title: "Чому обирають нас",
+    title: "Ваші переваги в KAISER",
     items: [
       {
-        icon: "delivery",
-        label: "Оперативна доставка",
+        label: "Німецька якість",
         description:
-          "Доставка по Києву в день звернення, по Україні — від 1 дня після оплати з повним комплектом документів.",
+          "Комплектуючі та гідравліка європейського класу для щоденної складської роботи.",
       },
       {
-        icon: "warranty",
-        label: "Гарантія до 24 місяців",
+        label: "20 років на ринку України",
         description:
-          "12 місяців базової гарантії; розширена гарантія 24 місяці на штабелери, рокли та навантажувачі.",
+          "Постачаємо рокли, штабелери та навантажувачі підприємствам по всій країні.",
       },
       {
-        icon: "service",
+        label: "Доставка по Україні",
+        description:
+          "Київ — часто в день звернення; регіони — від 1 дня після оплати з документами.",
+      },
+      {
         label: "Офіційний сервіс",
         description:
-          "Стаціонарний і виїзний сервіс по всій Україні, склади комплектуючих для рокл і штабелерів.",
+          "Стаціонарний і виїзний ремонт, діагностика гідравліки та заміна вузлів.",
+      },
+      {
+        label: "Гарантія до 24 місяців",
+        description:
+          "Базова гарантія 12 місяців; розширена — на штабелери, рокли та навантажувачі.",
+      },
+      {
+        label: "Склад запчастин",
+        description:
+          "Колеса, підшипники, гідравлічні вузли та витратні матеріали в наявності.",
+      },
+      {
+        label: "Підбір під задачу",
+        description:
+          "Менеджер підбере вантажопідйомність, довжину вил і комплектацію під ваш склад.",
+      },
+      {
+        label: "Документи для юросіб",
+        description:
+          "Рахунок, видаткова, гарантійний талон і повний пакет для бухгалтерії.",
       },
     ],
   },
   clients: {
-    eyebrow: "Довіра",
     title: "Наші постійні клієнти",
     logos: [
-      { name: "БКЛ", imageSrc: "/images/clients/client-1.jpg" },
-      { name: "Пром", imageSrc: "/images/clients/client-2.jpg" },
-      { name: "Строймаг", imageSrc: "/images/clients/client-3.jpg" },
-      { name: "Партнер 4", imageSrc: "/images/clients/client-4.jpg" },
-      { name: "Партнер 5", imageSrc: "/images/clients/client-5.jpg" },
-      { name: "Партнер 6", imageSrc: "/images/clients/client-6.jpg" },
+      { name: "McDonald's" },
+      { name: "Нова Пошта" },
+      { name: "OKKO" },
+      { name: "Roshen" },
+      { name: "Укрпошта" },
     ],
   },
+  caseStudy: {
+    title: "4 тисячі сімей мені вдячні",
+    paragraphs: [
+      "Щодня наша техніка працює на складах, у логістичних хабах і на рампі виробництва — там, де від надійної рокли залежить зміна цілої команди.",
+      "Ми не просто продаємо гідравлічні візки. Ми закриваємо простої, підбираємо вузли під навантаження і тримаємо сервіс так, щоб зміна не зупинялась.",
+      "За 20 років сотні підприємств стали постійними клієнтами. За кожним контрактом — люди, які годують свої сім’ї стабільною роботою на складі.",
+    ],
+    readMore: "Читати далі",
+    imageSrc: "/images/hero/rokla-hero.jpg",
+    imageAlt: "Робота з роклою на складі",
+  },
+  delivery: {
+    title: "Розрахувати вартість доставки",
+    from: "Звідки",
+    to: "Куди",
+    submit: "Розрахувати",
+    success: "Заявку на розрахунок прийнято.",
+    partners: ["Ford", "Nokia", "Nike", "Shell", "Nivea", "Bosch"],
+  },
   reviews: {
-    eyebrow: "Відгуки",
-    title: "Що кажуть клієнти",
+    title: "Відгуки наших клієнтів",
     items: [
       {
         company: "ТОВ «ЛАЙФСЕ ЛЛ»",
         author: "Язиджи Ісмет",
         text: "Купували самохідний штабелер. Показали модель до оплати, доставили за 2 дні — чітко й організовано.",
+        imageSrc: "/images/clients/client-1.jpg",
+        imageAlt: "Техніка KAISER у клієнта",
       },
       {
         company: "ТОВ «НОША»",
         author: "Гнатенко Сергій",
-        text: "Роклу доставили в Ужгород через два дні. Техніка відмінна, консультація з збірки допомогла.",
+        text: "Роклу доставили в Ужгород через два дні. Техніка відмінна, консультація зі збірки допомогла.",
+        imageSrc: "/images/clients/client-2.jpg",
+        imageAlt: "Рокла в роботі на складі клієнта",
       },
       {
         company: "ТОВ «ОККО-ХОЛДИНГ»",
         author: "Рассказов Дмитро",
         text: "Запропонували варіант із змінною АКБ, показали на складі й навіть тест-драйв. Працюватимемо далі.",
+        imageSrc: "/images/clients/client-3.jpg",
+        imageAlt: "Навантажувач на об’єкті клієнта",
       },
     ],
   },
   faq: {
-    eyebrow: "Підтримка",
     title: "Часті запитання",
     items: [
       {
-        question: "Які файли можна додати до заявки?",
-        answer: "PDF, JPG і PNG — реквізити, креслення чи специфікації в межах типових поштових вкладень.",
-      },
-      {
-        question: "Як швидко відповідаєте на заявки?",
-        answer: "Менеджер зв’язується протягом робочого дня, зазвичай протягом 24 годин.",
+        question: "Ємність і підйомність рокли?",
+        answer:
+          "Базові гідравлічні рохлі — 2000 кг, посилені моделі — до 2500 кг. Довжина вил 1150–1500 мм. Точні параметри підтверджуємо під вашу палету.",
       },
       {
         question: "Чи є доставка по Україні?",
-        answer: "Так. Київ — часто в день звернення; регіони — від 1 дня після оплати з документами.",
+        answer:
+          "Так. Київ — часто в день звернення; регіони — від 1 дня після оплати з повним комплектом документів.",
+      },
+      {
+        question: "Яка гарантія на техніку?",
+        answer:
+          "12 місяців базової гарантії. Для штабелерів, рокл і навантажувачів доступна розширена гарантія до 24 місяців.",
+      },
+      {
+        question: "Які файли можна додати до заявки?",
+        answer:
+          "PDF, JPG і PNG — реквізити, креслення чи специфікації в межах типових поштових вкладень.",
+      },
+      {
+        question: "Як швидко відповідаєте на заявки?",
+        answer:
+          "Менеджер зв’язується протягом робочого дня, зазвичай протягом 24 годин.",
       },
     ],
   },
   leadForm: {
     eyebrow: "Контакт",
-    title: "Замовити консультацію",
-    subtitle: "Залиште контакти та корпоративні реквізити (.pdf, .jpg, .png).",
+    title: "Надіслати реквізити",
+    subtitle: "Залиште контакти та файл з реквізитами компанії (.pdf, .jpg, .png).",
     fullName: "ПІБ",
     email: "Email",
     phone: "Телефон",
     company: "Компанія",
     message: "Повідомлення",
     quantity: "Кількість",
-    filesLabel: "Корпоративні реквізити",
+    citiesLabel: "Місто",
+    cities: LEAD_CITIES_UK,
+    filesLabel: "Прикріпити файл з реквізитами",
     filesHint: "Приймаємо: .pdf, .jpg, .png",
     filesBrowse: "Обрати файли",
     filesDrag: "Перетягніть файли сюди",
@@ -226,31 +409,102 @@ const DICTIONARY_UK: Dictionary = {
     thumbPlaceholder: "Мініатюра",
   },
   footer: {
-    tagline: "B2B-платформа заявок на складську техніку.",
-    locale: "Локаль",
+    brand: "KAISER",
+    phone: "+38 044 000 00 00",
+    email: "sales@kaiser.ua",
+    catalogTitle: "Каталог",
+    catalogLinks: [
+      { label: "Рохлі", href: "#catalog" },
+      { label: "Штабелери", href: "#catalog" },
+      { label: "Навантажувачі", href: "#catalog" },
+      { label: "Запчастини", href: "#catalog" },
+    ],
+    navTitle: "Навігація",
+    navLinks: [
+      { label: "Про компанію", href: "#about" },
+      { label: "Послуги", href: "#services" },
+      { label: "Відгуки", href: "#reviews" },
+      { label: "Контакти", href: "#contact" },
+    ],
+    addressTitle: "Адреса",
+    address: "Україна, м. Київ, склад і сервіс KAISER",
+    copyright: "© KAISER. Усі права захищено.",
   },
 };
 
 const DICTIONARY_RU: Dictionary = {
   header: {
-    catalog: "Каталог",
-    requestQuote: "Запрос цены",
+    brand: "KAISER",
+    tagline: "Складская техника",
+    nav: {
+      about: "О компании",
+      catalog: "Каталог",
+      promos: "Акции",
+      services: "Услуги",
+      reviews: "Отзывы",
+      contacts: "Контакты",
+    },
+    phone: "+38 044 000 00 00",
+    requestCall: "Заказать звонок",
     language: "Язык",
   },
   hero: {
-    brand: "Rocla",
-    title: "Купить роклу — немецкое качество для склада",
-    subtitle:
-      "Гидравлические рохли, штабелёры и складская техника с доставкой по Украине, гарантией и официальным сервисом.",
-    browseCatalog: "Перейти в каталог",
-    requestQuote: "Запрос цены",
-    badges: [
-      { label: "Груз", value: "до 2.5 т", tone: "gold" },
-      { label: "Вилы", value: "1150–1500 мм", tone: "dark" },
-      { label: "Гарантия", value: "до 24 мес.", tone: "gold" },
-      { label: "Ответ", value: "за 24 ч", tone: "dark" },
+    title: "Купить роклу, рохли немецкое качество",
+    subtitle: "20 лет на рынке в Украине",
+    name: "Имя",
+    phone: "Телефон",
+    submit: "Подобрать",
+    success: "Заявка принята. Менеджер перезвонит.",
+    imageAlt: "Складская техника KAISER",
+    errors: {
+      fullName: "Укажите имя (минимум 2 символа).",
+      phone: "Укажите телефон в формате +380… или 0…",
+    },
+  },
+  categories: {
+    items: [
+      {
+        title: "Гидравлические тележки (рохли)",
+        imageSrc: CATEGORY_IMAGES.pallet,
+        imageAlt: "Гидравлическая рохля",
+        productSlug: "hydraulic-pallet-truck-2t",
+      },
+      {
+        title: "Штабелёры",
+        imageSrc: CATEGORY_IMAGES.stacker,
+        imageAlt: "Штабелёр",
+      },
+      {
+        title: "Гидравлические столы",
+        imageSrc: CATEGORY_IMAGES.table,
+        imageAlt: "Гидравлический стол",
+      },
+      {
+        title: "Обслуживание / колёса",
+        imageSrc: CATEGORY_IMAGES.service,
+        imageAlt: "Обслуживание складской техники",
+      },
+      {
+        title: "Ричтраки",
+        imageSrc: CATEGORY_IMAGES.reach,
+        imageAlt: "Ричтрак",
+      },
+      {
+        title: "Погрузчики",
+        imageSrc: CATEGORY_IMAGES.forklift,
+        imageAlt: "Погрузчик",
+      },
+      {
+        title: "Подъёмники / вышки",
+        imageSrc: CATEGORY_IMAGES.lift,
+        imageAlt: "Подъёмник",
+      },
+      {
+        title: "Запчасти и аксессуары",
+        imageSrc: CATEGORY_IMAGES.parts,
+        imageAlt: "Запчасти для рокл",
+      },
     ],
-    imageAlt: "Гидравлическая рохля на складе",
   },
   catalog: {
     eyebrow: "Каталог",
@@ -260,91 +514,142 @@ const DICTIONARY_RU: Dictionary = {
     imageFallback: "Изображение",
   },
   advantages: {
-    eyebrow: "Преимущества",
-    title: "Почему выбирают нас",
+    title: "Ваши преимущества в KAISER",
     items: [
       {
-        icon: "delivery",
-        label: "Оперативная доставка",
+        label: "Немецкое качество",
         description:
-          "Доставка по Киеву в день обращения, по Украине — от 1 дня после оплаты с полным комплектом документов.",
+          "Комплектующие и гидравлика европейского класса для ежедневной складской работы.",
       },
       {
-        icon: "warranty",
-        label: "Гарантия до 24 месяцев",
+        label: "20 лет на рынке Украины",
         description:
-          "12 месяцев базовой гарантии; расширенная гарантия 24 месяца на штабелёры, роклы и погрузчики.",
+          "Поставляем роклы, штабелёры и погрузчики предприятиям по всей стране.",
       },
       {
-        icon: "service",
+        label: "Доставка по Украине",
+        description:
+          "Киев — часто в день обращения; регионы — от 1 дня после оплаты с документами.",
+      },
+      {
         label: "Официальный сервис",
         description:
-          "Стационарный и выездной сервис по всей Украине, склады комплектующих для рокл и штабелёров.",
+          "Стационарный и выездной ремонт, диагностика гидравлики и замена узлов.",
+      },
+      {
+        label: "Гарантия до 24 месяцев",
+        description:
+          "Базовая гарантия 12 месяцев; расширенная — на штабелёры, роклы и погрузчики.",
+      },
+      {
+        label: "Склад запчастей",
+        description:
+          "Колёса, подшипники, гидравлические узлы и расходники в наличии.",
+      },
+      {
+        label: "Подбор под задачу",
+        description:
+          "Менеджер подберёт грузоподъёмность, длину вил и комплектацию под ваш склад.",
+      },
+      {
+        label: "Документы для юрлиц",
+        description:
+          "Счёт, расходная, гарантийный талон и полный пакет для бухгалтерии.",
       },
     ],
   },
   clients: {
-    eyebrow: "Доверие",
     title: "Наши постоянные клиенты",
-    logos: [
-      { name: "БКЛ", imageSrc: "/images/clients/client-1.jpg" },
-      { name: "Пром", imageSrc: "/images/clients/client-2.jpg" },
-      { name: "Строймаг", imageSrc: "/images/clients/client-3.jpg" },
-      { name: "Партнёр 4", imageSrc: "/images/clients/client-4.jpg" },
-      { name: "Партнёр 5", imageSrc: "/images/clients/client-5.jpg" },
-      { name: "Партнёр 6", imageSrc: "/images/clients/client-6.jpg" },
+    logos: [{ name: "McDonald's" }, { name: "Новая Почта" }, { name: "OKKO" }, { name: "Roshen" }, { name: "Укрпочта" }],
+  },
+  caseStudy: {
+    title: "4 тысячи семей мне благодарны",
+    paragraphs: [
+      "Каждый день наша техника работает на складах, в логистических хабах и на рампе производства — там, где от надёжной роклы зависит смена целой команды.",
+      "Мы не просто продаём гидравлические тележки. Мы закрываем простои, подбираем узлы под нагрузку и держим сервис так, чтобы смена не останавливалась.",
+      "За 20 лет сотни предприятий стали постоянными клиентами. За каждым контрактом — люди, которые кормят свои семьи стабильной работой на складе.",
     ],
+    readMore: "Читать далее",
+    imageSrc: "/images/hero/rokla-hero.jpg",
+    imageAlt: "Работа с роклой на складе",
+  },
+  delivery: {
+    title: "Рассчитать стоимость доставки",
+    from: "Откуда",
+    to: "Куда",
+    submit: "Рассчитать",
+    success: "Заявка на расчёт принята.",
+    partners: ["Ford", "Nokia", "Nike", "Shell", "Nivea", "Bosch"],
   },
   reviews: {
-    eyebrow: "Отзывы",
-    title: "Что говорят клиенты",
+    title: "Отзывы наших клиентов",
     items: [
       {
         company: "ООО «ЛАЙФСЕ ЛЛ»",
         author: "Языджи Исмет",
         text: "Покупали самоходный штабеллер. Показали модель до оплаты, доставили за 2 дня — чётко и организованно.",
+        imageSrc: "/images/clients/client-1.jpg",
+        imageAlt: "Техника KAISER у клиента",
       },
       {
         company: "ООО «НОША»",
         author: "Гнатенко Сергей",
         text: "Роклу доставили в Ужгород через два дня. Техника отличная, консультация по сборке помогла.",
+        imageSrc: "/images/clients/client-2.jpg",
+        imageAlt: "Рокла в работе на складе клиента",
       },
       {
         company: "ООО «ОККО-ХОЛДИНГ»",
         author: "Рассказов Дмитрий",
         text: "Предложили вариант с переменной АКБ, показали на складе и даже тест-драйв. Будем сотрудничать.",
+        imageSrc: "/images/clients/client-3.jpg",
+        imageAlt: "Погрузчик на объекте клиента",
       },
     ],
   },
   faq: {
-    eyebrow: "Поддержка",
-    title: "Частые вопросы",
+    title: "Часто задаваемые вопросы",
     items: [
       {
-        question: "Какие файлы можно приложить к заявке?",
-        answer: "PDF, JPG и PNG — реквизиты, чертежи или спецификации в пределах типичных почтовых вложений.",
-      },
-      {
-        question: "Как быстро отвечаете на заявки?",
-        answer: "Менеджер связывается в течение рабочего дня, обычно в течение 24 часов.",
+        question: "Ёмкость и подъёмность роклы?",
+        answer:
+          "Базовые гидравлические рохли — 2000 кг, усиленные модели — до 2500 кг. Длина вил 1150–1500 мм. Точные параметры подтверждаем под ваш поддон.",
       },
       {
         question: "Есть ли доставка по Украине?",
-        answer: "Да. Киев — часто в день обращения; регионы — от 1 дня после оплаты с документами.",
+        answer:
+          "Да. Киев — часто в день обращения; регионы — от 1 дня после оплаты с полным комплектом документов.",
+      },
+      {
+        question: "Какая гарантия на технику?",
+        answer:
+          "12 месяцев базовой гарантии. Для штабелёров, рокл и погрузчиков доступна расширенная гарантия до 24 месяцев.",
+      },
+      {
+        question: "Какие файлы можно приложить к заявке?",
+        answer:
+          "PDF, JPG и PNG — реквизиты, чертежи или спецификации в пределах типичных почтовых вложений.",
+      },
+      {
+        question: "Как быстро отвечаете на заявки?",
+        answer:
+          "Менеджер связывается в течение рабочего дня, обычно в течение 24 часов.",
       },
     ],
   },
   leadForm: {
     eyebrow: "Контакт",
-    title: "Заказать консультацию",
-    subtitle: "Оставьте контакты и корпоративные реквизиты (.pdf, .jpg, .png).",
+    title: "Отправить реквизиты",
+    subtitle: "Оставьте контакты и файл с реквизитами компании (.pdf, .jpg, .png).",
     fullName: "ФИО",
     email: "Email",
     phone: "Телефон",
     company: "Компания",
     message: "Сообщение",
     quantity: "Количество",
-    filesLabel: "Корпоративные реквизиты",
+    citiesLabel: "Город",
+    cities: LEAD_CITIES_RU,
+    filesLabel: "Прикрепить файл с реквизитами",
     filesHint: "Принимаем: .pdf, .jpg, .png",
     filesBrowse: "Выбрать файлы",
     filesDrag: "Перетащите файлы сюда",
@@ -369,8 +674,26 @@ const DICTIONARY_RU: Dictionary = {
     thumbPlaceholder: "Миниатюра",
   },
   footer: {
-    tagline: "B2B-платформа заявок на складскую технику.",
-    locale: "Локаль",
+    brand: "KAISER",
+    phone: "+38 044 000 00 00",
+    email: "sales@kaiser.ua",
+    catalogTitle: "Каталог",
+    catalogLinks: [
+      { label: "Рохли", href: "#catalog" },
+      { label: "Штабелёры", href: "#catalog" },
+      { label: "Погрузчики", href: "#catalog" },
+      { label: "Запчасти", href: "#catalog" },
+    ],
+    navTitle: "Навигация",
+    navLinks: [
+      { label: "О компании", href: "#about" },
+      { label: "Услуги", href: "#services" },
+      { label: "Отзывы", href: "#reviews" },
+      { label: "Контакты", href: "#contact" },
+    ],
+    addressTitle: "Адрес",
+    address: "Украина, г. Киев, склад и сервис KAISER",
+    copyright: "© KAISER. Все права защищены.",
   },
 };
 

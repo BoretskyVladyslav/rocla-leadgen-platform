@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Rocla Leadgen Platform",
-  description: "B2B lead generation platform for Rocla product inquiries",
+  title: "KAISER — складська техніка",
+  description: "Рокли, штабелери та складська техніка KAISER. 20 років на ринку України.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

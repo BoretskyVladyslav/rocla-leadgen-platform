@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Dictionary } from "@/data/dictionary";
 
 export interface FooterProps {
@@ -6,20 +7,60 @@ export interface FooterProps {
 }
 
 export function Footer({ lang, copy }: FooterProps) {
+  const telHref = `tel:${copy.phone.replace(/[^\d+]/g, "")}`;
+
   return (
-    <footer className="border-t border-border bg-dark text-white">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-12 sm:flex-row sm:items-end sm:justify-between sm:px-6 lg:py-16">
-        <div className="flex flex-col gap-2">
-          <p className="text-base font-bold tracking-tight text-accent">
-            Rocla
+    <footer className="bg-dark text-white">
+      <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-14 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:py-16">
+        <div className="flex flex-col gap-3">
+          <p className="font-serif text-xl font-bold uppercase tracking-[0.14em] text-accent">
+            {copy.brand}
           </p>
-          <p className="max-w-sm text-sm leading-relaxed text-white/70">
-            {copy.tagline}
-          </p>
+          <a href={telHref} className="text-sm font-semibold text-white hover:text-accent">
+            {copy.phone}
+          </a>
+          <a href={`mailto:${copy.email}`} className="text-sm text-white/70 hover:text-white">
+            {copy.email}
+          </a>
         </div>
-        <p className="text-sm text-white/70">
-          {copy.locale} · {lang.toUpperCase()}
-        </p>
+
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-accent">
+            {copy.catalogTitle}
+          </p>
+          <ul className="mt-4 flex flex-col gap-2 text-sm text-white/75">
+            {copy.catalogLinks.map((item) => (
+              <li key={item.label}>
+                <Link href={`/${lang}${item.href}`} className="hover:text-white">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-accent">
+            {copy.navTitle}
+          </p>
+          <ul className="mt-4 flex flex-col gap-2 text-sm text-white/75">
+            {copy.navLinks.map((item) => (
+              <li key={item.label}>
+                <Link href={`/${lang}${item.href}`} className="hover:text-white">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-accent">
+            {copy.addressTitle}
+          </p>
+          <p className="mt-4 text-sm leading-relaxed text-white/75">{copy.address}</p>
+          <p className="mt-6 text-xs text-white/50">{copy.copyright}</p>
+        </div>
       </div>
     </footer>
   );

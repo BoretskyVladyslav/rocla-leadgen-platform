@@ -9,30 +9,59 @@ export interface HeaderProps {
 }
 
 export function Header({ lang, copy }: HeaderProps) {
+  const nav = [
+    { href: `/${lang}#about`, label: copy.nav.about },
+    { href: `/${lang}#catalog`, label: copy.nav.catalog },
+    { href: `/${lang}#catalog`, label: copy.nav.promos },
+    { href: `/${lang}#services`, label: copy.nav.services },
+    { href: `/${lang}#reviews`, label: copy.nav.reviews },
+    { href: `/${lang}#contact`, label: copy.nav.contacts },
+  ];
+
+  const telHref = `tel:${copy.phone.replace(/[^\d+]/g, "")}`;
+
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-white/95 backdrop-blur-sm">
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <Link
-          href={`/${lang}`}
-          className="text-lg font-bold tracking-tight text-heading"
-        >
-          Rocla
+    <header className="sticky top-0 z-50 border-b border-border bg-white">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+        <Link href={`/${lang}`} className="shrink-0 leading-tight">
+          <span className="block font-serif text-xl font-bold uppercase tracking-[0.14em] text-heading">
+            {copy.brand}
+          </span>
+          <span className="block text-[10px] font-medium uppercase tracking-[0.16em] text-muted">
+            {copy.tagline}
+          </span>
         </Link>
-        <nav aria-label="Primary" className="flex items-center gap-4 text-sm sm:gap-6">
-          <LocaleSwitcher lang={lang} label={copy.language} />
-          <Link
-            href={`/${lang}#catalog`}
-            className="hidden font-bold uppercase tracking-wide text-muted transition-colors hover:text-accent-alt sm:inline"
-          >
-            {copy.catalog}
-          </Link>
-          <MotionLink
-            href={`/${lang}#contact`}
-            className="inline-flex h-9 items-center rounded-md bg-accent px-3.5 text-xs font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover"
-          >
-            {copy.requestQuote}
-          </MotionLink>
+
+        <nav
+          aria-label="Primary"
+          className="hidden items-center gap-5 text-xs font-semibold uppercase tracking-wide text-foreground lg:flex"
+        >
+          {nav.map((item) => (
+            <Link
+              key={`${item.href}-${item.label}`}
+              href={item.href}
+              className="transition-colors hover:text-accent-alt"
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
+
+        <div className="flex items-center gap-3 sm:gap-4">
+          <LocaleSwitcher lang={lang} label={copy.language} />
+          <a
+            href={telHref}
+            className="hidden text-sm font-bold tracking-tight text-heading md:inline"
+          >
+            {copy.phone}
+          </a>
+          <MotionLink
+            href={`/${lang}#hero-form`}
+            className="inline-flex h-9 items-center rounded-md bg-dark px-3.5 text-xs font-bold uppercase tracking-wide text-white transition-colors hover:bg-graphite"
+          >
+            {copy.requestCall}
+          </MotionLink>
+        </div>
       </div>
     </header>
   );

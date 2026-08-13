@@ -18,6 +18,21 @@ export type LeadFieldErrors = {
   phone?: string;
 };
 
+export type CallbackFieldErrors = {
+  fullName?: string;
+  phone?: string;
+};
+
+export function validateCallbackFields(
+  values: { fullName: string; phone: string },
+  messages: { fullName: string; phone: string },
+): CallbackFieldErrors {
+  const errors: CallbackFieldErrors = {};
+  if (!isValidFullName(values.fullName)) errors.fullName = messages.fullName;
+  if (!isValidUaPhone(values.phone)) errors.phone = messages.phone;
+  return errors;
+}
+
 export function validateLeadFields(
   values: { fullName: string; email: string; phone: string },
   messages: { fullName: string; email: string; phone: string },

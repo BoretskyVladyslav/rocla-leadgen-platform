@@ -12,6 +12,7 @@ import {
   type LeadFieldErrors,
 } from "@/lib/validation";
 import type { FilePayload, LeadFormData } from "@/types/form";
+import { cn } from "@/lib/utils";
 
 const INITIAL_STATE: Omit<LeadFormData, "files"> & { phone: string } = {
   fullName: "",
@@ -28,8 +29,22 @@ export interface LeadCaptureFormProps {
   copy: Dictionary["leadForm"];
 }
 
+function WarehouseIllustration() {
+  return (
+    <svg viewBox="0 0 220 180" className="h-full w-full" aria-hidden>
+      <rect x="20" y="70" width="180" height="90" fill="none" stroke="#7eb6d4" strokeWidth="2" />
+      <path d="M20 70 110 20l90 50" fill="none" stroke="#7eb6d4" strokeWidth="2" />
+      <rect x="40" y="100" width="40" height="40" fill="none" stroke="#7eb6d4" strokeWidth="1.6" />
+      <rect x="90" y="95" width="40" height="45" fill="none" stroke="#7eb6d4" strokeWidth="1.6" />
+      <rect x="140" y="105" width="40" height="35" fill="none" stroke="#7eb6d4" strokeWidth="1.6" />
+      <path d="M40 120h40M90 117h40M140 122h40" stroke="#7eb6d4" strokeWidth="1.2" />
+    </svg>
+  );
+}
+
 export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
   const [form, setForm] = useState(INITIAL_STATE);
+  const [city, setCity] = useState(copy.cities[0]?.id ?? "");
   const [files, setFiles] = useState<FilePayload[]>([]);
   const [rawFiles, setRawFiles] = useState<File[]>([]);
   const [errors, setErrors] = useState<LeadFieldErrors>({});
@@ -72,7 +87,7 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
-    console.info("lead-capture", { ...form, files }, {
+    console.info("lead-capture", { ...form, city, files }, {
       fileCount: rawFiles.length,
     });
     setStatus("success");
@@ -80,6 +95,7 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
 
   function resetForm() {
     setForm(INITIAL_STATE);
+    setCity(copy.cities[0]?.id ?? "");
     setFiles([]);
     setRawFiles([]);
     setErrors({});
@@ -87,8 +103,8 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
   }
 
   return (
-    <section id="contact" className="bg-surface-muted">
-      <div className="mx-auto w-full max-w-xl px-4 py-16 sm:px-6 lg:py-20">
+    <section id="contact" className="scroll-mt-20 bg-surface">
+      <div className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 lg:py-16">
         <ScrollReveal>
           <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-accent-alt">
             {copy.eyebrow}
@@ -96,11 +112,11 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
           <h2 className="mt-3 text-center text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">
             {copy.title}
           </h2>
-          <p className="mt-3 text-center text-base leading-relaxed text-muted">
+          <p className="mx-auto mt-3 max-w-xl text-center text-base leading-relaxed text-muted">
             {copy.subtitle}
           </p>
 
-          <div className="relative mt-10 overflow-hidden rounded-md border-2 border-accent bg-white p-6 shadow-[0_10px_30px_rgba(254,202,22,0.18)] sm:p-8">
+          <div className="relative mt-10 overflow-hidden rounded-md border border-border bg-white p-6 shadow-sm sm:p-8">
             <AnimatePresence mode="wait">
               {status === "success" ? (
                 <motion.div
@@ -134,80 +150,111 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
                   exit={{ opacity: 0, y: -6 }}
                   transition={{ duration: 0.25 }}
                   onSubmit={handleSubmit}
-                  className="flex flex-col gap-5"
+                  className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)_180px]"
                   noValidate
                 >
-                  <Input
-                    label={copy.fullName}
-                    name="fullName"
-                    required
-                    value={form.fullName}
-                    error={errors.fullName}
-                    onBlur={handleBlur}
-                    onChange={(e) =>
-                      setForm((s) => ({ ...s, fullName: e.target.value }))
-                    }
-                  />
-                  <Input
-                    label={copy.email}
-                    name="email"
-                    type="email"
-                    required
-                    value={form.email}
-                    error={errors.email}
-                    onBlur={handleBlur}
-                    onChange={(e) =>
-                      setForm((s) => ({ ...s, email: e.target.value }))
-                    }
-                  />
-                  <Input
-                    label={copy.phone}
-                    name="phone"
-                    type="tel"
-                    required
-                    value={form.phone}
-                    error={errors.phone}
-                    onBlur={handleBlur}
-                    placeholder="+380…"
-                    onChange={(e) =>
-                      setForm((s) => ({ ...s, phone: e.target.value }))
-                    }
-                  />
-                  <Input
-                    label={copy.company}
-                    name="company"
-                    value={form.company}
-                    onChange={(e) =>
-                      setForm((s) => ({ ...s, company: e.target.value }))
-                    }
-                  />
-                  <label className="flex flex-col gap-1.5 text-sm">
-                    <span className="font-medium tracking-tight text-foreground">
-                      {copy.message}
-                    </span>
-                    <textarea
-                      name="message"
-                      rows={4}
-                      className={fieldControlClass}
-                      value={form.message}
+                  <div className="flex flex-col gap-4">
+                    <Input
+                      label={copy.fullName}
+                      name="fullName"
+                      required
+                      value={form.fullName}
+                      error={errors.fullName}
+                      onBlur={handleBlur}
                       onChange={(e) =>
-                        setForm((s) => ({ ...s, message: e.target.value }))
+                        setForm((s) => ({ ...s, fullName: e.target.value }))
                       }
                     />
-                  </label>
-                  <FileUpload
-                    label={copy.filesLabel}
-                    hint={copy.filesHint}
-                    browseLabel={copy.filesBrowse}
-                    dragLabel={copy.filesDrag}
-                    maxSizeLabel={copy.filesMaxSize}
-                    typeError={copy.errors.fileType}
-                    sizeError={copy.errors.fileSize}
-                    onFilesChange={handleFilesChange}
-                  />
-                  <Button type="submit" size="lg" className="mt-2 w-full">
-                    {copy.submit}
-                  </Button>
+                    <Input
+                      label={copy.email}
+                      name="email"
+                      type="email"
+                      required
+                      value={form.email}
+                      error={errors.email}
+                      onBlur={handleBlur}
+                      onChange={(e) =>
+                        setForm((s) => ({ ...s, email: e.target.value }))
+                      }
+                    />
+                    <Input
+                      label={copy.phone}
+                      name="phone"
+                      type="tel"
+                      required
+                      value={form.phone}
+                      error={errors.phone}
+                      onBlur={handleBlur}
+                      placeholder="+380…"
+                      onChange={(e) =>
+                        setForm((s) => ({ ...s, phone: e.target.value }))
+                      }
+                    />
+                    <Input
+                      label={copy.company}
+                      name="company"
+                      value={form.company}
+                      onChange={(e) =>
+                        setForm((s) => ({ ...s, company: e.target.value }))
+                      }
+                    />
+                    <fieldset>
+                      <legend className="mb-2 text-sm font-medium tracking-tight text-foreground">
+                        {copy.citiesLabel}
+                      </legend>
+                      <div className="flex flex-col gap-2">
+                        {copy.cities.map((item) => (
+                          <button
+                            key={item.id}
+                            type="button"
+                            onClick={() => setCity(item.id)}
+                            className={cn(
+                              "h-10 rounded-md px-3 text-sm font-bold uppercase tracking-wide transition-colors",
+                              city === item.id
+                                ? "bg-accent text-accent-fg"
+                                : "bg-surface text-heading hover:bg-accent/40",
+                            )}
+                          >
+                            {item.label}
+                          </button>
+                        ))}
+                      </div>
+                    </fieldset>
+                  </div>
+
+                  <div className="flex flex-col gap-4">
+                    <label className="flex flex-col gap-1.5 text-sm">
+                      <span className="font-medium tracking-tight text-foreground">
+                        {copy.message}
+                      </span>
+                      <textarea
+                        name="message"
+                        rows={4}
+                        className={fieldControlClass}
+                        value={form.message}
+                        onChange={(e) =>
+                          setForm((s) => ({ ...s, message: e.target.value }))
+                        }
+                      />
+                    </label>
+                    <FileUpload
+                      label={copy.filesLabel}
+                      hint={copy.filesHint}
+                      browseLabel={copy.filesBrowse}
+                      dragLabel={copy.filesDrag}
+                      maxSizeLabel={copy.filesMaxSize}
+                      typeError={copy.errors.fileType}
+                      sizeError={copy.errors.fileSize}
+                      onFilesChange={handleFilesChange}
+                    />
+                    <Button type="submit" size="lg" className="mt-auto w-full">
+                      {copy.submit}
+                    </Button>
+                  </div>
+
+                  <div className="hidden items-end lg:flex">
+                    <WarehouseIllustration />
+                  </div>
                 </motion.form>
               )}
             </AnimatePresence>
