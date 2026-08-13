@@ -7,7 +7,11 @@ import { Button } from "@/components/ui/Button";
 import { FileUpload } from "@/components/ui/FileUpload";
 import { Input } from "@/components/ui/Input";
 import { PhoneInput } from "@/components/ui/PhoneInput";
-import type { Dictionary } from "@/data/dictionary";
+import {
+  StoreLocationPicker,
+  formatWarehouseValue,
+} from "@/components/ui/StoreLocationPicker";
+import type { Dictionary, Warehouse } from "@/data/dictionary";
 import {
   validateLeadFields,
   type LeadFieldErrors,
@@ -17,11 +21,15 @@ import type { FilePayload, LeadFormData } from "@/types/form";
 const VIBER_HREF = "viber://chat?number=%2B380981540982";
 const TELEGRAM_HREF = "https://t.me/+380981540982";
 
-const INITIAL_STATE: Omit<LeadFormData, "files"> & { phone: string } = {
+const INITIAL_STATE: Omit<LeadFormData, "files"> & {
+  phone: string;
+  city: string;
+} = {
   fullName: "",
   email: "",
   phone: "",
   company: "",
+  city: "",
 };
 
 export interface LeadCaptureFormProps {
@@ -32,6 +40,9 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
   const [form, setForm] = useState(INITIAL_STATE);
   const [files, setFiles] = useState<FilePayload[]>([]);
   const [rawFiles, setRawFiles] = useState<File[]>([]);
+  const [selectedWarehouseId, setSelectedWarehouseId] = useState<string | null>(
+    null,
+  );
   const [errors, setErrors] = useState<LeadFieldErrors>({});
   const [status, setStatus] = useState<"idle" | "success">("idle");
 
@@ -59,6 +70,11 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
     }
   }
 
+  function handleWarehouseSelect(warehouse: Warehouse) {
+    setSelectedWarehouseId(warehouse.id);
+    setForm((s) => ({ ...s, city: formatWarehouseValue(warehouse) }));
+  }
+
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const nextErrors = validateLeadFields(
@@ -72,7 +88,7 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
-    console.info("lead-capture", { ...form, files }, {
+    console.info("lead-capture", { ...form, files, warehouseId: selectedWarehouseId }, {
       fileCount: rawFiles.length,
     });
     setStatus("success");
@@ -82,6 +98,7 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
     setForm(INITIAL_STATE);
     setFiles([]);
     setRawFiles([]);
+    setSelectedWarehouseId(null);
     setErrors({});
     setStatus("idle");
   }
@@ -172,6 +189,23 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
                     onChange={(e) =>
                       setForm((s) => ({ ...s, company: e.target.value }))
                     }
+                  />
+                  <StoreLocationPicker
+                    hint={copy.citiesHint}
+                    officeLabel={copy.warehouseOfficeLabel}
+                    hoursLabel={copy.warehouseHoursLabel}
+                    warehouses={copy.cities}
+                    selectedId={selectedWarehouseId}
+                    onSelect={handleWarehouseSelect}
+                  />
+                  <Input
+                    label={copy.citiesLabel}
+                    name="city"
+                    value={form.city}
+                    onChange={(e) => {
+                      setForm((s) => ({ ...s, city: e.target.value }));
+                      setSelectedWarehouseId(null);
+                    }}
                   />
                   <div className="flex flex-col gap-2">
                     <FileUpload

@@ -1,5 +1,12 @@
 import { resolveLocale, type Locale } from "@/lib/i18n";
 
+export interface Warehouse {
+  id: string;
+  city: string;
+  address: string;
+  hours: string;
+}
+
 export interface Dictionary {
   header: {
     brand: string;
@@ -78,6 +85,10 @@ export interface Dictionary {
     success: string;
     partnersTitle: string;
     partners: string[];
+    warehousesHint: string;
+    warehouseOfficeLabel: string;
+    warehouseHoursLabel: string;
+    warehouses: Warehouse[];
     errors: {
       from: string;
       to: string;
@@ -120,7 +131,9 @@ export interface Dictionary {
     quantity: string;
     citiesLabel: string;
     citiesHint: string;
-    cities: Array<{ id: string; label: string }>;
+    cities: Warehouse[];
+    warehouseOfficeLabel: string;
+    warehouseHoursLabel: string;
     filesLabel: string;
     filesHint: string;
     filesBrowse: string;
@@ -180,20 +193,82 @@ export interface Dictionary {
   };
 }
 
-const LEAD_CITIES_UK: Dictionary["leadForm"]["cities"] = [
-  { id: "dnipro", label: "Дніпро" },
-  { id: "kharkiv", label: "Харків" },
-  { id: "kyiv", label: "Київ" },
-  { id: "odesa", label: "Одеса" },
-  { id: "zaporizhzhia", label: "Запоріжжя" },
+const WAREHOUSES_UK: Warehouse[] = [
+  {
+    id: "kyiv",
+    city: "Київ",
+    address: "Дніпровська наб., 13-В",
+    hours: "09:00 - 17:00",
+  },
+  {
+    id: "dnipro",
+    city: "Дніпро",
+    address: "Запорізьке шосе, 62",
+    hours: "09:00 - 18:00",
+  },
+  {
+    id: "kharkiv",
+    city: "Харків",
+    address: "пр-т Аеропорту (Гагаріна), 352",
+    hours: "09:00 - 18:00",
+  },
+  {
+    id: "lviv",
+    city: "Львів",
+    address: "вул. Б. Хмельницького, 188-А",
+    hours: "09:00 - 18:00",
+  },
+  {
+    id: "vinnytsia",
+    city: "Вінниця",
+    address: "вул. Батозька, 1-В",
+    hours: "09:00 - 18:00",
+  },
+  {
+    id: "zhytomyr",
+    city: "Житомир",
+    address: "Київське шосе, 4/2",
+    hours: "09:00 - 18:00",
+  },
 ];
 
-const LEAD_CITIES_RU: Dictionary["leadForm"]["cities"] = [
-  { id: "dnipro", label: "Днепр" },
-  { id: "kharkiv", label: "Харьков" },
-  { id: "kyiv", label: "Киев" },
-  { id: "odesa", label: "Одесса" },
-  { id: "zaporizhzhia", label: "Запорожье" },
+const WAREHOUSES_RU: Warehouse[] = [
+  {
+    id: "kyiv",
+    city: "Киев",
+    address: "Днепровская наб., 13-В",
+    hours: "09:00 - 17:00",
+  },
+  {
+    id: "dnipro",
+    city: "Днепр",
+    address: "Запорожское шоссе, 62",
+    hours: "09:00 - 18:00",
+  },
+  {
+    id: "kharkiv",
+    city: "Харьков",
+    address: "пр-т Аэропорта (Гагарина), 352",
+    hours: "09:00 - 18:00",
+  },
+  {
+    id: "lviv",
+    city: "Львов",
+    address: "ул. Б. Хмельницкого, 188-А",
+    hours: "09:00 - 18:00",
+  },
+  {
+    id: "vinnytsia",
+    city: "Винница",
+    address: "ул. Батозская (Ботожская), 1-В",
+    hours: "09:00 - 18:00",
+  },
+  {
+    id: "zhytomyr",
+    city: "Житомир",
+    address: "Киевское шоссе, 4/2",
+    hours: "09:00 - 18:00",
+  },
 ];
 
 const CATEGORY_IMAGES = {
@@ -389,6 +464,10 @@ const DICTIONARY_UK: Dictionary = {
     success: "Заявку на розрахунок прийнято.",
     partnersTitle: "Бренди, які нам довіряють",
     partners: ["Нова Пошта", "Епіцентр", "АТБ", "Розетка", "ОККО", "Comfy"],
+    warehousesHint: "Оберіть офіс-склад відвантаження:",
+    warehouseOfficeLabel: "Офіс-склад",
+    warehouseHoursLabel: "Режим роботи",
+    warehouses: WAREHOUSES_UK,
     errors: {
       from: "Вкажіть місто відправлення.",
       to: "Вкажіть місто доставки.",
@@ -531,9 +610,11 @@ const DICTIONARY_UK: Dictionary = {
     company: "Назва компанії",
     message: "Повідомлення",
     quantity: "Кількість",
-    citiesLabel: "Місто",
-    citiesHint: "Швидка доставка в:",
-    cities: LEAD_CITIES_UK,
+    citiesLabel: "Місто / склад",
+    citiesHint: "Оберіть офіс-склад:",
+    cities: WAREHOUSES_UK,
+    warehouseOfficeLabel: "Офіс-склад",
+    warehouseHoursLabel: "Режим роботи",
     filesLabel: "Прикріпити файл з реквізитами",
     filesHint: "Приймаємо: .pdf, .jpg, .png",
     filesBrowse: "Обрати файли",
@@ -785,6 +866,10 @@ const DICTIONARY_RU: Dictionary = {
     success: "Заявка на расчёт принята.",
     partnersTitle: "Бренды, которые нам доверяют",
     partners: ["Новая Почта", "Эпицентр", "АТБ", "Розетка", "ОККО", "Comfy"],
+    warehousesHint: "Выберите офис-склад отгрузки:",
+    warehouseOfficeLabel: "Офис-склад",
+    warehouseHoursLabel: "Режим работы",
+    warehouses: WAREHOUSES_RU,
     errors: {
       from: "Укажите город отправления.",
       to: "Укажите город доставки.",
@@ -927,9 +1012,11 @@ const DICTIONARY_RU: Dictionary = {
     company: "Название компании",
     message: "Сообщение",
     quantity: "Количество",
-    citiesLabel: "Город",
-    citiesHint: "Быстрая доставка в:",
-    cities: LEAD_CITIES_RU,
+    citiesLabel: "Город / склад",
+    citiesHint: "Выберите офис-склад:",
+    cities: WAREHOUSES_RU,
+    warehouseOfficeLabel: "Офис-склад",
+    warehouseHoursLabel: "Режим работы",
     filesLabel: "Прикрепить файл с реквизитами",
     filesHint: "Принимаем: .pdf, .jpg, .png",
     filesBrowse: "Выбрать файлы",

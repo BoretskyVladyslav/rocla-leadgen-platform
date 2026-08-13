@@ -5,7 +5,11 @@ import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { PhoneInput } from "@/components/ui/PhoneInput";
-import type { Dictionary } from "@/data/dictionary";
+import {
+  StoreLocationPicker,
+  formatWarehouseValue,
+} from "@/components/ui/StoreLocationPicker";
+import type { Dictionary, Warehouse } from "@/data/dictionary";
 import {
   validateDeliveryFields,
   type DeliveryFieldErrors,
@@ -19,6 +23,9 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [phone, setPhone] = useState("");
+  const [selectedWarehouseId, setSelectedWarehouseId] = useState<string | null>(
+    null,
+  );
   const [errors, setErrors] = useState<DeliveryFieldErrors>({});
   const [status, setStatus] = useState<"idle" | "success">("idle");
 
@@ -34,17 +41,30 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
     }
   }
 
+  function handleWarehouseSelect(warehouse: Warehouse) {
+    setSelectedWarehouseId(warehouse.id);
+    setFrom(formatWarehouseValue(warehouse));
+    setErrors((prev) => ({ ...prev, from: undefined }));
+    setStatus("idle");
+  }
+
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const nextErrors = validateDeliveryFields({ from, to, phone }, copy.errors);
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
-    console.info("delivery-estimate", { from, to, phone });
+    console.info("delivery-estimate", {
+      from,
+      to,
+      phone,
+      warehouseId: selectedWarehouseId,
+    });
     setStatus("success");
     setFrom("");
     setTo("");
     setPhone("");
+    setSelectedWarehouseId(null);
   }
 
   return (
@@ -58,6 +78,14 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
               className="mt-8 flex flex-col gap-4"
               noValidate
             >
+              <StoreLocationPicker
+                hint={copy.warehousesHint}
+                officeLabel={copy.warehouseOfficeLabel}
+                hoursLabel={copy.warehouseHoursLabel}
+                warehouses={copy.warehouses}
+                selectedId={selectedWarehouseId}
+                onSelect={handleWarehouseSelect}
+              />
               <div className="grid gap-4 sm:grid-cols-2">
                 <Input
                   label={copy.from}
@@ -66,7 +94,10 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
                   value={from}
                   error={errors.from}
                   onBlur={handleBlur}
-                  onChange={(e) => setFrom(e.target.value)}
+                  onChange={(e) => {
+                    setFrom(e.target.value);
+                    setSelectedWarehouseId(null);
+                  }}
                 />
                 <Input
                   label={copy.to}
