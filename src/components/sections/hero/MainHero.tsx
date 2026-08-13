@@ -18,7 +18,7 @@ export interface MainHeroProps {
 
 function TruckIcon() {
   return (
-    <svg className="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden>
+    <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden>
       <path
         d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11"
         stroke="currentColor"
@@ -48,7 +48,7 @@ function TruckIcon() {
 
 function FileTextIcon() {
   return (
-    <svg className="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden>
+    <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden>
       <path
         d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
         stroke="currentColor"
@@ -87,7 +87,7 @@ function FileTextIcon() {
 
 function ShieldCheckIcon() {
   return (
-    <svg className="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden>
+    <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden>
       <path
         d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
         stroke="currentColor"
@@ -144,26 +144,15 @@ export function MainHero({ copy }: MainHeroProps) {
 
   return (
     <section className="scroll-mt-20 border-b border-border bg-white">
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 lg:py-28">
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:py-24">
         <ScrollReveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-3">
-            <h1 className="max-w-3xl text-3xl font-bold uppercase tracking-tight text-accent-alt sm:text-4xl lg:text-5xl lg:leading-[1.08]">
+            <h1 className="max-w-3xl text-3xl font-bold uppercase tracking-tight text-heading sm:text-4xl lg:text-5xl lg:leading-[1.08]">
               {copy.title}
             </h1>
-            <p className="text-lg font-bold uppercase tracking-[0.08em] text-heading sm:text-xl">
+            <p className="text-lg font-bold uppercase tracking-[0.08em] text-muted sm:text-xl">
               {copy.subtitle}
             </p>
-            <ul className="mt-1 flex flex-wrap gap-2">
-              {copy.trustBadges.map((badge, index) => (
-                <li
-                  key={badge}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-surface px-3 py-1.5 text-xs font-bold tracking-tight text-heading sm:text-sm"
-                >
-                  {TRUST_ICONS[index] ?? null}
-                  {badge}
-                </li>
-              ))}
-            </ul>
           </div>
 
           <form
@@ -196,7 +185,7 @@ export function MainHero({ copy }: MainHeroProps) {
                   onBlur={handleBlur}
                   onValueChange={setPhone}
                 />
-                <div className="sm:w-40 sm:shrink-0 sm:pb-[calc(0.375rem+1.25rem)]">
+                <div className="sm:w-44 sm:shrink-0 sm:pb-[calc(0.375rem+1.25rem)]">
                   <Button type="submit" size="lg" className="h-12 w-full">
                     {copy.submit}
                   </Button>
@@ -212,6 +201,19 @@ export function MainHero({ copy }: MainHeroProps) {
             label={copy.imageAlt}
             className="rounded-2xl border-gray-200 shadow-sm"
           />
+          <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            {copy.trustBadges.map((badge, index) => (
+              <li
+                key={badge}
+                className="flex items-center gap-2.5 rounded-xl border border-gray-200 bg-surface px-3 py-2.5 text-xs font-bold tracking-tight text-heading sm:flex-col sm:items-start sm:gap-2 sm:text-center sm:text-[11px] lg:text-xs"
+              >
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent text-accent-fg sm:mx-auto">
+                  {TRUST_ICONS[index] ?? null}
+                </span>
+                {badge}
+              </li>
+            ))}
+          </ul>
         </ScrollReveal>
       </div>
     </section>

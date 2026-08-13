@@ -155,6 +155,28 @@ export interface Dictionary {
       fileSize: string;
     };
   };
+  consultation: {
+    title: string;
+    benefits: string[];
+    fullName: string;
+    phone: string;
+    email: string;
+    submit: string;
+    success: string;
+    imageAlt: string;
+    errors: {
+      fullName: string;
+      email: string;
+      phone: string;
+    };
+  };
+  seoText: {
+    title: string;
+    preview: string[];
+    rest: string[];
+    readMore: string;
+    readLess: string;
+  };
   stickyCta: {
     call: string;
     order: string;
@@ -181,15 +203,22 @@ export interface Dictionary {
   };
   footer: {
     brand: string;
+    tagline: string;
     phone: string;
     email: string;
+    hours: string;
     catalogTitle: string;
     catalogLinks: Array<{ label: string; href: string }>;
     navTitle: string;
     navLinks: Array<{ label: string; href: string }>;
-    addressTitle: string;
-    address: string;
+    helpTitle: string;
+    helpText: string;
+    cta: string;
     copyright: string;
+    legal: string;
+    siteNote: string;
+    privacy: string;
+    social: Array<{ label: string; href: string; network: "telegram" | "whatsapp" }>;
   };
 }
 
@@ -660,27 +689,82 @@ const DICTIONARY_UK: Dictionary = {
       category: "Гідравлічні візки",
     },
   },
+  consultation: {
+    title: "Потрібна допомога з вибором?",
+    benefits: [
+      "Допоможемо підібрати під ваші задачі",
+      "Індивідуальний розрахунок вартості",
+      "Відповідь протягом 15 хвилин",
+    ],
+    fullName: "Ім’я",
+    phone: "Телефон",
+    email: "Email",
+    submit: "Отримати консультацію",
+    success: "Заявку прийнято. Менеджер зателефонує.",
+    imageAlt: "Менеджер KAISER",
+    errors: {
+      fullName: "Вкажіть ім’я (мінімум 2 символи).",
+      email: "Вкажіть коректний email.",
+      phone: "Вкажіть телефон у форматі +380 (XX) XXX-XX-XX.",
+    },
+  },
+  seoText: {
+    title: "Що являють собою гідравлічні візки",
+    preview: [
+      "Гідравлічні візки (рохлі) — базовий інструмент складської логістики. Вони піднімають палети на невелику висоту і дозволяють швидко переміщувати вантажі без електрики.",
+      "KAISER пропонує моделі вантажопідйомністю від 2 до 2,5 т з різною довжиною вил, типом коліс і комплектацією під підлогу вашого складу.",
+    ],
+    rest: [
+      "Правильний підбір рохлі зменшує простої на рампі, знижує навантаження на персонал і продовжує ресурс техніки. Важливі параметри: вага вантажу, ширина проїздів, покриття підлоги та інтенсивність змін.",
+      "Наші менеджери допоможуть порівняти гідравлічні візки, штабелери та іншу складську техніку під ваші задачі — з урахуванням бюджету, термінів відвантаження та сервісу.",
+    ],
+    readMore: "Читати далі →",
+    readLess: "Згорнути",
+  },
   footer: {
     brand: "KAISER",
+    tagline: "Надійна складська техніка для вашого бізнесу",
     phone: "+380 (98) 154-09-82",
     email: "rokla-ag@ukr.net",
-    catalogTitle: "Каталог",
+    hours: "Пн–Пт: 09:00 – 18:00",
+    catalogTitle: "Каталог продукції",
     catalogLinks: [
-      { label: "Рохлі", href: "#catalog" },
+      { label: "Гідравлічні візки", href: "#catalog" },
       { label: "Штабелери", href: "#catalog" },
+      { label: "Гідравлічні столи", href: "#catalog" },
+      { label: "Річтраки", href: "#catalog" },
       { label: "Навантажувачі", href: "#catalog" },
-      { label: "Запчастини", href: "#catalog" },
+      { label: "Підйомники", href: "#catalog" },
+      { label: "Обслуговування / колеса", href: "#catalog" },
     ],
-    navTitle: "Навігація",
+    navTitle: "Компанія",
     navLinks: [
       { label: "Про компанію", href: "#about" },
       { label: "Послуги", href: "#services" },
       { label: "Відгуки", href: "#reviews" },
       { label: "Контакти", href: "#contact" },
+      { label: "Каталог", href: "#catalog" },
     ],
-    addressTitle: "Адреса",
-    address: "Україна, м. Київ, склад і сервіс KAISER",
+    helpTitle: "Отримати допомогу з підбором",
+    helpText:
+      "Наші спеціалісти допоможуть підібрати оптимальне рішення під ваші задачі",
+    cta: "Отримати консультацію",
     copyright: "© KAISER. Усі права захищено.",
+    legal: "ТОВ «КАЙЗЕР ГРУП» — надійний партнер у складській техніці.",
+    siteNote: "Сайт створено для вашої зручності та росту бізнесу!",
+    privacy: "Політика конфіденційності",
+    social: [
+      {
+        label: "Telegram",
+        href: "https://t.me/+380981540982",
+        network: "telegram",
+      },
+      {
+        label: "WhatsApp",
+        href: "https://wa.me/380981540982",
+        network: "whatsapp",
+      },
+    ],
   },
 };
 
@@ -1062,27 +1146,82 @@ const DICTIONARY_RU: Dictionary = {
       category: "Гидравлические тележки",
     },
   },
+  consultation: {
+    title: "Нужна помощь с выбором?",
+    benefits: [
+      "Поможем подобрать под ваши задачи",
+      "Индивидуальный расчет стоимости",
+      "Ответ в течение 15 минут",
+    ],
+    fullName: "Имя",
+    phone: "Телефон",
+    email: "Email",
+    submit: "Получить консультацию",
+    success: "Заявку приняли. Менеджер перезвонит.",
+    imageAlt: "Менеджер KAISER",
+    errors: {
+      fullName: "Укажите имя (минимум 2 символа).",
+      email: "Укажите корректный email.",
+      phone: "Укажите телефон в формате +380 (XX) XXX-XX-XX.",
+    },
+  },
+  seoText: {
+    title: "Что представляют собой гидравлические тележки",
+    preview: [
+      "Гидравлические тележки (рохли) — базовый инструмент складской логистики. Они поднимают паллеты на небольшую высоту и позволяют быстро перемещать грузы без электричества.",
+      "KAISER предлагает модели грузоподъёмностью от 2 до 2,5 т с разной длиной вил, типом колёс и комплектацией под пол вашего склада.",
+    ],
+    rest: [
+      "Правильный подбор рохли уменьшает простои на рампе, снижает нагрузку на персонал и продлевает ресурс техники. Важные параметры: вес груза, ширина проездов, покрытие пола и интенсивность смен.",
+      "Наши менеджеры помогут сравнить гидравлические тележки, штабелёры и другую складскую технику под ваши задачи — с учётом бюджета, сроков отгрузки и сервиса.",
+    ],
+    readMore: "Читать далее →",
+    readLess: "Свернуть",
+  },
   footer: {
     brand: "KAISER",
+    tagline: "Надежная складская техника для вашего бизнеса",
     phone: "+380 (98) 154-09-82",
     email: "rokla-ag@ukr.net",
-    catalogTitle: "Каталог",
+    hours: "Пн–Пт: 09:00 – 18:00",
+    catalogTitle: "Каталог продукции",
     catalogLinks: [
-      { label: "Рохли", href: "#catalog" },
+      { label: "Гидравлические тележки", href: "#catalog" },
       { label: "Штабелёры", href: "#catalog" },
+      { label: "Гидравлические столы", href: "#catalog" },
+      { label: "Ричтраки", href: "#catalog" },
       { label: "Погрузчики", href: "#catalog" },
-      { label: "Запчасти", href: "#catalog" },
+      { label: "Подъёмники", href: "#catalog" },
+      { label: "Обслуживание / колёса", href: "#catalog" },
     ],
-    navTitle: "Навигация",
+    navTitle: "Компания",
     navLinks: [
       { label: "О компании", href: "#about" },
       { label: "Услуги", href: "#services" },
       { label: "Отзывы", href: "#reviews" },
       { label: "Контакты", href: "#contact" },
+      { label: "Каталог", href: "#catalog" },
     ],
-    addressTitle: "Адрес",
-    address: "Украина, г. Киев, склад и сервис KAISER",
+    helpTitle: "Получить помощь с подбором",
+    helpText:
+      "Наши специалисты помогут подобрать оптимальное решение под ваши задачи",
+    cta: "Получить консультацию",
     copyright: "© KAISER. Все права защищены.",
+    legal: "ООО «КАЙЗЕР ГРУПП» — надёжный партнёр в складской технике.",
+    siteNote: "Сайт создан для вашего удобства и роста бизнеса!",
+    privacy: "Политика конфиденциальности",
+    social: [
+      {
+        label: "Telegram",
+        href: "https://t.me/+380981540982",
+        network: "telegram",
+      },
+      {
+        label: "WhatsApp",
+        href: "https://wa.me/380981540982",
+        network: "whatsapp",
+      },
+    ],
   },
 };
 
