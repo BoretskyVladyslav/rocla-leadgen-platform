@@ -4,7 +4,7 @@ import { useState, type FormEvent, type FocusEvent } from "react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { MediaImage } from "@/components/ui/MediaImage";
 import { PhoneInput } from "@/components/ui/PhoneInput";
 import type { Dictionary } from "@/data/dictionary";
 import {
@@ -18,7 +18,7 @@ export interface ConsultationBlockProps {
 
 function CheckIcon() {
   return (
-    <svg className="h-4 w-4 text-emerald-600" viewBox="0 0 16 16" fill="none" aria-hidden>
+    <svg className="h-4 w-4 text-accent-fg" viewBox="0 0 16 16" fill="none" aria-hidden>
       <path
         d="M3.5 8.2 6.4 11l6.1-6.5"
         stroke="currentColor"
@@ -81,7 +81,7 @@ export function ConsultationBlock({ copy }: ConsultationBlockProps) {
           <ul className="flex flex-col gap-3">
             {copy.benefits.map((item) => (
               <li key={item} className="flex items-start gap-3 text-sm text-foreground sm:text-base">
-                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-100">
+                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent shadow-sm">
                   <CheckIcon />
                 </span>
                 {item}
@@ -136,10 +136,13 @@ export function ConsultationBlock({ copy }: ConsultationBlockProps) {
         </ScrollReveal>
 
         <ScrollReveal delay={0.1} className="mx-auto hidden w-full max-w-[14rem] lg:block">
-          <MediaPlaceholder
+          <MediaImage
+            src={copy.imageSrc}
+            alt={copy.imageAlt}
             aspect="3/4"
-            label={copy.imageAlt}
-            className="rounded-2xl border-gray-200 shadow-sm"
+            fit="cover"
+            sizes="224px"
+            className="rounded-2xl border border-gray-200 shadow-sm"
           />
         </ScrollReveal>
       </div>

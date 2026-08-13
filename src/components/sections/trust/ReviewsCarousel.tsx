@@ -8,7 +8,7 @@ import {
   staggerContainer,
   staggerItem,
 } from "@/components/motion/variants";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { MediaImage } from "@/components/ui/MediaImage";
 import type { Dictionary } from "@/data/dictionary";
 import { useCarouselTrack } from "@/hooks/useCarouselTrack";
 import { cn } from "@/lib/utils";
@@ -149,10 +149,12 @@ function ReviewCard({
           {item.author}
         </p>
       </div>
-      <MediaPlaceholder
+      <MediaImage
+        src={item.imageSrc}
+        alt={item.imageAlt}
         aspect="4/3"
-        label={item.imageAlt}
-        bordered={false}
+        fit="cover"
+        sizes="(max-width: 640px) 20rem, (max-width: 1024px) 50vw, 33vw"
       />
     </motion.article>
   );

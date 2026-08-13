@@ -4,7 +4,7 @@ import { useState, type FormEvent, type FocusEvent, type ReactNode } from "react
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { MediaImage } from "@/components/ui/MediaImage";
 import { PhoneInput } from "@/components/ui/PhoneInput";
 import type { Dictionary } from "@/data/dictionary";
 import {
@@ -196,10 +196,14 @@ export function MainHero({ copy }: MainHeroProps) {
         </ScrollReveal>
 
         <ScrollReveal delay={0.1} className="relative mx-auto w-full min-w-0 max-w-lg">
-          <MediaPlaceholder
+          <MediaImage
+            src={copy.imageSrc}
+            alt={copy.imageAlt}
             aspect="16/9"
-            label={copy.imageAlt}
-            className="rounded-2xl border-gray-200 shadow-sm"
+            fit="cover"
+            priority
+            sizes="(max-width: 1024px) 100vw, 512px"
+            className="rounded-2xl border border-gray-200 shadow-sm"
           />
           <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
             {copy.trustBadges.map((badge, index) => (

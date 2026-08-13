@@ -33,6 +33,7 @@ export interface Dictionary {
     phone: string;
     submit: string;
     success: string;
+    imageSrc: string;
     imageAlt: string;
     errors: {
       fullName: string;
@@ -163,6 +164,7 @@ export interface Dictionary {
     email: string;
     submit: string;
     success: string;
+    imageSrc: string;
     imageAlt: string;
     errors: {
       fullName: string;
@@ -218,7 +220,11 @@ export interface Dictionary {
     legal: string;
     siteNote: string;
     privacy: string;
-    social: Array<{ label: string; href: string; network: "telegram" | "whatsapp" }>;
+    social: Array<{
+      label: string;
+      href: string;
+      network: "telegram" | "instagram" | "whatsapp";
+    }>;
   };
 }
 
@@ -301,14 +307,14 @@ const WAREHOUSES_RU: Warehouse[] = [
 ];
 
 const CATEGORY_IMAGES = {
-  pallet: "/images/products/pallet-truck-2t-1.jpg",
-  stacker: "/images/products/pallet-truck-long-1.jpg",
-  table: "/images/products/pallet-truck-2t-2.jpg",
-  service: "/images/products/pallet-truck-long-2.jpg",
-  reach: "/images/products/pallet-truck-heavy-1.jpg",
-  forklift: "/images/products/pallet-truck-heavy-2.jpg",
-  lift: "/images/products/pallet-truck-2t-1.jpg",
-  parts: "/images/products/pallet-truck-long-2.jpg",
+  pallet: "/images/catalog/pallet.jpg",
+  stacker: "/images/catalog/stacker.jpg",
+  table: "/images/catalog/table.jpg",
+  service: "/images/catalog/service.jpg",
+  reach: "/images/catalog/reach.jpg",
+  forklift: "/images/catalog/forklift.jpg",
+  lift: "/images/catalog/lift.jpg",
+  parts: "/images/catalog/parts.jpg",
 } as const;
 
 const DICTIONARY_UK: Dictionary = {
@@ -341,6 +347,7 @@ const DICTIONARY_UK: Dictionary = {
     phone: "Телефон",
     submit: "Підібрати",
     success: "Заявку прийнято. Менеджер зателефонує.",
+    imageSrc: "/images/hero/rokla-hero.jpg",
     imageAlt: "Складська техніка KAISER",
     errors: {
       fullName: "Вкажіть ім’я (мінімум 2 символи).",
@@ -701,6 +708,7 @@ const DICTIONARY_UK: Dictionary = {
     email: "Email",
     submit: "Отримати консультацію",
     success: "Заявку прийнято. Менеджер зателефонує.",
+    imageSrc: "/images/consultation/manager.jpg",
     imageAlt: "Менеджер KAISER",
     errors: {
       fullName: "Вкажіть ім’я (мінімум 2 символи).",
@@ -740,10 +748,10 @@ const DICTIONARY_UK: Dictionary = {
     navTitle: "Компанія",
     navLinks: [
       { label: "Про компанію", href: "#about" },
-      { label: "Послуги", href: "#services" },
-      { label: "Відгуки", href: "#reviews" },
-      { label: "Контакти", href: "#contact" },
-      { label: "Каталог", href: "#catalog" },
+      { label: "Новини", href: "#about" },
+      { label: "Документи та реквізити", href: "#contact" },
+      { label: "Гарантія та сервіс", href: "#services" },
+      { label: "Вакансії", href: "#contact" },
     ],
     helpTitle: "Отримати допомогу з підбором",
     helpText:
@@ -758,6 +766,11 @@ const DICTIONARY_UK: Dictionary = {
         label: "Telegram",
         href: "https://t.me/+380981540982",
         network: "telegram",
+      },
+      {
+        label: "Instagram",
+        href: "https://www.instagram.com/",
+        network: "instagram",
       },
       {
         label: "WhatsApp",
@@ -798,6 +811,7 @@ const DICTIONARY_RU: Dictionary = {
     phone: "Телефон",
     submit: "Подобрать",
     success: "Заявка принята. Менеджер перезвонит.",
+    imageSrc: "/images/hero/rokla-hero.jpg",
     imageAlt: "Складская техника KAISER",
     errors: {
       fullName: "Укажите имя (минимум 2 символа).",
@@ -1158,6 +1172,7 @@ const DICTIONARY_RU: Dictionary = {
     email: "Email",
     submit: "Получить консультацию",
     success: "Заявку приняли. Менеджер перезвонит.",
+    imageSrc: "/images/consultation/manager.jpg",
     imageAlt: "Менеджер KAISER",
     errors: {
       fullName: "Укажите имя (минимум 2 символа).",
@@ -1197,10 +1212,10 @@ const DICTIONARY_RU: Dictionary = {
     navTitle: "Компания",
     navLinks: [
       { label: "О компании", href: "#about" },
-      { label: "Услуги", href: "#services" },
-      { label: "Отзывы", href: "#reviews" },
-      { label: "Контакты", href: "#contact" },
-      { label: "Каталог", href: "#catalog" },
+      { label: "Новости", href: "#about" },
+      { label: "Документы и реквизиты", href: "#contact" },
+      { label: "Гарантия и сервис", href: "#services" },
+      { label: "Вакансии", href: "#contact" },
     ],
     helpTitle: "Получить помощь с подбором",
     helpText:
@@ -1215,6 +1230,11 @@ const DICTIONARY_RU: Dictionary = {
         label: "Telegram",
         href: "https://t.me/+380981540982",
         network: "telegram",
+      },
+      {
+        label: "Instagram",
+        href: "https://www.instagram.com/",
+        network: "instagram",
       },
       {
         label: "WhatsApp",
