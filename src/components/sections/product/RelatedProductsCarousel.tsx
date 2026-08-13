@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback } from "react";
 import Link from "next/link";
 import { MotionLink } from "@/components/motion/MotionLink";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
+import { useCarouselTrack } from "@/hooks/useCarouselTrack";
 import type { Product } from "@/types/product";
 import { cn } from "@/lib/utils";
 
@@ -24,52 +25,25 @@ export function RelatedProductsCarousel({
   title,
   orderCta,
 }: RelatedProductsCarouselProps) {
-  const trackRef = useRef<HTMLUListElement>(null);
-  const [active, setActive] = useState(0);
+  const getKey = useCallback((product: Product) => product.slug, []);
 
-  function scrollToIndex(index: number) {
-    const track = trackRef.current;
-    if (!track) return;
-    const card = track.querySelectorAll<HTMLElement>("[data-related-card]")[
-      index
-    ];
-    if (!card) return;
-    track.scrollTo({
-      left: card.offsetLeft - track.offsetLeft,
-      behavior: "smooth",
-    });
-  }
-
-  function go(direction: -1 | 1) {
-    if (products.length === 0) return;
-    const next = (active + direction + products.length) % products.length;
-    setActive(next);
-    scrollToIndex(next);
-  }
-
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    function onScroll() {
-      const el = trackRef.current;
-      if (!el) return;
-      const cards = el.querySelectorAll<HTMLElement>("[data-related-card]");
-      let nearest = 0;
-      let nearestDist = Number.POSITIVE_INFINITY;
-      cards.forEach((card, index) => {
-        const dist = Math.abs(card.offsetLeft - el.offsetLeft - el.scrollLeft);
-        if (dist < nearestDist) {
-          nearestDist = dist;
-          nearest = index;
-        }
-      });
-      setActive(nearest);
-    }
-
-    track.addEventListener("scroll", onScroll, { passive: true });
-    return () => track.removeEventListener("scroll", onScroll);
-  }, []);
+  const {
+    trackRef,
+    loopedItems,
+    activePage,
+    pageCount,
+    go,
+    goToPage,
+    dragHandlers,
+    trackClassName,
+  } = useCarouselTrack({
+    items: products,
+    getKey,
+    cardSelector: "[data-related-card]",
+    infinite: true,
+    stepMode: "page",
+    gapClassName: "gap-5",
+  });
 
   if (products.length === 0) return null;
 
@@ -104,14 +78,15 @@ export function RelatedProductsCarousel({
 
         <ul
           ref={trackRef}
-          className="mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className={cn("mt-8", trackClassName)}
+          {...dragHandlers}
         >
-          {products.map((product) => {
+          {loopedItems.map(({ item: product, key }) => {
             const badges = (product.specs ?? []).slice(0, 3);
 
             return (
               <li
-                key={product.slug}
+                key={key}
                 data-related-card
                 className={cn(
                   "w-[min(100%,17.5rem)] shrink-0 snap-start",
@@ -124,6 +99,7 @@ export function RelatedProductsCarousel({
                   <Link
                     href={`/${lang}/product/${product.slug}`}
                     className="block border-b border-border"
+                    draggable={false}
                   >
                     <MediaPlaceholder
                       aspect="4/3"
@@ -133,7 +109,10 @@ export function RelatedProductsCarousel({
                     />
                   </Link>
                   <div className="flex flex-1 flex-col gap-3 p-4">
-                    <Link href={`/${lang}/product/${product.slug}`}>
+                    <Link
+                      href={`/${lang}/product/${product.slug}`}
+                      draggable={false}
+                    >
                       <h3 className="text-base font-bold tracking-tight text-foreground transition-colors hover:text-heading sm:text-lg">
                         {product.name}
                       </h3>
@@ -162,12 +141,13 @@ export function RelatedProductsCarousel({
                         </span>
                       </div>
                     ) : null}
-                      <MotionLink
-                        href={`/${lang}/product/${product.slug}`}
-                        className="mt-1 inline-flex h-11 w-full items-center justify-center rounded-md bg-accent px-5 text-sm font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-                      >
-                        {orderCta}
-                      </MotionLink>
+                    <MotionLink
+                      href={`/${lang}/product/${product.slug}`}
+                      className="mt-1 inline-flex h-11 w-full items-center justify-center rounded-md bg-accent px-5 text-sm font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                      draggable={false}
+                    >
+                      {orderCta}
+                    </MotionLink>
                   </div>
                 </article>
               </li>
@@ -176,20 +156,17 @@ export function RelatedProductsCarousel({
         </ul>
 
         <div className="mt-5 flex justify-center gap-2" role="tablist">
-          {products.map((product, index) => (
+          {Array.from({ length: pageCount }).map((_, index) => (
             <button
-              key={`${product.slug}-dot`}
+              key={`related-page-${index}`}
               type="button"
               role="tab"
-              aria-selected={active === index}
-              aria-label={product.name}
-              onClick={() => {
-                setActive(index);
-                scrollToIndex(index);
-              }}
+              aria-selected={activePage === index}
+              aria-label={`Page ${index + 1}`}
+              onClick={() => goToPage(index)}
               className={cn(
                 "h-2.5 w-2.5 rounded-full transition-colors",
-                active === index ? "bg-accent" : "bg-border hover:bg-muted",
+                activePage === index ? "bg-accent" : "bg-border hover:bg-muted",
               )}
             />
           ))}

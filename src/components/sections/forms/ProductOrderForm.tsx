@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
 import { FileUpload } from "@/components/ui/FileUpload";
 import { Input } from "@/components/ui/Input";
+import { PhoneInput } from "@/components/ui/PhoneInput";
 import type { Dictionary } from "@/data/dictionary";
 import type { FilePayload, ProductOrderFormData } from "@/types/form";
 
@@ -85,12 +86,12 @@ export function ProductOrderForm({
             value={form.email}
             onChange={(e) => setForm((s) => ({ ...s, email: e.target.value }))}
           />
-          <Input
+          <PhoneInput
             label={copy.phone}
             name="phone"
-            type="tel"
-            value={form.phone}
-            onChange={(e) => setForm((s) => ({ ...s, phone: e.target.value }))}
+            required
+            value={form.phone ?? ""}
+            onValueChange={(phone) => setForm((s) => ({ ...s, phone }))}
           />
           <Input
             label={copy.company}

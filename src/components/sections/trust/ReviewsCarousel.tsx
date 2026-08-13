@@ -1,129 +1,42 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback } from "react";
 import { motion } from "framer-motion";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
+import { useCarouselTrack } from "@/hooks/useCarouselTrack";
 import { cn } from "@/lib/utils";
 
 export interface ReviewsCarouselProps {
   copy: Dictionary["reviews"];
 }
 
-const LOOP_SETS = 3;
+type ReviewItem = Dictionary["reviews"]["items"][number];
 
 export function ReviewsCarousel({ copy }: ReviewsCarouselProps) {
-  const trackRef = useRef<HTMLUListElement>(null);
   const items = copy.items;
-  const count = items.length;
-  const [activeLogical, setActiveLogical] = useState(0);
-  const [slideIndex, setSlideIndex] = useState(count);
-  const animatingRef = useRef(false);
-  const jumpTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const looped = Array.from({ length: LOOP_SETS }, (_, set) =>
-    items.map((item, index) => ({
-      item,
-      key: `${set}-${item.company}-${item.author}`,
-      logical: index,
-      absolute: set * count + index,
-    })),
-  ).flat();
-
-  const scrollToAbsolute = useCallback((absolute: number, smooth: boolean) => {
-    const track = trackRef.current;
-    if (!track) return;
-    const card = track.querySelectorAll<HTMLElement>("[data-review-card]")[
-      absolute
-    ];
-    if (!card) return;
-    track.scrollTo({
-      left: card.offsetLeft - track.offsetLeft,
-      behavior: smooth ? "smooth" : "auto",
-    });
-  }, []);
-
-  const jumpToMiddle = useCallback(
-    (logical: number) => {
-      const middle = count + logical;
-      setSlideIndex(middle);
-      setActiveLogical(logical);
-      scrollToAbsolute(middle, false);
-    },
-    [count, scrollToAbsolute],
+  const getKey = useCallback(
+    (item: ReviewItem) => `${item.company}-${item.author}`,
+    [],
   );
 
-  useEffect(() => {
-    jumpToMiddle(0);
-  }, [jumpToMiddle]);
-
-  function go(direction: -1 | 1) {
-    if (count === 0 || animatingRef.current) return;
-    animatingRef.current = true;
-
-    const nextAbsolute = slideIndex + direction;
-    const nextLogical = ((activeLogical + direction) % count + count) % count;
-
-    setSlideIndex(nextAbsolute);
-    setActiveLogical(nextLogical);
-    scrollToAbsolute(nextAbsolute, true);
-
-    if (jumpTimerRef.current) clearTimeout(jumpTimerRef.current);
-    jumpTimerRef.current = setTimeout(() => {
-      if (nextAbsolute < count || nextAbsolute >= count * 2) {
-        jumpToMiddle(nextLogical);
-      } else {
-        setSlideIndex(nextAbsolute);
-      }
-      animatingRef.current = false;
-    }, 420);
-  }
-
-  function goToLogical(logical: number) {
-    if (count === 0 || animatingRef.current) return;
-    animatingRef.current = true;
-    const target = count + logical;
-    setSlideIndex(target);
-    setActiveLogical(logical);
-    scrollToAbsolute(target, true);
-    if (jumpTimerRef.current) clearTimeout(jumpTimerRef.current);
-    jumpTimerRef.current = setTimeout(() => {
-      animatingRef.current = false;
-    }, 420);
-  }
-
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track || count === 0) return;
-
-    function onScroll() {
-      if (animatingRef.current) return;
-      const el = trackRef.current;
-      if (!el) return;
-      const cards = el.querySelectorAll<HTMLElement>("[data-review-card]");
-      let nearest = 0;
-      let nearestDist = Number.POSITIVE_INFINITY;
-      cards.forEach((card, index) => {
-        const dist = Math.abs(card.offsetLeft - el.offsetLeft - el.scrollLeft);
-        if (dist < nearestDist) {
-          nearestDist = dist;
-          nearest = index;
-        }
-      });
-      setSlideIndex(nearest);
-      setActiveLogical(nearest % count);
-    }
-
-    track.addEventListener("scroll", onScroll, { passive: true });
-    return () => track.removeEventListener("scroll", onScroll);
-  }, [count]);
-
-  useEffect(() => {
-    return () => {
-      if (jumpTimerRef.current) clearTimeout(jumpTimerRef.current);
-    };
-  }, []);
+  const {
+    trackRef,
+    loopedItems,
+    activeLogical,
+    go,
+    goToLogical,
+    dragHandlers,
+    trackClassName,
+  } = useCarouselTrack({
+    items,
+    getKey,
+    cardSelector: "[data-review-card]",
+    infinite: true,
+    stepMode: "item",
+    gapClassName: "gap-6",
+  });
 
   return (
     <section id="reviews" className="scroll-mt-20 bg-white">
@@ -154,9 +67,10 @@ export function ReviewsCarousel({ copy }: ReviewsCarouselProps) {
 
         <ul
           ref={trackRef}
-          className="mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className={cn("mt-10", trackClassName)}
+          {...dragHandlers}
         >
-          {looped.map(({ item, key, logical }) => (
+          {loopedItems.map(({ item, key, logical }) => (
             <li
               key={key}
               data-review-card
@@ -198,12 +112,11 @@ function ReviewCard({
   item,
   active,
 }: {
-  item: Dictionary["reviews"]["items"][number];
+  item: ReviewItem;
   active: boolean;
 }) {
   return (
     <motion.article
-      layout
       className={cn(
         "flex h-full flex-col overflow-hidden rounded-xl border bg-white shadow-sm transition-shadow",
         active
