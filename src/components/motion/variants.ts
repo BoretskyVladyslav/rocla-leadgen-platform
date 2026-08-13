@@ -18,4 +18,4 @@ export const cardHover = {
 };
 
 export const cardHoverClassName =
-  "rounded-2xl border border-gray-200 bg-white shadow-sm transition-[border-color,box-shadow] duration-200 hover:border-accent hover:shadow-[0_12px_30px_-8px_rgba(0,0,0,0.12)]";
+  "rounded-2xl border border-gray-200 bg-white shadow-sm transition-[border-color,box-shadow] duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:border-accent [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-[0_12px_30px_-8px_rgba(0,0,0,0.12)]";

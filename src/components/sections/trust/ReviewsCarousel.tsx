@@ -133,7 +133,7 @@ function ReviewCard({
         "flex h-full flex-col overflow-hidden rounded-2xl border bg-white shadow-sm transition-[border-color,box-shadow] duration-200",
         active
           ? "border-accent shadow-md"
-          : "border-gray-200 hover:border-accent hover:shadow-[0_12px_30px_-8px_rgba(0,0,0,0.12)]",
+          : "border-gray-200 [@media(hover:hover)_and_(pointer:fine)]:hover:border-accent [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-[0_12px_30px_-8px_rgba(0,0,0,0.12)]",
       )}
       {...cardHover}
     >
