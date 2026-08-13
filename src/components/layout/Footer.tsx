@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { HashLink } from "@/components/layout/HashLink";
 import type { Dictionary } from "@/data/dictionary";
 
 export interface FooterProps {
@@ -31,9 +31,12 @@ export function Footer({ lang, copy }: FooterProps) {
           <ul className="mt-4 flex flex-col gap-2 text-sm text-white/75">
             {copy.catalogLinks.map((item) => (
               <li key={item.label}>
-                <Link href={`/${lang}${item.href}`} className="hover:text-white">
+                <HashLink
+                  href={`/${lang}${item.href}`}
+                  className="hover:text-white"
+                >
                   {item.label}
-                </Link>
+                </HashLink>
               </li>
             ))}
           </ul>
@@ -46,9 +49,12 @@ export function Footer({ lang, copy }: FooterProps) {
           <ul className="mt-4 flex flex-col gap-2 text-sm text-white/75">
             {copy.navLinks.map((item) => (
               <li key={item.label}>
-                <Link href={`/${lang}${item.href}`} className="hover:text-white">
+                <HashLink
+                  href={`/${lang}${item.href}`}
+                  className="hover:text-white"
+                >
                   {item.label}
-                </Link>
+                </HashLink>
               </li>
             ))}
           </ul>

@@ -1,4 +1,5 @@
 import { Footer } from "@/components/layout/Footer";
+import { HashScrollRestorer } from "@/components/layout/HashScrollRestorer";
 import { Header } from "@/components/layout/Header";
 import { getDictionary } from "@/data/dictionary";
 import { LOCALES } from "@/lib/i18n";
@@ -16,6 +17,7 @@ export default async function LangLayout({
 
   return (
     <>
+      <HashScrollRestorer />
       <Header lang={lang} copy={dict.header} />
       <main className="flex-1">{children}</main>
       <Footer lang={lang} copy={dict.footer} />

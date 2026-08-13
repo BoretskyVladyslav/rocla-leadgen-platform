@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useId, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { HashLink } from "@/components/layout/HashLink";
 import { LocaleSwitcher } from "@/components/layout/LocaleSwitcher";
 
 export interface MobileMenuItem {
@@ -152,13 +152,13 @@ export function MobileMenu({
               <ul className="flex flex-col gap-1 px-3 py-4">
                 {items.map((item) => (
                   <li key={`${item.href}-${item.label}`}>
-                    <Link
+                    <HashLink
                       href={item.href}
                       className="block rounded-md px-3 py-3 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:bg-surface hover:text-accent-alt"
                       onClick={close}
                     >
                       {item.label}
-                    </Link>
+                    </HashLink>
                   </li>
                 ))}
               </ul>

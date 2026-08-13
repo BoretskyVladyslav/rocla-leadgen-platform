@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HashLink } from "@/components/layout/HashLink";
 import { MotionLink } from "@/components/motion/MotionLink";
 import { LocaleSwitcher } from "@/components/layout/LocaleSwitcher";
 import { MobileMenu } from "@/components/layout/MobileMenu";
@@ -38,13 +39,13 @@ export function Header({ lang, copy }: HeaderProps) {
           className="hidden items-center gap-5 text-xs font-semibold uppercase tracking-wide text-foreground lg:flex"
         >
           {nav.map((item) => (
-            <Link
+            <HashLink
               key={`${item.href}-${item.label}`}
               href={item.href}
               className="transition-colors hover:text-accent-alt"
             >
               {item.label}
-            </Link>
+            </HashLink>
           ))}
         </nav>
 
