@@ -94,6 +94,7 @@ export interface Dictionary {
   };
   videos: {
     title: string;
+    subtitle: string;
     items: Array<{
       title: string;
       imageSrc: string;
@@ -433,6 +434,8 @@ const DICTIONARY_UK: Dictionary = {
   },
   videos: {
     title: "Відеоогляди",
+    subtitle:
+      "Короткі огляди техніки KAISER: збірка, гідровузол і робота на складі.",
     items: [
       {
         title: "Збірка гідравлічної рокли",
@@ -792,6 +795,8 @@ const DICTIONARY_RU: Dictionary = {
   },
   videos: {
     title: "Видеообзоры",
+    subtitle:
+      "Короткие обзоры техники KAISER: сборка, гидроузел и работа на складе.",
     items: [
       {
         title: "Сборка гидравлической роклы",

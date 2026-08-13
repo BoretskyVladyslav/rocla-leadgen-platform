@@ -30,7 +30,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
 
   return (
     <section className="bg-white">
-      <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 pb-12 pt-2 sm:px-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-14 lg:pb-16">
+      <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 pb-6 pt-6 sm:px-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12 lg:pb-8 lg:pt-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
           {images.length > 1 ? (
             <ul className="order-2 flex gap-2 sm:order-1 sm:w-20 sm:shrink-0 sm:flex-col">

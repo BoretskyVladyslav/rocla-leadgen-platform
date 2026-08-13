@@ -24,8 +24,8 @@ export function ProductTabs({ product, copy }: ProductTabsProps) {
   const specs = product.specs ?? [];
 
   return (
-    <section className="bg-surface-muted">
-      <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:py-16">
+    <section className="border-t border-border bg-white">
+      <div className="mx-auto w-full max-w-7xl px-4 pb-10 pt-2 sm:px-6 lg:pb-14">
         <div
           role="tablist"
           aria-label={copy.specifications}
@@ -47,7 +47,7 @@ export function ProductTabs({ product, copy }: ProductTabsProps) {
           </TabButton>
         </div>
 
-        <div className="mt-8 rounded-xl border border-border bg-white p-6 shadow-sm sm:p-8">
+        <div className="mt-6 rounded-xl border border-border bg-surface-muted/40 p-5 sm:p-7">
           {active === "description" ? (
             <div
               role="tabpanel"
