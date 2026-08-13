@@ -47,8 +47,10 @@ export function ReviewsCarousel({ copy }: ReviewsCarouselProps) {
     <section id="reviews" className="scroll-mt-20 bg-white">
       <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
         <ScrollReveal>
-          <div className="flex items-end justify-between gap-4">
-            <h2 className="section-heading text-left">{copy.title}</h2>
+          <div className="mb-8 flex flex-row items-end justify-between gap-4">
+            <h2 className="text-left text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">
+              {copy.title}
+            </h2>
             <div className="flex shrink-0 items-center gap-2">
               <button
                 type="button"
@@ -72,7 +74,7 @@ export function ReviewsCarousel({ copy }: ReviewsCarouselProps) {
 
         <motion.ul
           ref={trackRef}
-          className={cn("mt-10 will-change-transform", trackClassName)}
+          className={cn("will-change-transform", trackClassName)}
           variants={staggerContainer}
           initial="hidden"
           whileInView="show"
