@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent, type FocusEvent } from "react";
+import { useRef, useState, type FormEvent, type FocusEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Button } from "@/components/ui/Button";
@@ -37,6 +37,12 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
   const [rawFiles, setRawFiles] = useState<File[]>([]);
   const [errors, setErrors] = useState<LeadFieldErrors>({});
   const [status, setStatus] = useState<"idle" | "success">("idle");
+  const cityInputRef = useRef<HTMLInputElement>(null);
+
+  function selectCity(label: string) {
+    setCity(label);
+    requestAnimationFrame(() => cityInputRef.current?.focus());
+  }
 
   function handleFilesChange(next: FilePayload[], raw: File[]) {
     setFiles(next);
@@ -180,6 +186,7 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
                       }
                     />
                     <Input
+                      ref={cityInputRef}
                       label={copy.citiesLabel}
                       name="city"
                       value={city}
@@ -194,12 +201,12 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
                           <button
                             key={item.id}
                             type="button"
-                            onClick={() => setCity(item.label)}
+                            onClick={() => selectCity(item.label)}
                             className={cn(
-                              "rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors",
+                              "cursor-pointer rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors",
                               city === item.label
                                 ? "border-accent bg-accent text-accent-fg"
-                                : "border-gray-200 bg-gray-50 text-heading hover:border-accent hover:bg-accent/20",
+                                : "border-transparent bg-gray-100 text-heading hover:bg-accent hover:text-accent-fg",
                             )}
                           >
                             {item.label}

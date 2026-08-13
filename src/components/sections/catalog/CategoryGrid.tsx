@@ -1,14 +1,19 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
+import { cn } from "@/lib/utils";
 
 export interface CategoryGridProps {
   lang: string;
   copy: Dictionary["categories"];
 }
 
-const iconClass = "h-7 w-7";
+const MOBILE_PREVIEW = 4;
+const iconClass = "h-6 w-6 sm:h-7 sm:w-7";
 
 function PalletIcon() {
   return (
@@ -100,21 +105,28 @@ const CATEGORY_ICONS = [
 ];
 
 export function CategoryGrid({ lang, copy }: CategoryGridProps) {
+  const [expanded, setExpanded] = useState(false);
+  const hasMore = copy.items.length > MOBILE_PREVIEW;
+
   return (
     <section id="catalog" className="scroll-mt-20 bg-white">
       <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>
-        <ul className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <ul className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
           {copy.items.map((item, index) => {
             const href = item.productSlug
               ? `/${lang}/product/${item.productSlug}`
               : `/${lang}#contact`;
+            const hiddenOnMobile = !expanded && index >= MOBILE_PREVIEW;
 
             return (
-              <li key={item.title}>
-                <ScrollReveal delay={index * 0.04}>
+              <li
+                key={item.title}
+                className={cn(hiddenOnMobile && "hidden lg:block")}
+              >
+                <ScrollReveal delay={Math.min(index, 7) * 0.03}>
                   <Link
                     href={href}
                     className="group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md"
@@ -125,8 +137,9 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
                       sizeHint="4:3"
                       bordered={false}
                       icon={CATEGORY_ICONS[index]}
+                      className="min-h-0"
                     />
-                    <h3 className="px-5 py-4 text-base font-bold tracking-tight text-heading sm:text-lg">
+                    <h3 className="px-4 py-3 text-sm font-bold tracking-tight text-heading sm:px-5 sm:text-base">
                       {item.title}
                     </h3>
                   </Link>
@@ -135,6 +148,18 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
             );
           })}
         </ul>
+
+        {hasMore && !expanded ? (
+          <div className="mt-8 flex justify-center lg:hidden">
+            <button
+              type="button"
+              onClick={() => setExpanded(true)}
+              className="inline-flex h-11 items-center rounded-md bg-accent px-5 text-sm font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover"
+            >
+              {copy.showAll}
+            </button>
+          </div>
+        ) : null}
       </div>
     </section>
   );

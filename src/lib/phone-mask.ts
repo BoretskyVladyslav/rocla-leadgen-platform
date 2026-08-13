@@ -1,7 +1,9 @@
 const UA_PREFIX = "380";
 const LOCAL_DIGITS = 9;
 
-export const UA_PHONE_PLACEHOLDER = "+380 (XX) XXX-XX-XX";
+export const UA_PHONE_PREFIX = "+380";
+export const UA_PHONE_PLACEHOLDER = "(XX) XXX-XX-XX";
+export const UA_PHONE_FULL_PLACEHOLDER = "+380 (XX) XXX-XX-XX";
 
 /** Digits of the national number (9) after country code 380. */
 export function uaPhoneLocalDigits(value: string): string {
@@ -11,17 +13,24 @@ export function uaPhoneLocalDigits(value: string): string {
   return digits.slice(0, LOCAL_DIGITS);
 }
 
-/** Formats as +380 (XX) XXX-XX-XX while typing. */
-export function formatUaPhoneMask(value: string): string {
+/** Formats the editable local part as (XX) XXX-XX-XX. */
+export function formatUaPhoneLocalPart(value: string): string {
   const local = uaPhoneLocalDigits(value);
   if (local.length === 0) return "";
 
-  let result = `+380 (${local.slice(0, 2)}`;
+  let result = `(${local.slice(0, 2)}`;
   if (local.length >= 2) result += ")";
   if (local.length > 2) result += ` ${local.slice(2, 5)}`;
   if (local.length > 5) result += `-${local.slice(5, 7)}`;
   if (local.length > 7) result += `-${local.slice(7, 9)}`;
   return result;
+}
+
+/** Formats as +380 (XX) XXX-XX-XX while typing. */
+export function formatUaPhoneMask(value: string): string {
+  const local = formatUaPhoneLocalPart(value);
+  if (!local) return "";
+  return `${UA_PHONE_PREFIX} ${local}`;
 }
 
 function digitsBeforeCaret(value: string, caret: number): number {
@@ -33,76 +42,76 @@ function digitsBeforeCaret(value: string, caret: number): number {
   return count;
 }
 
-function prefixDigitOffset(value: string): number {
-  const digits = value.replace(/\D/g, "");
-  if (digits.startsWith(UA_PREFIX)) return UA_PREFIX.length;
-  if (digits.startsWith("0")) return 1;
-  return 0;
-}
-
-/** Local digit index (0..9) before caret in a (possibly partially) formatted value. */
-function localDigitIndexBeforeCaret(value: string, caret: number): number {
-  return Math.max(0, digitsBeforeCaret(value, caret) - prefixDigitOffset(value));
-}
-
-/** Map a local digit index (0..localLength) to a caret position in the formatted string. */
-export function caretFromDigitIndex(formatted: string, digitIndex: number): number {
-  if (!formatted) return 0;
+/** Map a local digit index (0..localLength) to a caret in the local formatted part. */
+export function caretFromLocalDigitIndex(
+  formattedLocal: string,
+  digitIndex: number,
+): number {
+  if (!formattedLocal) return 0;
   if (digitIndex <= 0) {
-    const open = formatted.indexOf("(");
-    return open >= 0 ? open + 1 : formatted.length;
+    const open = formattedLocal.indexOf("(");
+    return open >= 0 ? open + 1 : 0;
   }
 
   let seen = 0;
-  for (let i = 0; i < formatted.length; i += 1) {
-    if (/\d/.test(formatted[i]!)) {
+  for (let i = 0; i < formattedLocal.length; i += 1) {
+    if (/\d/.test(formattedLocal[i]!)) {
       seen += 1;
-      // Skip country-code digits in the formatted string (+380 ...)
-      if (seen <= UA_PREFIX.length) continue;
-      const localSeen = seen - UA_PREFIX.length;
-      if (localSeen === digitIndex) return i + 1;
+      if (seen === digitIndex) return i + 1;
     }
   }
-  return formatted.length;
+  return formattedLocal.length;
 }
 
 /**
- * Applies UA phone mask while preserving a sensible caret.
- * If the user deleted only a mask character (length down, digit count same),
- * removes the digit before the caret so backspace through `)` / `-` works.
+ * Applies local UA phone mask while preserving caret.
+ * Operates on the editable `(XX) XXX-XX-XX` segment only.
  */
-export function applyUaPhoneMaskInput(
-  prevFormatted: string,
+export function applyUaPhoneLocalInput(
+  prevLocalFormatted: string,
   nextRaw: string,
   caret: number,
-): { formatted: string; caret: number } {
-  const prevLocal = uaPhoneLocalDigits(prevFormatted);
+): { localFormatted: string; caret: number } {
+  const prevLocal = uaPhoneLocalDigits(prevLocalFormatted);
   const nextLocal = uaPhoneLocalDigits(nextRaw);
-  const deletedChars = Math.max(0, prevFormatted.length - nextRaw.length);
+  const deletedChars = Math.max(0, prevLocalFormatted.length - nextRaw.length);
   const digitCountUnchanged =
-    prevFormatted.replace(/\D/g, "").length === nextRaw.replace(/\D/g, "").length &&
-    deletedChars > 0;
+    prevLocalFormatted.replace(/\D/g, "").length ===
+      nextRaw.replace(/\D/g, "").length && deletedChars > 0;
 
   let local = nextLocal;
-  let targetDigitIndex = localDigitIndexBeforeCaret(nextRaw, caret);
+  let targetDigitIndex = digitsBeforeCaret(nextRaw, caret);
 
   if (digitCountUnchanged && prevLocal.length > 0) {
-    // Caret in nextRaw is where the browser left it after deleting a mask char.
-    // Delete the local digit that sat just before that caret in the previous value.
-    const prevCaret = Math.min(caret + deletedChars, prevFormatted.length);
-    const deleteIndex = Math.max(
-      0,
-      localDigitIndexBeforeCaret(prevFormatted, prevCaret) - 1,
-    );
+    const prevCaret = Math.min(caret + deletedChars, prevLocalFormatted.length);
+    const deleteIndex = Math.max(0, digitsBeforeCaret(prevLocalFormatted, prevCaret) - 1);
     local = prevLocal.slice(0, deleteIndex) + prevLocal.slice(deleteIndex + 1);
     targetDigitIndex = deleteIndex;
   } else {
     targetDigitIndex = Math.min(targetDigitIndex, local.length);
   }
 
-  const formatted = formatUaPhoneMask(local);
+  const localFormatted = formatUaPhoneLocalPart(local);
   return {
-    formatted,
-    caret: caretFromDigitIndex(formatted, targetDigitIndex),
+    localFormatted,
+    caret: caretFromLocalDigitIndex(localFormatted, targetDigitIndex),
+  };
+}
+
+/** @deprecated Prefer applyUaPhoneLocalInput for hard-prefix UI. */
+export function applyUaPhoneMaskInput(
+  prevFormatted: string,
+  nextRaw: string,
+  caret: number,
+): { formatted: string; caret: number } {
+  const prevLocal = formatUaPhoneLocalPart(prevFormatted);
+  const { localFormatted, caret: nextCaret } = applyUaPhoneLocalInput(
+    prevLocal,
+    nextRaw.startsWith("+380") ? nextRaw.slice(4).trimStart() : nextRaw,
+    caret,
+  );
+  return {
+    formatted: localFormatted ? `${UA_PHONE_PREFIX} ${localFormatted}` : "",
+    caret: nextCaret + (localFormatted ? UA_PHONE_PREFIX.length + 1 : 0),
   };
 }

@@ -117,8 +117,7 @@ export function MobileMenu({
               exit={{ x: "100%" }}
               transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="flex items-center justify-between gap-3 border-b border-border px-5 py-4">
-                <LocaleSwitcher lang={lang} label={languageLabel} />
+              <div className="flex items-center justify-end border-b border-border px-5 py-3">
                 <button
                   type="button"
                   className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border text-heading transition-colors hover:border-accent"
@@ -140,13 +139,16 @@ export function MobileMenu({
                   </svg>
                 </button>
               </div>
-              <a
-                href={telHref}
-                className="border-b border-border px-5 py-3 text-sm font-bold tracking-tight text-heading"
-                onClick={close}
-              >
-                {phone}
-              </a>
+              <div className="flex items-center justify-between gap-3 border-b border-border px-5 py-3">
+                <a
+                  href={telHref}
+                  className="text-sm font-bold tracking-tight text-heading"
+                  onClick={close}
+                >
+                  {phone}
+                </a>
+                <LocaleSwitcher lang={lang} label={languageLabel} />
+              </div>
               <ul className="flex flex-col gap-1 px-3 py-4">
                 {items.map((item) => (
                   <li key={`${item.href}-${item.label}`}>

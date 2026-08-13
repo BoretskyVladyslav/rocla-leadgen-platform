@@ -33,6 +33,7 @@ export interface Dictionary {
   };
   categories: {
     title: string;
+    showAll: string;
     items: Array<{
       title: string;
       imageSrc: string;
@@ -205,6 +206,7 @@ const DICTIONARY_UK: Dictionary = {
   },
   categories: {
     title: "Каталог техніки KAISER",
+    showAll: "Показати всі категорії",
     items: [
       {
         title: "Гідравлічні візки (рохлі)",
@@ -487,6 +489,7 @@ const DICTIONARY_RU: Dictionary = {
   },
   categories: {
     title: "Каталог техники KAISER",
+    showAll: "Показать все категории",
     items: [
       {
         title: "Гидравлические тележки (рохли)",
