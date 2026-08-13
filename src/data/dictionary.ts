@@ -68,7 +68,7 @@ export interface Dictionary {
   };
   clients: {
     title: string;
-    logos: Array<{ name: string }>;
+    logos: Array<{ name: string; imageSrc: string }>;
   };
   caseStudy: {
     title: string;
@@ -307,14 +307,14 @@ const WAREHOUSES_RU: Warehouse[] = [
 ];
 
 const CATEGORY_IMAGES = {
-  pallet: "/images/catalog/pallet.jpg",
-  stacker: "/images/catalog/stacker.jpg",
-  table: "/images/catalog/table.jpg",
-  service: "/images/catalog/service.jpg",
-  reach: "/images/catalog/reach.jpg",
-  forklift: "/images/catalog/forklift.jpg",
-  lift: "/images/catalog/lift.jpg",
-  parts: "/images/catalog/parts.jpg",
+  pallet: "/images/catalog/gidravlicheskie-telezhki.jpg",
+  stacker: "/images/catalog/shtabelery.jpg",
+  table: "/images/catalog/gidravlicheskie-stoly.jpg",
+  service: "/images/catalog/samohodnye-telezhki.jpg",
+  reach: "/images/catalog/richtracki.jpg",
+  forklift: "/images/catalog/pogruzchiki.jpg",
+  lift: "/images/catalog/podemniki.jpg",
+  parts: "/images/catalog/zapchasti.jpg",
 } as const;
 
 const DICTIONARY_UK: Dictionary = {
@@ -347,7 +347,7 @@ const DICTIONARY_UK: Dictionary = {
     phone: "Телефон",
     submit: "Підібрати",
     success: "Заявку прийнято. Менеджер зателефонує.",
-    imageSrc: "/images/hero/rokla-hero.jpg",
+    imageSrc: "/images/hero/hero-kaiser-warehouse.jpg",
     imageAlt: "Складська техніка KAISER",
     errors: {
       fullName: "Вкажіть ім’я (мінімум 2 символи).",
@@ -472,12 +472,14 @@ const DICTIONARY_UK: Dictionary = {
   clients: {
     title: "Наші постійні клієнти",
     logos: [
-      { name: "Нова Пошта" },
-      { name: "Епіцентр" },
-      { name: "АТБ" },
-      { name: "Розетка" },
-      { name: "ОККО" },
-      { name: "Comfy" },
+      { name: "Нова Пошта", imageSrc: "/images/clients/nova-poshta.webp" },
+      { name: "Епіцентр", imageSrc: "/images/clients/epicentr.png" },
+      { name: "АТБ", imageSrc: "/images/clients/atb.webp" },
+      { name: "Розетка", imageSrc: "/images/clients/rozetka.png" },
+      { name: "ОККО", imageSrc: "/images/clients/okko.jpg" },
+      { name: "Comfy", imageSrc: "/images/clients/comfy.webp" },
+      { name: "Укрпошта", imageSrc: "/images/clients/ukrposhta.webp" },
+      { name: "McDonald's", imageSrc: "/images/clients/mcdonalds.svg" },
     ],
   },
   caseStudy: {
@@ -488,7 +490,7 @@ const DICTIONARY_UK: Dictionary = {
       "За 20 років сотні підприємств стали постійними клієнтами. За кожним контрактом — люди, які годують свої сім’ї стабільною роботою на складі.",
     ],
     readMore: "Читати далі",
-    imageSrc: "/images/hero/rokla-hero.jpg",
+    imageSrc: "/images/case/warehouse.jpg",
     imageAlt: "Робота з роклою на складі",
   },
   delivery: {
@@ -518,7 +520,7 @@ const DICTIONARY_UK: Dictionary = {
         author: "Язиджи Ісмет",
         date: "12.03.2024",
         text: "Купували самохідний штабелер. Показали модель до оплати, доставили за 2 дні — чітко й організовано.",
-        imageSrc: "/images/clients/client-1.jpg",
+        imageSrc: "/images/reviews/review-1.jpg",
         imageAlt: "Техніка KAISER у клієнта",
       },
       {
@@ -526,7 +528,7 @@ const DICTIONARY_UK: Dictionary = {
         author: "Гнатенко Сергій",
         date: "28.01.2024",
         text: "Роклу доставили в Ужгород через два дні. Техніка відмінна, консультація зі збірки допомогла.",
-        imageSrc: "/images/clients/client-2.jpg",
+        imageSrc: "/images/reviews/review-2.jpg",
         imageAlt: "Рокла в роботі на складі клієнта",
       },
       {
@@ -534,7 +536,7 @@ const DICTIONARY_UK: Dictionary = {
         author: "Рассказов Дмитро",
         date: "05.11.2023",
         text: "Запропонували варіант із змінною АКБ, показали на складі й навіть тест-драйв. Працюватимемо далі.",
-        imageSrc: "/images/clients/client-3.jpg",
+        imageSrc: "/images/reviews/review-3.jpg",
         imageAlt: "Навантажувач на об’єкті клієнта",
       },
       {
@@ -542,7 +544,7 @@ const DICTIONARY_UK: Dictionary = {
         author: "Коваленко Олена",
         date: "19.09.2023",
         text: "Замовили партію гідравлічних рокл для розподільчого центру. Усі машини з однаковими вузлами — зручно для сервісу.",
-        imageSrc: "/images/clients/client-4.jpg",
+        imageSrc: "/images/reviews/review-4.jpg",
         imageAlt: "Рокли на складі ритейлера",
       },
       {
@@ -550,7 +552,7 @@ const DICTIONARY_UK: Dictionary = {
         author: "Мельник Андрій",
         date: "03.07.2023",
         text: "Потрібна була техніка з харчовим допуском коліс. Підібрали PU-ролики, документи надіслали того ж дня.",
-        imageSrc: "/images/clients/client-5.jpg",
+        imageSrc: "/images/reviews/review-5.jpg",
         imageAlt: "Складська техніка на фармацевтичному складі",
       },
       {
@@ -558,7 +560,7 @@ const DICTIONARY_UK: Dictionary = {
         author: "Шевченко Ігор",
         date: "21.05.2023",
         text: "Рокли витримали пікове навантаження сезону. Гарантійне обслуговування — без зайвих поїздок.",
-        imageSrc: "/images/clients/client-6.jpg",
+        imageSrc: "/images/reviews/review-6.jpg",
         imageAlt: "Рокла в логістичному хабі",
       },
       {
@@ -566,7 +568,7 @@ const DICTIONARY_UK: Dictionary = {
         author: "Бондар Марія",
         date: "14.02.2023",
         text: "Брали посилені моделі 2,5 т під важкі палети. Шасі не грає, гідравліка стабільна після року роботи.",
-        imageSrc: "/images/clients/client-1.jpg",
+        imageSrc: "/images/reviews/review-1.jpg",
         imageAlt: "Посилена рокла на будівельному складі",
       },
       {
@@ -574,7 +576,7 @@ const DICTIONARY_UK: Dictionary = {
         author: "Лисенко Віктор",
         date: "08.12.2022",
         text: "Доставили в Дніпро за добу після оплати. Менеджер пояснив різницю між кованим і збірним гідровузлом.",
-        imageSrc: "/images/clients/client-2.jpg",
+        imageSrc: "/images/reviews/review-2.jpg",
         imageAlt: "Рокла в магазині техніки",
       },
     ],
@@ -811,7 +813,7 @@ const DICTIONARY_RU: Dictionary = {
     phone: "Телефон",
     submit: "Подобрать",
     success: "Заявка принята. Менеджер перезвонит.",
-    imageSrc: "/images/hero/rokla-hero.jpg",
+    imageSrc: "/images/hero/hero-kaiser-warehouse.jpg",
     imageAlt: "Складская техника KAISER",
     errors: {
       fullName: "Укажите имя (минимум 2 символа).",
@@ -936,12 +938,14 @@ const DICTIONARY_RU: Dictionary = {
   clients: {
     title: "Наши постоянные клиенты",
     logos: [
-      { name: "Новая Почта" },
-      { name: "Эпицентр" },
-      { name: "АТБ" },
-      { name: "Розетка" },
-      { name: "ОККО" },
-      { name: "Comfy" },
+      { name: "Новая Почта", imageSrc: "/images/clients/nova-poshta.webp" },
+      { name: "Эпицентр", imageSrc: "/images/clients/epicentr.png" },
+      { name: "АТБ", imageSrc: "/images/clients/atb.webp" },
+      { name: "Розетка", imageSrc: "/images/clients/rozetka.png" },
+      { name: "ОККО", imageSrc: "/images/clients/okko.jpg" },
+      { name: "Comfy", imageSrc: "/images/clients/comfy.webp" },
+      { name: "Укрпочта", imageSrc: "/images/clients/ukrposhta.webp" },
+      { name: "McDonald's", imageSrc: "/images/clients/mcdonalds.svg" },
     ],
   },
   caseStudy: {
@@ -952,7 +956,7 @@ const DICTIONARY_RU: Dictionary = {
       "За 20 лет сотни предприятий стали постоянными клиентами. За каждым контрактом — люди, которые кормят свои семьи стабильной работой на складе.",
     ],
     readMore: "Читать далее",
-    imageSrc: "/images/hero/rokla-hero.jpg",
+    imageSrc: "/images/case/warehouse.jpg",
     imageAlt: "Работа с роклой на складе",
   },
   delivery: {
@@ -982,7 +986,7 @@ const DICTIONARY_RU: Dictionary = {
         author: "Языджи Исмет",
         date: "12.03.2024",
         text: "Покупали самоходный штабеллер. Показали модель до оплаты, доставили за 2 дня — чётко и организованно.",
-        imageSrc: "/images/clients/client-1.jpg",
+        imageSrc: "/images/reviews/review-1.jpg",
         imageAlt: "Техника KAISER у клиента",
       },
       {
@@ -990,7 +994,7 @@ const DICTIONARY_RU: Dictionary = {
         author: "Гнатенко Сергей",
         date: "28.01.2024",
         text: "Роклу доставили в Ужгород через два дня. Техника отличная, консультация по сборке помогла.",
-        imageSrc: "/images/clients/client-2.jpg",
+        imageSrc: "/images/reviews/review-2.jpg",
         imageAlt: "Рокла в работе на складе клиента",
       },
       {
@@ -998,7 +1002,7 @@ const DICTIONARY_RU: Dictionary = {
         author: "Рассказов Дмитрий",
         date: "05.11.2023",
         text: "Предложили вариант с переменной АКБ, показали на складе и даже тест-драйв. Будем сотрудничать.",
-        imageSrc: "/images/clients/client-3.jpg",
+        imageSrc: "/images/reviews/review-3.jpg",
         imageAlt: "Погрузчик на объекте клиента",
       },
       {
@@ -1006,7 +1010,7 @@ const DICTIONARY_RU: Dictionary = {
         author: "Коваленко Елена",
         date: "19.09.2023",
         text: "Заказали партию гидравлических рокл для распределительного центра. Все машины с одинаковыми узлами — удобно для сервиса.",
-        imageSrc: "/images/clients/client-4.jpg",
+        imageSrc: "/images/reviews/review-4.jpg",
         imageAlt: "Роклы на складе ритейлера",
       },
       {
@@ -1014,7 +1018,7 @@ const DICTIONARY_RU: Dictionary = {
         author: "Мельник Андрей",
         date: "03.07.2023",
         text: "Нужна была техника с пищевым допуском колёс. Подобрали PU-ролики, документы отправили в тот же день.",
-        imageSrc: "/images/clients/client-5.jpg",
+        imageSrc: "/images/reviews/review-5.jpg",
         imageAlt: "Складская техника на фармацевтическом складе",
       },
       {
@@ -1022,7 +1026,7 @@ const DICTIONARY_RU: Dictionary = {
         author: "Шевченко Игорь",
         date: "21.05.2023",
         text: "Роклы выдержали пиковую нагрузку сезона. Гарантийное обслуживание — без лишних поездок.",
-        imageSrc: "/images/clients/client-6.jpg",
+        imageSrc: "/images/reviews/review-6.jpg",
         imageAlt: "Рокла в логистическом хабе",
       },
       {
@@ -1030,7 +1034,7 @@ const DICTIONARY_RU: Dictionary = {
         author: "Бондарь Мария",
         date: "14.02.2023",
         text: "Брали усиленные модели 2,5 т под тяжёлые паллеты. Шасси не играет, гидравлика стабильна после года работы.",
-        imageSrc: "/images/clients/client-1.jpg",
+        imageSrc: "/images/reviews/review-1.jpg",
         imageAlt: "Усиленная рокла на строительном складе",
       },
       {
@@ -1038,7 +1042,7 @@ const DICTIONARY_RU: Dictionary = {
         author: "Лысенко Виктор",
         date: "08.12.2022",
         text: "Доставили в Днепр за сутки после оплаты. Менеджер объяснил разницу между кованым и сборным гидроузлом.",
-        imageSrc: "/images/clients/client-2.jpg",
+        imageSrc: "/images/reviews/review-2.jpg",
         imageAlt: "Рокла в магазине техники",
       },
     ],

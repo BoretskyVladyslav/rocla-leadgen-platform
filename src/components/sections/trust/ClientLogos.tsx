@@ -1,10 +1,54 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import type { Dictionary } from "@/data/dictionary";
 
 export interface ClientLogosProps {
   copy: Dictionary["clients"];
+}
+
+function LogoMark({
+  name,
+  imageSrc,
+}: {
+  name: string;
+  imageSrc: string;
+}) {
+  const [failed, setFailed] = useState(false);
+  const isSvg = imageSrc.endsWith(".svg");
+
+  if (failed) {
+    return (
+      <span className="text-center text-xs font-bold uppercase tracking-wide text-heading sm:text-sm">
+        {name}
+      </span>
+    );
+  }
+
+  if (isSvg) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={imageSrc}
+        alt={name}
+        className="max-h-10 w-auto max-w-[7.5rem] object-contain sm:max-h-12 sm:max-w-[9rem]"
+        onError={() => setFailed(true)}
+      />
+    );
+  }
+
+  return (
+    <Image
+      src={imageSrc}
+      alt={name}
+      width={160}
+      height={48}
+      className="max-h-10 w-auto max-w-[7.5rem] object-contain sm:max-h-12 sm:max-w-[9rem]"
+      onError={() => setFailed(true)}
+    />
+  );
 }
 
 export function ClientLogos({ copy }: ClientLogosProps) {
@@ -30,9 +74,7 @@ export function ClientLogos({ copy }: ClientLogosProps) {
                 className="flex h-20 w-36 shrink-0 items-center justify-center rounded-2xl border border-gray-200 bg-white px-3 shadow-sm sm:h-24 sm:w-52 sm:px-4"
                 aria-hidden={index >= copy.logos.length}
               >
-                <span className="text-center text-xs font-bold uppercase tracking-wide text-heading sm:text-sm">
-                  {logo.name}
-                </span>
+                <LogoMark name={logo.name} imageSrc={logo.imageSrc} />
               </li>
             ))}
           </ul>
