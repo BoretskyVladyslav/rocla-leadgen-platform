@@ -234,6 +234,7 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
                       browseLabel={copy.filesBrowse}
                       dragLabel={copy.filesDrag}
                       maxSizeLabel={copy.filesMaxSize}
+                      removeLabel={copy.filesRemove}
                       typeError={copy.errors.fileType}
                       sizeError={copy.errors.fileSize}
                       onFilesChange={handleFilesChange}

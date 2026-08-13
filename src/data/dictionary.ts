@@ -111,6 +111,7 @@ export interface Dictionary {
     filesBrowse: string;
     filesDrag: string;
     filesMaxSize: string;
+    filesRemove: string;
     submit: string;
     successTitle: string;
     successBody: string;
@@ -409,6 +410,7 @@ const DICTIONARY_UK: Dictionary = {
     filesBrowse: "Обрати файли",
     filesDrag: "Перетягніть файли сюди",
     filesMaxSize: "До 10 МБ на файл",
+    filesRemove: "Видалити файл",
     submit: "Надіслати заявку",
     successTitle: "Заявка успішно відправлена",
     successBody: "Менеджер зв’яжеться з вами найближчим часом у робочі години.",
@@ -684,6 +686,7 @@ const DICTIONARY_RU: Dictionary = {
     filesBrowse: "Выбрать файлы",
     filesDrag: "Перетащите файлы сюда",
     filesMaxSize: "До 10 МБ на файл",
+    filesRemove: "Удалить файл",
     submit: "Отправить заявку",
     successTitle: "Заявка успешно отправлена",
     successBody: "Менеджер свяжется с вами в ближайшее время в рабочие часы.",

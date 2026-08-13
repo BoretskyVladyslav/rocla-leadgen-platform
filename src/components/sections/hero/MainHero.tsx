@@ -89,7 +89,8 @@ export function MainHero({ copy }: MainHeroProps) {
                   onBlur={handleBlur}
                   onValueChange={setPhone}
                 />
-                <div className="sm:w-40 sm:shrink-0">
+                {/* Match Input: label spacer omitted; bottom pad = gap-1.5 + error min-h */}
+                <div className="sm:w-40 sm:shrink-0 sm:pb-[calc(0.375rem+1.25rem)]">
                   <Button type="submit" size="lg" className="h-12 w-full">
                     {copy.submit}
                   </Button>

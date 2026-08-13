@@ -24,7 +24,7 @@ export function Header({ lang, copy }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-white">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
-        <Link href={`/${lang}`} className="shrink-0 leading-tight">
+        <Link href={`/${lang}`} className="min-w-0 shrink leading-tight">
           <span className="block font-serif text-xl font-bold uppercase tracking-[0.14em] text-heading">
             {copy.brand}
           </span>
@@ -48,8 +48,10 @@ export function Header({ lang, copy }: HeaderProps) {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3 sm:gap-4">
-          <LocaleSwitcher lang={lang} label={copy.language} />
+        <div className="flex shrink-0 items-center gap-2 sm:gap-4">
+          <div className="hidden md:inline-flex">
+            <LocaleSwitcher lang={lang} label={copy.language} />
+          </div>
           <a
             href={telHref}
             className="hidden text-sm font-bold tracking-tight text-heading md:inline"
@@ -58,11 +60,13 @@ export function Header({ lang, copy }: HeaderProps) {
           </a>
           <MotionLink
             href={`/${lang}#hero-form`}
-            className="inline-flex h-9 items-center rounded-md bg-dark px-3.5 text-xs font-bold uppercase tracking-wide text-white transition-colors hover:bg-graphite"
+            className="inline-flex h-9 max-w-[9.5rem] items-center truncate rounded-md bg-dark px-2.5 text-[10px] font-bold uppercase tracking-wide text-white transition-colors hover:bg-graphite sm:max-w-none sm:px-3.5 sm:text-xs"
           >
             {copy.requestCall}
           </MotionLink>
           <MobileMenu
+            lang={lang}
+            languageLabel={copy.language}
             items={nav}
             phone={copy.phone}
             telHref={telHref}

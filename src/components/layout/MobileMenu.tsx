@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useId, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { LocaleSwitcher } from "@/components/layout/LocaleSwitcher";
 
 export interface MobileMenuItem {
   href: string;
@@ -11,6 +11,8 @@ export interface MobileMenuItem {
 }
 
 export interface MobileMenuProps {
+  lang: string;
+  languageLabel: string;
   items: MobileMenuItem[];
   phone: string;
   telHref: string;
@@ -19,6 +21,8 @@ export interface MobileMenuProps {
 }
 
 export function MobileMenu({
+  lang,
+  languageLabel,
   items,
   phone,
   telHref,
@@ -59,26 +63,35 @@ export function MobileMenu({
         aria-label={open ? closeLabel : openLabel}
         onClick={() => setOpen((value) => !value)}
       >
-        <span className="relative block h-3.5 w-4" aria-hidden>
-          <span
-            className={cn(
-              "absolute left-0 block h-0.5 w-full rounded-full bg-current transition-all duration-300",
-              open ? "top-1.5 rotate-45" : "top-0",
-            )}
-          />
-          <span
-            className={cn(
-              "absolute left-0 top-1.5 block h-0.5 w-full rounded-full bg-current transition-all duration-300",
-              open ? "scale-x-0 opacity-0" : "scale-x-100 opacity-100",
-            )}
-          />
-          <span
-            className={cn(
-              "absolute left-0 block h-0.5 w-full rounded-full bg-current transition-all duration-300",
-              open ? "top-1.5 -rotate-45" : "top-3",
-            )}
-          />
-        </span>
+        {open ? (
+          <svg
+            viewBox="0 0 24 24"
+            className="h-5 w-5"
+            fill="none"
+            aria-hidden
+          >
+            <path
+              d="M6 6l12 12M18 6L6 18"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
+        ) : (
+          <svg
+            viewBox="0 0 24 24"
+            className="h-5 w-5"
+            fill="none"
+            aria-hidden
+          >
+            <path
+              d="M4 7h16M4 12h16M4 17h16"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
+        )}
       </button>
 
       <AnimatePresence>
@@ -104,26 +117,36 @@ export function MobileMenu({
               exit={{ x: "100%" }}
               transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="flex items-center justify-between border-b border-border px-5 py-4">
-                <a
-                  href={telHref}
-                  className="text-sm font-bold tracking-tight text-heading"
-                  onClick={close}
-                >
-                  {phone}
-                </a>
+              <div className="flex items-center justify-between gap-3 border-b border-border px-5 py-4">
+                <LocaleSwitcher lang={lang} label={languageLabel} />
                 <button
                   type="button"
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-heading transition-colors hover:border-accent"
+                  className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border text-heading transition-colors hover:border-accent"
                   aria-label={closeLabel}
                   onClick={close}
                 >
-                  <span className="relative block h-3.5 w-4" aria-hidden>
-                    <span className="absolute left-0 top-1.5 block h-0.5 w-full rotate-45 rounded-full bg-current" />
-                    <span className="absolute left-0 top-1.5 block h-0.5 w-full -rotate-45 rounded-full bg-current" />
-                  </span>
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-5 w-5"
+                    fill="none"
+                    aria-hidden
+                  >
+                    <path
+                      d="M6 6l12 12M18 6L6 18"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                  </svg>
                 </button>
               </div>
+              <a
+                href={telHref}
+                className="border-b border-border px-5 py-3 text-sm font-bold tracking-tight text-heading"
+                onClick={close}
+              >
+                {phone}
+              </a>
               <ul className="flex flex-col gap-1 px-3 py-4">
                 {items.map((item) => (
                   <li key={`${item.href}-${item.label}`}>
