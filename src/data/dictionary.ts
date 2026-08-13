@@ -73,6 +73,7 @@ export interface Dictionary {
     phone: string;
     submit: string;
     success: string;
+    partnersTitle: string;
     partners: string[];
     errors: {
       from: string;
@@ -185,7 +186,7 @@ const DICTIONARY_UK: Dictionary = {
       reviews: "Відгуки",
       contacts: "Контакти",
     },
-    phone: "+38 044 000 00 00",
+    phone: "+380 (98) 154-09-82",
     requestCall: "Замовити дзвінок",
     language: "Мова",
     openMenu: "Відкрити меню",
@@ -331,6 +332,7 @@ const DICTIONARY_UK: Dictionary = {
     phone: "Телефон",
     submit: "Розрахувати",
     success: "Заявку на розрахунок прийнято.",
+    partnersTitle: "Бренди, які нам довіряють",
     partners: ["Ford", "Nokia", "Nike", "Shell", "Nivea", "Bosch"],
     errors: {
       from: "Вкажіть місто відправлення.",
@@ -434,8 +436,8 @@ const DICTIONARY_UK: Dictionary = {
   },
   footer: {
     brand: "KAISER",
-    phone: "+38 044 000 00 00",
-    email: "sales@kaiser.ua",
+    phone: "+380 (98) 154-09-82",
+    email: "rokla-ag@ukr.net",
     catalogTitle: "Каталог",
     catalogLinks: [
       { label: "Рохлі", href: "#catalog" },
@@ -468,7 +470,7 @@ const DICTIONARY_RU: Dictionary = {
       reviews: "Отзывы",
       contacts: "Контакты",
     },
-    phone: "+38 044 000 00 00",
+    phone: "+380 (98) 154-09-82",
     requestCall: "Заказать звонок",
     language: "Язык",
     openMenu: "Открыть меню",
@@ -608,6 +610,7 @@ const DICTIONARY_RU: Dictionary = {
     phone: "Телефон",
     submit: "Рассчитать",
     success: "Заявка на расчёт принята.",
+    partnersTitle: "Бренды, которые нам доверяют",
     partners: ["Ford", "Nokia", "Nike", "Shell", "Nivea", "Bosch"],
     errors: {
       from: "Укажите город отправления.",
@@ -711,8 +714,8 @@ const DICTIONARY_RU: Dictionary = {
   },
   footer: {
     brand: "KAISER",
-    phone: "+38 044 000 00 00",
-    email: "sales@kaiser.ua",
+    phone: "+380 (98) 154-09-82",
+    email: "rokla-ag@ukr.net",
     catalogTitle: "Каталог",
     catalogLinks: [
       { label: "Рохли", href: "#catalog" },

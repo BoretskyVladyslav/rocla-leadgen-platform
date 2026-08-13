@@ -87,25 +87,36 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
                 onBlur={handleBlur}
                 onValueChange={setPhone}
               />
-              <Button type="submit" size="lg" className="h-12 w-full sm:w-auto sm:self-end sm:px-10">
-                {copy.submit}
-              </Button>
+              <div className="flex w-full sm:justify-end">
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="h-12 w-full sm:w-auto sm:px-10"
+                >
+                  {copy.submit}
+                </Button>
+              </div>
             </form>
             {status === "success" ? (
               <p className="mt-4 text-center text-sm font-semibold text-heading">
                 {copy.success}
               </p>
             ) : null}
-            <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-              {copy.partners.map((name) => (
-                <li
-                  key={name}
-                  className="text-xs font-bold uppercase tracking-[0.18em] text-muted/70"
-                >
-                  {name}
-                </li>
-              ))}
-            </ul>
+            <div className="mt-8">
+              <p className="mb-4 text-center text-sm font-bold uppercase tracking-[0.12em] text-heading">
+                {copy.partnersTitle}
+              </p>
+              <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+                {copy.partners.map((name) => (
+                  <li
+                    key={name}
+                    className="text-xs font-bold uppercase tracking-[0.18em] text-muted/70"
+                  >
+                    {name}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </ScrollReveal>
       </div>
