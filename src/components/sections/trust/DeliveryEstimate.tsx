@@ -42,7 +42,7 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
     <section className="relative overflow-hidden bg-surface-muted">
       <BoxStack className="pointer-events-none absolute bottom-0 left-0 hidden h-48 w-36 opacity-80 sm:block" />
       <BoxStack className="pointer-events-none absolute right-0 bottom-0 hidden h-48 w-36 scale-x-[-1] opacity-80 sm:block" />
-      <div className="relative mx-auto w-full max-w-3xl px-4 py-14 sm:px-6 lg:py-16">
+      <div className="relative mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 lg:py-24">
         <ScrollReveal>
           <h2 className="text-center text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">
             {copy.title}

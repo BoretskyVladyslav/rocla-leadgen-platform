@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
 import { cn } from "@/lib/utils";
 
@@ -17,21 +17,23 @@ export function ReviewsCarousel({ copy }: ReviewsCarouselProps) {
 
   return (
     <section id="reviews" className="scroll-mt-20 bg-white">
-      <div className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 lg:py-16">
+      <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
         <ScrollReveal>
           <h2 className="text-center text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">
             {copy.title}
           </h2>
         </ScrollReveal>
 
-        <div className="mt-10 md:hidden">
+        <ScrollReveal delay={0.08} className="mt-10 md:hidden">
           <ReviewCard item={items[active]} />
-        </div>
+        </ScrollReveal>
 
         <ul className="mt-10 hidden gap-6 md:grid md:grid-cols-3">
-          {items.map((item) => (
+          {items.map((item, index) => (
             <li key={`${item.company}-${item.author}`}>
-              <ReviewCard item={item} />
+              <ScrollReveal delay={index * 0.06}>
+                <ReviewCard item={item} />
+              </ScrollReveal>
             </li>
           ))}
         </ul>
@@ -65,24 +67,21 @@ function ReviewCard({
   return (
     <motion.article
       layout
-      className="flex h-full flex-col overflow-hidden border border-border bg-white shadow-sm"
+      className="flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md"
     >
       <div className="flex flex-1 flex-col gap-4 p-5">
         <p className="text-sm leading-relaxed text-muted">{item.text}</p>
         <div>
-          <p className="text-sm font-bold tracking-tight text-heading">{item.company}</p>
-          <p className="mt-1 text-xs uppercase tracking-wide text-muted">{item.author}</p>
+          <p className="badge-status w-fit">{item.company}</p>
+          <p className="mt-2 text-xs uppercase tracking-wide text-muted">{item.author}</p>
         </div>
       </div>
-      <div className="relative aspect-[16/10] w-full bg-surface">
-        <Image
-          src={item.imageSrc}
-          alt={item.imageAlt}
-          fill
-          sizes="(min-width: 768px) 30vw, 90vw"
-          className="object-cover"
-        />
-      </div>
+      <MediaPlaceholder
+        aspect="4/3"
+        label={item.imageAlt}
+        sizeHint="4:3"
+        bordered={false}
+      />
     </motion.article>
   );
 }

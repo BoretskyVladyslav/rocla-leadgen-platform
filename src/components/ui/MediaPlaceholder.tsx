@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 export type PlaceholderAspect = "16/9" | "4/3" | "1/1" | "square";
@@ -8,6 +9,7 @@ export interface MediaPlaceholderProps {
   aspect?: PlaceholderAspect;
   className?: string;
   bordered?: boolean;
+  icon?: ReactNode;
 }
 
 const aspectClass: Record<PlaceholderAspect, string> = {
@@ -52,6 +54,7 @@ export function MediaPlaceholder({
   aspect = "4/3",
   className,
   bordered = true,
+  icon,
 }: MediaPlaceholderProps) {
   return (
     <div
@@ -74,8 +77,8 @@ export function MediaPlaceholder({
       />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.55)_0%,rgba(245,245,245,0.2)_100%)]" />
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-4 text-center">
-        <div className="flex h-12 w-12 items-center justify-center rounded-md border border-border bg-white text-muted shadow-sm">
-          <CameraIcon className="h-7 w-7" />
+        <div className="flex h-12 w-12 items-center justify-center rounded-md border border-accent bg-white text-accent-fg shadow-sm">
+          {icon ?? <CameraIcon className="h-7 w-7" />}
         </div>
         <div className="flex flex-col items-center gap-1.5">
           <span className="badge-status-outline max-w-full truncate">

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, type FormEvent, type FocusEvent } from "react";
-import Image from "next/image";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Button } from "@/components/ui/Button";
+import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
 import {
   validateCallbackFields,
@@ -52,7 +52,7 @@ export function MainHero({ copy }: MainHeroProps) {
 
   return (
     <section className="scroll-mt-20 border-b border-border bg-white">
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 lg:py-16">
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 lg:py-24">
         <ScrollReveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-3">
             <h1 className="max-w-3xl text-3xl font-bold uppercase tracking-tight text-accent-alt sm:text-4xl lg:text-5xl lg:leading-[1.08]">
@@ -66,7 +66,7 @@ export function MainHero({ copy }: MainHeroProps) {
           <form
             id="hero-form"
             onSubmit={handleSubmit}
-            className="scroll-mt-24 rounded-md border border-border bg-white p-3 shadow-sm sm:p-4"
+            className="scroll-mt-24 rounded-xl border border-gray-200 bg-white p-3 shadow-sm sm:p-4"
             noValidate
           >
             {status === "success" ? (
@@ -116,17 +116,13 @@ export function MainHero({ copy }: MainHeroProps) {
           </form>
         </ScrollReveal>
 
-        <ScrollReveal delay={0.1} className="relative">
-          <div className="relative mx-auto aspect-[4/3] w-full max-w-lg overflow-hidden bg-white">
-            <Image
-              src="/images/hero/rokla-hero.jpg"
-              alt={copy.imageAlt}
-              fill
-              priority
-              sizes="(min-width: 1024px) 40vw, 90vw"
-              className="object-contain object-center"
-            />
-          </div>
+        <ScrollReveal delay={0.1} className="relative mx-auto w-full max-w-lg">
+          <MediaPlaceholder
+            aspect="4/3"
+            label={copy.imageAlt}
+            sizeHint="1600×1200"
+            className="rounded-xl border-gray-200 shadow-sm"
+          />
         </ScrollReveal>
       </div>
     </section>

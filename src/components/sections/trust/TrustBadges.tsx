@@ -7,11 +7,11 @@ export interface TrustBadgesProps {
 
 function CheckIcon() {
   return (
-    <svg className="h-4 w-4 text-white" viewBox="0 0 16 16" fill="none" aria-hidden>
+    <svg className="h-4 w-4 text-accent-fg" viewBox="0 0 16 16" fill="none" aria-hidden>
       <path
         d="M3.5 8.2 6.4 11l6.1-6.5"
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="2.2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -22,15 +22,18 @@ function CheckIcon() {
 export function TrustBadges({ copy }: TrustBadgesProps) {
   return (
     <section id="about" className="scroll-mt-20 bg-white">
-      <div id="services" className="mx-auto w-full max-w-7xl scroll-mt-20 px-4 py-14 sm:px-6 lg:py-16">
+      <div id="services" className="mx-auto w-full max-w-7xl scroll-mt-20 px-4 py-16 sm:px-6 lg:py-24">
         <ScrollReveal>
           <h2 className="text-center text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">
             {copy.title}
           </h2>
-          <ul className="mt-10 grid gap-x-12 gap-y-8 sm:grid-cols-2">
+          <ul className="mt-12 grid gap-4 sm:grid-cols-2 sm:gap-5">
             {copy.items.map((item) => (
-              <li key={item.label} className="flex gap-4">
-                <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent">
+              <li
+                key={item.label}
+                className="flex gap-4 rounded-xl bg-gray-50 p-4"
+              >
+                <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent shadow-sm">
                   <CheckIcon />
                 </span>
                 <div>

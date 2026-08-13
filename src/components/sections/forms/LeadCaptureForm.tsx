@@ -104,7 +104,7 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
 
   return (
     <section id="contact" className="scroll-mt-20 bg-surface">
-      <div className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 lg:py-16">
+      <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
         <ScrollReveal>
           <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-accent-alt">
             {copy.eyebrow}
@@ -116,7 +116,7 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
             {copy.subtitle}
           </p>
 
-          <div className="relative mt-10 overflow-hidden rounded-md border border-border bg-white p-6 shadow-sm sm:p-8">
+          <div className="relative mt-10 overflow-hidden rounded-xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
             <AnimatePresence mode="wait">
               {status === "success" ? (
                 <motion.div

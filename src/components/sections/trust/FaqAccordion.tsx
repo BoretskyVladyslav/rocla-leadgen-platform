@@ -14,7 +14,7 @@ export function FaqAccordion({ copy }: FaqAccordionProps) {
 
   return (
     <section className="bg-white">
-      <div className="mx-auto w-full max-w-4xl px-4 py-14 sm:px-6 lg:py-16">
+      <div className="mx-auto w-full max-w-4xl px-4 py-16 sm:px-6 lg:py-24">
         <ScrollReveal>
           <h2 className="text-center text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">
             {copy.title}
@@ -49,7 +49,7 @@ export function FaqAccordion({ copy }: FaqAccordionProps) {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
                       >
                         <p className="pb-5 text-sm leading-relaxed text-muted">
