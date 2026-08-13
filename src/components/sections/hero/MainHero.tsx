@@ -100,11 +100,11 @@ export function MainHero({ copy }: MainHeroProps) {
           </form>
         </ScrollReveal>
 
-        <ScrollReveal delay={0.1} className="relative mx-auto w-full max-w-lg">
+        <ScrollReveal delay={0.1} className="relative mx-auto w-full min-w-0 max-w-lg">
           <MediaPlaceholder
-            aspect="4/3"
+            aspect="16/9"
             label={copy.imageAlt}
-            sizeHint="1600×1200"
+            sizeHint="16:9"
             className="rounded-xl border-gray-200 shadow-sm"
           />
         </ScrollReveal>

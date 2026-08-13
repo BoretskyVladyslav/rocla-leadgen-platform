@@ -1,6 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
+import { MotionLink } from "@/components/motion/MotionLink";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
 import type { Product } from "@/types/product";
 
@@ -42,31 +43,22 @@ export function ProductGrid({
         <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product, index) => {
             const badges = (product.specs ?? []).slice(0, 3);
-            const image = product.images?.[0];
 
             return (
-              <li key={product.slug}>
+              <li key={product.slug} className="min-w-0">
                 <ScrollReveal delay={index * 0.06}>
                   <article className="flex h-full flex-col overflow-hidden border-2 border-border bg-white shadow-sm transition-colors hover:border-accent hover:shadow-md">
                     <Link
                       href={`/${lang}/product/${product.slug}`}
                       className="group block border-b border-border"
                     >
-                      <div className="relative aspect-[4/3] w-full overflow-hidden bg-surface">
-                        {image ? (
-                          <Image
-                            src={image.src}
-                            alt={image.alt}
-                            fill
-                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                            className="object-cover transition-[filter,transform] duration-300 group-hover:scale-[1.02] group-hover:brightness-[0.98]"
-                          />
-                        ) : (
-                          <div className="flex h-full items-center justify-center text-sm text-muted">
-                            {copy.imageFallback}
-                          </div>
-                        )}
-                      </div>
+                      <MediaPlaceholder
+                        aspect="4/3"
+                        label={copy.imageFallback}
+                        sizeHint="4:3"
+                        bordered={false}
+                        className="transition-[filter] duration-300 group-hover:brightness-[0.98]"
+                      />
                     </Link>
                     <div className="flex flex-1 flex-col gap-3 p-5">
                       <Link href={`/${lang}/product/${product.slug}`}>
@@ -103,12 +95,12 @@ export function ProductGrid({
                           ) : null}
                         </div>
                       ) : null}
-                      <Link
+                      <MotionLink
                         href={`/${lang}/product/${product.slug}`}
-                        className="mt-1 inline-flex h-11 items-center justify-center rounded-md bg-accent px-5 text-sm font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                        className="mt-1 inline-flex h-11 w-full items-center justify-center rounded-md bg-accent px-5 text-sm font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                       >
                         {orderCta ?? copy.requestQuote}
-                      </Link>
+                      </MotionLink>
                     </div>
                   </article>
                 </ScrollReveal>

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { MotionLink } from "@/components/motion/MotionLink";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
@@ -161,12 +162,12 @@ export function RelatedProductsCarousel({
                         </span>
                       </div>
                     ) : null}
-                    <Link
-                      href={`/${lang}/product/${product.slug}`}
-                      className="mt-1 inline-flex h-11 items-center justify-center rounded-md bg-accent px-5 text-sm font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-                    >
-                      {orderCta}
-                    </Link>
+                      <MotionLink
+                        href={`/${lang}/product/${product.slug}`}
+                        className="mt-1 inline-flex h-11 w-full items-center justify-center rounded-md bg-accent px-5 text-sm font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                      >
+                        {orderCta}
+                      </MotionLink>
                   </div>
                 </article>
               </li>

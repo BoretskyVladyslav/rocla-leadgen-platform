@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { MotionLink } from "@/components/motion/MotionLink";
+import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/types/product";
@@ -13,47 +13,45 @@ export interface ProductHeroProps {
 }
 
 export function ProductHero({ product, copy }: ProductHeroProps) {
-  const images =
-    product.images && product.images.length > 0
-      ? product.images
-      : product.imageSrc
-        ? [{ src: product.imageSrc, alt: product.imageAlt ?? product.name }]
-        : [];
+  const thumbCount = Math.min(
+    Math.max(product.images?.length ?? 3, 1),
+    3,
+  );
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeImage = images[activeIndex] ?? images[0];
   const hasDiscount = Boolean(
     product.compareAtPriceLabel && product.priceLabel,
   );
-  const quickSpecs = (product.specs ?? []).filter(
-    (spec) => spec.label.toLowerCase() !== copy.skuLabel.toLowerCase(),
-  ).slice(0, 6);
+  const quickSpecs = (product.specs ?? [])
+    .filter(
+      (spec) => spec.label.toLowerCase() !== copy.skuLabel.toLowerCase(),
+    )
+    .slice(0, 6);
 
   return (
     <section className="bg-white">
       <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 pb-6 pt-6 sm:px-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12 lg:pb-8 lg:pt-8">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
-          {images.length > 1 ? (
+        <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-start">
+          {thumbCount > 1 ? (
             <ul className="order-2 flex gap-2 sm:order-1 sm:w-20 sm:shrink-0 sm:flex-col">
-              {images.slice(0, 3).map((image, index) => (
-                <li key={image.src} className="min-w-0 flex-1 sm:flex-none">
+              {Array.from({ length: thumbCount }).map((_, index) => (
+                <li key={index} className="min-w-0 flex-1 sm:flex-none">
                   <button
                     type="button"
                     onClick={() => setActiveIndex(index)}
                     aria-label={`${copy.thumbPlaceholder} ${index + 1}`}
                     aria-pressed={index === activeIndex}
                     className={cn(
-                      "relative aspect-square w-full overflow-hidden rounded-md border-2 bg-surface transition-colors",
+                      "w-full overflow-hidden rounded-md transition-opacity",
                       index === activeIndex
-                        ? "border-accent"
-                        : "border-border opacity-80 hover:opacity-100",
+                        ? "ring-2 ring-accent ring-offset-1"
+                        : "opacity-80 hover:opacity-100",
                     )}
                   >
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      sizes="80px"
-                      className="object-cover"
+                    <MediaPlaceholder
+                      aspect="1/1"
+                      label={copy.thumbPlaceholder}
+                      sizeHint={`${index + 1}`}
+                      bordered
                     />
                   </button>
                 </li>
@@ -61,25 +59,21 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
             </ul>
           ) : null}
 
-          <div className="order-1 relative aspect-[4/3] w-full overflow-hidden rounded-xl border-2 border-accent bg-surface shadow-sm sm:order-2">
-            {activeImage ? (
-              <Image
-                src={activeImage.src}
-                alt={activeImage.alt}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-              />
-            ) : (
-              <div className="flex h-full items-center justify-center text-sm text-muted">
-                {copy.imagePlaceholder}
-              </div>
-            )}
+          <div className="order-1 min-w-0 w-full sm:order-2">
+            <MediaPlaceholder
+              aspect="4/3"
+              label={
+                product.images?.[activeIndex]?.alt ??
+                product.name ??
+                copy.imagePlaceholder
+              }
+              sizeHint="800×600"
+              className="rounded-xl border-2 border-accent shadow-sm"
+            />
           </div>
         </div>
 
-        <div className="flex flex-col gap-6">
+        <div className="flex min-w-0 flex-col gap-6">
           <div className="flex flex-col gap-3">
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-accent-alt">
               {copy.eyebrow}

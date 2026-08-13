@@ -12,11 +12,11 @@ export function FeaturedCase({ lang, copy }: FeaturedCaseProps) {
   return (
     <section className="bg-white">
       <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:gap-12 lg:py-24">
-        <ScrollReveal>
+        <ScrollReveal className="min-w-0">
           <MediaPlaceholder
-            aspect="4/3"
+            aspect="16/9"
             label={copy.imageAlt}
-            sizeHint="4:3"
+            sizeHint="16:9"
             className="rounded-xl border-gray-200 shadow-sm"
           />
         </ScrollReveal>
