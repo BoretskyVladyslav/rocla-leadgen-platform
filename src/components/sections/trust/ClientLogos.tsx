@@ -34,10 +34,10 @@ export function ClientLogos({ copy }: ClientLogosProps) {
           ))}
         </ul>
 
-        {/* sm+ with motion: infinite marquee */}
-        <div className="group/marquee relative mt-10 hidden overflow-hidden motion-safe:sm:block">
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-surface to-transparent sm:w-16" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-surface to-transparent sm:w-16" />
+        {/* sm+ with motion: infinite marquee with edge fade */}
+        <div
+          className="group/marquee relative mt-10 hidden overflow-hidden motion-safe:sm:block [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
+        >
           <ul
             className="logo-marquee flex w-max gap-4 py-1 group-hover/marquee:[animation-play-state:paused]"
             aria-label={copy.title}
