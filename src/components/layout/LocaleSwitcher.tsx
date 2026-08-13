@@ -60,12 +60,21 @@ export function LocaleSwitcher({ lang, label }: LocaleSwitcherProps) {
     sessionStorage.setItem(SCROLL_KEY, String(window.scrollY));
   }
 
+  const activeIndex = Math.max(0, LOCALES.indexOf(lang as (typeof LOCALES)[number]));
+
   return (
     <div
-      className="flex items-center gap-1 text-xs font-medium"
+      className="relative inline-flex items-center rounded-md bg-surface p-0.5 text-xs font-medium"
       role="navigation"
       aria-label={label}
     >
+      <span
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute inset-y-0.5 left-0.5 w-[calc(50%-2px)] rounded bg-accent transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
+          activeIndex === 1 ? "translate-x-full" : "translate-x-0",
+        )}
+      />
       {LOCALES.map((locale) => (
         <Link
           key={locale}
@@ -79,9 +88,9 @@ export function LocaleSwitcher({ lang, label }: LocaleSwitcherProps) {
             handleClick();
           }}
           className={cn(
-            "rounded px-1.5 py-1 uppercase tracking-wide transition-colors",
+            "relative z-10 rounded px-1.5 py-1 uppercase tracking-wide transition-colors duration-300",
             locale === lang
-              ? "bg-accent text-accent-fg"
+              ? "text-accent-fg"
               : "text-muted hover:text-foreground",
           )}
           hrefLang={locale}

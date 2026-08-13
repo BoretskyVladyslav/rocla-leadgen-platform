@@ -6,11 +6,8 @@ import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Button } from "@/components/ui/Button";
 import { FileUpload } from "@/components/ui/FileUpload";
 import { Input } from "@/components/ui/Input";
+import { PhoneInput } from "@/components/ui/PhoneInput";
 import type { Dictionary } from "@/data/dictionary";
-import {
-  formatUaPhoneMask,
-  UA_PHONE_PLACEHOLDER,
-} from "@/lib/phone-mask";
 import {
   validateLeadFields,
   type LeadFieldErrors,
@@ -163,22 +160,15 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
                         setForm((s) => ({ ...s, email: e.target.value }))
                       }
                     />
-                    <Input
+                    <PhoneInput
                       label={copy.phone}
                       name="phone"
-                      type="tel"
-                      inputMode="tel"
-                      autoComplete="tel"
                       required
                       value={form.phone}
                       error={errors.phone}
                       onBlur={handleBlur}
-                      placeholder={UA_PHONE_PLACEHOLDER}
-                      onChange={(e) =>
-                        setForm((s) => ({
-                          ...s,
-                          phone: formatUaPhoneMask(e.target.value),
-                        }))
+                      onValueChange={(phone) =>
+                        setForm((s) => ({ ...s, phone }))
                       }
                     />
                     <Input

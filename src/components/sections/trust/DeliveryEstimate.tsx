@@ -4,11 +4,8 @@ import { useState, type FormEvent, type FocusEvent } from "react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { PhoneInput } from "@/components/ui/PhoneInput";
 import type { Dictionary } from "@/data/dictionary";
-import {
-  formatUaPhoneMask,
-  UA_PHONE_PLACEHOLDER,
-} from "@/lib/phone-mask";
 import {
   validateDeliveryFields,
   type DeliveryFieldErrors,
@@ -81,18 +78,14 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
                   onChange={(e) => setTo(e.target.value)}
                 />
               </div>
-              <Input
+              <PhoneInput
                 label={copy.phone}
                 name="phone"
-                type="tel"
-                inputMode="tel"
-                autoComplete="tel"
                 required
                 value={phone}
                 error={errors.phone}
-                placeholder={UA_PHONE_PLACEHOLDER}
                 onBlur={handleBlur}
-                onChange={(e) => setPhone(formatUaPhoneMask(e.target.value))}
+                onValueChange={setPhone}
               />
               <Button type="submit" size="lg" className="h-12 w-full sm:w-auto sm:self-end sm:px-10">
                 {copy.submit}

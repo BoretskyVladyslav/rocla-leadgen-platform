@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { MotionLink } from "@/components/motion/MotionLink";
 import { LocaleSwitcher } from "@/components/layout/LocaleSwitcher";
+import { MobileMenu } from "@/components/layout/MobileMenu";
 import type { Dictionary } from "@/data/dictionary";
 
 export interface HeaderProps {
@@ -61,6 +62,13 @@ export function Header({ lang, copy }: HeaderProps) {
           >
             {copy.requestCall}
           </MotionLink>
+          <MobileMenu
+            items={nav}
+            phone={copy.phone}
+            telHref={telHref}
+            openLabel={copy.openMenu}
+            closeLabel={copy.closeMenu}
+          />
         </div>
       </div>
     </header>

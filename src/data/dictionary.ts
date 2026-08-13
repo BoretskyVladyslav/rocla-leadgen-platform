@@ -15,6 +15,8 @@ export interface Dictionary {
     phone: string;
     requestCall: string;
     language: string;
+    openMenu: string;
+    closeMenu: string;
   };
   hero: {
     title: string;
@@ -184,6 +186,8 @@ const DICTIONARY_UK: Dictionary = {
     phone: "+38 044 000 00 00",
     requestCall: "Замовити дзвінок",
     language: "Мова",
+    openMenu: "Відкрити меню",
+    closeMenu: "Закрити меню",
   },
   hero: {
     title: "Купити роклу, рохлі німецька якість",
@@ -463,6 +467,8 @@ const DICTIONARY_RU: Dictionary = {
     phone: "+38 044 000 00 00",
     requestCall: "Заказать звонок",
     language: "Язык",
+    openMenu: "Открыть меню",
+    closeMenu: "Закрыть меню",
   },
   hero: {
     title: "Купить роклу, рохли немецкое качество",

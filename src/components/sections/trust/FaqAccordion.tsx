@@ -10,7 +10,7 @@ export interface FaqAccordionProps {
 }
 
 export function FaqAccordion({ copy }: FaqAccordionProps) {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <section className="bg-white">

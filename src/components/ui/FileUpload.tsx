@@ -38,6 +38,44 @@ function toFilePayload(file: File): FilePayload {
   };
 }
 
+function formatFileSize(bytes: number): string {
+  if (bytes >= 1024 * 1024) {
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  }
+  return `${Math.max(1, Math.round(bytes / 1024))} KB`;
+}
+
+function DocumentIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-6Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M14 2v6h6"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9 13h6M9 17h4"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 export function FileUpload({
   label = "Upload files",
   hint = "PDF, JPG, or PNG",
@@ -109,6 +147,8 @@ export function FileUpload({
     applyFiles(list);
   }
 
+  const hasFiles = files.length > 0;
+
   return (
     <div className={cn("flex w-full flex-col gap-2", className)}>
       <label
@@ -130,10 +170,37 @@ export function FileUpload({
         <span className="text-sm font-semibold tracking-tight text-foreground">
           {label}
         </span>
-        <span className="text-sm leading-relaxed text-muted">{hint}</span>
-        <span className="text-xs font-medium text-muted">
-          {dragging ? dragLabel : maxSizeLabel}
-        </span>
+
+        {hasFiles ? (
+          <ul className="flex w-full flex-col gap-2">
+            {files.map((file) => (
+              <li
+                key={`${file.name}-${file.lastModified}`}
+                className="flex w-full items-center gap-3 rounded-md border border-border bg-surface px-3 py-2.5"
+              >
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-white text-heading shadow-sm">
+                  <DocumentIcon className="h-5 w-5" />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate text-sm font-semibold text-foreground">
+                    {file.name}
+                  </span>
+                  <span className="block text-xs text-muted">
+                    {formatFileSize(file.size)}
+                  </span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <>
+            <span className="text-sm leading-relaxed text-muted">{hint}</span>
+            <span className="text-xs font-medium text-muted">
+              {dragging ? dragLabel : maxSizeLabel}
+            </span>
+          </>
+        )}
+
         <span className="mt-1 inline-flex h-9 items-center rounded-md border border-border bg-surface px-3 text-xs font-bold uppercase tracking-wide text-foreground">
           {browseLabel}
         </span>
@@ -148,17 +215,11 @@ export function FileUpload({
         />
       </label>
 
-      {error ? <p className="text-xs text-red-600">{error}</p> : null}
-
-      {files.length > 0 ? (
-        <ul className="space-y-1.5 rounded-md border border-border bg-white px-3 py-2 text-xs text-muted">
-          {files.map((file) => (
-            <li key={`${file.name}-${file.lastModified}`}>
-              {file.name} ({Math.round(file.size / 1024)} KB)
-            </li>
-          ))}
-        </ul>
-      ) : null}
+      <div className="relative min-h-[1.25rem]">
+        {error ? (
+          <p className="absolute inset-x-0 top-0 text-xs text-red-600">{error}</p>
+        ) : null}
+      </div>
     </div>
   );
 }

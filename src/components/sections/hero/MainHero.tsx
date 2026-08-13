@@ -5,11 +5,8 @@ import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { PhoneInput } from "@/components/ui/PhoneInput";
 import type { Dictionary } from "@/data/dictionary";
-import {
-  formatUaPhoneMask,
-  UA_PHONE_PLACEHOLDER,
-} from "@/lib/phone-mask";
 import {
   validateCallbackFields,
   type CallbackFieldErrors,
@@ -83,18 +80,14 @@ export function MainHero({ copy }: MainHeroProps) {
                   onBlur={handleBlur}
                   onChange={(e) => setFullName(e.target.value)}
                 />
-                <Input
+                <PhoneInput
                   label={copy.phone}
                   name="phone"
-                  type="tel"
-                  inputMode="tel"
-                  autoComplete="tel"
                   required
                   value={phone}
                   error={errors.phone}
-                  placeholder={UA_PHONE_PLACEHOLDER}
                   onBlur={handleBlur}
-                  onChange={(e) => setPhone(formatUaPhoneMask(e.target.value))}
+                  onValueChange={setPhone}
                 />
                 <div className="sm:w-40 sm:shrink-0">
                   <Button type="submit" size="lg" className="h-12 w-full">
