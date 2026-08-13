@@ -47,9 +47,9 @@ export function ReviewsCarousel({ copy }: ReviewsCarouselProps) {
     <section id="reviews" className="scroll-mt-20 bg-white">
       <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
         <ScrollReveal>
-          <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <h2 className="section-heading sm:text-left">{copy.title}</h2>
-            <div className="flex items-center gap-2">
+          <div className="flex items-end justify-between gap-4">
+            <h2 className="section-heading text-left">{copy.title}</h2>
+            <div className="flex shrink-0 items-center gap-2">
               <button
                 type="button"
                 aria-label="Previous review"

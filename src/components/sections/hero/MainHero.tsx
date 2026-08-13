@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent, type FocusEvent } from "react";
+import { useState, type FormEvent, type FocusEvent, type ReactNode } from "react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -15,6 +15,102 @@ import {
 export interface MainHeroProps {
   copy: Dictionary["hero"];
 }
+
+function TruckIcon() {
+  return (
+    <svg className="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M15 18H9"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M19 18h2v-3.65a1 1 0 0 0-.22-.62l-2.56-3.42A2 2 0 0 0 16.56 10H14"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="17" cy="18" r="2" stroke="currentColor" strokeWidth="2" />
+      <circle cx="7" cy="18" r="2" stroke="currentColor" strokeWidth="2" />
+    </svg>
+  );
+}
+
+function FileTextIcon() {
+  return (
+    <svg className="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M14 2v4a2 2 0 0 0 2 2h4"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10 9H8"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M16 13H8"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M16 17H8"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function ShieldCheckIcon() {
+  return (
+    <svg className="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="m9 12 2 2 4-4"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+const TRUST_ICONS: ReactNode[] = [
+  <TruckIcon key="truck" />,
+  <FileTextIcon key="file" />,
+  <ShieldCheckIcon key="shield" />,
+];
 
 export function MainHero({ copy }: MainHeroProps) {
   const [fullName, setFullName] = useState("");
@@ -58,11 +154,12 @@ export function MainHero({ copy }: MainHeroProps) {
               {copy.subtitle}
             </p>
             <ul className="mt-1 flex flex-wrap gap-2">
-              {copy.trustBadges.map((badge) => (
+              {copy.trustBadges.map((badge, index) => (
                 <li
                   key={badge}
-                  className="inline-flex items-center rounded-full border border-gray-200 bg-surface px-3 py-1.5 text-xs font-bold tracking-tight text-heading sm:text-sm"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-surface px-3 py-1.5 text-xs font-bold tracking-tight text-heading sm:text-sm"
                 >
+                  {TRUST_ICONS[index] ?? null}
                   {badge}
                 </li>
               ))}
@@ -99,7 +196,6 @@ export function MainHero({ copy }: MainHeroProps) {
                   onBlur={handleBlur}
                   onValueChange={setPhone}
                 />
-                {/* Match Input: label spacer omitted; bottom pad = gap-1.5 + error min-h */}
                 <div className="sm:w-40 sm:shrink-0 sm:pb-[calc(0.375rem+1.25rem)]">
                   <Button type="submit" size="lg" className="h-12 w-full">
                     {copy.submit}
