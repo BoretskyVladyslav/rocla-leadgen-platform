@@ -87,6 +87,15 @@ export interface Dictionary {
       company: string;
       author: string;
       text: string;
+      date?: string;
+      imageSrc: string;
+      imageAlt: string;
+    }>;
+  };
+  videos: {
+    title: string;
+    items: Array<{
+      title: string;
       imageSrc: string;
       imageAlt: string;
     }>;
@@ -129,9 +138,22 @@ export interface Dictionary {
   product: {
     eyebrow: string;
     requestQuote: string;
+    buyCta: string;
+    orderCta: string;
+    skuLabel: string;
+    relatedTitle: string;
     specifications: string;
     imagePlaceholder: string;
     thumbPlaceholder: string;
+    tabs: {
+      description: string;
+      specifications: string;
+    };
+    breadcrumbs: {
+      home: string;
+      catalog: string;
+      category: string;
+    };
   };
   footer: {
     brand: string;
@@ -346,6 +368,7 @@ const DICTIONARY_UK: Dictionary = {
       {
         company: "ТОВ «ЛАЙФСЕ ЛЛ»",
         author: "Язиджи Ісмет",
+        date: "12.03.2024",
         text: "Купували самохідний штабелер. Показали модель до оплати, доставили за 2 дні — чітко й організовано.",
         imageSrc: "/images/clients/client-1.jpg",
         imageAlt: "Техніка KAISER у клієнта",
@@ -353,6 +376,7 @@ const DICTIONARY_UK: Dictionary = {
       {
         company: "ТОВ «НОША»",
         author: "Гнатенко Сергій",
+        date: "28.01.2024",
         text: "Роклу доставили в Ужгород через два дні. Техніка відмінна, консультація зі збірки допомогла.",
         imageSrc: "/images/clients/client-2.jpg",
         imageAlt: "Рокла в роботі на складі клієнта",
@@ -360,9 +384,75 @@ const DICTIONARY_UK: Dictionary = {
       {
         company: "ТОВ «ОККО-ХОЛДИНГ»",
         author: "Рассказов Дмитро",
+        date: "05.11.2023",
         text: "Запропонували варіант із змінною АКБ, показали на складі й навіть тест-драйв. Працюватимемо далі.",
         imageSrc: "/images/clients/client-3.jpg",
         imageAlt: "Навантажувач на об’єкті клієнта",
+      },
+      {
+        company: "ТОВ «АТБ-МАРКЕТ»",
+        author: "Коваленко Олена",
+        date: "19.09.2023",
+        text: "Замовили партію гідравлічних рокл для розподільчого центру. Усі машини з однаковими вузлами — зручно для сервісу.",
+        imageSrc: "/images/clients/client-4.jpg",
+        imageAlt: "Рокли на складі ритейлера",
+      },
+      {
+        company: "ПрАТ «Фармак»",
+        author: "Мельник Андрій",
+        date: "03.07.2023",
+        text: "Потрібна була техніка з харчовим допуском коліс. Підібрали PU-ролики, документи надіслали того ж дня.",
+        imageSrc: "/images/clients/client-5.jpg",
+        imageAlt: "Складська техніка на фармацевтичному складі",
+      },
+      {
+        company: "ТОВ «Нова Пошта»",
+        author: "Шевченко Ігор",
+        date: "21.05.2023",
+        text: "Рокли витримали пікове навантаження сезону. Гарантійне обслуговування — без зайвих поїздок.",
+        imageSrc: "/images/clients/client-6.jpg",
+        imageAlt: "Рокла в логістичному хабі",
+      },
+      {
+        company: "ТОВ «Епіцентр К»",
+        author: "Бондар Марія",
+        date: "14.02.2023",
+        text: "Брали посилені моделі 2,5 т під важкі палети. Шасі не грає, гідравліка стабільна після року роботи.",
+        imageSrc: "/images/clients/client-1.jpg",
+        imageAlt: "Посилена рокла на будівельному складі",
+      },
+      {
+        company: "ТОВ «Комфі Трейд»",
+        author: "Лисенко Віктор",
+        date: "08.12.2022",
+        text: "Доставили в Дніпро за добу після оплати. Менеджер пояснив різницю між кованим і збірним гідровузлом.",
+        imageSrc: "/images/clients/client-2.jpg",
+        imageAlt: "Рокла в магазині техніки",
+      },
+    ],
+  },
+  videos: {
+    title: "Відеоогляди",
+    items: [
+      {
+        title: "Збірка гідравлічної рокли",
+        imageSrc: "/images/products/pallet-truck-2t-1.jpg",
+        imageAlt: "Відео: збірка гідравлічної рокли",
+      },
+      {
+        title: "Принцип роботи гідровузла",
+        imageSrc: "/images/products/pallet-truck-2t-2.jpg",
+        imageAlt: "Відео: принцип роботи гідровузла",
+      },
+      {
+        title: "Огляд посиленої моделі 2,5 т",
+        imageSrc: "/images/products/pallet-truck-heavy-1.jpg",
+        imageAlt: "Відео: огляд посиленої рокли",
+      },
+      {
+        title: "Рокла з довгими вилами на складі",
+        imageSrc: "/images/products/pallet-truck-long-1.jpg",
+        imageAlt: "Відео: рокла з довгими вилами",
       },
     ],
   },
@@ -430,9 +520,22 @@ const DICTIONARY_UK: Dictionary = {
   product: {
     eyebrow: "Товар",
     requestQuote: "Запит ціни",
+    buyCta: "Купити",
+    orderCta: "Замовити",
+    skuLabel: "Артикул",
+    relatedTitle: "Схожі товари",
     specifications: "Характеристики",
     imagePlaceholder: "Зображення відсутнє",
     thumbPlaceholder: "Мініатюра",
+    tabs: {
+      description: "Опис",
+      specifications: "Характеристики",
+    },
+    breadcrumbs: {
+      home: "Головна",
+      catalog: "Каталог",
+      category: "Гідравлічні візки",
+    },
   },
   footer: {
     brand: "KAISER",
@@ -624,6 +727,7 @@ const DICTIONARY_RU: Dictionary = {
       {
         company: "ООО «ЛАЙФСЕ ЛЛ»",
         author: "Языджи Исмет",
+        date: "12.03.2024",
         text: "Покупали самоходный штабеллер. Показали модель до оплаты, доставили за 2 дня — чётко и организованно.",
         imageSrc: "/images/clients/client-1.jpg",
         imageAlt: "Техника KAISER у клиента",
@@ -631,6 +735,7 @@ const DICTIONARY_RU: Dictionary = {
       {
         company: "ООО «НОША»",
         author: "Гнатенко Сергей",
+        date: "28.01.2024",
         text: "Роклу доставили в Ужгород через два дня. Техника отличная, консультация по сборке помогла.",
         imageSrc: "/images/clients/client-2.jpg",
         imageAlt: "Рокла в работе на складе клиента",
@@ -638,9 +743,75 @@ const DICTIONARY_RU: Dictionary = {
       {
         company: "ООО «ОККО-ХОЛДИНГ»",
         author: "Рассказов Дмитрий",
+        date: "05.11.2023",
         text: "Предложили вариант с переменной АКБ, показали на складе и даже тест-драйв. Будем сотрудничать.",
         imageSrc: "/images/clients/client-3.jpg",
         imageAlt: "Погрузчик на объекте клиента",
+      },
+      {
+        company: "ООО «АТБ-МАРКЕТ»",
+        author: "Коваленко Елена",
+        date: "19.09.2023",
+        text: "Заказали партию гидравлических рокл для распределительного центра. Все машины с одинаковыми узлами — удобно для сервиса.",
+        imageSrc: "/images/clients/client-4.jpg",
+        imageAlt: "Роклы на складе ритейлера",
+      },
+      {
+        company: "ЧАО «Фармак»",
+        author: "Мельник Андрей",
+        date: "03.07.2023",
+        text: "Нужна была техника с пищевым допуском колёс. Подобрали PU-ролики, документы отправили в тот же день.",
+        imageSrc: "/images/clients/client-5.jpg",
+        imageAlt: "Складская техника на фармацевтическом складе",
+      },
+      {
+        company: "ООО «Новая Почта»",
+        author: "Шевченко Игорь",
+        date: "21.05.2023",
+        text: "Роклы выдержали пиковую нагрузку сезона. Гарантийное обслуживание — без лишних поездок.",
+        imageSrc: "/images/clients/client-6.jpg",
+        imageAlt: "Рокла в логистическом хабе",
+      },
+      {
+        company: "ООО «Эпицентр К»",
+        author: "Бондарь Мария",
+        date: "14.02.2023",
+        text: "Брали усиленные модели 2,5 т под тяжёлые паллеты. Шасси не играет, гидравлика стабильна после года работы.",
+        imageSrc: "/images/clients/client-1.jpg",
+        imageAlt: "Усиленная рокла на строительном складе",
+      },
+      {
+        company: "ООО «Комфи Трейд»",
+        author: "Лысенко Виктор",
+        date: "08.12.2022",
+        text: "Доставили в Днепр за сутки после оплаты. Менеджер объяснил разницу между кованым и сборным гидроузлом.",
+        imageSrc: "/images/clients/client-2.jpg",
+        imageAlt: "Рокла в магазине техники",
+      },
+    ],
+  },
+  videos: {
+    title: "Видеообзоры",
+    items: [
+      {
+        title: "Сборка гидравлической роклы",
+        imageSrc: "/images/products/pallet-truck-2t-1.jpg",
+        imageAlt: "Видео: сборка гидравлической роклы",
+      },
+      {
+        title: "Принцип работы гидроузла",
+        imageSrc: "/images/products/pallet-truck-2t-2.jpg",
+        imageAlt: "Видео: принцип работы гидроузла",
+      },
+      {
+        title: "Обзор усиленной модели 2,5 т",
+        imageSrc: "/images/products/pallet-truck-heavy-1.jpg",
+        imageAlt: "Видео: обзор усиленной роклы",
+      },
+      {
+        title: "Рокла с длинными вилами на складе",
+        imageSrc: "/images/products/pallet-truck-long-1.jpg",
+        imageAlt: "Видео: рокла с длинными вилами",
       },
     ],
   },
@@ -708,9 +879,22 @@ const DICTIONARY_RU: Dictionary = {
   product: {
     eyebrow: "Товар",
     requestQuote: "Запрос цены",
+    buyCta: "Купить",
+    orderCta: "Заказать",
+    skuLabel: "Артикул",
+    relatedTitle: "Похожие товары",
     specifications: "Характеристики",
     imagePlaceholder: "Изображение отсутствует",
     thumbPlaceholder: "Миниатюра",
+    tabs: {
+      description: "Описание",
+      specifications: "Характеристики",
+    },
+    breadcrumbs: {
+      home: "Главная",
+      catalog: "Каталог",
+      category: "Гидравлические тележки",
+    },
   },
   footer: {
     brand: "KAISER",

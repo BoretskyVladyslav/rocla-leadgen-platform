@@ -22,7 +22,10 @@ export interface Product {
   slug: string;
   name: string;
   summary: string;
+  sku: string;
   description?: string;
+  descriptionParagraphs?: string[];
+  descriptionBullets?: string[];
   imageSrc?: string;
   imageAlt?: string;
   images?: ProductImage[];

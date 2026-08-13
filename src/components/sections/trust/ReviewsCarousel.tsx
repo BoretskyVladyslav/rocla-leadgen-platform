@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
 import { cn } from "@/lib/utils";
 
@@ -93,7 +93,7 @@ export function ReviewsCarousel({ copy }: ReviewsCarouselProps) {
               className={cn(
                 "w-[min(100%,20rem)] shrink-0 snap-start",
                 "sm:w-[calc(50%-0.75rem)]",
-                "lg:w-[calc((100%-3rem)/2.35)]",
+                "lg:w-[calc((100%-3rem)/3)]",
               )}
             >
               <ReviewCard item={item} active={active === index} />
@@ -143,20 +143,26 @@ function ReviewCard({
       )}
     >
       <div className="flex flex-1 flex-col gap-4 p-5">
-        <p className="text-sm leading-relaxed text-muted">{item.text}</p>
-        <div>
+        <div className="flex items-start justify-between gap-3">
           <p className="badge-status w-fit">{item.company}</p>
-          <p className="mt-2 text-xs uppercase tracking-wide text-muted">
-            {item.author}
-          </p>
+          {item.date ? (
+            <time className="shrink-0 text-xs text-muted">{item.date}</time>
+          ) : null}
         </div>
+        <p className="text-sm leading-relaxed text-muted">{item.text}</p>
+        <p className="mt-auto text-xs uppercase tracking-wide text-muted">
+          {item.author}
+        </p>
       </div>
-      <MediaPlaceholder
-        aspect="4/3"
-        label={item.imageAlt}
-        sizeHint="4:3"
-        bordered={false}
-      />
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-surface">
+        <Image
+          src={item.imageSrc}
+          alt={item.imageAlt}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover"
+        />
+      </div>
     </motion.article>
   );
 }
