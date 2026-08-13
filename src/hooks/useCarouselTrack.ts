@@ -372,7 +372,9 @@ export function useCarouselTrack<T>({
 
   const onPointerDown = useCallback(
     (event: ReactPointerEvent<HTMLUListElement>) => {
-      if (event.pointerType === "mouse" && event.button !== 0) return;
+      // Touch/pen: native overflow-x scroll + snap (setPointerCapture breaks iOS swipe).
+      // Mouse: custom grab-drag so desktop can scrub the track.
+      if (event.pointerType !== "mouse" || event.button !== 0) return;
       const track = trackRef.current;
       if (!track) return;
 
@@ -402,6 +404,7 @@ export function useCarouselTrack<T>({
       if (Math.abs(dx) > DRAG_THRESHOLD) {
         dragState.current.moved = true;
         suppressClickRef.current = true;
+        event.preventDefault();
       }
       track.scrollLeft = dragState.current.startScroll - dx;
     },
@@ -451,9 +454,11 @@ export function useCarouselTrack<T>({
   };
 
   const trackClassName = [
-    "flex snap-x snap-mandatory overflow-x-auto scroll-smooth pb-2",
+    "flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-smooth pb-2",
     gapClassName,
-    "cursor-grab active:cursor-grabbing touch-pan-y select-none",
+    "cursor-grab active:cursor-grabbing select-none",
+    // Allow native horizontal swipe + vertical page scroll; avoid touch-pan-y (blocks swipe).
+    "[touch-action:pan-x_pan-y] [-webkit-overflow-scrolling:touch]",
     "[-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
   ].join(" ");
 

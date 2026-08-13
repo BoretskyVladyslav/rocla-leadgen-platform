@@ -17,38 +17,20 @@ export function ClientLogos({ copy }: ClientLogosProps) {
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>
 
-        {/* Mobile + reduced-motion: all logos in a wrapping grid */}
-        <ul
-          className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 motion-safe:sm:hidden"
-          aria-label={copy.title}
-        >
-          {copy.logos.map((logo) => (
-            <li
-              key={logo.name}
-              className="flex h-24 items-center justify-center rounded-2xl border border-gray-200 bg-white px-4 shadow-sm"
-            >
-              <span className="text-center text-sm font-bold uppercase tracking-wide text-heading">
-                {logo.name}
-              </span>
-            </li>
-          ))}
-        </ul>
-
-        {/* sm+ with motion: infinite marquee with edge fade */}
         <div
-          className="group/marquee relative mt-10 hidden overflow-hidden motion-safe:sm:block [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
+          className="group/marquee relative mt-10 overflow-x-auto overflow-y-hidden motion-safe:overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           <ul
-            className="logo-marquee flex w-max gap-4 py-1 group-hover/marquee:[animation-play-state:paused]"
+            className="logo-marquee flex w-max gap-3 py-1 sm:gap-4 group-hover/marquee:[animation-play-state:paused]"
             aria-label={copy.title}
           >
             {logos.map((logo, index) => (
               <li
                 key={`${logo.name}-${index}`}
-                className="flex h-24 w-44 shrink-0 items-center justify-center rounded-2xl border border-gray-200 bg-white px-4 shadow-sm sm:w-52"
+                className="flex h-20 w-36 shrink-0 items-center justify-center rounded-2xl border border-gray-200 bg-white px-3 shadow-sm sm:h-24 sm:w-52 sm:px-4"
                 aria-hidden={index >= copy.logos.length}
               >
-                <span className="text-center text-sm font-bold uppercase tracking-wide text-heading">
+                <span className="text-center text-xs font-bold uppercase tracking-wide text-heading sm:text-sm">
                   {logo.name}
                 </span>
               </li>
