@@ -2,8 +2,15 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { HashLink } from "@/components/layout/HashLink";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import {
+  StaggerItem,
+  StaggerReveal,
+} from "@/components/motion/StaggerReveal";
+import { cardHover, cardHoverClassName } from "@/components/motion/variants";
+import { Button } from "@/components/ui/Button";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
 import { cn } from "@/lib/utils";
@@ -136,11 +143,11 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
 
   return (
     <section id="catalog" className="scroll-mt-20 bg-white">
-      <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
+      <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>
-        <ul className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
+        <StaggerReveal className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
           {copy.items.map((item, index) => {
             const productSlug =
               index === 0
@@ -151,15 +158,16 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
               ? `/${lang}/product/${productSlug}`
               : `/${lang}#contact`;
             const hiddenOnMobile = !expanded && index >= MOBILE_PREVIEW;
-            const tileClassName =
-              "group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-[transform,box-shadow] duration-200 hover:scale-[1.03] hover:shadow-md";
+            const tileClassName = cn(
+              "group flex h-full flex-col overflow-hidden",
+              cardHoverClassName,
+            );
 
             const cardBody = (
               <>
                 <MediaPlaceholder
                   aspect="4/3"
                   label={item.imageAlt}
-                  sizeHint="4:3"
                   bordered={false}
                   icon={CATEGORY_ICONS[index]}
                   className="min-h-0"
@@ -169,7 +177,7 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
                     {item.title}
                   </h3>
                   <p className="text-xs text-muted">{item.subtitle}</p>
-                  <p className="text-sm font-bold text-accent-alt">
+                  <p className="text-sm font-bold tabular-nums text-accent-alt">
                     {item.priceLabel}
                   </p>
                 </div>
@@ -177,11 +185,11 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
             );
 
             return (
-              <li
+              <StaggerItem
                 key={item.title}
                 className={cn(hiddenOnMobile && "hidden lg:block")}
               >
-                <ScrollReveal delay={Math.min(index, 7) * 0.03}>
+                <motion.div className="h-full" {...cardHover}>
                   {isProduct ? (
                     <Link href={href} className={tileClassName}>
                       {cardBody}
@@ -191,21 +199,17 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
                       {cardBody}
                     </HashLink>
                   )}
-                </ScrollReveal>
-              </li>
+                </motion.div>
+              </StaggerItem>
             );
           })}
-        </ul>
+        </StaggerReveal>
 
         {hasMore && !expanded ? (
           <div className="mt-8 flex justify-center lg:hidden">
-            <button
-              type="button"
-              onClick={() => setExpanded(true)}
-              className="inline-flex h-11 items-center rounded-md bg-accent px-5 text-sm font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover"
-            >
+            <Button type="button" onClick={() => setExpanded(true)}>
               {copy.showAll}
-            </button>
+            </Button>
           </div>
         ) : null}
       </div>

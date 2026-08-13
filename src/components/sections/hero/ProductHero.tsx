@@ -41,7 +41,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
                     aria-label={`${copy.thumbPlaceholder} ${index + 1}`}
                     aria-pressed={index === activeIndex}
                     className={cn(
-                      "w-full overflow-hidden rounded-md transition-opacity",
+                      "w-full overflow-hidden rounded-lg transition-opacity",
                       index === activeIndex
                         ? "ring-2 ring-accent ring-offset-1"
                         : "opacity-80 hover:opacity-100",
@@ -50,7 +50,6 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
                     <MediaPlaceholder
                       aspect="1/1"
                       label={copy.thumbPlaceholder}
-                      sizeHint={`${index + 1}`}
                       bordered
                     />
                   </button>
@@ -67,8 +66,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
                 product.name ??
                 copy.imagePlaceholder
               }
-              sizeHint="800×600"
-              className="rounded-xl border-2 border-accent shadow-sm"
+              className="rounded-2xl border-2 border-accent shadow-sm"
             />
           </div>
         </div>
@@ -90,14 +88,17 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
             <table className="w-full text-left text-sm">
               <tbody>
                 {quickSpecs.map((spec) => (
-                  <tr key={spec.label} className="border-b border-border">
+                  <tr
+                    key={spec.label}
+                    className="border-b border-border odd:bg-neutral-50"
+                  >
                     <th
                       scope="row"
                       className="py-2.5 pr-4 font-medium text-muted"
                     >
                       {spec.label}
                     </th>
-                    <td className="py-2.5 font-semibold text-foreground">
+                    <td className="py-2.5 font-semibold tabular-nums text-foreground">
                       {spec.value}
                     </td>
                   </tr>
@@ -109,22 +110,22 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
           {product.priceLabel ? (
             <div className="flex flex-wrap items-baseline gap-3 border-y border-border py-5">
               {hasDiscount ? (
-                <p className="text-base text-muted line-through">
+                <p className="text-base tabular-nums text-muted line-through">
                   {product.compareAtPriceLabel}
                 </p>
               ) : null}
-              <p className="text-3xl font-bold tracking-tight text-accent-alt">
+              <p className="text-3xl font-bold tracking-tight tabular-nums text-accent-alt">
                 {product.priceLabel}
               </p>
               {product.discountLabel ? (
-                <p className="badge-status">{product.discountLabel}</p>
+                <p className="badge-status -rotate-3">{product.discountLabel}</p>
               ) : null}
             </div>
           ) : null}
 
           <MotionLink
             href="#contact"
-            className="inline-flex h-12 min-w-[12rem] items-center justify-center rounded-md bg-accent px-6 text-sm font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            className="inline-flex h-12 min-w-[12rem] items-center justify-center rounded-lg bg-accent px-6 text-sm font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             {copy.buyCta}
           </MotionLink>

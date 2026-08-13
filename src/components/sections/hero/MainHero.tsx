@@ -48,7 +48,7 @@ export function MainHero({ copy }: MainHeroProps) {
 
   return (
     <section className="scroll-mt-20 border-b border-border bg-white">
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 lg:py-24">
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 lg:py-28">
         <ScrollReveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-3">
             <h1 className="max-w-3xl text-3xl font-bold uppercase tracking-tight text-accent-alt sm:text-4xl lg:text-5xl lg:leading-[1.08]">
@@ -72,7 +72,7 @@ export function MainHero({ copy }: MainHeroProps) {
           <form
             id="hero-form"
             onSubmit={handleSubmit}
-            className="scroll-mt-24 rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5"
+            className="scroll-mt-24 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5"
             noValidate
           >
             {status === "success" ? (
@@ -114,8 +114,7 @@ export function MainHero({ copy }: MainHeroProps) {
           <MediaPlaceholder
             aspect="16/9"
             label={copy.imageAlt}
-            sizeHint="16:9"
-            className="rounded-xl border-gray-200 shadow-sm"
+            className="rounded-2xl border-gray-200 shadow-sm"
           />
         </ScrollReveal>
       </div>

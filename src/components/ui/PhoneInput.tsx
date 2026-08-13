@@ -102,7 +102,7 @@ export function PhoneInput({
       ) : null}
       <div
         className={cn(
-          "flex h-12 w-full items-center overflow-hidden rounded-md border border-border bg-white shadow-sm",
+          "flex h-12 w-full items-center overflow-hidden rounded-lg border border-border bg-white shadow-sm",
           "transition-[border-color,box-shadow] focus-within:border-accent focus-within:ring-2 focus-within:ring-accent",
           error &&
             "border-red-500 focus-within:border-red-500 focus-within:ring-red-500/40",

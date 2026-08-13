@@ -69,7 +69,7 @@ html {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   background: var(--color-accent);
   color: var(--color-accent-fg);
   padding: 0.2rem 0.55rem;
@@ -83,7 +83,7 @@ html {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   background: var(--color-dark);
   color: var(--color-white);
   padding: 0.2rem 0.55rem;
@@ -97,7 +97,7 @@ html {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   border: 2px solid var(--color-accent);
   background: var(--color-white);
   color: var(--color-graphite);

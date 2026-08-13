@@ -3,6 +3,11 @@
 import { useCallback } from "react";
 import { motion } from "framer-motion";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import {
+  cardHover,
+  staggerContainer,
+  staggerItem,
+} from "@/components/motion/variants";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
 import { useCarouselTrack } from "@/hooks/useCarouselTrack";
@@ -40,7 +45,7 @@ export function ReviewsCarousel({ copy }: ReviewsCarouselProps) {
 
   return (
     <section id="reviews" className="scroll-mt-20 bg-white">
-      <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
+      <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
         <ScrollReveal>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-end sm:justify-between">
             <h2 className="section-heading sm:text-left">{copy.title}</h2>
@@ -49,7 +54,7 @@ export function ReviewsCarousel({ copy }: ReviewsCarouselProps) {
                 type="button"
                 aria-label="Previous review"
                 onClick={() => go(-1)}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-md border-2 border-dark bg-white text-lg font-bold text-heading shadow-sm transition-colors hover:border-accent hover:bg-accent"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-lg border-2 border-dark bg-white text-lg font-bold text-heading shadow-sm transition-colors hover:border-accent hover:bg-accent"
               >
                 ←
               </button>
@@ -57,7 +62,7 @@ export function ReviewsCarousel({ copy }: ReviewsCarouselProps) {
                 type="button"
                 aria-label="Next review"
                 onClick={() => go(1)}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-md border-2 border-dark bg-white text-lg font-bold text-heading shadow-sm transition-colors hover:border-accent hover:bg-accent"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-lg border-2 border-dark bg-white text-lg font-bold text-heading shadow-sm transition-colors hover:border-accent hover:bg-accent"
               >
                 →
               </button>
@@ -65,15 +70,20 @@ export function ReviewsCarousel({ copy }: ReviewsCarouselProps) {
           </div>
         </ScrollReveal>
 
-        <ul
+        <motion.ul
           ref={trackRef}
-          className={cn("mt-10", trackClassName)}
+          className={cn("mt-10 will-change-transform", trackClassName)}
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.15 }}
           {...dragHandlers}
         >
           {loopedItems.map(({ item, key, logical }) => (
-            <li
+            <motion.li
               key={key}
               data-review-card
+              variants={staggerItem}
               className={cn(
                 "w-[min(100%,20rem)] shrink-0 snap-start",
                 "sm:w-[calc(50%-0.75rem)]",
@@ -81,9 +91,9 @@ export function ReviewsCarousel({ copy }: ReviewsCarouselProps) {
               )}
             >
               <ReviewCard item={item} active={activeLogical === logical} />
-            </li>
+            </motion.li>
           ))}
-        </ul>
+        </motion.ul>
 
         <div className="mt-6 flex justify-center gap-2" role="tablist">
           {items.map((item, index) => (
@@ -118,11 +128,12 @@ function ReviewCard({
   return (
     <motion.article
       className={cn(
-        "flex h-full flex-col overflow-hidden rounded-xl border bg-white shadow-sm transition-shadow",
+        "flex h-full flex-col overflow-hidden rounded-2xl border bg-white shadow-sm transition-[border-color,box-shadow] duration-200",
         active
           ? "border-accent shadow-md"
-          : "border-gray-200 hover:shadow-md",
+          : "border-gray-200 hover:border-accent hover:shadow-[0_12px_30px_-8px_rgba(0,0,0,0.12)]",
       )}
+      {...cardHover}
     >
       <div className="flex flex-1 flex-col gap-4 p-5">
         <div className="flex items-start justify-between gap-3">
@@ -139,7 +150,6 @@ function ReviewCard({
       <MediaPlaceholder
         aspect="4/3"
         label={item.imageAlt}
-        sizeHint="4:3"
         bordered={false}
       />
     </motion.article>

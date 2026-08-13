@@ -47,7 +47,7 @@ export function ProductTabs({ product, copy }: ProductTabsProps) {
           </TabButton>
         </div>
 
-        <div className="mt-6 rounded-xl border border-border bg-surface-muted/40 p-5 sm:p-7">
+        <div className="mt-6 rounded-2xl border border-border bg-surface-muted/40 p-5 sm:p-7">
           {active === "description" ? (
             <div
               role="tabpanel"
@@ -82,10 +82,10 @@ export function ProductTabs({ product, copy }: ProductTabsProps) {
                   {specs.map((spec) => (
                     <div
                       key={spec.label}
-                      className="grid grid-cols-[1fr_auto] gap-4 border-b border-border py-3 text-sm"
+                      className="grid grid-cols-[1fr_auto] gap-4 border-b border-border px-2 py-3 text-sm odd:bg-neutral-50"
                     >
                       <dt className="font-medium text-muted">{spec.label}</dt>
-                      <dd className="text-right font-semibold text-foreground">
+                      <dd className="text-right font-semibold tabular-nums text-foreground">
                         {spec.value}
                       </dd>
                     </div>

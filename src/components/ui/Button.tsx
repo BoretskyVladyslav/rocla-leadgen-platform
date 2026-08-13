@@ -39,11 +39,11 @@ export function Button({
   return (
     <motion.button
       type={type}
-      whileHover={{ scale: 1.03, y: -1 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.97 }}
       transition={{ type: "spring", stiffness: 420, damping: 24 }}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-md font-medium transition-colors",
+        "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
         "disabled:pointer-events-none disabled:opacity-50",
         variantClasses[variant],

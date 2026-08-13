@@ -14,7 +14,7 @@ export function FaqAccordion({ copy }: FaqAccordionProps) {
 
   return (
     <section className="bg-white">
-      <div className="mx-auto w-full max-w-4xl px-4 py-16 sm:px-6 lg:py-24">
+      <div className="mx-auto w-full max-w-4xl px-4 py-20 sm:px-6 lg:py-28">
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
           <ul className="mt-10 divide-y divide-border border-y border-border">

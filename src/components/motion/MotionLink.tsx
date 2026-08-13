@@ -7,8 +7,8 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 const motionHover = {
-  whileHover: { scale: 1.03, y: -1 },
-  whileTap: { scale: 0.98 },
+  whileHover: { scale: 1.02 },
+  whileTap: { scale: 0.97 },
   transition: { type: "spring" as const, stiffness: 420, damping: 24 },
 };
 

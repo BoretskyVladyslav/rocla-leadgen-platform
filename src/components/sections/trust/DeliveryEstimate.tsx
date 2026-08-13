@@ -49,9 +49,9 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
 
   return (
     <section className="bg-surface">
-      <div className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 lg:py-24">
+      <div className="mx-auto w-full max-w-3xl px-4 py-20 sm:px-6 lg:py-28">
         <ScrollReveal>
-          <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
             <h2 className="section-heading">{copy.title}</h2>
             <form
               onSubmit={handleSubmit}

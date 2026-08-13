@@ -57,7 +57,7 @@ export function MobileMenu({
     <div className="lg:hidden">
       <button
         type="button"
-        className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-white text-heading transition-colors hover:border-accent"
+        className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-white text-heading transition-colors hover:border-accent"
         aria-expanded={open}
         aria-controls={panelId}
         aria-label={open ? closeLabel : openLabel}
@@ -120,7 +120,7 @@ export function MobileMenu({
               <div className="flex items-center justify-end border-b border-border px-5 py-3">
                 <button
                   type="button"
-                  className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border text-heading transition-colors hover:border-accent"
+                  className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-border text-heading transition-colors hover:border-accent"
                   aria-label={closeLabel}
                   onClick={close}
                 >
@@ -154,7 +154,7 @@ export function MobileMenu({
                   <li key={`${item.href}-${item.label}`}>
                     <HashLink
                       href={item.href}
-                      className="block rounded-md px-3 py-3 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:bg-surface hover:text-accent-alt"
+                      className="block rounded-lg px-3 py-3 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:bg-surface hover:text-accent-alt"
                       onClick={close}
                     >
                       {item.label}

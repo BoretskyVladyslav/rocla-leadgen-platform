@@ -61,7 +61,7 @@ export function Header({ lang, copy }: HeaderProps) {
           </a>
           <MotionLink
             href={`/${lang}#hero-form`}
-            className="inline-flex h-9 max-w-[9.5rem] items-center truncate rounded-md bg-dark px-2.5 text-[10px] font-bold uppercase tracking-wide text-white transition-colors hover:bg-graphite sm:max-w-none sm:px-3.5 sm:text-xs"
+            className="inline-flex h-9 max-w-[9.5rem] items-center truncate rounded-lg bg-dark px-2.5 text-[10px] font-bold uppercase tracking-wide text-white transition-colors hover:bg-graphite sm:max-w-none sm:px-3.5 sm:text-xs"
           >
             {copy.requestCall}
           </MotionLink>

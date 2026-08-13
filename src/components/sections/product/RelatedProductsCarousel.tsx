@@ -2,8 +2,15 @@
 
 import { useCallback } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { MotionLink } from "@/components/motion/MotionLink";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import {
+  cardHover,
+  cardHoverClassName,
+  staggerContainer,
+  staggerItem,
+} from "@/components/motion/variants";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
 import { useCarouselTrack } from "@/hooks/useCarouselTrack";
@@ -49,7 +56,7 @@ export function RelatedProductsCarousel({
 
   return (
     <section id="related" className="scroll-mt-20 bg-surface-muted">
-      <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:py-16">
+      <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
         <ScrollReveal>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-end sm:justify-between">
             <h2 className="text-center text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-left sm:text-3xl">
@@ -60,7 +67,7 @@ export function RelatedProductsCarousel({
                 type="button"
                 aria-label="Previous product"
                 onClick={() => go(-1)}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-md border-2 border-dark bg-white text-lg font-bold text-heading shadow-sm transition-colors hover:border-accent hover:bg-accent"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-lg border-2 border-dark bg-white text-lg font-bold text-heading shadow-sm transition-colors hover:border-accent hover:bg-accent"
               >
                 ←
               </button>
@@ -68,7 +75,7 @@ export function RelatedProductsCarousel({
                 type="button"
                 aria-label="Next product"
                 onClick={() => go(1)}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-md border-2 border-dark bg-white text-lg font-bold text-heading shadow-sm transition-colors hover:border-accent hover:bg-accent"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-lg border-2 border-dark bg-white text-lg font-bold text-heading shadow-sm transition-colors hover:border-accent hover:bg-accent"
               >
                 →
               </button>
@@ -76,18 +83,23 @@ export function RelatedProductsCarousel({
           </div>
         </ScrollReveal>
 
-        <ul
+        <motion.ul
           ref={trackRef}
-          className={cn("mt-8", trackClassName)}
+          className={cn("mt-8 will-change-transform", trackClassName)}
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.15 }}
           {...dragHandlers}
         >
           {loopedItems.map(({ item: product, key }) => {
             const badges = (product.specs ?? []).slice(0, 3);
 
             return (
-              <li
+              <motion.li
                 key={key}
                 data-related-card
+                variants={staggerItem}
                 className={cn(
                   "w-[min(100%,17.5rem)] shrink-0 snap-start",
                   "sm:w-[calc(50%-0.625rem)]",
@@ -95,7 +107,13 @@ export function RelatedProductsCarousel({
                   "xl:w-[calc((100%-5rem)/4)]",
                 )}
               >
-                <article className="flex h-full flex-col overflow-hidden border-2 border-border bg-white shadow-sm transition-colors hover:border-accent hover:shadow-md">
+                <motion.article
+                  className={cn(
+                    "flex h-full flex-col overflow-hidden",
+                    cardHoverClassName,
+                  )}
+                  {...cardHover}
+                >
                   <Link
                     href={`/${lang}/product/${product.slug}`}
                     className="block border-b border-border"
@@ -104,7 +122,6 @@ export function RelatedProductsCarousel({
                     <MediaPlaceholder
                       aspect="4/3"
                       label={copy.imageFallback}
-                      sizeHint="4:3"
                       bordered={false}
                     />
                   </Link>
@@ -132,28 +149,28 @@ export function RelatedProductsCarousel({
                     {product.priceLabel ? (
                       <div className="flex flex-wrap items-baseline gap-2 border-t border-border pt-3">
                         {product.compareAtPriceLabel ? (
-                          <span className="text-sm text-muted line-through">
+                          <span className="text-sm tabular-nums text-muted line-through">
                             {product.compareAtPriceLabel}
                           </span>
                         ) : null}
-                        <span className="text-base font-bold text-accent-alt">
+                        <span className="text-base font-bold tabular-nums text-accent-alt">
                           {product.priceLabel}
                         </span>
                       </div>
                     ) : null}
                     <MotionLink
                       href={`/${lang}/product/${product.slug}`}
-                      className="mt-1 inline-flex h-11 w-full items-center justify-center rounded-md bg-accent px-5 text-sm font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                      className="mt-1 inline-flex h-11 w-full items-center justify-center rounded-lg bg-accent px-5 text-sm font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                       draggable={false}
                     >
                       {orderCta}
                     </MotionLink>
                   </div>
-                </article>
-              </li>
+                </motion.article>
+              </motion.li>
             );
           })}
-        </ul>
+        </motion.ul>
 
         <div className="mt-5 flex justify-center gap-2" role="tablist">
           {Array.from({ length: pageCount }).map((_, index) => (

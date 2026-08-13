@@ -15,7 +15,7 @@ export interface ProductOrderFormProps {
 }
 
 const fieldControlClass =
-  "w-full rounded-md border border-border bg-white px-3.5 py-3 text-foreground shadow-sm placeholder:text-muted/80 transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/15 focus-visible:ring-offset-1";
+  "w-full rounded-lg border border-border bg-white px-3.5 py-3 text-foreground shadow-sm placeholder:text-muted/80 transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/15 focus-visible:ring-offset-1";
 
 export function ProductOrderForm({
   productSlug,
@@ -57,7 +57,7 @@ export function ProductOrderForm({
 
   return (
     <section id="order" className="bg-surface-muted">
-      <div className="mx-auto w-full max-w-xl px-4 py-16 sm:px-6 lg:py-20">
+      <div className="mx-auto w-full max-w-xl px-4 py-20 sm:px-6 lg:py-28">
         <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-accent-alt">
           {copy.eyebrow}
         </p>

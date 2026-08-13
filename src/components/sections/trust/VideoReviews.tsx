@@ -11,7 +11,7 @@ export interface VideoReviewsProps {
 export function VideoReviews({ copy }: VideoReviewsProps) {
   return (
     <section id="videos" className="scroll-mt-20 bg-surface-muted">
-      <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
+      <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
         <ScrollReveal>
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="section-heading">{copy.title}</h2>
@@ -29,12 +29,11 @@ export function VideoReviews({ copy }: VideoReviewsProps) {
               <ScrollReveal delay={index * 0.05}>
                 <a
                   href="#contact"
-                  className="group relative block aspect-video overflow-hidden rounded-xl border border-border bg-dark shadow-md"
+                  className="group relative block aspect-video overflow-hidden rounded-2xl border border-border bg-dark shadow-md"
                 >
                   <MediaPlaceholder
                     aspect="16/9"
                     label={item.imageAlt}
-                    sizeHint="16:9"
                     bordered={false}
                     className="h-full opacity-90 transition-[filter] duration-300 group-hover:brightness-90"
                   />

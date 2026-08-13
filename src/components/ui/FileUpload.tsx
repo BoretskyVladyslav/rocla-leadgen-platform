@@ -168,7 +168,7 @@ export function FileUpload({
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         className={cn(
-          "grid gap-4 rounded-md border-2 border-dashed px-4 py-5 sm:grid-cols-2 sm:px-5 sm:py-6",
+          "grid gap-4 rounded-lg border-2 border-dashed px-4 py-5 sm:grid-cols-2 sm:px-5 sm:py-6",
           "bg-white transition-colors",
           dragging
             ? "border-accent bg-[rgba(254,202,22,0.12)]"
@@ -195,7 +195,7 @@ export function FileUpload({
           </span>
           <label
             htmlFor={inputId}
-            className="mt-1 inline-flex h-9 cursor-pointer items-center rounded-md border border-border bg-surface px-3 text-xs font-bold uppercase tracking-wide text-foreground transition-colors hover:border-accent"
+            className="mt-1 inline-flex h-9 cursor-pointer items-center rounded-lg border border-border bg-surface px-3 text-xs font-bold uppercase tracking-wide text-foreground transition-colors hover:border-accent"
           >
             {browseLabel}
           </label>
@@ -213,7 +213,7 @@ export function FileUpload({
 
         <div
           className={cn(
-            "flex min-h-[5.5rem] flex-col gap-2 overflow-y-auto rounded-md border border-dashed border-border/80 bg-surface/40 p-2",
+            "flex min-h-[5.5rem] flex-col gap-2 overflow-y-auto rounded-lg border border-dashed border-border/80 bg-surface/40 p-2",
             !hasFiles && "items-center justify-center",
           )}
         >
@@ -222,7 +222,7 @@ export function FileUpload({
               {files.map((file, index) => (
                 <li
                   key={`${file.name}-${file.lastModified}-${index}`}
-                  className="flex items-center gap-2 rounded-md border border-border bg-white px-2.5 py-2 shadow-sm"
+                  className="flex items-center gap-2 rounded-lg border border-border bg-white px-2.5 py-2 shadow-sm"
                 >
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded text-heading">
                     <DocumentIcon className="h-5 w-5" />

@@ -12,7 +12,7 @@ export function ClientLogos({ copy }: ClientLogosProps) {
 
   return (
     <section className="bg-surface">
-      <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
+      <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>
@@ -26,7 +26,7 @@ export function ClientLogos({ copy }: ClientLogosProps) {
             {logos.map((logo, index) => (
               <li
                 key={`${logo.name}-${index}`}
-                className="flex h-24 w-44 shrink-0 items-center justify-center rounded-xl border border-gray-200 bg-white px-4 shadow-sm sm:w-52"
+                className="flex h-24 w-44 shrink-0 items-center justify-center rounded-2xl border border-gray-200 bg-white px-4 shadow-sm sm:w-52"
                 aria-hidden={index >= copy.logos.length}
               >
                 <span className="text-center text-sm font-bold uppercase tracking-wide text-heading">

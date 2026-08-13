@@ -64,7 +64,7 @@ export function LocaleSwitcher({ lang, label }: LocaleSwitcherProps) {
 
   return (
     <div
-      className="relative inline-flex items-center rounded-md bg-surface p-0.5 text-xs font-medium"
+      className="relative inline-flex items-center rounded-lg bg-surface p-0.5 text-xs font-medium"
       role="navigation"
       aria-label={label}
     >
