@@ -3,8 +3,13 @@
 import { useState, type FormEvent, type FocusEvent } from "react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
+import {
+  formatUaPhoneMask,
+  UA_PHONE_PLACEHOLDER,
+} from "@/lib/phone-mask";
 import {
   validateCallbackFields,
   type CallbackFieldErrors,
@@ -21,10 +26,7 @@ export function MainHero({ copy }: MainHeroProps) {
   const [status, setStatus] = useState<"idle" | "success">("idle");
 
   function validateField(field: keyof CallbackFieldErrors) {
-    const next = validateCallbackFields(
-      { fullName, phone },
-      copy.errors,
-    );
+    const next = validateCallbackFields({ fullName, phone }, copy.errors);
     setErrors((prev) => ({ ...prev, [field]: next[field] }));
   }
 
@@ -37,10 +39,7 @@ export function MainHero({ copy }: MainHeroProps) {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const nextErrors = validateCallbackFields(
-      { fullName, phone },
-      copy.errors,
-    );
+    const nextErrors = validateCallbackFields({ fullName, phone }, copy.errors);
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
@@ -66,7 +65,7 @@ export function MainHero({ copy }: MainHeroProps) {
           <form
             id="hero-form"
             onSubmit={handleSubmit}
-            className="scroll-mt-24 rounded-xl border border-gray-200 bg-white p-3 shadow-sm sm:p-4"
+            className="scroll-mt-24 rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5"
             noValidate
           >
             {status === "success" ? (
@@ -74,39 +73,30 @@ export function MainHero({ copy }: MainHeroProps) {
                 {copy.success}
               </p>
             ) : (
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
-                <label className="flex min-w-0 flex-1 flex-col gap-1 text-sm">
-                  <span className="sr-only">{copy.name}</span>
-                  <input
-                    name="fullName"
-                    value={fullName}
-                    onBlur={handleBlur}
-                    onChange={(e) => setFullName(e.target.value)}
-                    placeholder={copy.name}
-                    className="h-12 rounded-md border border-border bg-white px-3.5 text-foreground shadow-sm placeholder:text-muted/80 focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/45"
-                    aria-invalid={errors.fullName ? true : undefined}
-                  />
-                  {errors.fullName ? (
-                    <span className="text-xs text-red-600">{errors.fullName}</span>
-                  ) : null}
-                </label>
-                <label className="flex min-w-0 flex-1 flex-col gap-1 text-sm">
-                  <span className="sr-only">{copy.phone}</span>
-                  <input
-                    name="phone"
-                    type="tel"
-                    value={phone}
-                    onBlur={handleBlur}
-                    onChange={(e) => setPhone(e.target.value)}
-                    placeholder="+380"
-                    className="h-12 rounded-md border border-border bg-white px-3.5 text-foreground shadow-sm placeholder:text-muted/80 focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/45"
-                    aria-invalid={errors.phone ? true : undefined}
-                  />
-                  {errors.phone ? (
-                    <span className="text-xs text-red-600">{errors.phone}</span>
-                  ) : null}
-                </label>
-                <div className="sm:w-40">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
+                <Input
+                  label={copy.name}
+                  name="fullName"
+                  required
+                  value={fullName}
+                  error={errors.fullName}
+                  onBlur={handleBlur}
+                  onChange={(e) => setFullName(e.target.value)}
+                />
+                <Input
+                  label={copy.phone}
+                  name="phone"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  required
+                  value={phone}
+                  error={errors.phone}
+                  placeholder={UA_PHONE_PLACEHOLDER}
+                  onBlur={handleBlur}
+                  onChange={(e) => setPhone(formatUaPhoneMask(e.target.value))}
+                />
+                <div className="sm:w-40 sm:shrink-0">
                   <Button type="submit" size="lg" className="h-12 w-full">
                     {copy.submit}
                   </Button>

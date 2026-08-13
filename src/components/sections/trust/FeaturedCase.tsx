@@ -21,7 +21,7 @@ export function FeaturedCase({ lang, copy }: FeaturedCaseProps) {
           />
         </ScrollReveal>
         <ScrollReveal delay={0.08} className="flex flex-col justify-center">
-          <h2 className="text-2xl font-bold uppercase tracking-tight text-accent-alt sm:text-3xl lg:text-4xl">
+          <h2 className="text-2xl font-bold uppercase tracking-[0.08em] text-accent-alt sm:text-3xl lg:text-4xl">
             {copy.title}
           </h2>
           <div className="mt-6 flex flex-col gap-4">

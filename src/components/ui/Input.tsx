@@ -1,4 +1,6 @@
-import type { InputHTMLAttributes } from "react";
+"use client";
+
+import { useId, type InputHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -13,29 +15,31 @@ export function Input({
   className,
   ...props
 }: InputProps) {
-  const inputId = id ?? props.name;
+  const reactId = useId();
+  const inputId = id ?? reactId;
 
   return (
-    <label className="flex w-full flex-col gap-1.5 text-sm">
+    <div className="flex w-full flex-col gap-1.5 text-sm">
       {label ? (
-        <span className="font-medium tracking-tight text-foreground">
+        <label htmlFor={inputId} className="font-medium tracking-tight text-foreground">
           {label}
-        </span>
+        </label>
       ) : null}
       <input
         id={inputId}
         className={cn(
           "h-12 w-full rounded-md border border-border bg-white px-3.5 text-foreground shadow-sm",
           "placeholder:text-muted/80",
-          "transition-[border-color,box-shadow] focus-visible:outline-none focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/45 focus-visible:ring-offset-1",
+          "transition-[border-color,box-shadow] focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent",
+          "focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
           "disabled:cursor-not-allowed disabled:opacity-50",
-          error && "border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/30",
+          error && "border-red-500 focus:border-red-500 focus:ring-red-500/40",
           className,
         )}
         aria-invalid={error ? true : undefined}
         {...props}
       />
       {error ? <span className="text-xs text-red-600">{error}</span> : null}
-    </label>
+    </div>
   );
 }

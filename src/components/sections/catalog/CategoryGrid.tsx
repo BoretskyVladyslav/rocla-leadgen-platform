@@ -103,7 +103,10 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
   return (
     <section id="catalog" className="scroll-mt-20 bg-white">
       <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
-        <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <ScrollReveal>
+          <h2 className="section-heading">{copy.title}</h2>
+        </ScrollReveal>
+        <ul className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2">
           {copy.items.map((item, index) => {
             const href = item.productSlug
               ? `/${lang}/product/${item.productSlug}`
@@ -114,21 +117,18 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
                 <ScrollReveal delay={index * 0.04}>
                   <Link
                     href={href}
-                    className="group flex h-full flex-col rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
+                    className="group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md"
                   >
-                    <span className="badge-status w-fit max-w-full text-left">
+                    <MediaPlaceholder
+                      aspect="4/3"
+                      label={item.imageAlt}
+                      sizeHint="4:3"
+                      bordered={false}
+                      icon={CATEGORY_ICONS[index]}
+                    />
+                    <h3 className="px-5 py-4 text-base font-bold tracking-tight text-heading sm:text-lg">
                       {item.title}
-                    </span>
-                    <div className="mt-4">
-                      <MediaPlaceholder
-                        aspect="4/3"
-                        label={item.imageAlt}
-                        sizeHint="4:3"
-                        bordered={false}
-                        icon={CATEGORY_ICONS[index]}
-                        className="rounded-lg"
-                      />
-                    </div>
+                    </h3>
                   </Link>
                 </ScrollReveal>
               </li>

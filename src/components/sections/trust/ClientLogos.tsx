@@ -10,9 +10,7 @@ export function ClientLogos({ copy }: ClientLogosProps) {
     <section className="bg-surface">
       <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
         <ScrollReveal>
-          <h2 className="text-center text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">
-            {copy.title}
-          </h2>
+          <h2 className="section-heading">{copy.title}</h2>
           <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
             {copy.logos.map((logo) => (
               <li

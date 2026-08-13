@@ -8,6 +8,10 @@ import { FileUpload } from "@/components/ui/FileUpload";
 import { Input } from "@/components/ui/Input";
 import type { Dictionary } from "@/data/dictionary";
 import {
+  formatUaPhoneMask,
+  UA_PHONE_PLACEHOLDER,
+} from "@/lib/phone-mask";
+import {
   validateLeadFields,
   type LeadFieldErrors,
 } from "@/lib/validation";
@@ -23,28 +27,15 @@ const INITIAL_STATE: Omit<LeadFormData, "files"> & { phone: string } = {
 };
 
 const fieldControlClass =
-  "w-full rounded-md border border-border bg-white px-3.5 py-3 text-foreground shadow-sm placeholder:text-muted/80 transition-[border-color,box-shadow] focus-visible:outline-none focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/45 focus-visible:ring-offset-1";
+  "w-full rounded-md border border-border bg-white px-3.5 py-3 text-foreground shadow-sm placeholder:text-muted/80 transition-[border-color,box-shadow] focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
 
 export interface LeadCaptureFormProps {
   copy: Dictionary["leadForm"];
 }
 
-function WarehouseIllustration() {
-  return (
-    <svg viewBox="0 0 220 180" className="h-full w-full" aria-hidden>
-      <rect x="20" y="70" width="180" height="90" fill="none" stroke="#7eb6d4" strokeWidth="2" />
-      <path d="M20 70 110 20l90 50" fill="none" stroke="#7eb6d4" strokeWidth="2" />
-      <rect x="40" y="100" width="40" height="40" fill="none" stroke="#7eb6d4" strokeWidth="1.6" />
-      <rect x="90" y="95" width="40" height="45" fill="none" stroke="#7eb6d4" strokeWidth="1.6" />
-      <rect x="140" y="105" width="40" height="35" fill="none" stroke="#7eb6d4" strokeWidth="1.6" />
-      <path d="M40 120h40M90 117h40M140 122h40" stroke="#7eb6d4" strokeWidth="1.2" />
-    </svg>
-  );
-}
-
 export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
   const [form, setForm] = useState(INITIAL_STATE);
-  const [city, setCity] = useState(copy.cities[0]?.id ?? "");
+  const [city, setCity] = useState("");
   const [files, setFiles] = useState<FilePayload[]>([]);
   const [rawFiles, setRawFiles] = useState<File[]>([]);
   const [errors, setErrors] = useState<LeadFieldErrors>({});
@@ -95,7 +86,7 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
 
   function resetForm() {
     setForm(INITIAL_STATE);
-    setCity(copy.cities[0]?.id ?? "");
+    setCity("");
     setFiles([]);
     setRawFiles([]);
     setErrors({});
@@ -106,12 +97,7 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
     <section id="contact" className="scroll-mt-20 bg-surface">
       <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
         <ScrollReveal>
-          <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-accent-alt">
-            {copy.eyebrow}
-          </p>
-          <h2 className="mt-3 text-center text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">
-            {copy.title}
-          </h2>
+          <h2 className="section-heading">{copy.title}</h2>
           <p className="mx-auto mt-3 max-w-xl text-center text-base leading-relaxed text-muted">
             {copy.subtitle}
           </p>
@@ -150,7 +136,7 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
                   exit={{ opacity: 0, y: -6 }}
                   transition={{ duration: 0.25 }}
                   onSubmit={handleSubmit}
-                  className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)_180px]"
+                  className="grid gap-8 lg:grid-cols-2"
                   noValidate
                 >
                   <div className="flex flex-col gap-4">
@@ -181,13 +167,18 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
                       label={copy.phone}
                       name="phone"
                       type="tel"
+                      inputMode="tel"
+                      autoComplete="tel"
                       required
                       value={form.phone}
                       error={errors.phone}
                       onBlur={handleBlur}
-                      placeholder="+380…"
+                      placeholder={UA_PHONE_PLACEHOLDER}
                       onChange={(e) =>
-                        setForm((s) => ({ ...s, phone: e.target.value }))
+                        setForm((s) => ({
+                          ...s,
+                          phone: formatUaPhoneMask(e.target.value),
+                        }))
                       }
                     />
                     <Input
@@ -198,36 +189,46 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
                         setForm((s) => ({ ...s, company: e.target.value }))
                       }
                     />
-                    <fieldset>
-                      <legend className="mb-2 text-sm font-medium tracking-tight text-foreground">
-                        {copy.citiesLabel}
-                      </legend>
-                      <div className="flex flex-col gap-2">
+                    <Input
+                      label={copy.citiesLabel}
+                      name="city"
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                    />
+                    <div>
+                      <p className="mb-2 text-sm font-medium tracking-tight text-foreground">
+                        {copy.citiesHint}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
                         {copy.cities.map((item) => (
                           <button
                             key={item.id}
                             type="button"
-                            onClick={() => setCity(item.id)}
+                            onClick={() => setCity(item.label)}
                             className={cn(
-                              "h-10 rounded-md px-3 text-sm font-bold uppercase tracking-wide transition-colors",
-                              city === item.id
-                                ? "bg-accent text-accent-fg"
-                                : "bg-surface text-heading hover:bg-accent/40",
+                              "rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors",
+                              city === item.label
+                                ? "border-accent bg-accent text-accent-fg"
+                                : "border-gray-200 bg-gray-50 text-heading hover:border-accent hover:bg-accent/20",
                             )}
                           >
                             {item.label}
                           </button>
                         ))}
                       </div>
-                    </fieldset>
+                    </div>
                   </div>
 
                   <div className="flex flex-col gap-4">
-                    <label className="flex flex-col gap-1.5 text-sm">
-                      <span className="font-medium tracking-tight text-foreground">
+                    <div className="flex flex-col gap-1.5 text-sm">
+                      <label
+                        htmlFor="lead-message"
+                        className="font-medium tracking-tight text-foreground"
+                      >
                         {copy.message}
-                      </span>
+                      </label>
                       <textarea
+                        id="lead-message"
                         name="message"
                         rows={4}
                         className={fieldControlClass}
@@ -236,7 +237,7 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
                           setForm((s) => ({ ...s, message: e.target.value }))
                         }
                       />
-                    </label>
+                    </div>
                     <FileUpload
                       label={copy.filesLabel}
                       hint={copy.filesHint}
@@ -250,10 +251,6 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
                     <Button type="submit" size="lg" className="mt-auto w-full">
                       {copy.submit}
                     </Button>
-                  </div>
-
-                  <div className="hidden items-end lg:flex">
-                    <WarehouseIllustration />
                   </div>
                 </motion.form>
               )}

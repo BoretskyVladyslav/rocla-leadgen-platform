@@ -24,9 +24,7 @@ export function TrustBadges({ copy }: TrustBadgesProps) {
     <section id="about" className="scroll-mt-20 bg-white">
       <div id="services" className="mx-auto w-full max-w-7xl scroll-mt-20 px-4 py-16 sm:px-6 lg:py-24">
         <ScrollReveal>
-          <h2 className="text-center text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">
-            {copy.title}
-          </h2>
+          <h2 className="section-heading">{copy.title}</h2>
           <ul className="mt-12 grid gap-4 sm:grid-cols-2 sm:gap-5">
             {copy.items.map((item) => (
               <li

@@ -47,6 +47,21 @@ html {
   scroll-padding-top: 5rem;
 }
 
+.section-heading {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-heading);
+}
+
+@media (min-width: 640px) {
+  .section-heading {
+    font-size: 1.875rem;
+  }
+}
+
 /* Status / CTA badge primitives (archiv gold + dark-grey) */
 .badge-status {
   display: inline-flex;

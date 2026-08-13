@@ -19,9 +19,7 @@ export function ReviewsCarousel({ copy }: ReviewsCarouselProps) {
     <section id="reviews" className="scroll-mt-20 bg-white">
       <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
         <ScrollReveal>
-          <h2 className="text-center text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">
-            {copy.title}
-          </h2>
+          <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>
 
         <ScrollReveal delay={0.08} className="mt-10 md:hidden">

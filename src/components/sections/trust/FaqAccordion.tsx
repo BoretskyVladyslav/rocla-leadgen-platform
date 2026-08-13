@@ -16,9 +16,7 @@ export function FaqAccordion({ copy }: FaqAccordionProps) {
     <section className="bg-white">
       <div className="mx-auto w-full max-w-4xl px-4 py-16 sm:px-6 lg:py-24">
         <ScrollReveal>
-          <h2 className="text-center text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">
-            {copy.title}
-          </h2>
+          <h2 className="section-heading">{copy.title}</h2>
           <ul className="mt-10 divide-y divide-border border-y border-border">
             {copy.items.map((item, index) => {
               const isOpen = openIndex === index;

@@ -30,6 +30,7 @@ export interface Dictionary {
     };
   };
   categories: {
+    title: string;
     items: Array<{
       title: string;
       imageSrc: string;
@@ -66,9 +67,15 @@ export interface Dictionary {
     title: string;
     from: string;
     to: string;
+    phone: string;
     submit: string;
     success: string;
     partners: string[];
+    errors: {
+      from: string;
+      to: string;
+      phone: string;
+    };
   };
   reviews: {
     title: string;
@@ -95,6 +102,7 @@ export interface Dictionary {
     message: string;
     quantity: string;
     citiesLabel: string;
+    citiesHint: string;
     cities: Array<{ id: string; label: string }>;
     filesLabel: string;
     filesHint: string;
@@ -187,10 +195,11 @@ const DICTIONARY_UK: Dictionary = {
     imageAlt: "Складська техніка KAISER",
     errors: {
       fullName: "Вкажіть ім’я (мінімум 2 символи).",
-      phone: "Вкажіть телефон у форматі +380… або 0…",
+      phone: "Вкажіть телефон у форматі +380 (XX) XXX-XX-XX.",
     },
   },
   categories: {
+    title: "Каталог техніки KAISER",
     items: [
       {
         title: "Гідравлічні візки (рохлі)",
@@ -237,7 +246,7 @@ const DICTIONARY_UK: Dictionary = {
   },
   catalog: {
     eyebrow: "Каталог",
-    title: "Складська техніка",
+    title: "Каталог техніки KAISER",
     subtitle: "Оберіть модель, щоб відкрити сторінку з характеристиками та формою замовлення.",
     requestQuote: "Запит ціни",
     imageFallback: "Зображення",
@@ -312,9 +321,15 @@ const DICTIONARY_UK: Dictionary = {
     title: "Розрахувати вартість доставки",
     from: "Звідки",
     to: "Куди",
+    phone: "Телефон",
     submit: "Розрахувати",
     success: "Заявку на розрахунок прийнято.",
     partners: ["Ford", "Nokia", "Nike", "Shell", "Nivea", "Bosch"],
+    errors: {
+      from: "Вкажіть місто відправлення.",
+      to: "Вкажіть місто доставки.",
+      phone: "Вкажіть телефон у форматі +380 (XX) XXX-XX-XX.",
+    },
   },
   reviews: {
     title: "Відгуки наших клієнтів",
@@ -383,6 +398,7 @@ const DICTIONARY_UK: Dictionary = {
     message: "Повідомлення",
     quantity: "Кількість",
     citiesLabel: "Місто",
+    citiesHint: "Швидка доставка в:",
     cities: LEAD_CITIES_UK,
     filesLabel: "Прикріпити файл з реквізитами",
     filesHint: "Приймаємо: .pdf, .jpg, .png",
@@ -396,7 +412,7 @@ const DICTIONARY_UK: Dictionary = {
     errors: {
       fullName: "Вкажіть ім’я (мінімум 2 символи).",
       email: "Вкажіть коректний email.",
-      phone: "Вкажіть телефон у форматі +380… або 0…",
+      phone: "Вкажіть телефон у форматі +380 (XX) XXX-XX-XX.",
       fileType: "Лише PDF, JPG або PNG.",
       fileSize: "Файл перевищує 10 МБ.",
     },
@@ -458,10 +474,11 @@ const DICTIONARY_RU: Dictionary = {
     imageAlt: "Складская техника KAISER",
     errors: {
       fullName: "Укажите имя (минимум 2 символа).",
-      phone: "Укажите телефон в формате +380… или 0…",
+      phone: "Укажите телефон в формате +380 (XX) XXX-XX-XX.",
     },
   },
   categories: {
+    title: "Каталог техники KAISER",
     items: [
       {
         title: "Гидравлические тележки (рохли)",
@@ -508,7 +525,7 @@ const DICTIONARY_RU: Dictionary = {
   },
   catalog: {
     eyebrow: "Каталог",
-    title: "Складская техника",
+    title: "Каталог техники KAISER",
     subtitle: "Выберите модель, чтобы открыть страницу с характеристиками и формой заказа.",
     requestQuote: "Запрос цены",
     imageFallback: "Изображение",
@@ -577,9 +594,15 @@ const DICTIONARY_RU: Dictionary = {
     title: "Рассчитать стоимость доставки",
     from: "Откуда",
     to: "Куда",
+    phone: "Телефон",
     submit: "Рассчитать",
     success: "Заявка на расчёт принята.",
     partners: ["Ford", "Nokia", "Nike", "Shell", "Nivea", "Bosch"],
+    errors: {
+      from: "Укажите город отправления.",
+      to: "Укажите город доставки.",
+      phone: "Укажите телефон в формате +380 (XX) XXX-XX-XX.",
+    },
   },
   reviews: {
     title: "Отзывы наших клиентов",
@@ -648,6 +671,7 @@ const DICTIONARY_RU: Dictionary = {
     message: "Сообщение",
     quantity: "Количество",
     citiesLabel: "Город",
+    citiesHint: "Быстрая доставка в:",
     cities: LEAD_CITIES_RU,
     filesLabel: "Прикрепить файл с реквизитами",
     filesHint: "Принимаем: .pdf, .jpg, .png",
@@ -661,7 +685,7 @@ const DICTIONARY_RU: Dictionary = {
     errors: {
       fullName: "Укажите имя (минимум 2 символа).",
       email: "Укажите корректный email.",
-      phone: "Укажите телефон в формате +380… или 0…",
+      phone: "Укажите телефон в формате +380 (XX) XXX-XX-XX.",
       fileType: "Только PDF, JPG или PNG.",
       fileSize: "Файл превышает 10 МБ.",
     },
