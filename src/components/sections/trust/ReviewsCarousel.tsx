@@ -152,9 +152,11 @@ function ReviewCard({
       <MediaImage
         src={item.imageSrc}
         alt={item.imageAlt}
-        aspect="4/3"
+        aspect={false}
         fit="cover"
+        objectPosition="object-center"
         sizes="(max-width: 640px) 20rem, (max-width: 1024px) 50vw, 33vw"
+        className="h-56 w-full sm:h-64"
       />
     </motion.article>
   );

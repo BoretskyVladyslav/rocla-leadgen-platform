@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent, type FocusEvent } from "react";
+import Image from "next/image";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -17,6 +18,42 @@ import {
 
 export interface DeliveryEstimateProps {
   copy: Dictionary["delivery"];
+}
+
+function PartnerLogo({ name, imageSrc }: { name: string; imageSrc: string }) {
+  const [failed, setFailed] = useState(false);
+  const isSvg = imageSrc.endsWith(".svg");
+
+  if (failed) {
+    return (
+      <span className="text-xs font-bold uppercase tracking-[0.18em] text-muted/70">
+        {name}
+      </span>
+    );
+  }
+
+  if (isSvg) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={imageSrc}
+        alt={name}
+        className="h-8 w-auto max-w-[6.5rem] object-contain opacity-80 grayscale transition-[filter,opacity] hover:opacity-100 hover:grayscale-0 sm:h-9 sm:max-w-[7.5rem]"
+        onError={() => setFailed(true)}
+      />
+    );
+  }
+
+  return (
+    <Image
+      src={imageSrc}
+      alt={name}
+      width={120}
+      height={36}
+      className="h-8 w-auto max-w-[6.5rem] object-contain opacity-80 grayscale transition-[filter,opacity] hover:opacity-100 hover:grayscale-0 sm:h-9 sm:max-w-[7.5rem]"
+      onError={() => setFailed(true)}
+    />
+  );
 }
 
 export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
@@ -134,16 +171,19 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
               </p>
             ) : null}
             <div className="mt-8">
-              <p className="mb-4 text-center text-sm font-bold uppercase tracking-[0.12em] text-heading">
+              <p className="mb-5 text-center text-sm font-bold uppercase tracking-[0.12em] text-heading">
                 {copy.partnersTitle}
               </p>
-              <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-                {copy.partners.map((name) => (
+              <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-5 sm:gap-x-10">
+                {copy.partners.map((partner) => (
                   <li
-                    key={name}
-                    className="text-xs font-bold uppercase tracking-[0.18em] text-muted/70"
+                    key={partner.name}
+                    className="flex h-10 items-center justify-center"
                   >
-                    {name}
+                    <PartnerLogo
+                      name={partner.name}
+                      imageSrc={partner.imageSrc}
+                    />
                   </li>
                 ))}
               </ul>

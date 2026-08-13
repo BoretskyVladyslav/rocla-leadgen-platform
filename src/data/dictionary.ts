@@ -85,7 +85,7 @@ export interface Dictionary {
     submit: string;
     success: string;
     partnersTitle: string;
-    partners: string[];
+    partners: Array<{ name: string; imageSrc: string }>;
     warehousesHint: string;
     warehouseOfficeLabel: string;
     warehouseHoursLabel: string;
@@ -490,7 +490,7 @@ const DICTIONARY_UK: Dictionary = {
       "За 20 років сотні підприємств стали постійними клієнтами. За кожним контрактом — люди, які годують свої сім’ї стабільною роботою на складі.",
     ],
     readMore: "Читати далі",
-    imageSrc: "/images/case/warehouse.jpg",
+    imageSrc: "/images/case/ceo-alferov.jpg",
     imageAlt: "Робота з роклою на складі",
   },
   delivery: {
@@ -501,7 +501,13 @@ const DICTIONARY_UK: Dictionary = {
     submit: "Розрахувати",
     success: "Заявку на розрахунок прийнято.",
     partnersTitle: "Бренди, які нам довіряють",
-    partners: ["Нова Пошта", "Епіцентр", "АТБ", "Розетка", "ОККО", "Comfy"],
+    partners: [
+      { name: "Ford", imageSrc: "/images/trust-brands/ford.svg" },
+      { name: "Nokia", imageSrc: "/images/trust-brands/nokia.png" },
+      { name: "Nike", imageSrc: "/images/trust-brands/nike.svg" },
+      { name: "Shell", imageSrc: "/images/trust-brands/shell.webp" },
+      { name: "Nivea", imageSrc: "/images/trust-brands/nivea.png" },
+    ],
     warehousesHint: "Оберіть офіс-склад відвантаження:",
     warehouseOfficeLabel: "Офіс-склад",
     warehouseHoursLabel: "Режим роботи",
@@ -956,7 +962,7 @@ const DICTIONARY_RU: Dictionary = {
       "За 20 лет сотни предприятий стали постоянными клиентами. За каждым контрактом — люди, которые кормят свои семьи стабильной работой на складе.",
     ],
     readMore: "Читать далее",
-    imageSrc: "/images/case/warehouse.jpg",
+    imageSrc: "/images/case/ceo-alferov.jpg",
     imageAlt: "Работа с роклой на складе",
   },
   delivery: {
@@ -967,7 +973,13 @@ const DICTIONARY_RU: Dictionary = {
     submit: "Рассчитать",
     success: "Заявка на расчёт принята.",
     partnersTitle: "Бренды, которые нам доверяют",
-    partners: ["Новая Почта", "Эпицентр", "АТБ", "Розетка", "ОККО", "Comfy"],
+    partners: [
+      { name: "Ford", imageSrc: "/images/trust-brands/ford.svg" },
+      { name: "Nokia", imageSrc: "/images/trust-brands/nokia.png" },
+      { name: "Nike", imageSrc: "/images/trust-brands/nike.svg" },
+      { name: "Shell", imageSrc: "/images/trust-brands/shell.webp" },
+      { name: "Nivea", imageSrc: "/images/trust-brands/nivea.png" },
+    ],
     warehousesHint: "Выберите офис-склад отгрузки:",
     warehouseOfficeLabel: "Офис-склад",
     warehouseHoursLabel: "Режим работы",

@@ -144,7 +144,7 @@ export function MainHero({ copy }: MainHeroProps) {
 
   return (
     <section className="scroll-mt-20 border-b border-border bg-white">
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:py-24">
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch lg:gap-12 lg:py-24">
         <ScrollReveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-3">
             <h1 className="max-w-3xl text-3xl font-bold uppercase tracking-tight text-heading sm:text-4xl lg:text-5xl lg:leading-[1.08]">
@@ -195,15 +195,16 @@ export function MainHero({ copy }: MainHeroProps) {
           </form>
         </ScrollReveal>
 
-        <ScrollReveal delay={0.1} className="relative mx-auto w-full min-w-0 max-w-lg">
+        <ScrollReveal delay={0.1} className="relative mx-auto flex h-full w-full min-w-0 max-w-lg flex-col lg:max-w-none">
           <MediaImage
             src={copy.imageSrc}
             alt={copy.imageAlt}
-            aspect="16/9"
-            fit="cover"
+            aspect={false}
+            fit="contain"
             priority
-            sizes="(max-width: 1024px) 100vw, 512px"
-            className="rounded-2xl border border-gray-200 shadow-sm"
+            objectPosition="object-center"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="min-h-[320px] rounded-2xl border border-gray-200 bg-surface shadow-sm sm:min-h-[380px] lg:min-h-[440px]"
           />
           <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
             {copy.trustBadges.map((badge, index) => (
