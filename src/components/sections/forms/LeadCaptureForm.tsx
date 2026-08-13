@@ -21,6 +21,7 @@ const INITIAL_STATE: Omit<LeadFormData, "files"> & { phone: string } = {
   fullName: "",
   email: "",
   phone: "",
+  company: "",
 };
 
 export interface LeadCaptureFormProps {
@@ -162,6 +163,14 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
                     onBlur={handleBlur}
                     onChange={(e) =>
                       setForm((s) => ({ ...s, email: e.target.value }))
+                    }
+                  />
+                  <Input
+                    label={copy.company}
+                    name="company"
+                    value={form.company ?? ""}
+                    onChange={(e) =>
+                      setForm((s) => ({ ...s, company: e.target.value }))
                     }
                   />
                   <div className="flex flex-col gap-2">

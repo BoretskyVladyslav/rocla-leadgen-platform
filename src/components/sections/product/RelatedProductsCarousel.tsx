@@ -58,11 +58,11 @@ export function RelatedProductsCarousel({
     <section id="related" className="scroll-mt-20 bg-surface-muted">
       <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
         <ScrollReveal>
-          <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <h2 className="text-center text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-left sm:text-3xl">
+          <div className="mb-8 flex flex-row items-end justify-between gap-4">
+            <h2 className="text-left text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">
               {title}
             </h2>
-            <div className="flex items-center gap-2">
+            <div className="flex shrink-0 items-center gap-2">
               <button
                 type="button"
                 aria-label="Previous product"
@@ -85,7 +85,7 @@ export function RelatedProductsCarousel({
 
         <motion.ul
           ref={trackRef}
-          className={cn("mt-8 will-change-transform", trackClassName)}
+          className={cn("will-change-transform", trackClassName)}
           variants={staggerContainer}
           initial="hidden"
           whileInView="show"
