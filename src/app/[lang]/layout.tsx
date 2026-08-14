@@ -3,6 +3,7 @@ import { HashScrollRestorer } from "@/components/layout/HashScrollRestorer";
 import { Header } from "@/components/layout/Header";
 import { MobileStickyCta } from "@/components/layout/MobileStickyCta";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
+import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { getDictionary } from "@/data/dictionary";
 import { LOCALES } from "@/lib/i18n";
 
@@ -31,6 +32,7 @@ export default async function LangLayout({
         phone={dict.header.phone}
         copy={dict.stickyCta}
       />
+      <ScrollToTop />
     </>
   );
 }

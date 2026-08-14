@@ -156,7 +156,7 @@ function ReviewCard({
         fit="cover"
         objectPosition="object-center"
         sizes="(max-width: 640px) 20rem, (max-width: 1024px) 50vw, 33vw"
-        className="h-60 w-full rounded-xl md:h-64"
+        className="h-72 w-full rounded-xl"
       />
     </motion.article>
   );

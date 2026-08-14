@@ -12,15 +12,15 @@ export function FeaturedCase({ lang, copy }: FeaturedCaseProps) {
   return (
     <section className="bg-white">
       <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:gap-12 lg:py-28">
-        <ScrollReveal className="min-w-0">
+        <ScrollReveal className="mx-auto min-w-0 w-full max-w-[420px]">
           <MediaImage
             src={copy.imageSrc}
             alt={copy.imageAlt}
-            aspect="4/3"
+            aspect={false}
             fit="cover"
             objectPosition="object-center"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="min-h-[360px] w-full rounded-2xl border border-gray-200 shadow-sm"
+            sizes="(max-width: 1024px) 100vw, 420px"
+            className="mx-auto h-[480px] w-full max-w-[420px] rounded-2xl border border-gray-200 shadow-sm lg:h-[540px]"
           />
         </ScrollReveal>
         <ScrollReveal delay={0.08} className="flex flex-col justify-center">

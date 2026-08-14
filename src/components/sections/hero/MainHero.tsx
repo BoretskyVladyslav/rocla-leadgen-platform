@@ -155,6 +155,20 @@ export function MainHero({ copy }: MainHeroProps) {
             </p>
           </div>
 
+          <ul className="flex flex-wrap items-center gap-2">
+            {copy.trustBadges.map((badge, index) => (
+              <li
+                key={badge}
+                className="inline-flex items-center gap-1.5 rounded-full border border-gray-200/80 bg-surface/80 px-2.5 py-1 text-[11px] font-bold tracking-tight text-heading backdrop-blur-sm sm:text-xs"
+              >
+                <span className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent text-accent-fg [&_svg]:h-3 [&_svg]:w-3">
+                  {TRUST_ICONS[index] ?? null}
+                </span>
+                {badge}
+              </li>
+            ))}
+          </ul>
+
           <form
             id="hero-form"
             onSubmit={handleSubmit}
@@ -193,20 +207,6 @@ export function MainHero({ copy }: MainHeroProps) {
               </div>
             )}
           </form>
-
-          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-            {copy.trustBadges.map((badge, index) => (
-              <li
-                key={badge}
-                className="flex items-center gap-2.5 rounded-xl border border-gray-200 bg-surface px-3 py-2.5 text-xs font-bold tracking-tight text-heading sm:flex-col sm:items-start sm:gap-2 sm:text-center sm:text-[11px] lg:text-xs"
-              >
-                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent text-accent-fg sm:mx-auto">
-                  {TRUST_ICONS[index] ?? null}
-                </span>
-                {badge}
-              </li>
-            ))}
-          </ul>
         </ScrollReveal>
 
         <ScrollReveal delay={0.1} className="relative mx-auto h-full w-full min-w-0 max-w-lg lg:max-w-none">

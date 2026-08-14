@@ -38,7 +38,7 @@ function PartnerLogo({ name, imageSrc }: { name: string; imageSrc: string }) {
       <img
         src={imageSrc}
         alt={name}
-        className="max-h-7 max-w-[90px] object-contain"
+        className="h-5 max-w-[75px] object-contain md:h-6"
         onError={() => setFailed(true)}
       />
     );
@@ -50,7 +50,7 @@ function PartnerLogo({ name, imageSrc }: { name: string; imageSrc: string }) {
       alt={name}
       width={120}
       height={36}
-      className="max-h-7 max-w-[90px] object-contain"
+      className="h-5 max-w-[75px] object-contain md:h-6"
       onError={() => setFailed(true)}
     />
   );
@@ -174,11 +174,11 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
               <p className="mb-5 text-center text-sm font-bold uppercase tracking-[0.12em] text-heading">
                 {copy.partnersTitle}
               </p>
-              <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-5 sm:gap-x-8">
+              <ul className="flex flex-row flex-nowrap items-center justify-between gap-4 overflow-hidden sm:justify-center sm:gap-6">
                 {copy.partners.map((partner) => (
                   <li
                     key={partner.name}
-                    className="flex h-8 w-24 items-center justify-center grayscale opacity-80 transition hover:grayscale-0 hover:opacity-100"
+                    className="flex h-6 shrink-0 items-center justify-center grayscale opacity-80 transition hover:grayscale-0 hover:opacity-100"
                   >
                     <PartnerLogo
                       name={partner.name}

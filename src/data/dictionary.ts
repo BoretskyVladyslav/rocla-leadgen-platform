@@ -223,7 +223,7 @@ export interface Dictionary {
     social: Array<{
       label: string;
       href: string;
-      network: "telegram" | "instagram" | "whatsapp";
+      network: "telegram" | "instagram" | "viber";
     }>;
   };
 }
@@ -783,9 +783,9 @@ const DICTIONARY_UK: Dictionary = {
         network: "instagram",
       },
       {
-        label: "WhatsApp",
-        href: "https://wa.me/380981540982",
-        network: "whatsapp",
+        label: "Viber",
+        href: "viber://chat?number=%2B380981540982",
+        network: "viber",
       },
     ],
   },
@@ -1257,9 +1257,9 @@ const DICTIONARY_RU: Dictionary = {
         network: "instagram",
       },
       {
-        label: "WhatsApp",
-        href: "https://wa.me/380981540982",
-        network: "whatsapp",
+        label: "Viber",
+        href: "viber://chat?number=%2B380981540982",
+        network: "viber",
       },
     ],
   },
