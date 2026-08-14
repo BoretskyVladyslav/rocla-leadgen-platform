@@ -1,3 +1,4 @@
+import { getClientLogos } from "@/data/clients";
 import { resolveLocale, type Locale } from "@/lib/i18n";
 
 export interface Warehouse {
@@ -510,16 +511,7 @@ const DICTIONARY_UK: Dictionary = {
   },
   clients: {
     title: "Наші постійні клієнти",
-    logos: [
-      { name: "Нова Пошта", imageSrc: "/images/clients/nova-poshta.webp" },
-      { name: "Епіцентр", imageSrc: "/images/clients/epicentr.png" },
-      { name: "АТБ", imageSrc: "/images/clients/atb.webp" },
-      { name: "Розетка", imageSrc: "/images/clients/rozetka.png" },
-      { name: "ОККО", imageSrc: "/images/clients/okko.jpg" },
-      { name: "Comfy", imageSrc: "/images/clients/comfy.webp" },
-      { name: "Укрпошта", imageSrc: "/images/clients/ukrposhta.webp" },
-      { name: "McDonald's", imageSrc: "/images/clients/mcdonalds.svg" },
-    ],
+    logos: getClientLogos("uk"),
   },
   caseStudy: {
     title: "Алфьоров Сергій Миколайович",
@@ -542,15 +534,7 @@ const DICTIONARY_UK: Dictionary = {
     submit: "Підтвердити",
     success: "Заявку прийнято. Менеджер зателефонує.",
     partnersTitle: "Бренди, які нам довіряють",
-    partners: [
-      { name: "Ford", imageSrc: "/images/trust-brands/ford.svg" },
-      { name: "Nokia", imageSrc: "/images/trust-brands/nokia.png" },
-      { name: "Nike", imageSrc: "/images/trust-brands/nike.svg" },
-      { name: "Shell", imageSrc: "/images/trust-brands/shell.webp" },
-      { name: "Nivea", imageSrc: "/images/trust-brands/nivea.png" },
-      { name: "Kyivstar", imageSrc: "/images/trust-brands/kyivstar.svg" },
-      { name: "АТБ", imageSrc: "/images/trust-brands/atb.webp" },
-    ],
+    partners: getClientLogos("uk"),
     errors: {
       fullName: "Вкажіть ім’я (мінімум 2 символи).",
       phone: "Вкажіть телефон у форматі +380 (XX) XXX-XX-XX.",
@@ -992,16 +976,7 @@ const DICTIONARY_RU: Dictionary = {
   },
   clients: {
     title: "Наши постоянные клиенты",
-    logos: [
-      { name: "Новая Почта", imageSrc: "/images/clients/nova-poshta.webp" },
-      { name: "Эпицентр", imageSrc: "/images/clients/epicentr.png" },
-      { name: "АТБ", imageSrc: "/images/clients/atb.webp" },
-      { name: "Розетка", imageSrc: "/images/clients/rozetka.png" },
-      { name: "ОККО", imageSrc: "/images/clients/okko.jpg" },
-      { name: "Comfy", imageSrc: "/images/clients/comfy.webp" },
-      { name: "Укрпочта", imageSrc: "/images/clients/ukrposhta.webp" },
-      { name: "McDonald's", imageSrc: "/images/clients/mcdonalds.svg" },
-    ],
+    logos: getClientLogos("ru"),
   },
   caseStudy: {
     title: "Алферов Сергей Николаевич",
@@ -1024,15 +999,7 @@ const DICTIONARY_RU: Dictionary = {
     submit: "Подтвердить",
     success: "Заявка принята. Менеджер перезвонит.",
     partnersTitle: "Бренды, которые нам доверяют",
-    partners: [
-      { name: "Ford", imageSrc: "/images/trust-brands/ford.svg" },
-      { name: "Nokia", imageSrc: "/images/trust-brands/nokia.png" },
-      { name: "Nike", imageSrc: "/images/trust-brands/nike.svg" },
-      { name: "Shell", imageSrc: "/images/trust-brands/shell.webp" },
-      { name: "Nivea", imageSrc: "/images/trust-brands/nivea.png" },
-      { name: "Kyivstar", imageSrc: "/images/trust-brands/kyivstar.svg" },
-      { name: "АТБ", imageSrc: "/images/trust-brands/atb.webp" },
-    ],
+    partners: getClientLogos("ru"),
     errors: {
       fullName: "Укажите имя (минимум 2 символа).",
       phone: "Укажите телефон в формате +380 (XX) XXX-XX-XX.",

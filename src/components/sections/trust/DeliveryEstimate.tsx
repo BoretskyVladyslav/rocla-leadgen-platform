@@ -18,7 +18,6 @@ export interface DeliveryEstimateProps {
 
 function PartnerLogo({ name, imageSrc }: { name: string; imageSrc: string }) {
   const [failed, setFailed] = useState(false);
-  const isSvg = imageSrc.endsWith(".svg");
 
   if (failed) {
     return (
@@ -28,25 +27,13 @@ function PartnerLogo({ name, imageSrc }: { name: string; imageSrc: string }) {
     );
   }
 
-  if (isSvg) {
-    return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        src={imageSrc}
-        alt={name}
-        className="h-5 max-w-[75px] object-contain md:h-6"
-        onError={() => setFailed(true)}
-      />
-    );
-  }
-
   return (
     <Image
       src={imageSrc}
       alt={name}
       width={120}
-      height={36}
-      className="h-5 max-w-[75px] object-contain md:h-6"
+      height={32}
+      className="h-7 w-auto object-contain opacity-80 grayscale transition-all hover:opacity-100 hover:grayscale-0 sm:h-8"
       onError={() => setFailed(true)}
     />
   );
@@ -137,11 +124,11 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
             <p className="mb-5 text-center text-sm font-bold uppercase tracking-[0.12em] text-heading">
               {copy.partnersTitle}
             </p>
-            <ul className="flex flex-row flex-nowrap items-center justify-center gap-4 overflow-hidden sm:gap-6">
+            <ul className="flex flex-row flex-nowrap items-center justify-start gap-5 overflow-x-auto pb-1 sm:justify-center sm:gap-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {copy.partners.map((partner) => (
                 <li
                   key={partner.name}
-                  className="flex h-6 shrink-0 items-center justify-center grayscale opacity-80 transition hover:grayscale-0 hover:opacity-100"
+                  className="flex h-8 shrink-0 items-center justify-center"
                 >
                   <PartnerLogo name={partner.name} imageSrc={partner.imageSrc} />
                 </li>
