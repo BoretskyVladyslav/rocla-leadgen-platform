@@ -1,12 +1,17 @@
+import { Home } from "lucide-react";
 import { notFound } from "next/navigation";
-import { LeadCaptureForm } from "@/components/sections/forms/LeadCaptureForm";
+import { ConsultationBlock } from "@/components/sections/forms/ConsultationBlock";
 import { ProductHero } from "@/components/sections/hero/ProductHero";
+import { ProductAdvantages } from "@/components/sections/product/ProductAdvantages";
+import { PdpFaqOffer } from "@/components/sections/product/PdpFaqOffer";
 import { RelatedProductsCarousel } from "@/components/sections/product/RelatedProductsCarousel";
 import { ProductTabs } from "@/components/sections/product/ProductTabs";
 import { ClientLogos } from "@/components/sections/trust/ClientLogos";
 import { DeliveryEstimate } from "@/components/sections/trust/DeliveryEstimate";
 import { ReviewsCarousel } from "@/components/sections/trust/ReviewsCarousel";
+import { SeoTextAccordion } from "@/components/sections/trust/SeoTextAccordion";
 import { VideoReviews } from "@/components/sections/trust/VideoReviews";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { getDictionary } from "@/data/dictionary";
 import {
   getProductBySlug,
@@ -36,10 +41,35 @@ export default async function ProductPage({
     .filter((item) => item.slug !== product.slug)
     .slice(0, 5);
 
+  const crumbs = dict.product.breadcrumbs;
+
   return (
     <>
+      <Breadcrumbs
+        items={[
+          {
+            label: crumbs.home,
+            href: `/${lang}`,
+            icon: <Home className="h-4 w-4" />,
+          },
+          {
+            label: crumbs.catalog,
+            href: `/${lang}#catalog`,
+          },
+          {
+            label: crumbs.category,
+            href: `/${lang}#catalog`,
+          },
+          {
+            label: product.name,
+          },
+        ]}
+      />
       <ProductHero product={product} copy={dict.product} />
+      <ClientLogos copy={dict.clients} />
       <ProductTabs product={product} copy={dict.product} />
+      <ProductAdvantages copy={dict.product.advantages} />
+      <ConsultationBlock copy={dict.consultation} />
       <RelatedProductsCarousel
         lang={lang}
         products={related}
@@ -47,11 +77,11 @@ export default async function ProductPage({
         title={dict.product.relatedTitle}
         orderCta={dict.product.orderCta}
       />
-      <ClientLogos copy={dict.clients} />
       <DeliveryEstimate copy={dict.delivery} />
       <VideoReviews copy={dict.videos} />
       <ReviewsCarousel copy={dict.reviews} />
-      <LeadCaptureForm copy={dict.leadForm} />
+      <PdpFaqOffer faq={dict.faq} offer={dict.product.commercialOffer} />
+      <SeoTextAccordion copy={dict.seoText} />
     </>
   );
 }

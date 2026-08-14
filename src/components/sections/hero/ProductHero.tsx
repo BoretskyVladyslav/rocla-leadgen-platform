@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MotionLink } from "@/components/motion/MotionLink";
+import { HashLink } from "@/components/layout/HashLink";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
 import { cn } from "@/lib/utils";
@@ -123,12 +123,12 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
             </div>
           ) : null}
 
-          <MotionLink
-            href="#contact"
-            className="inline-flex h-12 min-w-[12rem] items-center justify-center rounded-lg bg-accent px-6 text-sm font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+          <HashLink
+            href="#consultation"
+            className="inline-flex h-12 min-w-[12rem] items-center justify-center rounded-lg bg-accent px-6 text-sm font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 cta-glow cta-shine"
           >
             {copy.buyCta}
-          </MotionLink>
+          </HashLink>
         </div>
       </div>
     </section>

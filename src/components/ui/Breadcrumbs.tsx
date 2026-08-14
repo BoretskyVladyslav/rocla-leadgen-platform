@@ -1,9 +1,11 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export interface BreadcrumbItem {
   label: string;
   href?: string;
+  icon?: ReactNode;
 }
 
 export interface BreadcrumbsProps {
@@ -20,6 +22,23 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
       <ol className="mx-auto flex w-full max-w-7xl flex-wrap items-center gap-1.5 px-4 py-4 text-sm text-muted sm:px-6">
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
+          const body = (
+            <>
+              {item.icon ? (
+                <span className="inline-flex shrink-0" aria-hidden>
+                  {item.icon}
+                </span>
+              ) : null}
+              <span
+                className={cn(
+                  item.icon && "sr-only",
+                  isLast && !item.icon && "font-medium text-heading",
+                )}
+              >
+                {item.label}
+              </span>
+            </>
+          );
 
           return (
             <li key={`${item.label}-${index}`} className="flex items-center gap-1.5">
@@ -31,16 +50,16 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
               {item.href && !isLast ? (
                 <Link
                   href={item.href}
-                  className="transition-colors hover:text-heading"
+                  className="inline-flex items-center gap-1.5 transition-colors hover:text-heading"
                 >
-                  {item.label}
+                  {body}
                 </Link>
               ) : (
                 <span
-                  className={cn(isLast && "font-medium text-heading")}
+                  className="inline-flex items-center gap-1.5"
                   aria-current={isLast ? "page" : undefined}
                 >
-                  {item.label}
+                  {body}
                 </span>
               )}
             </li>

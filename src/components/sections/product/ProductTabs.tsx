@@ -10,7 +10,7 @@ export interface ProductTabsProps {
   copy: Dictionary["product"];
 }
 
-type TabId = "description" | "specifications";
+type TabId = "description" | "specifications" | "delivery";
 
 export function ProductTabs({ product, copy }: ProductTabsProps) {
   const [active, setActive] = useState<TabId>("description");
@@ -22,14 +22,15 @@ export function ProductTabs({ product, copy }: ProductTabsProps) {
         : [];
   const bullets = product.descriptionBullets ?? [];
   const specs = product.specs ?? [];
+  const deliveryBullets = copy.deliveryBullets ?? [];
 
   return (
-    <section className="border-t border-border bg-white">
+    <section className="border-t border-border bg-neutral-50/80">
       <div className="mx-auto w-full max-w-7xl px-4 pb-10 pt-2 sm:px-6 lg:pb-14">
         <div
           role="tablist"
           aria-label={copy.specifications}
-          className="flex gap-2 border-b border-border"
+          className="flex flex-wrap gap-2 border-b border-border"
         >
           <TabButton
             id="description"
@@ -45,9 +46,16 @@ export function ProductTabs({ product, copy }: ProductTabsProps) {
           >
             {copy.tabs.specifications}
           </TabButton>
+          <TabButton
+            id="delivery"
+            active={active === "delivery"}
+            onClick={() => setActive("delivery")}
+          >
+            {copy.tabs.delivery}
+          </TabButton>
         </div>
 
-        <div className="mt-6 rounded-2xl border border-border bg-surface-muted/40 p-5 sm:p-7">
+        <div className="mt-6 rounded-2xl border border-border bg-white p-5 sm:p-7">
           {active === "description" ? (
             <div
               role="tabpanel"
@@ -71,7 +79,9 @@ export function ProductTabs({ product, copy }: ProductTabsProps) {
                 </ul>
               ) : null}
             </div>
-          ) : (
+          ) : null}
+
+          {active === "specifications" ? (
             <div
               role="tabpanel"
               id="panel-specifications"
@@ -95,7 +105,27 @@ export function ProductTabs({ product, copy }: ProductTabsProps) {
                 <p className="text-sm text-muted">{copy.imagePlaceholder}</p>
               )}
             </div>
-          )}
+          ) : null}
+
+          {active === "delivery" ? (
+            <div
+              role="tabpanel"
+              id="panel-delivery"
+              aria-labelledby="tab-delivery"
+            >
+              {deliveryBullets.length > 0 ? (
+                <ul className="list-disc space-y-2 pl-5 text-base text-foreground">
+                  {deliveryBullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-sm text-muted">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </p>
+              )}
+            </div>
+          ) : null}
         </div>
       </div>
     </section>

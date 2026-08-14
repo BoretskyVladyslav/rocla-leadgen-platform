@@ -55,7 +55,7 @@ export function RelatedProductsCarousel({
   if (products.length === 0) return null;
 
   return (
-    <section id="related" className="scroll-mt-20 bg-surface-muted">
+    <section id="related" className="scroll-mt-20 bg-white">
       <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
         <ScrollReveal>
           <div className="mb-8 flex flex-row items-end justify-between gap-4">

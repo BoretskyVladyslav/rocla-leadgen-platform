@@ -7,6 +7,8 @@ import type { Dictionary } from "@/data/dictionary";
 
 export interface FaqAccordionProps {
   copy: Dictionary["faq"];
+  /** When true, omit outer section padding/bg so parent can control layout. */
+  embedded?: boolean;
 }
 
 function AnswerBody({ text }: { text: string }) {
@@ -58,69 +60,77 @@ function AnswerBody({ text }: { text: string }) {
   );
 }
 
-export function FaqAccordion({ copy }: FaqAccordionProps) {
+export function FaqAccordion({ copy, embedded = false }: FaqAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const body = (
+    <>
+      <ScrollReveal>
+        <h2 className="section-heading">{copy.title}</h2>
+        <ul className="mt-10">
+          {copy.items.map((item, index) => {
+            const isOpen = openIndex === index;
+            const triggerId = `${item.id ?? `faq-${index}`}-trigger`;
+            const panelId = `${item.id ?? `faq-${index}`}-panel`;
+            return (
+              <li
+                key={item.id ?? item.question}
+                className="mb-3 overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-xs transition-colors hover:border-amber-300"
+              >
+                <button
+                  type="button"
+                  id={triggerId}
+                  className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
+                  aria-expanded={isOpen}
+                  aria-controls={panelId}
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                >
+                  <span className="text-sm font-semibold tracking-tight text-heading sm:text-base">
+                    {item.question}
+                  </span>
+                  <motion.span
+                    className="text-lg font-medium text-muted"
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ duration: 0.2 }}
+                    aria-hidden
+                  >
+                    +
+                  </motion.span>
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen ? (
+                    <motion.div
+                      key="content"
+                      id={panelId}
+                      role="region"
+                      aria-labelledby={triggerId}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-5 pb-5">
+                        <AnswerBody text={item.answer} />
+                      </div>
+                    </motion.div>
+                  ) : null}
+                </AnimatePresence>
+              </li>
+            );
+          })}
+        </ul>
+      </ScrollReveal>
+    </>
+  );
+
+  if (embedded) {
+    return <div className="w-full min-w-0">{body}</div>;
+  }
 
   return (
     <section className="bg-white py-16">
-      <div className="mx-auto w-full max-w-4xl px-4 sm:px-6">
-        <ScrollReveal>
-          <h2 className="section-heading">{copy.title}</h2>
-          <ul className="mt-10">
-            {copy.items.map((item, index) => {
-              const isOpen = openIndex === index;
-              const triggerId = `${item.id ?? `faq-${index}`}-trigger`;
-              const panelId = `${item.id ?? `faq-${index}`}-panel`;
-              return (
-                <li
-                  key={item.id ?? item.question}
-                  className="mb-3 overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-xs transition-colors hover:border-amber-300"
-                >
-                  <button
-                    type="button"
-                    id={triggerId}
-                    className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
-                    aria-expanded={isOpen}
-                    aria-controls={panelId}
-                    onClick={() => setOpenIndex(isOpen ? null : index)}
-                  >
-                    <span className="text-sm font-semibold tracking-tight text-heading sm:text-base">
-                      {item.question}
-                    </span>
-                    <motion.span
-                      className="text-lg font-medium text-muted"
-                      animate={{ rotate: isOpen ? 45 : 0 }}
-                      transition={{ duration: 0.2 }}
-                      aria-hidden
-                    >
-                      +
-                    </motion.span>
-                  </button>
-                  <AnimatePresence initial={false}>
-                    {isOpen ? (
-                      <motion.div
-                        key="content"
-                        id={panelId}
-                        role="region"
-                        aria-labelledby={triggerId}
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-5 pb-5">
-                          <AnswerBody text={item.answer} />
-                        </div>
-                      </motion.div>
-                    ) : null}
-                  </AnimatePresence>
-                </li>
-              );
-            })}
-          </ul>
-        </ScrollReveal>
-      </div>
+      <div className="mx-auto w-full max-w-4xl px-4 sm:px-6">{body}</div>
     </section>
   );
 }

@@ -227,6 +227,31 @@ export interface Dictionary {
     tabs: {
       description: string;
       specifications: string;
+      delivery: string;
+    };
+    deliveryBullets: string[];
+    advantages: Array<{
+      id: "quality" | "delivery" | "return" | "support";
+      label: string;
+    }>;
+    commercialOffer: {
+      title: string;
+      email: string;
+      phone: string;
+      submit: string;
+      filesLabel: string;
+      filesHint: string;
+      filesBrowse: string;
+      filesDrag: string;
+      filesMaxSize: string;
+      filesRemove: string;
+      success: string;
+      errors: {
+        email: string;
+        phone: string;
+        fileType: string;
+        fileSize: string;
+      };
     };
     breadcrumbs: {
       home: string;
@@ -666,7 +691,7 @@ const DICTIONARY_UK: Dictionary = {
   product: {
     eyebrow: "Товар",
     requestQuote: "Запит ціни",
-    buyCta: "Купити",
+    buyCta: "Замовити зі знижкою",
     orderCta: "Замовити",
     skuLabel: "Артикул",
     relatedTitle: "Схожі товари",
@@ -676,6 +701,37 @@ const DICTIONARY_UK: Dictionary = {
     tabs: {
       description: "Опис",
       specifications: "Характеристики",
+      delivery: "Доставка",
+    },
+    deliveryBullets: [
+      "Доставка по Києву в день звернення після підтвердження замовлення.",
+      "По Україні — від 1 дня після оплати, з повним комплектом документів.",
+      "Самовивіз зі складів у Києві, Дніпрі, Харкові, Одесі та Львові.",
+    ],
+    advantages: [
+      { id: "quality", label: "Гарантія якості" },
+      { id: "delivery", label: "Швидка доставка" },
+      { id: "return", label: "Просте повернення" },
+      { id: "support", label: "Підтримка 24/7" },
+    ],
+    commercialOffer: {
+      title: "Отримати комерційну пропозицію",
+      email: "Email",
+      phone: "Телефон",
+      submit: "Надіслати",
+      filesLabel: "Прикріпити файл",
+      filesHint: "PDF, JPG або PNG до 10 МБ",
+      filesBrowse: "Обрати файл",
+      filesDrag: "Перетягніть файл сюди",
+      filesMaxSize: "Макс. 10 МБ",
+      filesRemove: "Видалити",
+      success: "Заявку прийнято. Надішлемо КП на email.",
+      errors: {
+        email: "Вкажіть коректний email.",
+        phone: "Вкажіть телефон у форматі +380 (XX) XXX-XX-XX.",
+        fileType: "Лише PDF, JPG або PNG.",
+        fileSize: "Файл перевищує 10 МБ.",
+      },
     },
     breadcrumbs: {
       home: "Головна",
@@ -1059,7 +1115,7 @@ const DICTIONARY_RU: Dictionary = {
   product: {
     eyebrow: "Товар",
     requestQuote: "Запрос цены",
-    buyCta: "Купить",
+    buyCta: "Заказать со скидкой",
     orderCta: "Заказать",
     skuLabel: "Артикул",
     relatedTitle: "Похожие товары",
@@ -1069,6 +1125,37 @@ const DICTIONARY_RU: Dictionary = {
     tabs: {
       description: "Описание",
       specifications: "Характеристики",
+      delivery: "Доставка",
+    },
+    deliveryBullets: [
+      "Доставка по Киеву в день обращения после подтверждения заказа.",
+      "По Украине — от 1 дня после оплаты, с полным комплектом документов.",
+      "Самовывоз со складов в Киеве, Днепре, Харькове, Одессе и Львове.",
+    ],
+    advantages: [
+      { id: "quality", label: "Гарантия качества" },
+      { id: "delivery", label: "Быстрая доставка" },
+      { id: "return", label: "Простой возврат" },
+      { id: "support", label: "Поддержка 24/7" },
+    ],
+    commercialOffer: {
+      title: "Получить коммерческое предложение",
+      email: "Email",
+      phone: "Телефон",
+      submit: "Отправить",
+      filesLabel: "Прикрепить файл",
+      filesHint: "PDF, JPG или PNG до 10 МБ",
+      filesBrowse: "Выбрать файл",
+      filesDrag: "Перетащите файл сюда",
+      filesMaxSize: "Макс. 10 МБ",
+      filesRemove: "Удалить",
+      success: "Заявку приняли. Отправим КП на email.",
+      errors: {
+        email: "Укажите корректный email.",
+        phone: "Укажите телефон в формате +380 (XX) XXX-XX-XX.",
+        fileType: "Только PDF, JPG или PNG.",
+        fileSize: "Файл превышает 10 МБ.",
+      },
     },
     breadcrumbs: {
       home: "Главная",
