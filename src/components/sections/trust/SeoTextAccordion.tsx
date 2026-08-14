@@ -23,13 +23,15 @@ export function SeoTextAccordion({ copy }: SeoTextAccordionProps) {
             {copy.preview.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
-            {expanded ? (
-              <div id={contentId} className="space-y-3">
-                {copy.rest.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-              </div>
-            ) : null}
+            <div
+              id={contentId}
+              className={expanded ? "space-y-3" : "hidden"}
+              hidden={!expanded}
+            >
+              {copy.rest.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
           </div>
           <button
             type="button"

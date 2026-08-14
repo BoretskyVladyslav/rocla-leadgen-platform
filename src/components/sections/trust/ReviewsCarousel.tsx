@@ -21,7 +21,7 @@ type ReviewItem = Dictionary["reviews"]["items"][number];
 export function ReviewsCarousel({ copy }: ReviewsCarouselProps) {
   const items = copy.items;
   const getKey = useCallback(
-    (item: ReviewItem) => `${item.company}-${item.author}`,
+    (item: ReviewItem) => item.id,
     [],
   );
 
@@ -53,7 +53,7 @@ export function ReviewsCarousel({ copy }: ReviewsCarouselProps) {
             <div className="flex shrink-0 items-center gap-2">
               <button
                 type="button"
-                aria-label="Previous review"
+                aria-label={copy.prevLabel}
                 onClick={() => go(-1)}
                 className="inline-flex h-11 w-11 items-center justify-center rounded-lg border-2 border-dark bg-white text-lg font-bold text-heading shadow-sm transition-colors hover:border-accent hover:bg-accent"
               >
@@ -61,7 +61,7 @@ export function ReviewsCarousel({ copy }: ReviewsCarouselProps) {
               </button>
               <button
                 type="button"
-                aria-label="Next review"
+                aria-label={copy.nextLabel}
                 onClick={() => go(1)}
                 className="inline-flex h-11 w-11 items-center justify-center rounded-lg border-2 border-dark bg-white text-lg font-bold text-heading shadow-sm transition-colors hover:border-accent hover:bg-accent"
               >
@@ -99,7 +99,7 @@ export function ReviewsCarousel({ copy }: ReviewsCarouselProps) {
         <div className="mt-6 flex justify-center gap-2" role="tablist">
           {items.map((item, index) => (
             <button
-              key={`${item.company}-dot`}
+              key={`${item.id}-dot`}
               type="button"
               role="tab"
               aria-selected={activeLogical === index}

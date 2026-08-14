@@ -33,8 +33,8 @@ export function Header({ lang, copy }: HeaderProps) {
           </span>
         </Link>
 
-        <nav
-          aria-label="Primary"
+          <nav
+          aria-label={copy.navLabel}
           className="hidden items-center gap-5 text-xs font-medium uppercase tracking-wide text-foreground lg:flex"
         >
           {nav.map((item) => (
@@ -67,6 +67,7 @@ export function Header({ lang, copy }: HeaderProps) {
           <MobileMenu
             lang={lang}
             languageLabel={copy.language}
+            navLabel={copy.navLabel}
             items={nav}
             phone={copy.phone}
             telHref={telHref}

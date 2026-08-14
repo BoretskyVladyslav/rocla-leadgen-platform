@@ -158,6 +158,7 @@ export const reviewsData: ReviewItem[] = [
 
 export function getReviews(locale: Locale) {
   return reviewsData.map((review) => ({
+    id: review.id,
     company: review.company,
     author: review.author,
     date: review.date,

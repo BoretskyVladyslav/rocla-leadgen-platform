@@ -13,6 +13,7 @@ export interface MobileMenuItem {
 export interface MobileMenuProps {
   lang: string;
   languageLabel: string;
+  navLabel: string;
   items: MobileMenuItem[];
   phone: string;
   telHref: string;
@@ -23,6 +24,7 @@ export interface MobileMenuProps {
 export function MobileMenu({
   lang,
   languageLabel,
+  navLabel,
   items,
   phone,
   telHref,
@@ -110,7 +112,7 @@ export function MobileMenu({
             <motion.nav
               id={panelId}
               key="panel"
-              aria-label="Primary"
+              aria-label={navLabel}
               className="fixed inset-y-0 right-0 z-40 flex w-[min(100%,20rem)] flex-col border-l border-border bg-white shadow-xl"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}

@@ -150,6 +150,7 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
                   noValidate
                 >
                   <Input
+                    id="lead-fullName"
                     label={copy.fullName}
                     name="fullName"
                     required
@@ -161,6 +162,7 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
                     }
                   />
                   <PhoneInput
+                    id="lead-phone"
                     label={copy.phone}
                     name="phone"
                     required
@@ -172,6 +174,7 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
                     }
                   />
                   <Input
+                    id="lead-email"
                     label={copy.email}
                     name="email"
                     type="email"
@@ -183,6 +186,7 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
                     }
                   />
                   <Input
+                    id="lead-company"
                     label={copy.company}
                     name="company"
                     value={form.company ?? ""}
@@ -199,6 +203,7 @@ export function LeadCaptureForm({ copy }: LeadCaptureFormProps) {
                     onSelect={handleWarehouseSelect}
                   />
                   <Input
+                    id="lead-city"
                     label={copy.citiesLabel}
                     name="city"
                     value={form.city}

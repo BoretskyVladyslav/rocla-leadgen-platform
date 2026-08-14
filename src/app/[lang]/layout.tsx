@@ -1,14 +1,27 @@
+import type { Metadata } from "next";
 import { Footer } from "@/components/layout/Footer";
 import { HashScrollRestorer } from "@/components/layout/HashScrollRestorer";
 import { Header } from "@/components/layout/Header";
+import { HtmlLang } from "@/components/layout/HtmlLang";
 import { MobileStickyCta } from "@/components/layout/MobileStickyCta";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { getDictionary } from "@/data/dictionary";
-import { LOCALES } from "@/lib/i18n";
+import { LOCALES, resolveLocale } from "@/lib/i18n";
 
 export function generateStaticParams() {
   return LOCALES.map((lang) => ({ lang }));
+}
+
+export async function generateMetadata({
+  params,
+}: LayoutProps<"/[lang]">): Promise<Metadata> {
+  const { lang } = await params;
+  const dict = getDictionary(lang);
+  return {
+    title: dict.meta.title,
+    description: dict.meta.description,
+  };
 }
 
 export default async function LangLayout({
@@ -16,23 +29,25 @@ export default async function LangLayout({
   params,
 }: LayoutProps<"/[lang]">) {
   const { lang } = await params;
-  const dict = getDictionary(lang);
+  const locale = resolveLocale(lang);
+  const dict = getDictionary(locale);
 
   return (
     <>
+      <HtmlLang lang={locale} />
       <ScrollProgress />
       <HashScrollRestorer />
-      <Header lang={lang} copy={dict.header} />
+      <Header lang={locale} copy={dict.header} />
       <div className="flex flex-1 flex-col pb-[calc(4.75rem+env(safe-area-inset-bottom))] md:pb-0">
         <main className="flex-1">{children}</main>
-        <Footer lang={lang} copy={dict.footer} />
+        <Footer lang={locale} copy={dict.footer} />
       </div>
       <MobileStickyCta
-        lang={lang}
+        lang={locale}
         phone={dict.header.phone}
         copy={dict.stickyCta}
       />
-      <ScrollToTop />
+      <ScrollToTop label={dict.a11y.scrollToTop} />
     </>
   );
 }

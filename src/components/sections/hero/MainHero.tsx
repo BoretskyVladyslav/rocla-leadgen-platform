@@ -202,6 +202,9 @@ export function MainHero({ copy }: MainHeroProps) {
 
         <ScrollReveal className="order-2 flex flex-col gap-3 lg:col-start-1 lg:row-start-2">
           <div className="flex flex-col gap-1">
+            <p className="text-sm font-extrabold tracking-[0.12em] text-heading uppercase sm:text-base">
+              {copy.banner}
+            </p>
             <p className="text-sm font-semibold text-heading sm:text-base">
               {copy.promo}
             </p>
@@ -254,6 +257,7 @@ export function MainHero({ copy }: MainHeroProps) {
             ) : (
               <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
                 <Input
+                  id="hero-fullName"
                   label={copy.name}
                   name="fullName"
                   required
@@ -263,6 +267,7 @@ export function MainHero({ copy }: MainHeroProps) {
                   onChange={(e) => setFullName(e.target.value)}
                 />
                 <PhoneInput
+                  id="hero-phone"
                   label={copy.phone}
                   name="phone"
                   required

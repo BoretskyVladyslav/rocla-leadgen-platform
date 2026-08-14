@@ -107,6 +107,7 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
               >
                 <div className="w-full sm:w-64">
                   <Input
+                    id="delivery-fullName"
                     name="fullName"
                     required
                     placeholder={copy.name}
@@ -120,6 +121,7 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
                 </div>
                 <div className="w-full sm:w-64">
                   <PhoneInput
+                    id="delivery-phone"
                     name="phone"
                     required
                     aria-label={copy.phone}

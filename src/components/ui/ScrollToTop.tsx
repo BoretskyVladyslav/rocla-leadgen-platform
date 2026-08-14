@@ -2,7 +2,11 @@
 
 import { useEffect, useState } from "react";
 
-export function ScrollToTop() {
+export interface ScrollToTopProps {
+  label: string;
+}
+
+export function ScrollToTop({ label }: ScrollToTopProps) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -20,7 +24,7 @@ export function ScrollToTop() {
   return (
     <button
       type="button"
-      aria-label="Scroll to top"
+      aria-label={label}
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       className="fixed bottom-24 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-[#FFCC00] text-neutral-900 shadow-lg transition-all hover:scale-105 hover:bg-amber-400 md:bottom-6"
     >

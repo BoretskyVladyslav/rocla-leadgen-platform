@@ -13,9 +13,14 @@ export interface Warehouse {
 }
 
 export interface Dictionary {
+  meta: {
+    title: string;
+    description: string;
+  };
   header: {
     brand: string;
     tagline: string;
+    navLabel: string;
     nav: {
       about: string;
       catalog: string;
@@ -34,6 +39,7 @@ export interface Dictionary {
     title: string;
     titleHighlights: string[];
     subtitle: string;
+    banner: string;
     promo: string;
     promoNote: string;
     trustBadges: string[];
@@ -117,7 +123,10 @@ export interface Dictionary {
   };
   reviews: {
     title: string;
+    prevLabel: string;
+    nextLabel: string;
     items: Array<{
+      id: string;
       company: string;
       author: string;
       text: string;
@@ -201,6 +210,9 @@ export interface Dictionary {
   stickyCta: {
     call: string;
     order: string;
+  };
+  a11y: {
+    scrollToTop: string;
   };
   product: {
     eyebrow: string;
@@ -364,9 +376,15 @@ const CATEGORY_IMAGES = {
 } as const;
 
 const DICTIONARY_UK: Dictionary = {
+  meta: {
+    title: "KAISER — складська техніка",
+    description:
+      "Рокли, штабелери та складська техніка KAISER. 20 років на ринку України.",
+  },
   header: {
     brand: "KAISER",
     tagline: "Офіційний представник / Продаж, сервіс та ремонт по всій Україні",
+    navLabel: "Основна навігація",
     nav: {
       about: "Про компанію",
       catalog: "Каталог",
@@ -385,6 +403,7 @@ const DICTIONARY_UK: Dictionary = {
     title: "Купити роклу (рохлю) — німецька якість KAISER",
     titleHighlights: ["роклу (рохлю)", "KAISER"],
     subtitle: "20 років на ринку в Україні",
+    banner: "ТИЖДЕНЬ НИЗЬКИХ ЦІН",
     promo: "Знижки до 18%. Гарантія 24 місяці.",
     promoNote: "* Детальну інформацію уточнюйте у менеджера",
     trustBadges: [
@@ -524,16 +543,16 @@ const DICTIONARY_UK: Dictionary = {
   },
   caseStudy: {
     title: "Алфьоров Сергій Миколайович",
-    role: "Генеральний директор ТОВ \"КЛЕБАЕР ЛТД\"",
+    role: "Генеральний директор ТОВ \"КЛЕБАЄР ЛТД\"",
     paragraphs: [
-      "Дорогі партнери, я радий вітати вас на нашому сайті. Наша компанія ТОВ \"КЛЕБАЕР ЛТД\" працює 20 років на ринку. Ми займаємося продажем техніки для складу (Гідравлічні візки, Рокли, Штабелери, Навантажувачі).",
+      "Дорогі партнери, я радий вітати вас на нашому сайті. Наша компанія ТОВ \"КЛЕБАЄР ЛТД\" працює 20 років на ринку. Ми займаємося продажем техніки для складу (Гідравлічні візки, Рокли, Штабелери, Навантажувачі).",
       "Наша мета — виявити ваші потреби та залишити вас задоволеними.",
       "Ми працюємо на всій території України, надаємо гарантійне та післягарантійне обслуговування по всій країні.",
       "Ми постійно працюємо над розширенням асортименту нашого магазину з гнучкими системами знижок, покращенням клієнтського сервісу, щоб наші клієнти могли отримати найкращий вибір та найкращі умови.",
     ],
     signoff: "З повагою до Вас та Вашого бізнесу!",
     imageSrc: "/images/case/ceo-alferov.jpg",
-    imageAlt: "Алфьоров Сергій Миколайович, генеральний директор ТОВ «КЛЕБАЕР ЛТД»",
+    imageAlt: "Алфьоров Сергій Миколайович, генеральний директор ТОВ «КЛЕБАЄР ЛТД»",
   },
   delivery: {
     title: "Замовити доставку по Україні",
@@ -566,6 +585,8 @@ const DICTIONARY_UK: Dictionary = {
   },
   reviews: {
     title: "Відгуки наших клієнтів",
+    prevLabel: "Попередній відгук",
+    nextLabel: "Наступний відгук",
     items: getReviews("uk"),
   },
   videos: {
@@ -638,6 +659,9 @@ const DICTIONARY_UK: Dictionary = {
   stickyCta: {
     call: "Зателефонувати",
     order: "Замовити",
+  },
+  a11y: {
+    scrollToTop: "Нагору",
   },
   product: {
     eyebrow: "Товар",
@@ -720,7 +744,7 @@ const DICTIONARY_UK: Dictionary = {
     helpText:
       "Наші спеціалісти допоможуть підібрати оптимальне рішення під ваші задачі",
     cta: "Отримати консультацію",
-    copyright: "© KAISER. Усі права захищено.",
+    copyright: "© KAISER / ТОВ «КЛЕБАЄР ЛТД» 2016-2026. Усі права захищено.",
     legal: "ТОВ «КАЙЗЕР ГРУП» — надійний партнер у складській техніці.",
     siteNote: "Сайт створено для вашої зручності та росту бізнесу!",
     privacy: "Політика конфіденційності",
@@ -745,9 +769,15 @@ const DICTIONARY_UK: Dictionary = {
 };
 
 const DICTIONARY_RU: Dictionary = {
+  meta: {
+    title: "KAISER — складская техника",
+    description:
+      "Роклы, штабелеры и складская техника KAISER. 20 лет на рынке Украины.",
+  },
   header: {
     brand: "KAISER",
     tagline: "Официальный представитель / Продажа, сервис и ремонт по всей Украине",
+    navLabel: "Основная навигация",
     nav: {
       about: "О компании",
       catalog: "Каталог",
@@ -766,6 +796,7 @@ const DICTIONARY_RU: Dictionary = {
     title: "Купить роклу (рохлю) — немецкое качество KAISER",
     titleHighlights: ["роклу (рохлю)", "KAISER"],
     subtitle: "20 лет на рынке в Украине",
+    banner: "НЕДЕЛЯ НИЗКИХ ЦЕН",
     promo: "Скидки до 18%. Гарантия 24 месяца.",
     promoNote: "* Детальную информацию уточняйте у менеджера",
     trustBadges: [
@@ -947,6 +978,8 @@ const DICTIONARY_RU: Dictionary = {
   },
   reviews: {
     title: "Отзывы наших клиентов",
+    prevLabel: "Предыдущий отзыв",
+    nextLabel: "Следующий отзыв",
     items: getReviews("ru"),
   },
   videos: {
@@ -1019,6 +1052,9 @@ const DICTIONARY_RU: Dictionary = {
   stickyCta: {
     call: "Позвонить",
     order: "Заказать",
+  },
+  a11y: {
+    scrollToTop: "Наверх",
   },
   product: {
     eyebrow: "Товар",
@@ -1101,7 +1137,7 @@ const DICTIONARY_RU: Dictionary = {
     helpText:
       "Наши специалисты помогут подобрать оптимальное решение под ваши задачи",
     cta: "Получить консультацию",
-    copyright: "© KAISER. Все права защищены.",
+    copyright: "© KAISER / ООО «КЛЕБАЕР ЛТД» 2016-2026. Все права защищены.",
     legal: "ООО «КАЙЗЕР ГРУПП» — надёжный партнёр в складской технике.",
     siteNote: "Сайт создан для вашего удобства и роста бизнеса!",
     privacy: "Политика конфиденциальности",

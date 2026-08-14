@@ -94,6 +94,7 @@ export function LocaleSwitcher({ lang, label }: LocaleSwitcherProps) {
               : "text-muted hover:text-foreground",
           )}
           hrefLang={locale}
+          aria-current={locale === lang ? "true" : undefined}
         >
           {locale}
         </Link>

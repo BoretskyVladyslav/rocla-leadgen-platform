@@ -102,6 +102,7 @@ export function ConsultationBlock({ copy }: ConsultationBlockProps) {
               noValidate
             >
               <Input
+                id="consultation-fullName"
                 label={copy.fullName}
                 name="fullName"
                 required
@@ -111,6 +112,7 @@ export function ConsultationBlock({ copy }: ConsultationBlockProps) {
                 onChange={(e) => setFullName(e.target.value)}
               />
               <PhoneInput
+                id="consultation-phone"
                 label={copy.phone}
                 name="phone"
                 required
@@ -120,6 +122,7 @@ export function ConsultationBlock({ copy }: ConsultationBlockProps) {
                 onValueChange={setPhone}
               />
               <Input
+                id="consultation-email"
                 label={copy.email}
                 name="email"
                 type="email"

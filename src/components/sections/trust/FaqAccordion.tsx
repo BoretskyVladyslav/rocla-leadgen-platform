@@ -69,6 +69,8 @@ export function FaqAccordion({ copy }: FaqAccordionProps) {
           <ul className="mt-10">
             {copy.items.map((item, index) => {
               const isOpen = openIndex === index;
+              const triggerId = `${item.id ?? `faq-${index}`}-trigger`;
+              const panelId = `${item.id ?? `faq-${index}`}-panel`;
               return (
                 <li
                   key={item.id ?? item.question}
@@ -76,8 +78,10 @@ export function FaqAccordion({ copy }: FaqAccordionProps) {
                 >
                   <button
                     type="button"
+                    id={triggerId}
                     className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
                     aria-expanded={isOpen}
+                    aria-controls={panelId}
                     onClick={() => setOpenIndex(isOpen ? null : index)}
                   >
                     <span className="text-sm font-semibold tracking-tight text-heading sm:text-base">
@@ -96,6 +100,9 @@ export function FaqAccordion({ copy }: FaqAccordionProps) {
                     {isOpen ? (
                       <motion.div
                         key="content"
+                        id={panelId}
+                        role="region"
+                        aria-labelledby={triggerId}
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
