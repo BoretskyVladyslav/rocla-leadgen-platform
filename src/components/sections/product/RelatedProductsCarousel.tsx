@@ -115,7 +115,7 @@ export function RelatedProductsCarousel({
                 >
                   <Link
                     href={`/${lang}/product/${product.slug}`}
-                    className="block overflow-hidden rounded-2xl"
+                    className="block overflow-hidden rounded-t-2xl rounded-b-none"
                     draggable={false}
                   >
                     <MediaImage
@@ -123,9 +123,9 @@ export function RelatedProductsCarousel({
                       alt={product.images?.[0]?.alt ?? product.imageAlt ?? product.name}
                       aspect="4/3"
                       fit="cover"
-                      objectPosition="object-center"
+                      objectPosition="object-top"
                       sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 25vw"
-                      className="h-full w-full overflow-hidden rounded-2xl"
+                      className="h-full w-full rounded-t-2xl rounded-b-none"
                     />
                   </Link>
                   <div className="flex flex-1 flex-col gap-3 p-4">
