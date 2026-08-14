@@ -528,12 +528,12 @@ const DICTIONARY_UK: Dictionary = {
   },
   delivery: {
     title: "Замовити доставку по Україні",
-    subtitle: "Детальну інформацію уточніть у менеджера",
+    subtitle: "* Детальну інформацію уточніть у менеджера",
     name: "Ім’я",
     phone: "Телефон",
-    submit: "Підтвердити",
+    submit: "Отримати доставку",
     success: "Заявку прийнято. Менеджер зателефонує.",
-    partnersTitle: "Бренди, які нам довіряють",
+    partnersTitle: "Нам довіряють:",
     partners: getClientLogos("uk"),
     errors: {
       fullName: "Вкажіть ім’я (мінімум 2 символи).",
@@ -993,12 +993,12 @@ const DICTIONARY_RU: Dictionary = {
   },
   delivery: {
     title: "Заказать доставку по Украине",
-    subtitle: "Подробную информацию уточните у менеджера",
+    subtitle: "* Подробную информацию уточните у менеджера",
     name: "Имя",
     phone: "Телефон",
-    submit: "Подтвердить",
+    submit: "Получить доставку",
     success: "Заявка принята. Менеджер перезвонит.",
-    partnersTitle: "Бренды, которые нам доверяют",
+    partnersTitle: "Нам доверяют:",
     partners: getClientLogos("ru"),
     errors: {
       fullName: "Укажите имя (минимум 2 символа).",
