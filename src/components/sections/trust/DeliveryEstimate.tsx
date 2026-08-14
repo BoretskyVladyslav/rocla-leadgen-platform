@@ -70,23 +70,23 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
   }
 
   return (
-    <section className="bg-white">
-      <div className="mx-auto w-full max-w-5xl px-4 py-16 sm:px-6 lg:py-24">
+    <section className="bg-neutral-50/80 py-16">
+      <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
         <ScrollReveal>
-          <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-neutral-200/90 bg-white p-6 shadow-sm sm:p-10">
+          <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-neutral-200/90 bg-white p-8 shadow-sm sm:p-12">
             <Image
               src="/images/delivery/boxes-left.jpg"
               alt=""
-              width={220}
-              height={220}
-              className="pointer-events-none absolute bottom-0 left-0 z-0 hidden max-h-52 w-auto object-contain select-none lg:block xl:max-h-60"
+              width={360}
+              height={360}
+              className="pointer-events-none absolute -bottom-4 -left-4 z-0 hidden max-h-72 w-auto object-contain select-none lg:block xl:max-h-80"
             />
             <Image
               src="/images/delivery/boxes-right.jpg"
               alt=""
-              width={220}
-              height={220}
-              className="pointer-events-none absolute right-0 bottom-0 z-0 hidden max-h-52 w-auto object-contain select-none lg:block xl:max-h-60"
+              width={360}
+              height={360}
+              className="pointer-events-none absolute -right-4 -bottom-4 z-0 hidden max-h-72 w-auto object-contain select-none lg:block xl:max-h-80"
             />
             <h2 className="relative z-10 text-center text-2xl font-extrabold tracking-wide text-neutral-900 uppercase sm:text-3xl">
               {copy.title}

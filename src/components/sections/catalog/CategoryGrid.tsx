@@ -26,8 +26,8 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
   const hasMore = copy.items.length > MOBILE_PREVIEW;
 
   return (
-    <section id="catalog" className="scroll-mt-20 bg-white">
-      <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
+    <section id="catalog" className="scroll-mt-20 bg-neutral-50/80 py-16">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>

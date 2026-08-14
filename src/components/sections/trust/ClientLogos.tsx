@@ -42,8 +42,8 @@ export function ClientLogos({ copy }: ClientLogosProps) {
   const logos = [...copy.logos, ...copy.logos];
 
   return (
-    <section className="bg-surface">
-      <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
+    <section className="bg-white py-14">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>

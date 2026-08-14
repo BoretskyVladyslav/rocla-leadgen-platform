@@ -28,8 +28,8 @@ export function WarehouseContacts({ copy }: WarehouseContactsProps) {
   const maps = mapsUrls(selected.city, selected.address);
 
   return (
-    <section id="contact" className="scroll-mt-20 bg-white">
-      <div className="mx-auto max-w-5xl px-4 py-12">
+    <section id="contact" className="scroll-mt-20 bg-white py-16">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>

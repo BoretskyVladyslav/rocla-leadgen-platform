@@ -43,8 +43,8 @@ export function ReviewsCarousel({ copy }: ReviewsCarouselProps) {
   });
 
   return (
-    <section id="reviews" className="scroll-mt-20 bg-white">
-      <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
+    <section id="reviews" className="scroll-mt-20 bg-white py-16">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
         <ScrollReveal>
           <div className="mb-8 flex flex-row items-end justify-between gap-4">
             <h2 className="text-left text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">

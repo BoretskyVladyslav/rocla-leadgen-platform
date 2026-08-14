@@ -62,8 +62,8 @@ export function FaqAccordion({ copy }: FaqAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="bg-white">
-      <div className="mx-auto w-full max-w-4xl px-4 py-20 sm:px-6 lg:py-28">
+    <section className="bg-white py-16">
+      <div className="mx-auto w-full max-w-4xl px-4 sm:px-6">
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
           <ul className="mt-10">
