@@ -73,11 +73,12 @@ export function ConsultationBlock({ copy }: ConsultationBlockProps) {
       id="consultation"
       className="relative scroll-mt-20 overflow-hidden border-y border-border bg-[#eef5f8]"
     >
-      <div className="mx-auto grid w-full max-w-7xl items-start gap-8 px-4 pt-16 sm:px-6 lg:grid-cols-[minmax(0,1.25fr)_auto] lg:gap-x-12 lg:pt-16 lg:pl-8 lg:pr-6">
-        <ScrollReveal className="flex flex-col gap-5 self-start lg:max-w-md lg:pt-8">
+      <div className="mx-auto grid w-full max-w-7xl items-start gap-8 px-4 pt-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,28rem)_auto] lg:gap-x-8 lg:pt-14 lg:pr-4">
+        <ScrollReveal className="flex flex-col self-start lg:max-w-sm">
           <h2 className="text-2xl font-bold tracking-tight text-heading sm:text-3xl">
             {copy.title}
           </h2>
+          <p className="mt-1 mb-6 text-xs text-neutral-500">{copy.subtitle}</p>
           <ul className="flex flex-col gap-3">
             {copy.benefits.map((item) => (
               <li key={item} className="flex items-start gap-3 text-sm text-foreground sm:text-base">
@@ -90,65 +91,66 @@ export function ConsultationBlock({ copy }: ConsultationBlockProps) {
           </ul>
         </ScrollReveal>
 
-        <div className="flex items-end justify-end gap-0 self-end">
-          <ScrollReveal delay={0.06} className="w-full max-w-sm shrink-0 self-center pb-10 lg:w-[20rem] lg:pb-12">
-            {status === "success" ? (
-              <p className="rounded-2xl border border-border bg-white px-5 py-8 text-center text-sm font-semibold text-heading shadow-sm">
-                {copy.success}
-              </p>
-            ) : (
-              <form
-                onSubmit={handleSubmit}
-                className="flex flex-col gap-3 rounded-2xl border border-border bg-white p-5 shadow-sm sm:p-6"
-                noValidate
-              >
-                <Input
-                  id="consultation-fullName"
-                  label={copy.fullName}
-                  name="fullName"
-                  required
-                  value={fullName}
-                  error={errors.fullName}
-                  onBlur={handleBlur}
-                  onChange={(e) => setFullName(e.target.value)}
-                />
-                <PhoneInput
-                  id="consultation-phone"
-                  label={copy.phone}
-                  name="phone"
-                  required
-                  value={phone}
-                  error={errors.phone}
-                  onBlur={handleBlur}
-                  onValueChange={setPhone}
-                />
-                <Input
-                  id="consultation-email"
-                  label={copy.email}
-                  name="email"
-                  type="email"
-                  value={email}
-                  error={errors.email}
-                  onBlur={handleBlur}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <Button type="submit" size="lg" className="mt-1 w-full">
-                  {copy.submit}
-                </Button>
-              </form>
-            )}
-          </ScrollReveal>
+        <ScrollReveal delay={0.06} className="w-full max-w-md self-start justify-self-center lg:justify-self-stretch">
+          {status === "success" ? (
+            <p className="rounded-3xl border border-border bg-white px-8 py-10 text-center text-sm font-semibold text-heading shadow-sm">
+              {copy.success}
+            </p>
+          ) : (
+            <form
+              onSubmit={handleSubmit}
+              className="flex w-full flex-col gap-2 rounded-3xl border border-border bg-white p-8 shadow-sm"
+              noValidate
+            >
+              <Input
+                id="consultation-fullName"
+                label={copy.fullName}
+                name="fullName"
+                required
+                value={fullName}
+                error={errors.fullName}
+                onBlur={handleBlur}
+                onChange={(e) => setFullName(e.target.value)}
+                className="h-auto py-3.5 px-4 text-base"
+              />
+              <PhoneInput
+                id="consultation-phone"
+                label={copy.phone}
+                name="phone"
+                required
+                value={phone}
+                error={errors.phone}
+                onBlur={handleBlur}
+                onValueChange={setPhone}
+                className="h-auto min-h-12 py-1"
+              />
+              <Input
+                id="consultation-email"
+                label={copy.email}
+                name="email"
+                type="email"
+                value={email}
+                error={errors.email}
+                onBlur={handleBlur}
+                onChange={(e) => setEmail(e.target.value)}
+                className="h-auto py-3.5 px-4 text-base"
+              />
+              <Button type="submit" size="lg" className="mt-2 h-14 w-full text-base font-bold">
+                {copy.submit}
+              </Button>
+            </form>
+          )}
+        </ScrollReveal>
 
-          <div className="relative self-end">
-            <Image
-              src="/images/manager.png"
-              alt={copy.imageAlt}
-              width={400}
-              height={600}
-              sizes="(max-width: 1024px) 200px, 240px"
-              className="h-[300px] w-auto object-contain object-bottom lg:h-[380px]"
-            />
-          </div>
+        <div className="relative justify-self-end self-end">
+          <Image
+            src="/images/manager.png"
+            alt={copy.imageAlt}
+            width={480}
+            height={720}
+            sizes="(max-width: 1280px) 260px, 300px"
+            className="h-[400px] w-auto object-contain object-bottom lg:h-[460px] xl:h-[500px]"
+          />
         </div>
       </div>
     </section>

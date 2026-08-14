@@ -189,6 +189,7 @@ export interface Dictionary {
   };
   consultation: {
     title: string;
+    subtitle: string;
     benefits: string[];
     fullName: string;
     phone: string;
@@ -750,6 +751,7 @@ const DICTIONARY_UK: Dictionary = {
   },
   consultation: {
     title: "Потрібна допомога з вибором?",
+    subtitle: "* Зв'яжіться з нашим менеджером",
     benefits: [
       "Допоможемо підібрати під ваші задачі",
       "Індивідуальний розрахунок вартості",
@@ -1180,6 +1182,7 @@ const DICTIONARY_RU: Dictionary = {
   },
   consultation: {
     title: "Нужна помощь с выбором?",
+    subtitle: "* Свяжитесь с нашим менеджером",
     benefits: [
       "Поможем подобрать под ваши задачи",
       "Индивидуальный расчет стоимости",
