@@ -13,7 +13,7 @@ export interface TrustBadgesProps {
 
 function CheckIcon() {
   return (
-    <svg className="h-4 w-4 text-accent-fg" viewBox="0 0 16 16" fill="none" aria-hidden>
+    <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden>
       <path
         d="M3.5 8.2 6.4 11l6.1-6.5"
         stroke="currentColor"
@@ -35,11 +35,11 @@ export function TrustBadges({ copy }: TrustBadgesProps) {
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>
-        <StaggerReveal className="mt-12 grid gap-x-12 gap-y-8 sm:grid-cols-2 lg:gap-x-16 lg:gap-y-10">
+        <StaggerReveal className="mt-12 grid grid-cols-1 gap-x-12 gap-y-8 md:grid-cols-2">
           {copy.items.map((item) => (
             <StaggerItem key={item.label}>
               <div className="flex gap-4">
-                <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-400/20 text-amber-500">
                   <CheckIcon />
                 </span>
                 <div>
