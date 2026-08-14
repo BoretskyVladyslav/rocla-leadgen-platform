@@ -75,26 +75,26 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
         <ScrollReveal>
           <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-neutral-200/90 bg-white p-8 shadow-sm sm:p-12">
             <div
-              className="pointer-events-none absolute bottom-0 left-0 z-0 hidden h-[55%] w-[40%] md:block lg:h-[70%] xl:h-[75%]"
+              className="pointer-events-none absolute bottom-0 left-0 z-0 hidden h-[38%] max-h-[190px] w-[32%] md:block lg:h-[42%] xl:h-[45%]"
               aria-hidden
             >
               <Image
                 src="/images/delivery/boxes-left.jpg"
                 alt=""
                 fill
-                sizes="(min-width: 1280px) 420px, (min-width: 768px) 280px, 0px"
+                sizes="(min-width: 1280px) 280px, (min-width: 768px) 200px, 0px"
                 className="max-h-none max-w-none object-contain object-left-bottom"
               />
             </div>
             <div
-              className="pointer-events-none absolute right-0 bottom-0 z-0 hidden h-[55%] w-[40%] md:block lg:h-[70%] xl:h-[75%]"
+              className="pointer-events-none absolute right-0 bottom-0 z-0 hidden h-[38%] max-h-[190px] w-[32%] md:block lg:h-[42%] xl:h-[45%]"
               aria-hidden
             >
               <Image
                 src="/images/delivery/boxes-right.jpg"
                 alt=""
                 fill
-                sizes="(min-width: 1280px) 420px, (min-width: 768px) 280px, 0px"
+                sizes="(min-width: 1280px) 280px, (min-width: 768px) 200px, 0px"
                 className="max-h-none max-w-none object-contain object-right-bottom"
               />
             </div>
