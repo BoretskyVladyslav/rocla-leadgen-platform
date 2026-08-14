@@ -1,3 +1,4 @@
+import { Clock, Mail, Phone } from "lucide-react";
 import { HashLink } from "@/components/layout/HashLink";
 import { MotionLink } from "@/components/motion/MotionLink";
 import type { Dictionary } from "@/data/dictionary";
@@ -7,18 +8,61 @@ export interface FooterProps {
   copy: Dictionary["footer"];
 }
 
+function iconClassName() {
+  return "h-6 w-6";
+}
+
 function TelegramIcon() {
   return (
-    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+    <svg
+      className={iconClassName()}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M14.5 9.5 9 12.5l7.5 6.5L21 4 3 11l4.5 1.5L9 19l2-3.5" />
     </svg>
   );
 }
 
 function InstagramIcon() {
   return (
-    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+    <svg
+      className={iconClassName()}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function ViberIcon() {
+  return (
+    <svg
+      className={iconClassName()}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M9.5 7.5c.4 2 1.6 3.8 3.2 5.2 1.5 1.3 3.4 2.2 5.3 2.4" />
+      <path d="M14.2 7.8c1.1.4 2.1 1.2 2.8 2.2.6.9.9 2 .9 3.1" />
+      <path d="M8.2 3.6C4.9 5.2 3 8.6 3 12.3c0 1.7.5 3.3 1.3 4.7L3 21l4.2-1.2c1.3.7 2.8 1.1 4.3 1.1 5.2 0 9.5-4.3 9.5-9.5S16.7 2 11.5 2c-1.2 0-2.3.2-3.3.6Z" />
     </svg>
   );
 }
@@ -26,6 +70,7 @@ function InstagramIcon() {
 const SOCIAL_ICONS = {
   telegram: TelegramIcon,
   instagram: InstagramIcon,
+  viber: ViberIcon,
 } as const;
 
 export function Footer({ lang, copy }: FooterProps) {
@@ -33,8 +78,7 @@ export function Footer({ lang, copy }: FooterProps) {
 
   return (
     <footer className="bg-[#1a1a1a] text-white">
-      <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        {/* Mobile */}
+      <div className="mx-auto w-full max-w-7xl px-4 pt-12 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-10 md:hidden">
           <BrandColumn copy={copy} />
           <div className="grid grid-cols-2 gap-6">
@@ -48,7 +92,6 @@ export function Footer({ lang, copy }: FooterProps) {
           <HelpColumn lang={lang} copy={copy} telHref={telHref} />
         </div>
 
-        {/* Desktop — 4 columns */}
         <div className="hidden gap-8 md:grid md:grid-cols-4 lg:gap-10">
           <BrandColumn copy={copy} />
           <LinkColumn title={copy.navTitle} links={copy.navLinks} lang={lang} />
@@ -59,10 +102,10 @@ export function Footer({ lang, copy }: FooterProps) {
           />
           <HelpColumn lang={lang} copy={copy} telHref={telHref} />
         </div>
-      </div>
 
-      <div className="border-t border-white/10">
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-2 px-4 py-4 text-xs leading-relaxed text-white/55 sm:px-6 md:flex-row md:items-center md:justify-between">
+        <div className="my-8 border-t border-neutral-800" />
+
+        <div className="flex flex-col gap-2 pb-6 text-xs leading-relaxed text-white/55 md:flex-row md:items-center md:justify-between">
           <p>{copy.legal}</p>
           <p>{copy.siteNote}</p>
         </div>
@@ -71,51 +114,45 @@ export function Footer({ lang, copy }: FooterProps) {
   );
 }
 
+function BrandMark({ brand }: { brand: string }) {
+  return (
+    <p className="font-sans text-3xl font-extrabold uppercase tracking-tight">
+      <span className="text-amber-500">{brand.slice(0, 1)}</span>
+      <span className="text-white">{brand.slice(1)}</span>
+    </p>
+  );
+}
+
 function BrandColumn({ copy }: { copy: Dictionary["footer"] }) {
   return (
-    <div className="flex flex-col gap-4">
-      <p className="font-serif text-xl font-bold uppercase tracking-[0.14em] text-white">
-        {copy.brand}
-      </p>
+    <div className="flex h-full flex-col gap-4">
+      <BrandMark brand={copy.brand} />
       <p className="max-w-xs text-sm leading-relaxed text-white/75">
         {copy.tagline}
       </p>
-      <div className="flex items-center gap-3">
+      <p className="mt-auto text-xs text-white/45">{copy.copyright}</p>
+      <p className="text-xs text-white/45">{copy.privacy}</p>
+      <div className="flex items-center gap-4">
         {copy.social.map((item) => {
-          if (item.network === "viber") {
-            return (
-              <a
-                key={item.network}
-                href="viber://chat?number=%2B380981540982"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex h-10 w-10 items-center justify-center rounded-full bg-neutral-800 transition-colors hover:bg-[#7360F2]"
-                aria-label="Viber"
-              >
-                <svg className="h-5 w-5 fill-white" viewBox="0 0 24 24" aria-hidden>
-                  <path d="M12.01 2C6.49 2 2 6.49 2 12.01c0 2.06.63 3.97 1.71 5.56L2.3 21.7a.75.75 0 0 0 .93.93l4.13-1.41A10.01 10.01 0 0 0 12.01 22C17.53 22 22 17.51 22 12.01 22 6.49 17.53 2 12.01 2zm4.7 13.56c-.36.98-1.57 1.76-2.58 1.84-.71.05-1.63-.16-3.79-1.07-2.61-1.1-4.46-3.62-5.46-5.06-.21-.3-.49-.78-.49-1.32 0-.96.61-1.68 1.02-2.05.21-.19.49-.3.77-.3.26 0 .42.02.58.05.37.08.57.51.78.97.24.52.54 1.25.61 1.38.11.2.14.41.03.62-.08.15-.17.29-.27.42-.14.18-.3.33-.4.47-.13.17-.16.32-.07.49.52.99 1.32 1.87 2.34 2.51.2.13.37.14.52.02.2-.16.5-.54.67-.78.17-.24.38-.26.6-.17.18.07 1.24.59 1.49.71.3.15.54.26.63.4.11.19.11.83-.24 1.81z" />
-                </svg>
-              </a>
-            );
-          }
-
           const Icon = SOCIAL_ICONS[item.network];
           return (
             <a
               key={item.network}
-              href={item.href}
+              href={
+                item.network === "viber"
+                  ? "viber://chat?number=%2B380981540982"
+                  : item.href
+              }
               target="_blank"
               rel="noopener noreferrer"
               aria-label={item.label}
-              className="group inline-flex h-10 w-10 items-center justify-center rounded-full bg-neutral-800 text-neutral-300 transition hover:bg-[#FFCC00] hover:text-black"
+              className="text-white transition-colors hover:text-amber-500"
             >
               <Icon />
             </a>
           );
         })}
       </div>
-      <p className="text-xs text-white/45">{copy.copyright}</p>
-      <p className="text-xs text-white/45">{copy.privacy}</p>
     </div>
   );
 }
@@ -171,21 +208,26 @@ function HelpColumn({
       >
         {copy.cta}
       </MotionLink>
-      <ul className="flex flex-col gap-2.5 text-sm text-white/85">
+      <ul className="flex flex-col gap-3 text-sm text-white/85">
         <li>
-          <a href={telHref} className="font-semibold hover:text-accent">
+          <a href={telHref} className="flex items-center gap-3 font-semibold hover:text-accent">
+            <Phone className="h-5 w-5 shrink-0 text-amber-500" aria-hidden />
             {copy.phone}
           </a>
         </li>
         <li>
           <a
             href={`mailto:${copy.email}`}
-            className="hover:text-white"
+            className="flex items-center gap-3 hover:text-white"
           >
+            <Mail className="h-5 w-5 shrink-0 text-amber-500" aria-hidden />
             {copy.email}
           </a>
         </li>
-        <li className="text-white/70">{copy.hours}</li>
+        <li className="flex items-center gap-3 text-white/70">
+          <Clock className="h-5 w-5 shrink-0 text-amber-500" aria-hidden />
+          {copy.hours}
+        </li>
       </ul>
     </div>
   );
