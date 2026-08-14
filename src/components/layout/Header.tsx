@@ -25,8 +25,9 @@ export function Header({ lang, copy }: HeaderProps) {
     <header className="sticky top-0 z-50 border-b border-border bg-white">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
         <Link href={`/${lang}`} className="min-w-0 shrink leading-tight">
-          <span className="block font-serif text-xl font-bold uppercase tracking-[0.14em] text-heading">
-            {copy.brand}
+          <span className="block font-sans text-2xl font-extrabold uppercase tracking-tight md:text-3xl">
+            <span className="text-amber-500">{copy.brand.slice(0, 1)}</span>
+            <span className="text-neutral-900">{copy.brand.slice(1)}</span>
           </span>
           <span className="mt-0.5 block max-w-[11.5rem] text-[9px] leading-snug text-muted sm:max-w-[16rem] sm:text-[10px] lg:max-w-[18rem]">
             {copy.tagline}

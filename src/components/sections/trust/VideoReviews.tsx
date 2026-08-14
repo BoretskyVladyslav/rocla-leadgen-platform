@@ -58,7 +58,7 @@ export function VideoReviews({ copy, className }: VideoReviewsProps) {
                     aria-hidden
                     className="absolute inset-0 z-10 flex items-center justify-center"
                   >
-                    <span className="flex h-16 w-16 items-center justify-center rounded-full bg-amber-400/80 text-heading backdrop-blur-sm transition-transform group-hover:scale-110">
+                    <span className="flex h-16 w-16 items-center justify-center rounded-full border border-amber-300/50 bg-amber-400/30 text-white backdrop-blur-md transition-transform group-hover:scale-110">
                       <Play
                         className="ml-0.5 h-7 w-7 fill-current"
                         aria-hidden

@@ -118,7 +118,7 @@ export function RelatedProductsCarousel({
                 >
                   <Link
                     href={`/${lang}/product/${product.slug}`}
-                    className="block overflow-hidden rounded-t-2xl rounded-b-none bg-neutral-50"
+                    className="block overflow-hidden rounded-t-2xl rounded-b-none bg-white"
                     draggable={false}
                   >
                     <MediaImage
@@ -127,10 +127,10 @@ export function RelatedProductsCarousel({
                       aspect="4/3"
                       fit="contain"
                       sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 25vw"
-                      className="h-full w-full rounded-t-2xl rounded-b-none bg-neutral-50"
+                      className="h-full w-full rounded-t-2xl rounded-b-none bg-white"
                     />
                   </Link>
-                  <div className="flex flex-1 flex-col gap-3 p-4">
+                  <div className="flex flex-1 flex-col gap-3 bg-neutral-50 p-4">
                     <Link
                       href={`/${lang}/product/${product.slug}`}
                       draggable={false}
