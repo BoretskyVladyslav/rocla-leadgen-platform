@@ -31,7 +31,10 @@ export function RelatedProductsCarousel({
   title,
   orderCta,
 }: RelatedProductsCarouselProps) {
-  const getKey = useCallback((product: Product) => product.slug, []);
+  const getKey = useCallback(
+    (product: Product) => product.images?.[0]?.src ?? product.slug,
+    [],
+  );
 
   const {
     trackRef,
@@ -54,8 +57,8 @@ export function RelatedProductsCarousel({
   if (products.length === 0) return null;
 
   return (
-    <section id="related" className="scroll-mt-20 bg-white">
-      <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
+    <section id="related" className="scroll-mt-20 bg-amber-50/30 py-16 md:py-24">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
         <ScrollReveal>
           <div className="mb-8 flex flex-row items-end justify-between gap-4">
             <h2 className="text-left text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">
@@ -115,17 +118,16 @@ export function RelatedProductsCarousel({
                 >
                   <Link
                     href={`/${lang}/product/${product.slug}`}
-                    className="block overflow-hidden rounded-t-2xl rounded-b-none"
+                    className="block overflow-hidden rounded-t-2xl rounded-b-none bg-neutral-50"
                     draggable={false}
                   >
                     <MediaImage
                       src={product.images?.[0]?.src ?? product.imageSrc}
                       alt={product.images?.[0]?.alt ?? product.imageAlt ?? product.name}
                       aspect="4/3"
-                      fit="cover"
-                      objectPosition="object-top"
+                      fit="contain"
                       sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 25vw"
-                      className="h-full w-full rounded-t-2xl rounded-b-none"
+                      className="h-full w-full rounded-t-2xl rounded-b-none bg-neutral-50"
                     />
                   </Link>
                   <div className="flex flex-1 flex-col gap-3 p-4">

@@ -11,9 +11,11 @@ import {
   validateLeadFields,
   type LeadFieldErrors,
 } from "@/lib/validation";
+import { cn } from "@/lib/utils";
 
 export interface ConsultationBlockProps {
   copy: Dictionary["consultation"];
+  className?: string;
 }
 
 function CheckIcon() {
@@ -30,7 +32,7 @@ function CheckIcon() {
   );
 }
 
-export function ConsultationBlock({ copy }: ConsultationBlockProps) {
+export function ConsultationBlock({ copy, className }: ConsultationBlockProps) {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -71,7 +73,10 @@ export function ConsultationBlock({ copy }: ConsultationBlockProps) {
   return (
     <section
       id="consultation"
-      className="relative scroll-mt-20 overflow-hidden border-y border-border bg-[#eef5f8]"
+      className={cn(
+        "relative scroll-mt-20 overflow-hidden border-y border-border bg-[#eef5f8]",
+        className,
+      )}
     >
       <div className="mx-auto grid w-full max-w-7xl items-start gap-8 px-4 pt-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,28rem)_auto] lg:gap-x-8 lg:pt-14 lg:pr-4">
         <ScrollReveal className="flex flex-col self-start lg:max-w-sm">

@@ -1,17 +1,23 @@
 "use client";
 
+import { Play } from "lucide-react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { MediaImage } from "@/components/ui/MediaImage";
 import type { Dictionary } from "@/data/dictionary";
+import { cn } from "@/lib/utils";
 
 export interface VideoReviewsProps {
   copy: Dictionary["videos"];
+  className?: string;
 }
 
-export function VideoReviews({ copy }: VideoReviewsProps) {
+export function VideoReviews({ copy, className }: VideoReviewsProps) {
   return (
-    <section id="videos" className="scroll-mt-20 bg-surface-muted">
-      <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
+    <section
+      id="videos"
+      className={cn("scroll-mt-20 bg-purple-50/50 py-16 md:py-24", className)}
+    >
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
         <ScrollReveal>
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="section-heading">{copy.title}</h2>
@@ -45,23 +51,18 @@ export function VideoReviews({ copy }: VideoReviewsProps) {
                   <p className="pointer-events-none absolute inset-x-0 top-0 z-10 p-4 text-left text-sm font-bold leading-snug text-white drop-shadow">
                     {item.title}
                   </p>
-                  <span
-                    className="absolute right-3 bottom-3 z-10 rounded-md bg-black/75 px-2 py-0.5 text-xs font-bold tabular-nums text-white"
-                  >
+                  <span className="absolute right-3 bottom-3 z-10 rounded-md bg-black/75 px-2 py-0.5 text-xs font-bold tabular-nums text-white">
                     {item.duration}
                   </span>
                   <span
                     aria-hidden
                     className="absolute inset-0 z-10 flex items-center justify-center"
                   >
-                    <span className="flex h-16 w-16 items-center justify-center rounded-full bg-red-600 text-white shadow-lg transition-transform group-hover:scale-110">
-                      <svg
-                        viewBox="0 0 24 24"
+                    <span className="flex h-16 w-16 items-center justify-center rounded-full bg-amber-400/80 text-heading backdrop-blur-sm transition-transform group-hover:scale-110">
+                      <Play
                         className="ml-0.5 h-7 w-7 fill-current"
                         aria-hidden
-                      >
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
+                      />
                     </span>
                   </span>
                   <span className="sr-only">{item.title}</span>

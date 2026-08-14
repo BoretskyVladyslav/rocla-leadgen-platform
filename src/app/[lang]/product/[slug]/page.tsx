@@ -37,9 +37,19 @@ export default async function ProductPage({
     notFound();
   }
 
-  const related = getProducts(lang)
-    .filter((item) => item.slug !== product.slug)
-    .slice(0, 5);
+  const others = getProducts(lang).filter((item) => item.slug !== product.slug);
+  const related = Array.from({ length: 8 }, (_, i) => {
+    const base = others[i % others.length];
+    return {
+      ...base,
+      images: [
+        {
+          src: `/images/products/related-${i + 1}.jpg`,
+          alt: base.name,
+        },
+      ],
+    };
+  });
 
   const crumbs = dict.product.breadcrumbs;
 
@@ -66,10 +76,16 @@ export default async function ProductPage({
         ]}
       />
       <ProductHero product={product} copy={dict.product} />
-      <ClientLogos copy={dict.clients} />
+      <ClientLogos
+        copy={dict.clients}
+        className="bg-purple-50/50 py-16 md:py-24"
+      />
       <ProductTabs product={product} copy={dict.product} />
       <ProductAdvantages copy={dict.product.advantages} />
-      <ConsultationBlock copy={dict.consultation} />
+      <ConsultationBlock
+        copy={dict.consultation}
+        className="bg-sky-50/50"
+      />
       <RelatedProductsCarousel
         lang={lang}
         products={related}
@@ -77,11 +93,20 @@ export default async function ProductPage({
         title={dict.product.relatedTitle}
         orderCta={dict.product.orderCta}
       />
-      <DeliveryEstimate copy={dict.delivery} />
+      <DeliveryEstimate
+        copy={dict.delivery}
+        className="bg-emerald-50/50 py-16 md:py-24"
+      />
       <VideoReviews copy={dict.videos} />
-      <ReviewsCarousel copy={dict.reviews} />
+      <ReviewsCarousel
+        copy={dict.reviews}
+        className="bg-yellow-50/30 py-16 md:py-24"
+      />
       <PdpFaqOffer faq={dict.faq} offer={dict.product.commercialOffer} />
-      <SeoTextAccordion copy={dict.seoText} />
+      <SeoTextAccordion
+        copy={dict.seoText}
+        className="bg-rose-50/30 py-16 md:py-24"
+      />
     </>
   );
 }

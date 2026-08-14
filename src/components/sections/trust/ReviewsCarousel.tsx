@@ -14,11 +14,12 @@ import { cn } from "@/lib/utils";
 
 export interface ReviewsCarouselProps {
   copy: Dictionary["reviews"];
+  className?: string;
 }
 
 type ReviewItem = Dictionary["reviews"]["items"][number];
 
-export function ReviewsCarousel({ copy }: ReviewsCarouselProps) {
+export function ReviewsCarousel({ copy, className }: ReviewsCarouselProps) {
   const items = copy.items;
   const getKey = useCallback(
     (item: ReviewItem) => item.id,
@@ -43,7 +44,7 @@ export function ReviewsCarousel({ copy }: ReviewsCarouselProps) {
   });
 
   return (
-    <section id="reviews" className="scroll-mt-20 bg-white py-16">
+    <section id="reviews" className={cn("scroll-mt-20 bg-white py-16", className)}>
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
         <ScrollReveal>
           <div className="mb-8 flex flex-row items-end justify-between gap-4">

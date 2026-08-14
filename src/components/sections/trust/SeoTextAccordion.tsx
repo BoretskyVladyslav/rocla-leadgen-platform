@@ -3,18 +3,20 @@
 import { useId, useState } from "react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import type { Dictionary } from "@/data/dictionary";
+import { cn } from "@/lib/utils";
 
 export interface SeoTextAccordionProps {
   copy: Dictionary["seoText"];
+  className?: string;
 }
 
-export function SeoTextAccordion({ copy }: SeoTextAccordionProps) {
+export function SeoTextAccordion({ copy, className }: SeoTextAccordionProps) {
   const [expanded, setExpanded] = useState(false);
   const contentId = useId();
 
   return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-5xl px-4 py-10">
+    <section className={cn("bg-white py-10", className)}>
+      <div className="mx-auto max-w-5xl px-4">
         <ScrollReveal>
           <h2 className="mb-4 text-2xl font-bold text-neutral-900">
             {copy.title}

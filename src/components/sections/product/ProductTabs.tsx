@@ -25,8 +25,8 @@ export function ProductTabs({ product, copy }: ProductTabsProps) {
   const deliveryBullets = copy.deliveryBullets ?? [];
 
   return (
-    <section className="border-t border-border bg-neutral-50/80">
-      <div className="mx-auto w-full max-w-7xl px-4 pb-10 pt-2 sm:px-6 lg:pb-14">
+    <section className="border-t border-border bg-emerald-50/30 py-16 md:py-24">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
         <div
           role="tablist"
           aria-label={copy.specifications}

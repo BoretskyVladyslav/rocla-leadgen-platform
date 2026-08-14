@@ -12,8 +12,8 @@ const CARD_CLASS =
 
 export function PdpFaqOffer({ faq, offer }: PdpFaqOfferProps) {
   return (
-    <section className="bg-neutral-50/80">
-      <div className="mx-auto grid w-full max-w-7xl items-stretch gap-8 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-20">
+    <section className="bg-sky-50/50 py-16 md:py-24">
+      <div className="mx-auto grid w-full max-w-7xl items-stretch gap-8 px-4 sm:px-6 lg:grid-cols-2">
         <div className={CARD_CLASS}>
           <FaqAccordion copy={faq} embedded />
         </div>

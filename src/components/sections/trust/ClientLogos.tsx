@@ -3,10 +3,12 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { cn } from "@/lib/utils";
 import type { Dictionary } from "@/data/dictionary";
 
 export interface ClientLogosProps {
   copy: Dictionary["clients"];
+  className?: string;
 }
 
 function LogoMark({
@@ -38,11 +40,11 @@ function LogoMark({
   );
 }
 
-export function ClientLogos({ copy }: ClientLogosProps) {
+export function ClientLogos({ copy, className }: ClientLogosProps) {
   const logos = [...copy.logos, ...copy.logos];
 
   return (
-    <section className="bg-white py-14">
+    <section className={cn("bg-white py-14", className)}>
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>

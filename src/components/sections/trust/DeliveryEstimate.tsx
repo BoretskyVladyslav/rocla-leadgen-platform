@@ -11,9 +11,11 @@ import {
   validateCallbackFields,
   type CallbackFieldErrors,
 } from "@/lib/validation";
+import { cn } from "@/lib/utils";
 
 export interface DeliveryEstimateProps {
   copy: Dictionary["delivery"];
+  className?: string;
 }
 
 function PartnerLogo({ name, imageSrc }: { name: string; imageSrc: string }) {
@@ -39,7 +41,7 @@ function PartnerLogo({ name, imageSrc }: { name: string; imageSrc: string }) {
   );
 }
 
-export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
+export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState<CallbackFieldErrors>({});
@@ -70,7 +72,7 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
   }
 
   return (
-    <section className="bg-neutral-50/80 py-16">
+    <section className={cn("bg-neutral-50/80 py-16", className)}>
       <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
         <ScrollReveal>
           <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-neutral-200/90 bg-white p-8 shadow-sm sm:p-12">
