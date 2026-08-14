@@ -54,9 +54,9 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
                       src={image.src}
                       alt={image.alt}
                       aspect="1/1"
-                      fit="cover"
+                      fit="contain"
                       sizes="80px"
-                      className="h-full w-full"
+                      className="h-full w-full bg-neutral-50"
                     />
                   </button>
                 </li>
@@ -68,10 +68,10 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
             <MediaImage
               src={activeImage?.src}
               alt={activeImage?.alt ?? product.name ?? copy.imagePlaceholder}
-              aspect="4/3"
-              fit="cover"
+              aspect="4/5"
+              fit="contain"
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="h-full w-full rounded-2xl border-2 border-accent shadow-sm"
+              className="h-full w-full rounded-2xl border-2 border-accent bg-neutral-50 shadow-sm"
             />
           </div>
         </div>

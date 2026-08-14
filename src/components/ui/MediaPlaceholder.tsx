@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-export type PlaceholderAspect = "16/9" | "4/3" | "1/1" | "square" | "3/4";
+export type PlaceholderAspect = "16/9" | "4/3" | "4/5" | "1/1" | "square" | "3/4";
 
 export interface MediaPlaceholderProps {
   label?: string;
@@ -15,6 +15,7 @@ export interface MediaPlaceholderProps {
 const aspectClass: Record<PlaceholderAspect, string> = {
   "16/9": "aspect-video",
   "4/3": "aspect-[4/3]",
+  "4/5": "aspect-[4/5]",
   "1/1": "aspect-square",
   square: "aspect-square",
   "3/4": "aspect-[3/4]",
