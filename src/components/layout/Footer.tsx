@@ -107,9 +107,8 @@ export function Footer({ lang, copy }: FooterProps) {
 function BrandColumn({ copy }: { copy: Dictionary["footer"] }) {
   return (
     <div className="flex flex-col gap-4">
-      <p className="font-serif text-xl font-bold uppercase tracking-[0.14em]">
-        <span className="text-accent">K</span>
-        <span className="text-white">AISER</span>
+      <p className="font-serif text-xl font-bold uppercase tracking-[0.14em] text-white">
+        {copy.brand}
       </p>
       <p className="max-w-xs text-sm leading-relaxed text-white/75">
         {copy.tagline}
@@ -124,7 +123,7 @@ function BrandColumn({ copy }: { copy: Dictionary["footer"] }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={item.label}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-accent hover:text-accent"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-neutral-800 text-white transition-colors hover:bg-amber-400 hover:text-neutral-900"
             >
               <Icon />
             </a>

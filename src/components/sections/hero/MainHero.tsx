@@ -193,20 +193,8 @@ export function MainHero({ copy }: MainHeroProps) {
               </div>
             )}
           </form>
-        </ScrollReveal>
 
-        <ScrollReveal delay={0.1} className="relative mx-auto flex h-full w-full min-w-0 max-w-lg flex-col lg:max-w-none">
-          <MediaImage
-            src={copy.imageSrc}
-            alt={copy.imageAlt}
-            aspect={false}
-            fit="contain"
-            priority
-            objectPosition="object-center"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="min-h-[320px] rounded-2xl border border-gray-200 bg-surface shadow-sm sm:min-h-[380px] lg:min-h-[440px]"
-          />
-          <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             {copy.trustBadges.map((badge, index) => (
               <li
                 key={badge}
@@ -219,6 +207,19 @@ export function MainHero({ copy }: MainHeroProps) {
               </li>
             ))}
           </ul>
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.1} className="relative mx-auto h-full w-full min-w-0 max-w-lg lg:max-w-none">
+          <MediaImage
+            src={copy.imageSrc}
+            alt={copy.imageAlt}
+            aspect={false}
+            fit="cover"
+            priority
+            objectPosition="object-center"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="h-full min-h-[460px] rounded-2xl border border-gray-200 bg-surface shadow-sm lg:min-h-[500px]"
+          />
         </ScrollReveal>
       </div>
     </section>

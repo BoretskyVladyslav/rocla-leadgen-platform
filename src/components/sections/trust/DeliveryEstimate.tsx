@@ -38,7 +38,7 @@ function PartnerLogo({ name, imageSrc }: { name: string; imageSrc: string }) {
       <img
         src={imageSrc}
         alt={name}
-        className="h-8 w-auto max-w-[6.5rem] object-contain opacity-80 grayscale transition-[filter,opacity] hover:opacity-100 hover:grayscale-0 sm:h-9 sm:max-w-[7.5rem]"
+        className="max-h-7 max-w-[90px] object-contain"
         onError={() => setFailed(true)}
       />
     );
@@ -50,7 +50,7 @@ function PartnerLogo({ name, imageSrc }: { name: string; imageSrc: string }) {
       alt={name}
       width={120}
       height={36}
-      className="h-8 w-auto max-w-[6.5rem] object-contain opacity-80 grayscale transition-[filter,opacity] hover:opacity-100 hover:grayscale-0 sm:h-9 sm:max-w-[7.5rem]"
+      className="max-h-7 max-w-[90px] object-contain"
       onError={() => setFailed(true)}
     />
   );
@@ -174,11 +174,11 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
               <p className="mb-5 text-center text-sm font-bold uppercase tracking-[0.12em] text-heading">
                 {copy.partnersTitle}
               </p>
-              <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-5 sm:gap-x-10">
+              <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-5 sm:gap-x-8">
                 {copy.partners.map((partner) => (
                   <li
                     key={partner.name}
-                    className="flex h-10 items-center justify-center"
+                    className="flex h-8 w-24 items-center justify-center grayscale opacity-80 transition hover:grayscale-0 hover:opacity-100"
                   >
                     <PartnerLogo
                       name={partner.name}

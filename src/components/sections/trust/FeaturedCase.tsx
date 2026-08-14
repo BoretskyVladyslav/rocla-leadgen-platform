@@ -16,11 +16,11 @@ export function FeaturedCase({ lang, copy }: FeaturedCaseProps) {
           <MediaImage
             src={copy.imageSrc}
             alt={copy.imageAlt}
-            aspect={false}
+            aspect="4/3"
             fit="cover"
             objectPosition="object-center"
             sizes="(max-width: 1024px) 100vw, 50vw"
-            className="h-[280px] rounded-2xl border border-gray-200 shadow-sm sm:h-[340px] lg:h-[380px]"
+            className="min-h-[360px] w-full rounded-2xl border border-gray-200 shadow-sm"
           />
         </ScrollReveal>
         <ScrollReveal delay={0.08} className="flex flex-col justify-center">
