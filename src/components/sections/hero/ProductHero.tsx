@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import { HashLink } from "@/components/layout/HashLink";
-import { MediaImage } from "@/components/ui/MediaImage";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
 import { cn } from "@/lib/utils";
@@ -35,30 +34,29 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
   return (
     <section className="bg-white">
       <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 pb-6 pt-6 sm:px-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12 lg:pb-8 lg:pt-8">
-        <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-start">
+        <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-stretch">
           {thumbCount > 1 ? (
-            <ul className="order-2 flex gap-2 sm:order-1 sm:w-20 sm:shrink-0 sm:flex-col">
+            <ul className="order-2 flex gap-2 sm:order-1 sm:w-[4.75rem] sm:shrink-0 sm:flex-col">
               {gallery.slice(0, thumbCount).map((image, index) => (
-                <li key={image.src} className="min-w-0 flex-1 sm:flex-none">
+                <li key={image.src} className="min-h-0 min-w-0 flex-1">
                   <button
                     type="button"
                     onClick={() => setActiveIndex(index)}
                     aria-label={`${copy.thumbPlaceholder} ${index + 1}`}
                     aria-pressed={index === activeIndex}
                     className={cn(
-                      "w-full overflow-hidden rounded-lg border-2 transition-opacity",
+                      "relative block h-full min-h-16 w-full overflow-hidden rounded-xl border-2 transition-opacity",
                       index === activeIndex
                         ? "border-accent"
                         : "border-transparent opacity-80 hover:opacity-100",
                     )}
                   >
-                    <MediaImage
+                    <Image
                       src={image.src}
                       alt={image.alt}
-                      aspect="1/1"
-                      fit="cover"
+                      fill
                       sizes="80px"
-                      className="h-full w-full"
+                      className="object-cover"
                     />
                   </button>
                 </li>
@@ -67,19 +65,20 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
           ) : null}
 
           <div className="order-1 min-w-0 w-full sm:order-2">
-            <div className="inline-block w-full overflow-hidden rounded-2xl border-2 border-accent bg-white shadow-sm">
+            <div className="relative aspect-square w-full overflow-hidden rounded-3xl border-2 border-accent">
               {activeImage?.src ? (
                 <Image
+                  key={activeImage.src}
                   src={activeImage.src}
                   alt={activeImage.alt ?? product.name ?? copy.imagePlaceholder}
-                  width={900}
-                  height={675}
+                  fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="h-auto w-full"
+                  className="object-cover"
+                  priority
                 />
               ) : (
                 <MediaPlaceholder
-                  aspect="4/3"
+                  aspect="1/1"
                   label={product.name ?? copy.imagePlaceholder}
                   bordered={false}
                 />
