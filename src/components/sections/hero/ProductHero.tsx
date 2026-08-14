@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { HashLink } from "@/components/layout/HashLink";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { MediaImage } from "@/components/ui/MediaImage";
 import type { Dictionary } from "@/data/dictionary";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/types/product";
@@ -13,11 +13,14 @@ export interface ProductHeroProps {
 }
 
 export function ProductHero({ product, copy }: ProductHeroProps) {
-  const thumbCount = Math.min(
-    Math.max(product.images?.length ?? 3, 1),
-    3,
-  );
+  const gallery = product.images?.length
+    ? product.images
+    : product.imageSrc
+      ? [{ src: product.imageSrc, alt: product.imageAlt ?? product.name }]
+      : [];
+  const thumbCount = Math.min(Math.max(gallery.length, 1), 3);
   const [activeIndex, setActiveIndex] = useState(0);
+  const activeImage = gallery[activeIndex];
   const hasDiscount = Boolean(
     product.compareAtPriceLabel && product.priceLabel,
   );
@@ -33,8 +36,8 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
         <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-start">
           {thumbCount > 1 ? (
             <ul className="order-2 flex gap-2 sm:order-1 sm:w-20 sm:shrink-0 sm:flex-col">
-              {Array.from({ length: thumbCount }).map((_, index) => (
-                <li key={index} className="min-w-0 flex-1 sm:flex-none">
+              {gallery.slice(0, thumbCount).map((image, index) => (
+                <li key={image.src} className="min-w-0 flex-1 sm:flex-none">
                   <button
                     type="button"
                     onClick={() => setActiveIndex(index)}
@@ -47,10 +50,13 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
                         : "opacity-80 hover:opacity-100",
                     )}
                   >
-                    <MediaPlaceholder
+                    <MediaImage
+                      src={image.src}
+                      alt={image.alt}
                       aspect="1/1"
-                      label={copy.thumbPlaceholder}
-                      bordered
+                      fit="contain"
+                      sizes="80px"
+                      className="rounded-lg border border-border bg-white"
                     />
                   </button>
                 </li>
@@ -59,14 +65,13 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
           ) : null}
 
           <div className="order-1 min-w-0 w-full sm:order-2">
-            <MediaPlaceholder
+            <MediaImage
+              src={activeImage?.src}
+              alt={activeImage?.alt ?? product.name ?? copy.imagePlaceholder}
               aspect="4/3"
-              label={
-                product.images?.[activeIndex]?.alt ??
-                product.name ??
-                copy.imagePlaceholder
-              }
-              className="rounded-2xl border-2 border-accent shadow-sm"
+              fit="contain"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="rounded-2xl border-2 border-accent bg-white shadow-sm"
             />
           </div>
         </div>

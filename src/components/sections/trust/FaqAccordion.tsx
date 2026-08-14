@@ -61,12 +61,14 @@ function AnswerBody({ text }: { text: string }) {
 }
 
 export function FaqAccordion({ copy, embedded = false }: FaqAccordionProps) {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const body = (
     <>
       <ScrollReveal>
-        <h2 className="section-heading">{copy.title}</h2>
+        <h2 className={embedded ? "text-left text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl" : "section-heading"}>
+          {copy.title}
+        </h2>
         <ul className="mt-10">
           {copy.items.map((item, index) => {
             const isOpen = openIndex === index;

@@ -6,11 +6,13 @@ import { FileUpload } from "@/components/ui/FileUpload";
 import { Input } from "@/components/ui/Input";
 import { PhoneInput } from "@/components/ui/PhoneInput";
 import type { Dictionary } from "@/data/dictionary";
+import { cn } from "@/lib/utils";
 import { isValidEmail, isValidUaPhone } from "@/lib/validation";
 import type { FilePayload } from "@/types/form";
 
 export interface CommercialOfferCardProps {
   copy: Dictionary["product"]["commercialOffer"];
+  className?: string;
 }
 
 type OfferErrors = {
@@ -18,7 +20,7 @@ type OfferErrors = {
   phone?: string;
 };
 
-export function CommercialOfferCard({ copy }: CommercialOfferCardProps) {
+export function CommercialOfferCard({ copy, className }: CommercialOfferCardProps) {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [files, setFiles] = useState<FilePayload[]>([]);
@@ -61,9 +63,14 @@ export function CommercialOfferCard({ copy }: CommercialOfferCardProps) {
     setRawFiles([]);
   }
 
+  const cardClassName = cn(
+    "flex h-full flex-col justify-between gap-4 rounded-3xl border border-neutral-200/80 bg-white p-6 shadow-xs sm:p-8",
+    className,
+  );
+
   if (status === "success") {
     return (
-      <div className="rounded-2xl border border-border bg-white px-5 py-8 text-center shadow-sm sm:p-8">
+      <div className={cn(cardClassName, "items-center text-center")}>
         <p className="text-sm font-semibold text-heading">{copy.success}</p>
         <Button
           type="button"
@@ -81,7 +88,7 @@ export function CommercialOfferCard({ copy }: CommercialOfferCardProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-4 rounded-2xl border border-border bg-white p-5 shadow-sm sm:p-6"
+      className={cardClassName}
       noValidate
     >
       <h2 className="text-lg font-bold uppercase tracking-[0.06em] text-heading sm:text-xl">

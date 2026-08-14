@@ -138,10 +138,13 @@ export interface Dictionary {
   videos: {
     title: string;
     subtitle: string;
+    youtubeCta: string;
+    youtubeHref: string;
     items: Array<{
       title: string;
       imageSrc: string;
       imageAlt: string;
+      duration: string;
     }>;
   };
   faq: {
@@ -618,26 +621,32 @@ const DICTIONARY_UK: Dictionary = {
     title: "Відеоогляди",
     subtitle:
       "Короткі огляди техніки KAISER: збірка, гідровузол і робота на складі.",
+    youtubeCta: "Дивитися більше на YouTube",
+    youtubeHref: "https://www.youtube.com",
     items: [
       {
         title: "Збірка гідравлічної рокли",
         imageSrc: "/images/products/pallet-truck-2t-1.jpg",
         imageAlt: "Відео: збірка гідравлічної рокли",
+        duration: "0:48",
       },
       {
         title: "Принцип роботи гідровузла",
         imageSrc: "/images/products/pallet-truck-2t-2.jpg",
         imageAlt: "Відео: принцип роботи гідровузла",
+        duration: "0:36",
       },
       {
         title: "Огляд посиленої моделі 2,5 т",
         imageSrc: "/images/products/pallet-truck-heavy-1.jpg",
         imageAlt: "Відео: огляд посиленої рокли",
+        duration: "1:12",
       },
       {
         title: "Рокла з довгими вилами на складі",
         imageSrc: "/images/products/pallet-truck-long-1.jpg",
         imageAlt: "Відео: рокла з довгими вилами",
+        duration: "0:54",
       },
     ],
   },
@@ -751,7 +760,7 @@ const DICTIONARY_UK: Dictionary = {
     email: "Email",
     submit: "Отримати консультацію",
     success: "Заявку прийнято. Менеджер зателефонує.",
-    imageSrc: "/images/consultation/manager.jpg",
+    imageSrc: "/images/manager.jpg",
     imageAlt: "Менеджер KAISER",
     errors: {
       fullName: "Вкажіть ім’я (мінімум 2 символи).",
@@ -1042,26 +1051,32 @@ const DICTIONARY_RU: Dictionary = {
     title: "Видеообзоры",
     subtitle:
       "Короткие обзоры техники KAISER: сборка, гидроузел и работа на складе.",
+    youtubeCta: "Перейти на канал",
+    youtubeHref: "https://www.youtube.com",
     items: [
       {
         title: "Сборка гидравлической роклы",
         imageSrc: "/images/products/pallet-truck-2t-1.jpg",
         imageAlt: "Видео: сборка гидравлической роклы",
+        duration: "0:48",
       },
       {
         title: "Принцип работы гидроузла",
         imageSrc: "/images/products/pallet-truck-2t-2.jpg",
         imageAlt: "Видео: принцип работы гидроузла",
+        duration: "0:36",
       },
       {
         title: "Обзор усиленной модели 2,5 т",
         imageSrc: "/images/products/pallet-truck-heavy-1.jpg",
         imageAlt: "Видео: обзор усиленной роклы",
+        duration: "1:12",
       },
       {
         title: "Рокла с длинными вилами на складе",
         imageSrc: "/images/products/pallet-truck-long-1.jpg",
         imageAlt: "Видео: рокла с длинными вилами",
+        duration: "0:54",
       },
     ],
   },
@@ -1175,7 +1190,7 @@ const DICTIONARY_RU: Dictionary = {
     email: "Email",
     submit: "Получить консультацию",
     success: "Заявку приняли. Менеджер перезвонит.",
-    imageSrc: "/images/consultation/manager.jpg",
+    imageSrc: "/images/manager.jpg",
     imageAlt: "Менеджер KAISER",
     errors: {
       fullName: "Укажите имя (минимум 2 символа).",

@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, type FormEvent, type FocusEvent } from "react";
+import Image from "next/image";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import { MediaImage } from "@/components/ui/MediaImage";
 import { PhoneInput } from "@/components/ui/PhoneInput";
 import type { Dictionary } from "@/data/dictionary";
 import {
@@ -73,8 +73,8 @@ export function ConsultationBlock({ copy }: ConsultationBlockProps) {
       id="consultation"
       className="scroll-mt-20 border-y border-border bg-[#eef5f8]"
     >
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_1fr_auto] lg:gap-12 lg:py-20">
-        <ScrollReveal className="flex flex-col gap-5">
+      <div className="mx-auto grid w-full max-w-7xl items-end gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_1fr_auto] lg:gap-12 lg:py-20">
+        <ScrollReveal className="flex flex-col gap-5 self-center">
           <h2 className="text-2xl font-bold tracking-tight text-heading sm:text-3xl">
             {copy.title}
           </h2>
@@ -90,7 +90,7 @@ export function ConsultationBlock({ copy }: ConsultationBlockProps) {
           </ul>
         </ScrollReveal>
 
-        <ScrollReveal delay={0.06}>
+        <ScrollReveal delay={0.06} className="self-center">
           {status === "success" ? (
             <p className="rounded-2xl border border-border bg-white px-5 py-8 text-center text-sm font-semibold text-heading shadow-sm">
               {copy.success}
@@ -138,14 +138,16 @@ export function ConsultationBlock({ copy }: ConsultationBlockProps) {
           )}
         </ScrollReveal>
 
-        <ScrollReveal delay={0.1} className="mx-auto hidden w-full max-w-[14rem] lg:block">
-          <MediaImage
+        <ScrollReveal
+          delay={0.1}
+          className="relative mx-auto h-52 w-full max-w-[14rem] overflow-hidden lg:h-[22rem] lg:w-56"
+        >
+          <Image
             src={copy.imageSrc}
             alt={copy.imageAlt}
-            aspect="3/4"
-            fit="cover"
+            fill
             sizes="224px"
-            className="rounded-2xl border border-gray-200 shadow-sm"
+            className="object-contain object-bottom"
           />
         </ScrollReveal>
       </div>

@@ -11,7 +11,7 @@ import {
   staggerContainer,
   staggerItem,
 } from "@/components/motion/variants";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { MediaImage } from "@/components/ui/MediaImage";
 import type { Dictionary } from "@/data/dictionary";
 import { useCarouselTrack } from "@/hooks/useCarouselTrack";
 import type { Product } from "@/types/product";
@@ -28,7 +28,6 @@ export interface RelatedProductsCarouselProps {
 export function RelatedProductsCarousel({
   lang,
   products,
-  copy,
   title,
   orderCta,
 }: RelatedProductsCarouselProps) {
@@ -116,13 +115,16 @@ export function RelatedProductsCarousel({
                 >
                   <Link
                     href={`/${lang}/product/${product.slug}`}
-                    className="block border-b border-border"
+                    className="block border-b border-border bg-white"
                     draggable={false}
                   >
-                    <MediaPlaceholder
+                    <MediaImage
+                      src={product.images?.[0]?.src ?? product.imageSrc}
+                      alt={product.images?.[0]?.alt ?? product.imageAlt ?? product.name}
                       aspect="4/3"
-                      label={copy.imageFallback}
-                      bordered={false}
+                      fit="contain"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 25vw"
+                      className="bg-white"
                     />
                   </Link>
                   <div className="flex flex-1 flex-col gap-3 p-4">
