@@ -1,12 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import {
   StaggerItem,
   StaggerReveal,
 } from "@/components/motion/StaggerReveal";
-import { cardHover } from "@/components/motion/variants";
 import type { Dictionary } from "@/data/dictionary";
 
 export interface TrustBadgesProps {
@@ -37,14 +35,11 @@ export function TrustBadges({ copy }: TrustBadgesProps) {
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>
-        <StaggerReveal className="mt-12 grid gap-4 sm:grid-cols-2 sm:gap-5">
+        <StaggerReveal className="mt-12 grid gap-x-12 gap-y-8 sm:grid-cols-2 lg:gap-x-16 lg:gap-y-10">
           {copy.items.map((item) => (
             <StaggerItem key={item.label}>
-              <motion.div
-                className="flex h-full gap-4 rounded-2xl bg-gray-50 p-4 transition-[border-color,box-shadow] duration-200 hover:shadow-[0_12px_30px_-8px_rgba(0,0,0,0.12)]"
-                {...cardHover}
-              >
-                <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent shadow-sm">
+              <div className="flex gap-4">
+                <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent">
                   <CheckIcon />
                 </span>
                 <div>
@@ -55,7 +50,7 @@ export function TrustBadges({ copy }: TrustBadgesProps) {
                     {item.description}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             </StaggerItem>
           ))}
         </StaggerReveal>

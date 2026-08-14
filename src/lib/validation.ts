@@ -33,23 +33,6 @@ export function validateCallbackFields(
   return errors;
 }
 
-export type DeliveryFieldErrors = {
-  from?: string;
-  to?: string;
-  phone?: string;
-};
-
-export function validateDeliveryFields(
-  values: { from: string; to: string; phone: string },
-  messages: { from: string; to: string; phone: string },
-): DeliveryFieldErrors {
-  const errors: DeliveryFieldErrors = {};
-  if (values.from.trim().length < 2) errors.from = messages.from;
-  if (values.to.trim().length < 2) errors.to = messages.to;
-  if (!isValidUaPhone(values.phone)) errors.phone = messages.phone;
-  return errors;
-}
-
 export function validateLeadFields(
   values: { fullName: string; email: string; phone: string },
   messages: { fullName: string; email: string; phone: string },

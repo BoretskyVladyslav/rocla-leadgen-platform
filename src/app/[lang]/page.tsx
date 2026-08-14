@@ -9,6 +9,7 @@ import { FeaturedCase } from "@/components/sections/trust/FeaturedCase";
 import { ReviewsCarousel } from "@/components/sections/trust/ReviewsCarousel";
 import { SeoTextAccordion } from "@/components/sections/trust/SeoTextAccordion";
 import { TrustBadges } from "@/components/sections/trust/TrustBadges";
+import { WarehouseContacts } from "@/components/sections/trust/WarehouseContacts";
 import { getDictionary } from "@/data/dictionary";
 
 export default async function HomePage({
@@ -27,6 +28,7 @@ export default async function HomePage({
       <FeaturedCase lang={lang} copy={dict.caseStudy} />
       <ReviewsCarousel copy={dict.reviews} />
       <FaqAccordion copy={dict.faq} />
+      <WarehouseContacts copy={dict.branches} />
       <LeadCaptureForm copy={dict.leadForm} />
       <ConsultationBlock copy={dict.consultation} />
       <SeoTextAccordion copy={dict.seoText} />

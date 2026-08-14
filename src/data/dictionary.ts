@@ -5,6 +5,8 @@ export interface Warehouse {
   city: string;
   address: string;
   hours: string;
+  phone: string;
+  email: string;
 }
 
 export interface Dictionary {
@@ -79,22 +81,25 @@ export interface Dictionary {
   };
   delivery: {
     title: string;
-    from: string;
-    to: string;
+    subtitle: string;
+    name: string;
     phone: string;
     submit: string;
     success: string;
     partnersTitle: string;
     partners: Array<{ name: string; imageSrc: string }>;
-    warehousesHint: string;
-    warehouseOfficeLabel: string;
-    warehouseHoursLabel: string;
-    warehouses: Warehouse[];
     errors: {
-      from: string;
-      to: string;
+      fullName: string;
       phone: string;
     };
+  };
+  branches: {
+    title: string;
+    phoneLabel: string;
+    emailLabel: string;
+    addressLabel: string;
+    hoursLabel: string;
+    warehouses: Warehouse[];
   };
   reviews: {
     title: string;
@@ -228,42 +233,57 @@ export interface Dictionary {
   };
 }
 
+const COMPANY_PHONE = "+380 (98) 154-09-82";
+const COMPANY_EMAIL = "rokla-ag@ukr.net";
+
 const WAREHOUSES_UK: Warehouse[] = [
   {
     id: "kyiv",
     city: "Київ",
     address: "Дніпровська наб., 13-В",
     hours: "09:00 - 17:00",
+    phone: COMPANY_PHONE,
+    email: COMPANY_EMAIL,
   },
   {
     id: "dnipro",
     city: "Дніпро",
     address: "Запорізьке шосе, 62",
     hours: "09:00 - 18:00",
+    phone: COMPANY_PHONE,
+    email: COMPANY_EMAIL,
   },
   {
     id: "kharkiv",
     city: "Харків",
     address: "пр-т Аеропорту (Гагаріна), 352",
     hours: "09:00 - 18:00",
+    phone: COMPANY_PHONE,
+    email: COMPANY_EMAIL,
   },
   {
     id: "lviv",
     city: "Львів",
     address: "вул. Б. Хмельницького, 188-А",
     hours: "09:00 - 18:00",
+    phone: COMPANY_PHONE,
+    email: COMPANY_EMAIL,
   },
   {
     id: "vinnytsia",
     city: "Вінниця",
     address: "вул. Батозька, 1-В",
     hours: "09:00 - 18:00",
+    phone: COMPANY_PHONE,
+    email: COMPANY_EMAIL,
   },
   {
     id: "zhytomyr",
     city: "Житомир",
     address: "Київське шосе, 4/2",
     hours: "09:00 - 18:00",
+    phone: COMPANY_PHONE,
+    email: COMPANY_EMAIL,
   },
 ];
 
@@ -273,36 +293,48 @@ const WAREHOUSES_RU: Warehouse[] = [
     city: "Киев",
     address: "Днепровская наб., 13-В",
     hours: "09:00 - 17:00",
+    phone: COMPANY_PHONE,
+    email: COMPANY_EMAIL,
   },
   {
     id: "dnipro",
     city: "Днепр",
     address: "Запорожское шоссе, 62",
     hours: "09:00 - 18:00",
+    phone: COMPANY_PHONE,
+    email: COMPANY_EMAIL,
   },
   {
     id: "kharkiv",
     city: "Харьков",
     address: "пр-т Аэропорта (Гагарина), 352",
     hours: "09:00 - 18:00",
+    phone: COMPANY_PHONE,
+    email: COMPANY_EMAIL,
   },
   {
     id: "lviv",
     city: "Львов",
     address: "ул. Б. Хмельницкого, 188-А",
     hours: "09:00 - 18:00",
+    phone: COMPANY_PHONE,
+    email: COMPANY_EMAIL,
   },
   {
     id: "vinnytsia",
     city: "Винница",
     address: "ул. Батозская (Ботожская), 1-В",
     hours: "09:00 - 18:00",
+    phone: COMPANY_PHONE,
+    email: COMPANY_EMAIL,
   },
   {
     id: "zhytomyr",
     city: "Житомир",
     address: "Киевское шоссе, 4/2",
     hours: "09:00 - 18:00",
+    phone: COMPANY_PHONE,
+    email: COMPANY_EMAIL,
   },
 ];
 
@@ -494,12 +526,12 @@ const DICTIONARY_UK: Dictionary = {
     imageAlt: "Робота з роклою на складі",
   },
   delivery: {
-    title: "Розрахувати вартість доставки",
-    from: "Звідки",
-    to: "Куди",
+    title: "Замовити доставку по Україні",
+    subtitle: "Детальну інформацію уточніть у менеджера",
+    name: "Ім’я",
     phone: "Телефон",
-    submit: "Розрахувати",
-    success: "Заявку на розрахунок прийнято.",
+    submit: "Підтвердити",
+    success: "Заявку прийнято. Менеджер зателефонує.",
     partnersTitle: "Бренди, які нам довіряють",
     partners: [
       { name: "Ford", imageSrc: "/images/trust-brands/ford.svg" },
@@ -510,15 +542,18 @@ const DICTIONARY_UK: Dictionary = {
       { name: "Kyivstar", imageSrc: "/images/trust-brands/kyivstar.svg" },
       { name: "АТБ", imageSrc: "/images/trust-brands/atb.webp" },
     ],
-    warehousesHint: "Оберіть офіс-склад відвантаження:",
-    warehouseOfficeLabel: "Офіс-склад",
-    warehouseHoursLabel: "Режим роботи",
-    warehouses: WAREHOUSES_UK,
     errors: {
-      from: "Вкажіть місто відправлення.",
-      to: "Вкажіть місто доставки.",
+      fullName: "Вкажіть ім’я (мінімум 2 символи).",
       phone: "Вкажіть телефон у форматі +380 (XX) XXX-XX-XX.",
     },
+  },
+  branches: {
+    title: "Контактна інформація",
+    phoneLabel: "Телефон",
+    emailLabel: "Email",
+    addressLabel: "Адреса",
+    hoursLabel: "Режим роботи",
+    warehouses: WAREHOUSES_UK,
   },
   reviews: {
     title: "Відгуки наших клієнтів",
@@ -968,12 +1003,12 @@ const DICTIONARY_RU: Dictionary = {
     imageAlt: "Работа с роклой на складе",
   },
   delivery: {
-    title: "Рассчитать стоимость доставки",
-    from: "Откуда",
-    to: "Куда",
+    title: "Заказать доставку по Украине",
+    subtitle: "Подробную информацию уточните у менеджера",
+    name: "Имя",
     phone: "Телефон",
-    submit: "Рассчитать",
-    success: "Заявка на расчёт принята.",
+    submit: "Подтвердить",
+    success: "Заявка принята. Менеджер перезвонит.",
     partnersTitle: "Бренды, которые нам доверяют",
     partners: [
       { name: "Ford", imageSrc: "/images/trust-brands/ford.svg" },
@@ -984,15 +1019,18 @@ const DICTIONARY_RU: Dictionary = {
       { name: "Kyivstar", imageSrc: "/images/trust-brands/kyivstar.svg" },
       { name: "АТБ", imageSrc: "/images/trust-brands/atb.webp" },
     ],
-    warehousesHint: "Выберите офис-склад отгрузки:",
-    warehouseOfficeLabel: "Офис-склад",
-    warehouseHoursLabel: "Режим работы",
-    warehouses: WAREHOUSES_RU,
     errors: {
-      from: "Укажите город отправления.",
-      to: "Укажите город доставки.",
+      fullName: "Укажите имя (минимум 2 символа).",
       phone: "Укажите телефон в формате +380 (XX) XXX-XX-XX.",
     },
+  },
+  branches: {
+    title: "Контактная информация",
+    phoneLabel: "Телефон",
+    emailLabel: "Email",
+    addressLabel: "Адрес",
+    hoursLabel: "Режим работы",
+    warehouses: WAREHOUSES_RU,
   },
   reviews: {
     title: "Отзывы наших клиентов",
