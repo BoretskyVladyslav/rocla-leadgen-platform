@@ -15,18 +15,6 @@ function TelegramIcon() {
   );
 }
 
-function ViberIcon() {
-  return (
-    <svg
-      className="h-5 w-5 fill-current text-white transition-colors group-hover:text-neutral-950"
-      viewBox="0 0 24 24"
-      aria-hidden
-    >
-      <path d="M19.38 3.52C16.8 1.45 13.06 1.03 9.4 1.34c-4.4.38-7.97 3.59-8.32 8.01-.2 2.52.48 4.96 1.95 6.95l-.76 2.92c-.17.65.41 1.23 1.06 1.06l2.87-.75c2.31 1.4 5.07 1.91 7.78 1.41 4.54-.83 8.07-4.5 8.35-9.1.18-3.05-.88-6.02-2.95-8.32zm-2.02 12.01c-.35.98-1.57 1.76-2.58 1.84-.71.05-1.63-.16-3.79-1.07-2.61-1.1-4.46-3.62-5.46-5.06-.21-.3-.49-.78-.49-1.32 0-.96.61-1.68 1.02-2.05.21-.19.49-.3.77-.3.26 0 .42.02.58.05.37.08.57.51.78.97.24.52.54 1.25.61 1.38.11.2.14.41.03.62-.08.15-.17.29-.27.42-.14.18-.3.33-.4.47-.13.17-.16.32-.07.49.52.99 1.32 1.87 2.34 2.51.2.13.37.14.52.02.2-.16.5-.54.67-.78.17-.24.38-.26.6-.17.18.07 1.24.59 1.49.71.3.15.54.26.63.4.11.19.11.83-.24 1.81z" />
-    </svg>
-  );
-}
-
 function InstagramIcon() {
   return (
     <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
@@ -38,7 +26,6 @@ function InstagramIcon() {
 const SOCIAL_ICONS = {
   telegram: TelegramIcon,
   instagram: InstagramIcon,
-  viber: ViberIcon,
 } as const;
 
 export function Footer({ lang, copy }: FooterProps) {
@@ -95,6 +82,23 @@ function BrandColumn({ copy }: { copy: Dictionary["footer"] }) {
       </p>
       <div className="flex items-center gap-3">
         {copy.social.map((item) => {
+          if (item.network === "viber") {
+            return (
+              <a
+                key={item.network}
+                href="viber://chat?number=%2B380981540982"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex h-10 w-10 items-center justify-center rounded-full bg-neutral-800 transition-colors hover:bg-[#7360F2]"
+                aria-label="Viber"
+              >
+                <svg className="h-5 w-5 fill-white" viewBox="0 0 24 24" aria-hidden>
+                  <path d="M19.38 3.52C16.8 1.45 13.06 1.03 9.4 1.34c-4.4.38-7.97 3.59-8.32 8.01-.2 2.52.48 4.96 1.95 6.95l-.76 2.92c-.17.65.41 1.23 1.06 1.06l2.87-.75c2.31 1.4 5.07 1.91 7.78 1.41 4.54-.83 8.07-4.5 8.35-9.1.18-3.05-.88-6.02-2.95-8.32zm-2.02 12.01c-.35.98-1.57 1.76-2.58 1.84-.71.05-1.63-.16-3.79-1.07-2.61-1.1-4.46-3.62-5.46-5.06-.21-.3-.49-.78-.49-1.32 0-.96.61-1.68 1.02-2.05.21-.19.49-.3.77-.3.26 0 .42.02.58.05.37.08.57.51.78.97.24.52.54 1.25.61 1.38.11.2.14.41.03.62-.08.15-.17.29-.27.42-.14.18-.3.33-.4.47-.13.17-.16.32-.07.49.52.99 1.32 1.87 2.34 2.51.2.13.37.14.52.02.2-.16.5-.54.67-.78.17-.24.38-.26.6-.17.18.07 1.24.59 1.49.71.3.15.54.26.63.4.11.19.11.83-.24 1.81z" />
+                </svg>
+              </a>
+            );
+          }
+
           const Icon = SOCIAL_ICONS[item.network];
           return (
             <a

@@ -70,39 +70,39 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
   }
 
   return (
-    <section className="relative overflow-hidden bg-white">
-      <Image
-        src="/images/delivery/boxes-left.jpg"
-        alt=""
-        width={180}
-        height={180}
-        className="pointer-events-none absolute bottom-0 left-0 hidden max-w-[160px] select-none lg:block xl:max-w-[200px]"
-      />
-      <Image
-        src="/images/delivery/boxes-right.jpg"
-        alt=""
-        width={180}
-        height={180}
-        className="pointer-events-none absolute right-0 bottom-0 hidden max-w-[160px] select-none lg:block xl:max-w-[200px]"
-      />
-      <div className="relative z-10 mx-auto w-full max-w-5xl px-4 py-16 sm:px-6 lg:py-24">
+    <section className="bg-white">
+      <div className="mx-auto w-full max-w-5xl px-4 py-16 sm:px-6 lg:py-24">
         <ScrollReveal>
-          <div className="mx-auto max-w-5xl rounded-3xl border border-neutral-200/80 bg-neutral-50/70 p-6 shadow-xs sm:p-10">
-            <h2 className="text-center text-2xl font-extrabold tracking-wide text-neutral-900 uppercase sm:text-3xl">
+          <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-neutral-200/80 bg-neutral-50/70 p-6 shadow-xs sm:p-10">
+            <Image
+              src="/images/delivery/boxes-left.jpg"
+              alt=""
+              width={150}
+              height={150}
+              className="pointer-events-none absolute bottom-0 left-0 z-0 hidden max-h-40 w-auto object-contain select-none lg:block"
+            />
+            <Image
+              src="/images/delivery/boxes-right.jpg"
+              alt=""
+              width={150}
+              height={150}
+              className="pointer-events-none absolute right-0 bottom-0 z-0 hidden max-h-40 w-auto object-contain select-none lg:block"
+            />
+            <h2 className="relative z-10 text-center text-2xl font-extrabold tracking-wide text-neutral-900 uppercase sm:text-3xl">
               {copy.title}
             </h2>
-            <p className="mb-6 mt-3 text-center text-xs text-neutral-500">
+            <p className="relative z-10 mb-6 mt-3 text-center text-xs text-neutral-500">
               {copy.subtitle}
             </p>
 
             {status === "success" ? (
-              <p className="text-center text-sm font-semibold text-heading">
+              <p className="relative z-10 text-center text-sm font-semibold text-heading">
                 {copy.success}
               </p>
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="mx-auto flex w-full max-w-2xl flex-col items-center justify-center gap-3 sm:flex-row"
+                className="relative z-10 mx-auto flex w-full max-w-2xl flex-col items-center justify-center gap-3 sm:flex-row"
                 noValidate
               >
                 <div className="w-full sm:w-64">
@@ -143,7 +143,7 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
               </form>
             )}
 
-            <div className="mt-8 border-t border-neutral-200/60 pt-6">
+            <div className="relative z-10 mt-8 border-t border-neutral-200/60 pt-6">
               <p className="mb-3 text-center text-xs font-bold tracking-wider text-neutral-400 uppercase">
                 {copy.partnersTitle}
               </p>
