@@ -13,7 +13,7 @@ export interface TrustBadgesProps {
 
 function CheckIcon() {
   return (
-    <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden>
+    <svg className="h-5 w-5" viewBox="0 0 16 16" fill="none" aria-hidden>
       <path
         d="M3.5 8.2 6.4 11l6.1-6.5"
         stroke="currentColor"
@@ -30,23 +30,23 @@ export function TrustBadges({ copy }: TrustBadgesProps) {
     <section id="about" className="scroll-mt-20 bg-white">
       <div
         id="services"
-        className="mx-auto w-full max-w-7xl scroll-mt-20 px-4 py-20 sm:px-6 lg:py-28"
+        className="mx-auto w-full max-w-6xl scroll-mt-20 px-4 py-20 lg:py-28"
       >
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>
-        <StaggerReveal className="mt-12 grid grid-cols-1 gap-x-12 gap-y-8 md:grid-cols-2">
+        <StaggerReveal className="mt-12 grid grid-cols-1 gap-x-12 gap-y-6 md:grid-cols-2 lg:gap-y-8">
           {copy.items.map((item) => (
             <StaggerItem key={item.label}>
-              <div className="flex gap-4">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-400/20 text-amber-500">
+              <div className="flex items-start gap-4 rounded-xl p-2 transition-colors hover:bg-neutral-50/80">
+                <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[#FFCC00] bg-amber-50 text-amber-500">
                   <CheckIcon />
                 </span>
                 <div>
-                  <h3 className="text-base font-bold tracking-tight text-heading">
+                  <h3 className="mb-1 text-base font-bold text-neutral-900 md:text-lg">
                     {item.label}
                   </h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted">
+                  <p className="text-sm leading-relaxed text-neutral-600">
                     {item.description}
                   </p>
                 </div>
