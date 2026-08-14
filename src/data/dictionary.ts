@@ -102,10 +102,15 @@ export interface Dictionary {
   };
   branches: {
     title: string;
+    brand: string;
     phoneLabel: string;
     emailLabel: string;
     addressLabel: string;
     hoursLabel: string;
+    hoursPrefix: string;
+    callCta: string;
+    emailCta: string;
+    mapsCta: string;
     warehouses: Warehouse[];
   };
   reviews: {
@@ -544,10 +549,15 @@ const DICTIONARY_UK: Dictionary = {
   },
   branches: {
     title: "Контактна інформація",
+    brand: "KAISER",
     phoneLabel: "Телефон",
     emailLabel: "Email",
     addressLabel: "Адреса",
     hoursLabel: "Режим роботи",
+    hoursPrefix: "Пн–Пт",
+    callCta: "Зателефонувати",
+    emailCta: "Написати на Email",
+    mapsCta: "Відкрити в Google Maps",
     warehouses: WAREHOUSES_UK,
   },
   reviews: {
@@ -918,10 +928,15 @@ const DICTIONARY_RU: Dictionary = {
   },
   branches: {
     title: "Контактная информация",
+    brand: "KAISER",
     phoneLabel: "Телефон",
     emailLabel: "Email",
     addressLabel: "Адрес",
     hoursLabel: "Режим работы",
+    hoursPrefix: "Пн–Пт",
+    callCta: "Позвонить",
+    emailCta: "Написать на Email",
+    mapsCta: "Открыть в Google Maps",
     warehouses: WAREHOUSES_RU,
   },
   reviews: {
