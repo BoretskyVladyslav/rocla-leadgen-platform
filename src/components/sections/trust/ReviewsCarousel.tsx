@@ -4,7 +4,6 @@ import { useCallback } from "react";
 import { motion } from "framer-motion";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import {
-  cardHover,
   staggerContainer,
   staggerItem,
 } from "@/components/motion/variants";
@@ -128,24 +127,25 @@ function ReviewCard({
   active: boolean;
 }) {
   return (
-    <motion.article
+    <article
       className={cn(
-        "flex h-full flex-col overflow-hidden rounded-2xl border bg-white shadow-sm transition-[border-color,box-shadow] duration-200",
-        active
-          ? "border-accent shadow-md"
-          : "border-gray-200 [@media(hover:hover)_and_(pointer:fine)]:hover:border-accent [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-[0_12px_30px_-8px_rgba(0,0,0,0.12)]",
+        "flex h-full flex-col justify-between rounded-2xl border border-neutral-200 bg-white p-5 shadow-xs transition-shadow hover:shadow-md",
+        active && "border-accent shadow-md",
       )}
-      {...cardHover}
     >
-      <div className="flex flex-1 flex-col gap-4 p-5">
+      <div className="mb-4 flex flex-1 flex-col justify-start overflow-hidden">
         <div className="flex items-start justify-between gap-3">
-          <p className="badge-status w-fit">{item.company}</p>
+          <p className="inline-block w-fit rounded-md bg-[#FFCC00]/20 px-2.5 py-1 text-xs font-bold text-neutral-900">
+            {item.company}
+          </p>
           {item.date ? (
             <time className="shrink-0 text-xs text-muted">{item.date}</time>
           ) : null}
         </div>
-        <p className="text-sm leading-relaxed text-muted">{item.text}</p>
-        <p className="mt-auto text-xs uppercase tracking-wide text-muted">
+        <p className="mt-3 text-sm leading-relaxed text-neutral-600">
+          {item.text}
+        </p>
+        <p className="mt-3 text-xs tracking-wide text-muted uppercase">
           {item.author}
         </p>
       </div>
@@ -154,10 +154,10 @@ function ReviewCard({
         alt={item.imageAlt}
         aspect={false}
         fit="cover"
-        objectPosition="object-center"
+        objectPosition="object-top"
         sizes="(max-width: 640px) 20rem, (max-width: 1024px) 50vw, 33vw"
-        className="h-72 w-full rounded-xl"
+        className="mt-auto h-80 w-full rounded-xl bg-neutral-100 [&_img]:transition-transform [&_img]:duration-300 hover:[&_img]:scale-105"
       />
-    </motion.article>
+    </article>
   );
 }
