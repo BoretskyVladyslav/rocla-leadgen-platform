@@ -103,9 +103,11 @@ export interface Dictionary {
   branches: {
     title: string;
     brand: string;
+    subtitle: string;
     phoneLabel: string;
     emailLabel: string;
     addressLabel: string;
+    officeLabel: string;
     hoursLabel: string;
     hoursPrefix: string;
     callCta: string;
@@ -550,14 +552,16 @@ const DICTIONARY_UK: Dictionary = {
   branches: {
     title: "Контактна інформація",
     brand: "KAISER",
+    subtitle: "Офіційний представник",
     phoneLabel: "Телефон",
     emailLabel: "Email",
     addressLabel: "Адреса",
-    hoursLabel: "Режим роботи",
+    officeLabel: "Офіс - Склад:",
+    hoursLabel: "Режим роботи:",
     hoursPrefix: "Пн–Пт",
     callCta: "Зателефонувати",
     emailCta: "Написати на Email",
-    mapsCta: "Відкрити в Google Maps",
+    mapsCta: "Відкрити в Google Maps ↗",
     warehouses: WAREHOUSES_UK,
   },
   reviews: {
@@ -929,14 +933,16 @@ const DICTIONARY_RU: Dictionary = {
   branches: {
     title: "Контактная информация",
     brand: "KAISER",
+    subtitle: "Официальный представитель",
     phoneLabel: "Телефон",
     emailLabel: "Email",
     addressLabel: "Адрес",
-    hoursLabel: "Режим работы",
+    officeLabel: "Офис - Склад:",
+    hoursLabel: "Режим работы:",
     hoursPrefix: "Пн–Пт",
     callCta: "Позвонить",
     emailCta: "Написать на Email",
-    mapsCta: "Открыть в Google Maps",
+    mapsCta: "Открыть в Google Maps ↗",
     warehouses: WAREHOUSES_RU,
   },
   reviews: {
