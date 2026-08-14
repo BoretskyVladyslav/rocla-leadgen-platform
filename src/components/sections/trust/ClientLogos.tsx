@@ -3,10 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
-import {
-  StaggerItem,
-  StaggerReveal,
-} from "@/components/motion/StaggerReveal";
 import type { Dictionary } from "@/data/dictionary";
 
 export interface ClientLogosProps {
@@ -43,6 +39,8 @@ function LogoMark({
 }
 
 export function ClientLogos({ copy }: ClientLogosProps) {
+  const logos = [...copy.logos, ...copy.logos];
+
   return (
     <section className="bg-surface">
       <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
@@ -50,15 +48,22 @@ export function ClientLogos({ copy }: ClientLogosProps) {
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>
 
-        <StaggerReveal className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-3">
-          {copy.logos.map((logo) => (
-            <StaggerItem key={logo.name}>
-              <div className="flex h-24 items-center justify-center rounded-2xl border border-neutral-200 bg-white p-4 shadow-xs transition-shadow hover:shadow-md">
+        <div className="group/marquee mt-10 overflow-hidden select-none">
+          <ul
+            className="logo-marquee flex w-max whitespace-nowrap py-1 group-hover/marquee:[animation-play-state:paused]"
+            aria-label={copy.title}
+          >
+            {logos.map((logo, index) => (
+              <li
+                key={`${logo.name}-${index}`}
+                className="mx-3 inline-flex h-24 w-44 shrink-0 items-center justify-center rounded-2xl border border-neutral-200 bg-white p-4 shadow-xs transition-shadow hover:shadow-md md:w-52"
+                aria-hidden={index >= copy.logos.length}
+              >
                 <LogoMark name={logo.name} imageSrc={logo.imageSrc} />
-              </div>
-            </StaggerItem>
-          ))}
-        </StaggerReveal>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
