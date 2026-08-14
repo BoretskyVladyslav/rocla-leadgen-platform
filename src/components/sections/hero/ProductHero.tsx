@@ -34,21 +34,21 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
   return (
     <section className="bg-white">
       <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 pb-6 pt-6 sm:px-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12 lg:pb-8 lg:pt-8">
-        <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-stretch">
+        <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-start">
           {thumbCount > 1 ? (
-            <ul className="order-2 flex gap-2 sm:order-1 sm:w-[4.75rem] sm:shrink-0 sm:flex-col">
+            <ul className="order-2 flex gap-2 sm:order-1 sm:w-20 sm:shrink-0 sm:flex-col">
               {gallery.slice(0, thumbCount).map((image, index) => (
-                <li key={image.src} className="min-h-0 min-w-0 flex-1">
+                <li key={image.src} className="shrink-0">
                   <button
                     type="button"
                     onClick={() => setActiveIndex(index)}
                     aria-label={`${copy.thumbPlaceholder} ${index + 1}`}
                     aria-pressed={index === activeIndex}
                     className={cn(
-                      "relative block h-full min-h-16 w-full overflow-hidden rounded-xl border-2 transition-opacity",
+                      "relative block aspect-square w-20 overflow-hidden rounded-xl",
                       index === activeIndex
-                        ? "border-accent"
-                        : "border-transparent opacity-80 hover:opacity-100",
+                        ? "border-2 border-amber-500"
+                        : "border border-neutral-200 opacity-90 hover:opacity-100",
                     )}
                   >
                     <Image
@@ -56,7 +56,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
                       alt={image.alt}
                       fill
                       sizes="80px"
-                      className="object-cover"
+                      className="h-full w-full object-cover"
                     />
                   </button>
                 </li>
@@ -65,7 +65,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
           ) : null}
 
           <div className="order-1 min-w-0 w-full sm:order-2">
-            <div className="relative aspect-square w-full overflow-hidden rounded-3xl border-2 border-accent">
+            <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-neutral-50">
               {activeImage?.src ? (
                 <Image
                   key={activeImage.src}
