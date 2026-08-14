@@ -23,14 +23,14 @@ export default async function HomePage({
       <MainHero copy={dict.hero} />
       <CategoryGrid lang={lang} copy={dict.categories} />
       <TrustBadges copy={dict.advantages} />
-      <DeliveryEstimate copy={dict.delivery} />
       <ClientLogos copy={dict.clients} />
       <FeaturedCase lang={lang} copy={dict.caseStudy} />
+      <DeliveryEstimate copy={dict.delivery} />
       <ReviewsCarousel copy={dict.reviews} />
       <FaqAccordion copy={dict.faq} />
-      <WarehouseContacts copy={dict.branches} />
-      <LeadCaptureForm copy={dict.leadForm} />
       <ConsultationBlock copy={dict.consultation} />
+      <LeadCaptureForm copy={dict.leadForm} />
+      <WarehouseContacts copy={dict.branches} />
       <SeoTextAccordion copy={dict.seoText} />
     </>
   );
