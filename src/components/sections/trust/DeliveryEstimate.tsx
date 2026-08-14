@@ -77,16 +77,16 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
             <Image
               src="/images/delivery/boxes-left.jpg"
               alt=""
-              width={360}
-              height={360}
-              className="pointer-events-none absolute -bottom-4 -left-4 z-0 hidden max-h-72 w-auto object-contain select-none lg:block xl:max-h-80"
+              width={480}
+              height={480}
+              className="pointer-events-none absolute -bottom-6 -left-6 z-0 hidden max-h-80 w-auto object-contain select-none lg:block xl:max-h-96 2xl:max-h-[420px]"
             />
             <Image
               src="/images/delivery/boxes-right.jpg"
               alt=""
-              width={360}
-              height={360}
-              className="pointer-events-none absolute -right-4 -bottom-4 z-0 hidden max-h-72 w-auto object-contain select-none lg:block xl:max-h-80"
+              width={480}
+              height={480}
+              className="pointer-events-none absolute -right-6 -bottom-6 z-0 hidden max-h-80 w-auto object-contain select-none lg:block xl:max-h-96 2xl:max-h-[420px]"
             />
             <h2 className="relative z-10 text-center text-2xl font-extrabold tracking-wide text-neutral-900 uppercase sm:text-3xl">
               {copy.title}
