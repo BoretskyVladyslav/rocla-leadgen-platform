@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { HashLink } from "@/components/layout/HashLink";
 import { MediaImage } from "@/components/ui/MediaImage";
+import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/types/product";
@@ -54,9 +56,9 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
                       src={image.src}
                       alt={image.alt}
                       aspect="1/1"
-                      fit="contain"
+                      fit="cover"
                       sizes="80px"
-                      className="h-full w-full bg-neutral-50"
+                      className="h-full w-full"
                     />
                   </button>
                 </li>
@@ -65,14 +67,24 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
           ) : null}
 
           <div className="order-1 min-w-0 w-full sm:order-2">
-            <MediaImage
-              src={activeImage?.src}
-              alt={activeImage?.alt ?? product.name ?? copy.imagePlaceholder}
-              aspect="4/5"
-              fit="contain"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="h-full w-full rounded-2xl border-2 border-accent bg-neutral-50 shadow-sm"
-            />
+            <div className="inline-block w-full overflow-hidden rounded-2xl border-2 border-accent bg-white shadow-sm">
+              {activeImage?.src ? (
+                <Image
+                  src={activeImage.src}
+                  alt={activeImage.alt ?? product.name ?? copy.imagePlaceholder}
+                  width={900}
+                  height={675}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="h-auto w-full"
+                />
+              ) : (
+                <MediaPlaceholder
+                  aspect="4/3"
+                  label={product.name ?? copy.imagePlaceholder}
+                  bordered={false}
+                />
+              )}
+            </div>
           </div>
         </div>
 
