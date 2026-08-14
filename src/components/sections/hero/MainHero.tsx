@@ -112,6 +112,49 @@ const TRUST_ICONS: ReactNode[] = [
   <ShieldCheckIcon key="shield" />,
 ];
 
+function HighlightedTitle({
+  title,
+  highlights,
+}: {
+  title: string;
+  highlights: string[];
+}) {
+  type Chunk = { text: string; accent: boolean };
+  let chunks: Chunk[] = [{ text: title, accent: false }];
+
+  for (const highlight of highlights) {
+    const next: Chunk[] = [];
+    for (const chunk of chunks) {
+      if (chunk.accent) {
+        next.push(chunk);
+        continue;
+      }
+      const parts = chunk.text.split(highlight);
+      parts.forEach((part, index) => {
+        if (part) next.push({ text: part, accent: false });
+        if (index < parts.length - 1) {
+          next.push({ text: highlight, accent: true });
+        }
+      });
+    }
+    chunks = next;
+  }
+
+  return (
+    <>
+      {chunks.map((chunk, index) =>
+        chunk.accent ? (
+          <span key={`${chunk.text}-${index}`} className="text-amber-500">
+            {chunk.text}
+          </span>
+        ) : (
+          <span key={`${chunk.text}-${index}`}>{chunk.text}</span>
+        ),
+      )}
+    </>
+  );
+}
+
 export function MainHero({ copy }: MainHeroProps) {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
@@ -144,17 +187,28 @@ export function MainHero({ copy }: MainHeroProps) {
 
   return (
     <section className="scroll-mt-20 border-b border-border bg-white">
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch lg:gap-12 lg:py-24">
-        <ScrollReveal className="flex flex-col gap-8">
-          <div className="flex flex-col gap-3">
-            <h1 className="max-w-3xl text-3xl font-bold uppercase tracking-tight text-heading sm:text-4xl lg:text-5xl lg:leading-[1.08]">
-              {copy.title}
-            </h1>
-            <p className="text-lg font-bold uppercase tracking-[0.08em] text-muted sm:text-xl">
-              {copy.subtitle}
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 px-4 py-16 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:grid-rows-[auto_auto_1fr] lg:items-stretch lg:gap-x-12 lg:gap-y-8 lg:py-24">
+        <ScrollReveal className="order-1 flex flex-col gap-3 lg:col-start-1 lg:row-start-1">
+          <h1 className="max-w-3xl text-3xl font-bold uppercase tracking-tight text-heading sm:text-4xl lg:text-5xl lg:leading-[1.08]">
+            <HighlightedTitle
+              title={copy.title}
+              highlights={copy.titleHighlights}
+            />
+          </h1>
+          <p className="text-lg font-bold uppercase tracking-[0.08em] text-muted sm:text-xl">
+            {copy.subtitle}
+          </p>
+        </ScrollReveal>
+
+        <ScrollReveal className="order-2 flex flex-col gap-3 lg:col-start-1 lg:row-start-2">
+          <div className="flex flex-col gap-1">
+            <p className="text-sm font-semibold text-heading sm:text-base">
+              {copy.promo}
+            </p>
+            <p className="text-[11px] leading-snug text-gray-400 sm:text-xs">
+              {copy.promoNote}
             </p>
           </div>
-
           <ul className="flex flex-wrap items-center gap-2">
             {copy.trustBadges.map((badge, index) => (
               <li
@@ -168,7 +222,25 @@ export function MainHero({ copy }: MainHeroProps) {
               </li>
             ))}
           </ul>
+        </ScrollReveal>
 
+        <ScrollReveal
+          delay={0.1}
+          className="relative order-3 mx-auto h-full w-full min-w-0 max-w-lg lg:col-start-2 lg:row-span-3 lg:row-start-1 lg:max-w-none"
+        >
+          <MediaImage
+            src={copy.imageSrc}
+            alt={copy.imageAlt}
+            aspect={false}
+            fit="cover"
+            priority
+            objectPosition="object-center"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="h-full min-h-[280px] rounded-2xl border border-gray-200 bg-surface shadow-sm sm:min-h-[360px] lg:min-h-[500px]"
+          />
+        </ScrollReveal>
+
+        <ScrollReveal className="order-4 lg:col-start-1 lg:row-start-3 lg:self-end">
           <form
             id="hero-form"
             onSubmit={handleSubmit}
@@ -200,26 +272,17 @@ export function MainHero({ copy }: MainHeroProps) {
                   onValueChange={setPhone}
                 />
                 <div className="sm:w-44 sm:shrink-0 sm:pb-[calc(0.375rem+1.25rem)]">
-                  <Button type="submit" size="lg" className="h-12 w-full">
+                  <Button
+                    type="submit"
+                    size="lg"
+                    className="h-12 w-full bg-[#FFCC00] font-bold tracking-wide uppercase hover:bg-amber-400"
+                  >
                     {copy.submit}
                   </Button>
                 </div>
               </div>
             )}
           </form>
-        </ScrollReveal>
-
-        <ScrollReveal delay={0.1} className="relative mx-auto h-full w-full min-w-0 max-w-lg lg:max-w-none">
-          <MediaImage
-            src={copy.imageSrc}
-            alt={copy.imageAlt}
-            aspect={false}
-            fit="cover"
-            priority
-            objectPosition="object-center"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="h-full min-h-[460px] rounded-2xl border border-gray-200 bg-surface shadow-sm lg:min-h-[500px]"
-          />
         </ScrollReveal>
       </div>
     </section>

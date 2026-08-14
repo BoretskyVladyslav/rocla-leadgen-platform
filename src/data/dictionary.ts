@@ -29,7 +29,10 @@ export interface Dictionary {
   };
   hero: {
     title: string;
+    titleHighlights: string[];
     subtitle: string;
+    promo: string;
+    promoNote: string;
     trustBadges: string[];
     name: string;
     phone: string;
@@ -352,7 +355,7 @@ const CATEGORY_IMAGES = {
 const DICTIONARY_UK: Dictionary = {
   header: {
     brand: "KAISER",
-    tagline: "Складська техніка",
+    tagline: "Офіційний представник / Продаж, сервіс та ремонт по всій Україні",
     nav: {
       about: "Про компанію",
       catalog: "Каталог",
@@ -369,7 +372,10 @@ const DICTIONARY_UK: Dictionary = {
   },
   hero: {
     title: "Купити роклу (рохлю) — німецька якість KAISER",
+    titleHighlights: ["роклу (рохлю)", "KAISER"],
     subtitle: "20 років на ринку в Україні",
+    promo: "Знижки до 18%. Гарантія 24 місяці.",
+    promoNote: "* Детальну інформацію уточнюйте у менеджера",
     trustBadges: [
       "Відвантаження за 30 хв",
       "Оплата з ПДВ",
@@ -377,7 +383,7 @@ const DICTIONARY_UK: Dictionary = {
     ],
     name: "Ім’я",
     phone: "Телефон",
-    submit: "Підібрати",
+    submit: "Замовити",
     success: "Заявку прийнято. Менеджер зателефонує.",
     imageSrc: "/images/hero/hero-kaiser-warehouse.jpg",
     imageAlt: "Складська техніка KAISER",
@@ -829,7 +835,7 @@ const DICTIONARY_UK: Dictionary = {
 const DICTIONARY_RU: Dictionary = {
   header: {
     brand: "KAISER",
-    tagline: "Складская техника",
+    tagline: "Официальный представитель / Продажа, сервис и ремонт по всей Украине",
     nav: {
       about: "О компании",
       catalog: "Каталог",
@@ -846,7 +852,10 @@ const DICTIONARY_RU: Dictionary = {
   },
   hero: {
     title: "Купить роклу (рохлю) — немецкое качество KAISER",
+    titleHighlights: ["роклу (рохлю)", "KAISER"],
     subtitle: "20 лет на рынке в Украине",
+    promo: "Скидки до 18%. Гарантия 24 месяца.",
+    promoNote: "* Детальную информацию уточняйте у менеджера",
     trustBadges: [
       "Отгрузка за 30 мин",
       "Оплата с НДС",
@@ -854,7 +863,7 @@ const DICTIONARY_RU: Dictionary = {
     ],
     name: "Имя",
     phone: "Телефон",
-    submit: "Подобрать",
+    submit: "Заказать",
     success: "Заявка принята. Менеджер перезвонит.",
     imageSrc: "/images/hero/hero-kaiser-warehouse.jpg",
     imageAlt: "Складская техника KAISER",

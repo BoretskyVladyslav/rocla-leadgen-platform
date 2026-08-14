@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { HashLink } from "@/components/layout/HashLink";
-import { MotionLink } from "@/components/motion/MotionLink";
 import { LocaleSwitcher } from "@/components/layout/LocaleSwitcher";
 import { MobileMenu } from "@/components/layout/MobileMenu";
 import type { Dictionary } from "@/data/dictionary";
@@ -29,20 +28,20 @@ export function Header({ lang, copy }: HeaderProps) {
           <span className="block font-serif text-xl font-bold uppercase tracking-[0.14em] text-heading">
             {copy.brand}
           </span>
-          <span className="block text-[10px] font-medium uppercase tracking-[0.16em] text-muted">
+          <span className="mt-0.5 block max-w-[11.5rem] text-[9px] leading-snug text-muted sm:max-w-[16rem] sm:text-[10px] lg:max-w-[18rem]">
             {copy.tagline}
           </span>
         </Link>
 
         <nav
           aria-label="Primary"
-          className="hidden items-center gap-5 text-xs font-semibold uppercase tracking-wide text-foreground lg:flex"
+          className="hidden items-center gap-5 text-xs font-medium uppercase tracking-wide text-foreground lg:flex"
         >
           {nav.map((item) => (
             <HashLink
               key={`${item.href}-${item.label}`}
               href={item.href}
-              className="transition-colors hover:text-accent-alt"
+              className="relative py-1 transition-colors duration-200 after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-amber-500 after:transition-transform after:duration-300 after:ease-out hover:text-amber-500 hover:after:scale-x-100"
             >
               {item.label}
             </HashLink>
@@ -59,12 +58,12 @@ export function Header({ lang, copy }: HeaderProps) {
           >
             {copy.phone}
           </a>
-          <MotionLink
+          <HashLink
             href={`/${lang}#hero-form`}
-            className="inline-flex h-9 max-w-[9.5rem] items-center truncate rounded-lg bg-accent px-2.5 text-[10px] font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover sm:max-w-none sm:px-3.5 sm:text-xs"
+            className="inline-flex h-9 max-w-[9.5rem] items-center truncate rounded-lg bg-accent px-2.5 text-[10px] font-bold uppercase tracking-wide text-accent-fg shadow-sm transition-all hover:scale-105 hover:bg-accent-hover active:scale-95 sm:max-w-none sm:px-3.5 sm:text-xs"
           >
             {copy.requestCall}
-          </MotionLink>
+          </HashLink>
           <MobileMenu
             lang={lang}
             languageLabel={copy.language}
