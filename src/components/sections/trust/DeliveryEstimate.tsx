@@ -33,14 +33,11 @@ function PartnerLogo({ name, imageSrc }: { name: string; imageSrc: string }) {
       alt={name}
       width={120}
       height={32}
-      className="h-7 w-auto object-contain opacity-80 grayscale transition-all hover:opacity-100 hover:grayscale-0 sm:h-8"
+      className="h-5 w-auto max-w-[85px] object-contain opacity-75 grayscale transition-all hover:opacity-100 hover:grayscale-0 sm:h-6"
       onError={() => setFailed(true)}
     />
   );
 }
-
-const fieldClassName =
-  "h-12 rounded-xl border-neutral-300 bg-white px-4 text-sm shadow-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500";
 
 export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
   const [fullName, setFullName] = useState("");
@@ -91,59 +88,64 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="mx-auto flex w-full max-w-3xl flex-col items-center justify-center gap-3 sm:flex-row"
+                className="mx-auto flex w-full max-w-2xl flex-col items-center justify-center gap-3 sm:flex-row"
                 noValidate
               >
-                <Input
-                  name="fullName"
-                  required
-                  placeholder={copy.name}
-                  aria-label={copy.name}
-                  value={fullName}
-                  error={errors.fullName}
-                  onBlur={handleBlur}
-                  onChange={(e) => setFullName(e.target.value)}
-                  className={fieldClassName}
-                />
-                <PhoneInput
-                  name="phone"
-                  required
-                  aria-label={copy.phone}
-                  value={phone}
-                  error={errors.phone}
-                  onBlur={handleBlur}
-                  onValueChange={setPhone}
-                  className="h-12 rounded-xl border-neutral-300 bg-white shadow-none focus-within:border-amber-500 focus-within:ring-1 focus-within:ring-amber-500"
-                />
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="h-12 shrink-0 rounded-xl bg-[#FFCC00] px-6 font-bold text-neutral-900 uppercase shadow-xs transition-all hover:bg-amber-400"
-                >
-                  {copy.submit}
-                </Button>
+                <div className="w-full sm:w-64">
+                  <Input
+                    name="fullName"
+                    required
+                    placeholder={copy.name}
+                    aria-label={copy.name}
+                    value={fullName}
+                    error={errors.fullName}
+                    onBlur={handleBlur}
+                    onChange={(e) => setFullName(e.target.value)}
+                    className="h-12 rounded-xl border-neutral-300 bg-white px-4 text-sm shadow-none focus:border-amber-500 focus:ring-0 focus:outline-none"
+                  />
+                </div>
+                <div className="w-full sm:w-64">
+                  <PhoneInput
+                    name="phone"
+                    required
+                    aria-label={copy.phone}
+                    value={phone}
+                    error={errors.phone}
+                    onBlur={handleBlur}
+                    onValueChange={setPhone}
+                    className="h-12 rounded-xl border-neutral-300 bg-white shadow-none focus-within:border-amber-500 focus-within:ring-0"
+                  />
+                </div>
+                <div className="flex w-full shrink-0 flex-col gap-1.5 sm:w-auto">
+                  <Button
+                    type="submit"
+                    size="lg"
+                    className="flex h-12 w-full shrink-0 items-center justify-center whitespace-nowrap rounded-xl bg-[#FFCC00] px-6 text-xs font-bold text-neutral-900 uppercase shadow-xs transition-all hover:bg-amber-400 sm:w-auto sm:text-sm"
+                  >
+                    {copy.submit}
+                  </Button>
+                  <div className="relative min-h-[1.25rem]" />
+                </div>
               </form>
             )}
 
             <div className="mt-8 border-t border-neutral-200/60 pt-6">
-              <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:flex-nowrap">
-                <p className="shrink-0 text-xs font-semibold tracking-wider text-neutral-600 uppercase sm:text-sm">
-                  {copy.partnersTitle}
-                </p>
-                <ul className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:flex-nowrap">
-                  {copy.partners.map((partner) => (
-                    <li
-                      key={partner.name}
-                      className="flex h-8 shrink-0 items-center justify-center"
-                    >
-                      <PartnerLogo
-                        name={partner.name}
-                        imageSrc={partner.imageSrc}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <p className="mb-3 text-center text-xs font-bold tracking-wider text-neutral-400 uppercase">
+                {copy.partnersTitle}
+              </p>
+              <ul className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-4 px-4 sm:gap-6">
+                {copy.partners.map((partner) => (
+                  <li
+                    key={partner.name}
+                    className="flex h-6 shrink-0 items-center justify-center"
+                  >
+                    <PartnerLogo
+                      name={partner.name}
+                      imageSrc={partner.imageSrc}
+                    />
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </ScrollReveal>
