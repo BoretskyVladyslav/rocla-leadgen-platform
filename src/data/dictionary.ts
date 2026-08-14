@@ -706,7 +706,7 @@ const DICTIONARY_UK: Dictionary = {
       { label: "Річтраки", href: "#catalog" },
       { label: "Навантажувачі", href: "#catalog" },
       { label: "Підйомники", href: "#catalog" },
-      { label: "Обслуговування / колеса", href: "#catalog" },
+      { label: "Самохідні візки", href: "#catalog" },
     ],
     navTitle: "Компанія",
     navLinks: [
@@ -1087,7 +1087,7 @@ const DICTIONARY_RU: Dictionary = {
       { label: "Ричтраки", href: "#catalog" },
       { label: "Погрузчики", href: "#catalog" },
       { label: "Подъёмники", href: "#catalog" },
-      { label: "Обслуживание / колёса", href: "#catalog" },
+      { label: "Самоходные тележки", href: "#catalog" },
     ],
     navTitle: "Компания",
     navLinks: [

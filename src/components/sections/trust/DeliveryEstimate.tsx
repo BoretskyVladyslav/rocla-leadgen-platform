@@ -70,8 +70,22 @@ export function DeliveryEstimate({ copy }: DeliveryEstimateProps) {
   }
 
   return (
-    <section className="bg-white">
-      <div className="mx-auto w-full max-w-5xl px-4 py-16 sm:px-6 lg:py-24">
+    <section className="relative overflow-hidden bg-white">
+      <Image
+        src="/images/delivery/boxes-left.jpg"
+        alt=""
+        width={180}
+        height={180}
+        className="pointer-events-none absolute bottom-0 left-0 hidden max-w-[160px] select-none lg:block xl:max-w-[200px]"
+      />
+      <Image
+        src="/images/delivery/boxes-right.jpg"
+        alt=""
+        width={180}
+        height={180}
+        className="pointer-events-none absolute right-0 bottom-0 hidden max-w-[160px] select-none lg:block xl:max-w-[200px]"
+      />
+      <div className="relative z-10 mx-auto w-full max-w-5xl px-4 py-16 sm:px-6 lg:py-24">
         <ScrollReveal>
           <div className="mx-auto max-w-5xl rounded-3xl border border-neutral-200/80 bg-neutral-50/70 p-6 shadow-xs sm:p-10">
             <h2 className="text-center text-2xl font-extrabold tracking-wide text-neutral-900 uppercase sm:text-3xl">

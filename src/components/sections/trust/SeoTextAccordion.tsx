@@ -14,17 +14,17 @@ export function SeoTextAccordion({ copy }: SeoTextAccordionProps) {
 
   return (
     <section className="bg-white">
-      <div className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 lg:py-16">
-        <ScrollReveal className="max-w-4xl">
-          <h2 className="text-xl font-bold tracking-tight text-heading sm:text-2xl">
+      <div className="mx-auto max-w-5xl px-4 py-10">
+        <ScrollReveal>
+          <h2 className="mb-4 text-2xl font-bold text-neutral-900">
             {copy.title}
           </h2>
-          <div className="mt-5 flex flex-col gap-4 text-sm leading-relaxed text-muted sm:text-base">
+          <div className="space-y-3 leading-relaxed text-neutral-600">
             {copy.preview.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
             {expanded ? (
-              <div id={contentId} className="flex flex-col gap-4">
+              <div id={contentId} className="space-y-3">
                 {copy.rest.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
@@ -33,7 +33,7 @@ export function SeoTextAccordion({ copy }: SeoTextAccordionProps) {
           </div>
           <button
             type="button"
-            className="mt-5 text-sm font-bold text-heading underline decoration-accent underline-offset-4 transition-colors hover:text-accent-alt"
+            className="mt-2 inline-flex items-center gap-1 font-semibold text-amber-500 hover:underline"
             aria-expanded={expanded}
             aria-controls={contentId}
             onClick={() => setExpanded((prev) => !prev)}
