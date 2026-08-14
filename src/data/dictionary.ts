@@ -760,7 +760,7 @@ const DICTIONARY_UK: Dictionary = {
     email: "Email",
     submit: "Отримати консультацію",
     success: "Заявку прийнято. Менеджер зателефонує.",
-    imageSrc: "/images/manager.jpg",
+    imageSrc: "/images/manager.png",
     imageAlt: "Менеджер KAISER",
     errors: {
       fullName: "Вкажіть ім’я (мінімум 2 символи).",
@@ -1190,7 +1190,7 @@ const DICTIONARY_RU: Dictionary = {
     email: "Email",
     submit: "Получить консультацию",
     success: "Заявку приняли. Менеджер перезвонит.",
-    imageSrc: "/images/manager.jpg",
+    imageSrc: "/images/manager.png",
     imageAlt: "Менеджер KAISER",
     errors: {
       fullName: "Укажите имя (минимум 2 символа).",

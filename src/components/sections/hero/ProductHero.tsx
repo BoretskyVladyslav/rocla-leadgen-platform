@@ -44,19 +44,19 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
                     aria-label={`${copy.thumbPlaceholder} ${index + 1}`}
                     aria-pressed={index === activeIndex}
                     className={cn(
-                      "w-full overflow-hidden rounded-lg transition-opacity",
+                      "w-full overflow-hidden rounded-lg border-2 transition-opacity",
                       index === activeIndex
-                        ? "ring-2 ring-accent ring-offset-1"
-                        : "opacity-80 hover:opacity-100",
+                        ? "border-accent"
+                        : "border-transparent opacity-80 hover:opacity-100",
                     )}
                   >
                     <MediaImage
                       src={image.src}
                       alt={image.alt}
                       aspect="1/1"
-                      fit="contain"
+                      fit="cover"
                       sizes="80px"
-                      className="rounded-lg border border-border bg-white"
+                      className="h-full w-full"
                     />
                   </button>
                 </li>
@@ -69,9 +69,9 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
               src={activeImage?.src}
               alt={activeImage?.alt ?? product.name ?? copy.imagePlaceholder}
               aspect="4/3"
-              fit="contain"
+              fit="cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="rounded-2xl border-2 border-accent bg-white shadow-sm"
+              className="h-full w-full rounded-2xl border-2 border-accent shadow-sm"
             />
           </div>
         </div>

@@ -36,6 +36,7 @@ export function ConsultationBlock({ copy }: ConsultationBlockProps) {
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState<LeadFieldErrors>({});
   const [status, setStatus] = useState<"idle" | "success">("idle");
+  const [imageSrc, setImageSrc] = useState(copy.imageSrc);
 
   function validateField(field: keyof LeadFieldErrors) {
     const next = validateLeadFields(
@@ -71,10 +72,10 @@ export function ConsultationBlock({ copy }: ConsultationBlockProps) {
   return (
     <section
       id="consultation"
-      className="scroll-mt-20 border-y border-border bg-[#eef5f8]"
+      className="relative scroll-mt-20 overflow-hidden border-y border-border bg-[#eef5f8]"
     >
-      <div className="mx-auto grid w-full max-w-7xl items-end gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_1fr_auto] lg:gap-12 lg:py-20">
-        <ScrollReveal className="flex flex-col gap-5 self-center">
+      <div className="mx-auto grid w-full max-w-7xl items-end gap-10 px-4 pt-16 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] lg:gap-8 lg:pt-20">
+        <ScrollReveal className="flex flex-col gap-5 pb-12 lg:pb-16">
           <h2 className="text-2xl font-bold tracking-tight text-heading sm:text-3xl">
             {copy.title}
           </h2>
@@ -90,7 +91,7 @@ export function ConsultationBlock({ copy }: ConsultationBlockProps) {
           </ul>
         </ScrollReveal>
 
-        <ScrollReveal delay={0.06} className="self-center">
+        <ScrollReveal delay={0.06} className="pb-12 lg:pb-16">
           {status === "success" ? (
             <p className="rounded-2xl border border-border bg-white px-5 py-8 text-center text-sm font-semibold text-heading shadow-sm">
               {copy.success}
@@ -138,18 +139,21 @@ export function ConsultationBlock({ copy }: ConsultationBlockProps) {
           )}
         </ScrollReveal>
 
-        <ScrollReveal
-          delay={0.1}
-          className="relative mx-auto h-52 w-full max-w-[14rem] overflow-hidden lg:h-[22rem] lg:w-56"
-        >
+        <div className="pointer-events-none flex justify-center self-end lg:justify-end">
           <Image
-            src={copy.imageSrc}
+            src={imageSrc}
             alt={copy.imageAlt}
-            fill
-            sizes="224px"
-            className="object-contain object-bottom"
+            width={420}
+            height={640}
+            sizes="(max-width: 1024px) 220px, 280px"
+            className="h-[340px] w-auto object-contain object-bottom lg:h-[400px]"
+            onError={() => {
+              if (imageSrc !== "/images/manager.jpg") {
+                setImageSrc("/images/manager.jpg");
+              }
+            }}
           />
-        </ScrollReveal>
+        </div>
       </div>
     </section>
   );
