@@ -1,14 +1,12 @@
-import Link from "next/link";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { MediaImage } from "@/components/ui/MediaImage";
 import type { Dictionary } from "@/data/dictionary";
 
 export interface FeaturedCaseProps {
-  lang: string;
   copy: Dictionary["caseStudy"];
 }
 
-export function FeaturedCase({ lang, copy }: FeaturedCaseProps) {
+export function FeaturedCase({ copy }: FeaturedCaseProps) {
   return (
     <section className="bg-white">
       <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:gap-12 lg:py-28">
@@ -24,22 +22,18 @@ export function FeaturedCase({ lang, copy }: FeaturedCaseProps) {
           />
         </ScrollReveal>
         <ScrollReveal delay={0.08} className="flex flex-col justify-center">
-          <h2 className="text-2xl font-bold uppercase tracking-[0.08em] text-accent-alt sm:text-3xl lg:text-4xl">
+          <h2 className="text-2xl font-bold tracking-wide text-neutral-900 uppercase md:text-3xl">
             {copy.title}
           </h2>
-          <div className="mt-6 flex flex-col gap-4">
+          <p className="mt-2 mb-4 text-base font-semibold text-amber-500 md:text-lg">
+            {copy.role}
+          </p>
+          <div className="space-y-3 text-sm leading-relaxed text-neutral-700 md:text-base">
             {copy.paragraphs.map((paragraph) => (
-              <p key={paragraph} className="text-sm leading-relaxed text-muted sm:text-base">
-                {paragraph}
-              </p>
+              <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
-          <Link
-            href={`/${lang}#about`}
-            className="mt-6 text-sm font-bold uppercase tracking-wide text-heading underline decoration-accent underline-offset-4 hover:text-accent-alt"
-          >
-            {copy.readMore}
-          </Link>
+          <p className="pt-2 font-semibold text-neutral-900">{copy.signoff}</p>
         </ScrollReveal>
       </div>
     </section>

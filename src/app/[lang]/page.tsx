@@ -24,7 +24,7 @@ export default async function HomePage({
       <CategoryGrid lang={lang} copy={dict.categories} />
       <TrustBadges copy={dict.advantages} />
       <ClientLogos copy={dict.clients} />
-      <FeaturedCase lang={lang} copy={dict.caseStudy} />
+      <FeaturedCase copy={dict.caseStudy} />
       <DeliveryEstimate copy={dict.delivery} />
       <ReviewsCarousel copy={dict.reviews} />
       <FaqAccordion copy={dict.faq} />
