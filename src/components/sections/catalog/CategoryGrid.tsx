@@ -2,14 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { HashLink } from "@/components/layout/HashLink";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import {
   StaggerItem,
   StaggerReveal,
 } from "@/components/motion/StaggerReveal";
-import { cardHover, cardHoverClassName } from "@/components/motion/variants";
 import { Button } from "@/components/ui/Button";
 import { MediaImage } from "@/components/ui/MediaImage";
 import type { Dictionary } from "@/data/dictionary";
@@ -44,30 +42,22 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
               ? `/${lang}/product/${productSlug}`
               : `/${lang}#contact`;
             const hiddenOnMobile = !expanded && index >= MOBILE_PREVIEW;
-            const tileClassName = cn(
-              "group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-white shadow-sm",
-              cardHoverClassName,
-            );
+            const tileClassName =
+              "group flex h-full flex-col rounded-xl border-2 border-[#FFCC00] bg-white pb-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl";
 
             const cardBody = (
               <>
+                <h3 className="px-2 pt-4 pb-2 text-center text-sm font-bold tracking-wide text-neutral-900 uppercase sm:text-base">
+                  {item.title}
+                </h3>
                 <MediaImage
                   src={item.imageSrc}
                   alt={item.imageAlt}
-                  aspect="4/3"
+                  aspect={false}
                   fit="contain"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="min-h-0 border-b border-border"
+                  className="flex h-48 w-full items-center justify-center bg-white p-4 sm:h-56 [&_img]:object-contain [&_img]:transition-transform [&_img]:duration-300 group-hover:[&_img]:scale-105"
                 />
-                <div className="flex flex-col gap-1 px-4 py-3 sm:px-5">
-                  <h3 className="text-sm font-bold tracking-tight text-heading sm:text-base">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs text-muted">{item.subtitle}</p>
-                  <p className="text-sm font-bold tabular-nums text-accent-alt">
-                    {item.priceLabel}
-                  </p>
-                </div>
               </>
             );
 
@@ -76,17 +66,15 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
                 key={item.title}
                 className={cn(hiddenOnMobile && "hidden lg:block")}
               >
-                <motion.div className="h-full" {...cardHover}>
-                  {isProduct ? (
-                    <Link href={href} className={tileClassName}>
-                      {cardBody}
-                    </Link>
-                  ) : (
-                    <HashLink href={href} className={tileClassName}>
-                      {cardBody}
-                    </HashLink>
-                  )}
-                </motion.div>
+                {isProduct ? (
+                  <Link href={href} className={tileClassName}>
+                    {cardBody}
+                  </Link>
+                ) : (
+                  <HashLink href={href} className={tileClassName}>
+                    {cardBody}
+                  </HashLink>
+                )}
               </StaggerItem>
             );
           })}
