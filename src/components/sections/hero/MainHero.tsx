@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent, type FocusEvent, type ReactNode } from "react";
+import { useState, type FormEvent, type FocusEvent } from "react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -15,102 +15,6 @@ import {
 export interface MainHeroProps {
   copy: Dictionary["hero"];
 }
-
-function TruckIcon() {
-  return (
-    <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M15 18H9"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M19 18h2v-3.65a1 1 0 0 0-.22-.62l-2.56-3.42A2 2 0 0 0 16.56 10H14"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="17" cy="18" r="2" stroke="currentColor" strokeWidth="2" />
-      <circle cx="7" cy="18" r="2" stroke="currentColor" strokeWidth="2" />
-    </svg>
-  );
-}
-
-function FileTextIcon() {
-  return (
-    <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M14 2v4a2 2 0 0 0 2 2h4"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M10 9H8"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <path
-        d="M16 13H8"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <path
-        d="M16 17H8"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function ShieldCheckIcon() {
-  return (
-    <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="m9 12 2 2 4-4"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-const TRUST_ICONS: ReactNode[] = [
-  <TruckIcon key="truck" />,
-  <FileTextIcon key="file" />,
-  <ShieldCheckIcon key="shield" />,
-];
 
 function HighlightedTitle({
   title,
@@ -187,7 +91,7 @@ export function MainHero({ copy }: MainHeroProps) {
 
   return (
     <section className="scroll-mt-20 border-b border-border bg-white">
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 px-4 py-16 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:grid-rows-[auto_auto_1fr] lg:items-stretch lg:gap-x-12 lg:gap-y-8 lg:py-24">
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:items-stretch lg:gap-x-10 lg:gap-y-8 lg:py-16">
         <ScrollReveal className="order-1 flex flex-col gap-3 lg:col-start-1 lg:row-start-1">
           <h1 className="max-w-3xl text-3xl font-bold uppercase tracking-tight text-heading sm:text-4xl lg:text-5xl lg:leading-[1.08]">
             <HighlightedTitle
@@ -195,41 +99,14 @@ export function MainHero({ copy }: MainHeroProps) {
               highlights={copy.titleHighlights}
             />
           </h1>
-          <p className="text-lg font-bold uppercase tracking-[0.08em] text-muted sm:text-xl">
+          <p className="text-base font-semibold leading-relaxed text-muted sm:text-lg">
             {copy.subtitle}
           </p>
         </ScrollReveal>
 
-        <ScrollReveal className="order-2 flex flex-col gap-3 lg:col-start-1 lg:row-start-2">
-          <div className="flex flex-col gap-1">
-            <p className="text-sm font-extrabold tracking-[0.12em] text-heading uppercase sm:text-base">
-              {copy.banner}
-            </p>
-            <p className="text-sm font-semibold text-heading sm:text-base">
-              {copy.promo}
-            </p>
-            <p className="text-[11px] leading-snug text-gray-400 sm:text-xs">
-              {copy.promoNote}
-            </p>
-          </div>
-          <ul className="flex flex-wrap items-center gap-2">
-            {copy.trustBadges.map((badge, index) => (
-              <li
-                key={badge}
-                className="inline-flex items-center gap-1.5 rounded-full border border-gray-200/80 bg-surface/80 px-2.5 py-1 text-[11px] font-bold tracking-tight text-heading backdrop-blur-sm sm:text-xs"
-              >
-                <span className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent text-accent-fg [&_svg]:h-3 [&_svg]:w-3">
-                  {TRUST_ICONS[index] ?? null}
-                </span>
-                {badge}
-              </li>
-            ))}
-          </ul>
-        </ScrollReveal>
-
         <ScrollReveal
           delay={0.1}
-          className="relative order-3 mx-auto h-full w-full min-w-0 max-w-lg lg:col-start-2 lg:row-span-3 lg:row-start-1 lg:max-w-none"
+          className="relative order-3 mx-auto h-full w-full min-w-0 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:max-w-none"
         >
           <MediaImage
             src={copy.imageSrc}
@@ -239,15 +116,15 @@ export function MainHero({ copy }: MainHeroProps) {
             priority
             objectPosition="object-center"
             sizes="(max-width: 1024px) 100vw, 50vw"
-            className="h-full min-h-[280px] rounded-2xl border border-gray-200 bg-surface shadow-sm sm:min-h-[360px] lg:min-h-[500px]"
+            className="h-full min-h-[320px] rounded-none border border-gray-200 bg-surface shadow-sm sm:min-h-[420px] lg:min-h-[640px]"
           />
         </ScrollReveal>
 
-        <ScrollReveal className="order-4 lg:col-start-1 lg:row-start-3 lg:self-end">
+        <ScrollReveal className="order-4 lg:col-start-1 lg:row-start-2 lg:self-end">
           <form
             id="hero-form"
             onSubmit={handleSubmit}
-            className="scroll-mt-24 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5"
+            className="scroll-mt-24"
             noValidate
           >
             {status === "success" ? (
@@ -255,35 +132,43 @@ export function MainHero({ copy }: MainHeroProps) {
                 {copy.success}
               </p>
             ) : (
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
-                <Input
-                  id="hero-fullName"
-                  label={copy.name}
-                  name="fullName"
-                  required
-                  value={fullName}
-                  error={errors.fullName}
-                  onBlur={handleBlur}
-                  onChange={(e) => setFullName(e.target.value)}
-                />
-                <PhoneInput
-                  id="hero-phone"
-                  label={copy.phone}
-                  name="phone"
-                  required
-                  value={phone}
-                  error={errors.phone}
-                  onBlur={handleBlur}
-                  onValueChange={setPhone}
-                />
-                <div className="sm:w-44 sm:shrink-0 sm:pb-[calc(0.375rem+1.25rem)]">
+              <div className="flex flex-col gap-4 items-center justify-between md:flex-row">
+                <div className="w-full md:flex-1">
+                  <Input
+                    id="hero-fullName"
+                    name="fullName"
+                    required
+                    placeholder={copy.name}
+                    aria-label={copy.name}
+                    value={fullName}
+                    error={errors.fullName}
+                    onBlur={handleBlur}
+                    onChange={(e) => setFullName(e.target.value)}
+                    className="rounded-none"
+                  />
+                </div>
+                <div className="w-full md:flex-1">
+                  <PhoneInput
+                    id="hero-phone"
+                    name="phone"
+                    required
+                    aria-label={copy.phone}
+                    value={phone}
+                    error={errors.phone}
+                    onBlur={handleBlur}
+                    onValueChange={setPhone}
+                    className="rounded-none"
+                  />
+                </div>
+                <div className="w-full md:flex-1">
                   <Button
                     type="submit"
                     size="lg"
-                    className="h-12 w-full bg-[#FFCC00] font-bold tracking-wide uppercase hover:bg-amber-400"
+                    className="h-12 w-full rounded-none bg-[#FFCC00] font-bold tracking-wide uppercase hover:bg-amber-400"
                   >
                     {copy.submit}
                   </Button>
+                  <div className="relative min-h-[1.25rem]" />
                 </div>
               </div>
             )}

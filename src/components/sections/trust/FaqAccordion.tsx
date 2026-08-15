@@ -77,7 +77,7 @@ export function FaqAccordion({ copy, embedded = false }: FaqAccordionProps) {
             return (
               <li
                 key={item.id ?? item.question}
-                className="mb-3 overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-xs transition-colors hover:border-amber-300"
+                className="mb-3 overflow-hidden rounded-none border border-neutral-200 bg-white shadow-xs transition-colors hover:border-amber-300"
               >
                 <button
                   type="button"

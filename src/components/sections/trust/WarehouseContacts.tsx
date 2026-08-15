@@ -96,7 +96,7 @@ export function WarehouseContacts({ copy }: WarehouseContactsProps) {
           </div>
 
           <div className="lg:col-span-7">
-            <div className="relative h-[340px] w-full overflow-hidden rounded-2xl border border-neutral-200 shadow-xs sm:h-[380px]">
+            <div className="relative h-[340px] w-full overflow-hidden rounded-none border border-neutral-200 shadow-xs sm:h-[380px]">
               <iframe
                 key={selected.id}
                 title={`${selected.city}, ${selected.address}`}

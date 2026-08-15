@@ -1,11 +1,9 @@
 import { CategoryGrid } from "@/components/sections/catalog/CategoryGrid";
-import { ConsultationBlock } from "@/components/sections/forms/ConsultationBlock";
-import { LeadCaptureForm } from "@/components/sections/forms/LeadCaptureForm";
 import { MainHero } from "@/components/sections/hero/MainHero";
 import { ClientLogos } from "@/components/sections/trust/ClientLogos";
 import { DeliveryEstimate } from "@/components/sections/trust/DeliveryEstimate";
-import { FaqAccordion } from "@/components/sections/trust/FaqAccordion";
 import { FeaturedCase } from "@/components/sections/trust/FeaturedCase";
+import { HomepageFaqOffer } from "@/components/sections/trust/HomepageFaqOffer";
 import { ReviewsCarousel } from "@/components/sections/trust/ReviewsCarousel";
 import { SeoTextAccordion } from "@/components/sections/trust/SeoTextAccordion";
 import { TrustBadges } from "@/components/sections/trust/TrustBadges";
@@ -27,9 +25,7 @@ export default async function HomePage({
       <FeaturedCase copy={dict.caseStudy} />
       <DeliveryEstimate copy={dict.delivery} />
       <ReviewsCarousel copy={dict.reviews} />
-      <FaqAccordion copy={dict.faq} />
-      <ConsultationBlock copy={dict.consultation} />
-      <LeadCaptureForm copy={dict.leadForm} />
+      <HomepageFaqOffer faq={dict.faq} offer={dict.product.commercialOffer} />
       <WarehouseContacts copy={dict.branches} />
       <SeoTextAccordion copy={dict.seoText} />
     </>

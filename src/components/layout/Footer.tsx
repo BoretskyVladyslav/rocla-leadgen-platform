@@ -29,25 +29,6 @@ function TelegramIcon() {
   );
 }
 
-function InstagramIcon() {
-  return (
-    <svg
-      className={iconClassName()}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-    >
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
 function ViberIcon() {
   return (
     <svg
@@ -67,10 +48,28 @@ function ViberIcon() {
   );
 }
 
+function YoutubeIcon() {
+  return (
+    <svg
+      className={iconClassName()}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M2.5 8.5A3.5 3.5 0 0 1 6 5h12a3.5 3.5 0 0 1 3.5 3.5v7A3.5 3.5 0 0 1 18 19H6a3.5 3.5 0 0 1-3.5-3.5v-7Z" />
+      <path d="m10 9.5 5 2.5-5 2.5v-5Z" />
+    </svg>
+  );
+}
+
 const SOCIAL_ICONS = {
   telegram: TelegramIcon,
-  instagram: InstagramIcon,
   viber: ViberIcon,
+  youtube: YoutubeIcon,
 } as const;
 
 export function Footer({ lang, copy }: FooterProps) {

@@ -39,10 +39,6 @@ export interface Dictionary {
     title: string;
     titleHighlights: string[];
     subtitle: string;
-    banner: string;
-    promo: string;
-    promoNote: string;
-    trustBadges: string[];
     name: string;
     phone: string;
     submit: string;
@@ -283,7 +279,7 @@ export interface Dictionary {
     social: Array<{
       label: string;
       href: string;
-      network: "telegram" | "instagram" | "viber";
+      network: "telegram" | "viber" | "youtube";
     }>;
   };
 }
@@ -429,17 +425,10 @@ const DICTIONARY_UK: Dictionary = {
     closeMenu: "Закрити меню",
   },
   hero: {
-    title: "Купити роклу (рохлю) — німецька якість KAISER",
-    titleHighlights: ["роклу (рохлю)", "KAISER"],
-    subtitle: "20 років на ринку в Україні",
-    banner: "ТИЖДЕНЬ НИЗЬКИХ ЦІН",
-    promo: "Знижки до 18%. Гарантія 24 місяці.",
-    promoNote: "* Детальну інформацію уточнюйте у менеджера",
-    trustBadges: [
-      "Відвантаження за 30 хв",
-      "Оплата з ПДВ",
-      "Гарантія 24 міс",
-    ],
+    title: "ТЕХНІКА ДЛЯ СКЛАДУ НІМЕЦЬКА ЯКІСТЬ",
+    titleHighlights: ["НІМЕЦЬКА ЯКІСТЬ"],
+    subtitle:
+      "Офіційний дилер. Гарантія 3 роки. Сервіс 24/7. В наявності по всій Україні.",
     name: "Ім’я",
     phone: "Телефон",
     submit: "Замовити",
@@ -822,14 +811,14 @@ const DICTIONARY_UK: Dictionary = {
         network: "telegram",
       },
       {
-        label: "Instagram",
-        href: "https://www.instagram.com/",
-        network: "instagram",
-      },
-      {
         label: "Viber",
         href: "viber://chat?number=%2B380981540982",
         network: "viber",
+      },
+      {
+        label: "YouTube",
+        href: "https://www.youtube.com",
+        network: "youtube",
       },
     ],
   },
@@ -860,17 +849,10 @@ const DICTIONARY_RU: Dictionary = {
     closeMenu: "Закрыть меню",
   },
   hero: {
-    title: "Купить роклу (рохлю) — немецкое качество KAISER",
-    titleHighlights: ["роклу (рохлю)", "KAISER"],
-    subtitle: "20 лет на рынке в Украине",
-    banner: "НЕДЕЛЯ НИЗКИХ ЦЕН",
-    promo: "Скидки до 18%. Гарантия 24 месяца.",
-    promoNote: "* Детальную информацию уточняйте у менеджера",
-    trustBadges: [
-      "Отгрузка за 30 мин",
-      "Оплата с НДС",
-      "Гарантия 24 мес",
-    ],
+    title: "ТЕХНИКА ДЛЯ СКЛАДА НЕМЕЦКОЕ КАЧЕСТВО",
+    titleHighlights: ["НЕМЕЦКОЕ КАЧЕСТВО"],
+    subtitle:
+      "Официальный дилер. Гарантия 3 года. Сервис 24/7. В наличии по всей Украине.",
     name: "Имя",
     phone: "Телефон",
     submit: "Заказать",
@@ -1253,14 +1235,14 @@ const DICTIONARY_RU: Dictionary = {
         network: "telegram",
       },
       {
-        label: "Instagram",
-        href: "https://www.instagram.com/",
-        network: "instagram",
-      },
-      {
         label: "Viber",
         href: "viber://chat?number=%2B380981540982",
         network: "viber",
+      },
+      {
+        label: "YouTube",
+        href: "https://www.youtube.com",
+        network: "youtube",
       },
     ],
   },

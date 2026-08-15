@@ -44,27 +44,33 @@ export function ClientLogos({ copy, className }: ClientLogosProps) {
   const logos = [...copy.logos, ...copy.logos];
 
   return (
-    <section className={cn("bg-white py-14", className)}>
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
-        <ScrollReveal>
-          <h2 className="section-heading">{copy.title}</h2>
-        </ScrollReveal>
+    <section>
+      <div className={cn("bg-neutral-100 py-10", className)}>
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+          <ScrollReveal>
+            <h2 className="section-heading">{copy.title}</h2>
+          </ScrollReveal>
+        </div>
+      </div>
 
-        <div className="group/marquee mt-10 overflow-hidden select-none">
-          <ul
-            className="logo-marquee flex w-max whitespace-nowrap py-1 group-hover/marquee:[animation-play-state:paused]"
-            aria-label={copy.title}
-          >
-            {logos.map((logo, index) => (
-              <li
-                key={`${logo.name}-${index}`}
-                className="mx-3 inline-flex h-24 w-44 shrink-0 items-center justify-center rounded-2xl border border-neutral-200 bg-white p-4 shadow-xs transition-shadow hover:shadow-md md:w-52"
-                aria-hidden={index >= copy.logos.length}
-              >
-                <LogoMark name={logo.name} imageSrc={logo.imageSrc} />
-              </li>
-            ))}
-          </ul>
+      <div className="bg-white py-8">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+          <div className="group/marquee overflow-hidden select-none">
+            <ul
+              className="logo-marquee flex w-max whitespace-nowrap py-1 group-hover/marquee:[animation-play-state:paused]"
+              aria-label={copy.title}
+            >
+              {logos.map((logo, index) => (
+                <li
+                  key={`${logo.name}-${index}`}
+                  className="mx-3 inline-flex h-24 w-44 shrink-0 items-center justify-center rounded-2xl border border-neutral-200 bg-white p-4 shadow-xs transition-shadow hover:shadow-md md:w-52"
+                  aria-hidden={index >= copy.logos.length}
+                >
+                  <LogoMark name={logo.name} imageSrc={logo.imageSrc} />
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
