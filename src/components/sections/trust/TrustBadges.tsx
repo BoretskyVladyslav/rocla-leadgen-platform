@@ -35,7 +35,7 @@ export function TrustBadges({ copy }: TrustBadgesProps) {
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>
-        <div className="mx-auto mt-10 max-w-7xl rounded-none border border-neutral-200/80 bg-white p-8 shadow-xs sm:p-12">
+        <div className="mt-10 w-full rounded-none border border-neutral-200/80 bg-white p-8 shadow-xs sm:p-12">
           <StaggerReveal className="grid grid-cols-1 gap-x-12 gap-y-6 md:grid-cols-2 lg:gap-y-8">
             {copy.items.map((item) => (
               <StaggerItem key={item.label}>

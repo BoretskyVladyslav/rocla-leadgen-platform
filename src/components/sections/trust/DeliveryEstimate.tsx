@@ -35,11 +35,14 @@ function PartnerLogo({ name, imageSrc }: { name: string; imageSrc: string }) {
       alt={name}
       width={120}
       height={32}
-      className="h-5 w-auto max-w-[85px] object-contain opacity-75 grayscale transition-all hover:opacity-100 hover:grayscale-0 sm:h-6"
+      className="h-6 w-auto max-w-[90px] object-contain opacity-70 grayscale"
       onError={() => setFailed(true)}
     />
   );
 }
+
+const FIELD_CLASS =
+  "h-12 rounded-full border-neutral-200 bg-white px-5 text-sm shadow-none focus:border-amber-400 focus:ring-0 focus:outline-none";
 
 export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
   const [fullName, setFullName] = useState("");
@@ -72,53 +75,54 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
   }
 
   return (
-    <section className={cn("bg-neutral-50/80 py-16", className)}>
-      <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
+    <section className={cn("bg-neutral-50 py-12", className)}>
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
         <ScrollReveal>
-          <div className="relative mx-auto max-w-5xl overflow-hidden rounded-none border border-neutral-200/90 bg-neutral-50 shadow-sm">
-            <div className="relative px-8 pt-8 pb-10 sm:px-12 sm:pt-12 sm:pb-14">
-              <div
-                className="pointer-events-none absolute bottom-0 left-0 z-0 hidden h-[48%] w-[34%] md:block lg:h-[52%] xl:h-[55%]"
-                aria-hidden
-              >
-                <Image
-                  src="/images/delivery/boxes-left.jpg"
-                  alt=""
-                  fill
-                  sizes="(min-width: 1280px) 280px, (min-width: 768px) 200px, 0px"
-                  className="max-h-none max-w-none object-contain object-left-bottom"
-                />
-              </div>
-              <div
-                className="pointer-events-none absolute right-0 bottom-0 z-0 hidden h-[48%] w-[34%] md:block lg:h-[52%] xl:h-[55%]"
-                aria-hidden
-              >
-                <Image
-                  src="/images/delivery/boxes-right.jpg"
-                  alt=""
-                  fill
-                  sizes="(min-width: 1280px) 280px, (min-width: 768px) 200px, 0px"
-                  className="max-h-none max-w-none object-contain object-right-bottom"
-                />
-              </div>
-              <h2 className="relative z-10 text-center text-2xl font-extrabold tracking-wide text-neutral-900 uppercase sm:text-3xl">
+          <div className="relative overflow-hidden rounded-2xl bg-white shadow-sm">
+            <div
+              className="pointer-events-none absolute bottom-0 left-0 z-0 hidden h-full w-[22%] md:block lg:w-[24%]"
+              aria-hidden
+            >
+              <Image
+                src="/images/delivery/boxes-left.jpg"
+                alt=""
+                fill
+                sizes="(min-width: 1280px) 280px, (min-width: 768px) 200px, 0px"
+                className="max-h-none max-w-none object-contain object-left-bottom"
+              />
+            </div>
+            <div
+              className="pointer-events-none absolute right-0 bottom-0 z-0 hidden h-full w-[22%] md:block lg:w-[24%]"
+              aria-hidden
+            >
+              <Image
+                src="/images/delivery/boxes-right.jpg"
+                alt=""
+                fill
+                sizes="(min-width: 1280px) 280px, (min-width: 768px) 200px, 0px"
+                className="max-h-none max-w-none object-contain object-right-bottom"
+              />
+            </div>
+
+            <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-6 py-10 text-center sm:px-10 sm:py-12 md:px-16">
+              <h2 className="text-2xl font-extrabold tracking-wide text-neutral-900 uppercase sm:text-3xl">
                 {copy.title}
               </h2>
-              <p className="relative z-10 mb-6 mt-3 text-center text-xs text-neutral-500">
+              <p className="mt-2 text-xs text-neutral-500 italic">
                 {copy.subtitle}
               </p>
 
               {status === "success" ? (
-                <p className="relative z-10 text-center text-sm font-semibold text-heading">
+                <p className="mt-6 text-sm font-semibold text-heading">
                   {copy.success}
                 </p>
               ) : (
                 <form
                   onSubmit={handleSubmit}
-                  className="relative z-10 mx-auto flex w-full max-w-2xl flex-col items-center justify-center gap-3 sm:flex-row"
+                  className="mt-6 flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:items-start"
                   noValidate
                 >
-                  <div className="w-full sm:w-64">
+                  <div className="w-full sm:flex-1">
                     <Input
                       id="delivery-fullName"
                       name="fullName"
@@ -129,10 +133,10 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
                       error={errors.fullName}
                       onBlur={handleBlur}
                       onChange={(e) => setFullName(e.target.value)}
-                      className="h-12 rounded-none border-neutral-300 bg-white px-4 text-sm shadow-none focus:border-amber-500 focus:ring-0 focus:outline-none"
+                      className={FIELD_CLASS}
                     />
                   </div>
-                  <div className="w-full sm:w-64">
+                  <div className="w-full sm:flex-1">
                     <PhoneInput
                       id="delivery-phone"
                       name="phone"
@@ -142,14 +146,14 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
                       error={errors.phone}
                       onBlur={handleBlur}
                       onValueChange={setPhone}
-                      className="h-12 rounded-none border-neutral-300 bg-white shadow-none focus-within:border-amber-500 focus-within:ring-0"
+                      className="h-12 rounded-full border-neutral-200 bg-white shadow-none focus-within:border-amber-400 focus-within:ring-0"
                     />
                   </div>
-                  <div className="flex w-full shrink-0 flex-col gap-1.5 sm:w-auto">
+                  <div className="w-full sm:flex-1">
                     <Button
                       type="submit"
                       size="lg"
-                      className="flex h-12 w-full shrink-0 items-center justify-center whitespace-nowrap rounded-none bg-[#FFCC00] px-6 text-xs font-bold text-neutral-900 uppercase shadow-xs transition-all hover:bg-amber-400 sm:w-auto sm:text-sm"
+                      className="h-12 w-full rounded-full bg-amber-400 px-5 text-xs font-bold text-white uppercase shadow-none hover:bg-amber-500 sm:text-sm"
                     >
                       {copy.submit}
                     </Button>
@@ -157,17 +161,15 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
                   </div>
                 </form>
               )}
-            </div>
 
-            <div className="relative z-10 border-t border-neutral-200/60 bg-white px-4 py-6 sm:px-8">
-              <p className="mb-3 text-center text-xs font-bold tracking-wider text-neutral-400 uppercase">
+              <p className="mt-2 text-xs font-bold tracking-wider text-neutral-400 uppercase">
                 {copy.partnersTitle}
               </p>
-              <ul className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-4 sm:gap-6">
+              <ul className="mt-3 flex w-full flex-nowrap items-center justify-center gap-4 overflow-x-auto sm:gap-6">
                 {copy.partners.map((partner) => (
                   <li
                     key={partner.name}
-                    className="flex h-6 shrink-0 items-center justify-center"
+                    className="flex h-7 shrink-0 items-center justify-center"
                   >
                     <PartnerLogo
                       name={partner.name}
