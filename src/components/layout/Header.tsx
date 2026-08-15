@@ -15,7 +15,6 @@ export function Header({ lang, copy }: HeaderProps) {
     { href: `/${lang}#catalog`, label: copy.nav.catalog },
     { href: `/${lang}#catalog`, label: copy.nav.promos },
     { href: `/${lang}#services`, label: copy.nav.services },
-    { href: `/${lang}#reviews`, label: copy.nav.reviews },
     { href: `/${lang}#contact`, label: copy.nav.contacts },
   ];
 
@@ -34,7 +33,7 @@ export function Header({ lang, copy }: HeaderProps) {
           </span>
         </Link>
 
-          <nav
+        <nav
           aria-label={copy.navLabel}
           className="hidden items-center gap-5 text-xs font-medium uppercase tracking-wide text-foreground lg:flex"
         >
@@ -61,7 +60,7 @@ export function Header({ lang, copy }: HeaderProps) {
           </a>
           <HashLink
             href={`/${lang}#hero-form`}
-            className="inline-flex h-9 max-w-[9.5rem] items-center truncate rounded-lg bg-accent px-2.5 text-[10px] font-bold uppercase tracking-wide text-accent-fg shadow-sm transition-all hover:scale-105 hover:bg-accent-hover active:scale-95 sm:max-w-none sm:px-3.5 sm:text-xs"
+            className="inline-flex items-center bg-amber-400 px-4 py-2 text-xs font-bold uppercase tracking-wide text-neutral-900 rounded-sm transition-colors hover:bg-amber-500"
           >
             {copy.requestCall}
           </HashLink>

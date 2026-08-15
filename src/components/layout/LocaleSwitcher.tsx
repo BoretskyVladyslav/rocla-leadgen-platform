@@ -13,9 +13,30 @@ export interface LocaleSwitcherProps {
   label: string;
 }
 
+function UaFlag() {
+  return (
+    <svg viewBox="0 0 16 12" className="h-3 w-4 shrink-0" aria-hidden>
+      <rect width="16" height="6" fill="#0057B7" />
+      <rect y="6" width="16" height="6" fill="#FFD700" />
+    </svg>
+  );
+}
+
+function RuFlag() {
+  return (
+    <svg viewBox="0 0 16 12" className="h-3 w-4 shrink-0" aria-hidden>
+      <rect width="16" height="4" fill="#fff" />
+      <rect y="4" width="16" height="4" fill="#0039A6" />
+      <rect y="8" width="16" height="4" fill="#D52B1E" />
+    </svg>
+  );
+}
+
 export function LocaleSwitcher({ lang, label }: LocaleSwitcherProps) {
   const pathname = usePathname();
   const [hash, setHash] = useState("");
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
   const prevPath = useRef(pathname);
 
   useEffect(() => {
@@ -47,6 +68,17 @@ export function LocaleSwitcher({ lang, label }: LocaleSwitcherProps) {
     });
   }, [pathname]);
 
+  useEffect(() => {
+    if (!open) return;
+    function onPointerDown(event: PointerEvent) {
+      if (!rootRef.current?.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [open]);
+
   function hrefFor(locale: string) {
     const segments = pathname.split("/");
     if (segments.length > 1) {
@@ -60,45 +92,55 @@ export function LocaleSwitcher({ lang, label }: LocaleSwitcherProps) {
     sessionStorage.setItem(SCROLL_KEY, String(window.scrollY));
   }
 
-  const activeIndex = Math.max(0, LOCALES.indexOf(lang as (typeof LOCALES)[number]));
+  const Flag = lang === "ru" ? RuFlag : UaFlag;
 
   return (
-    <div
-      className="relative inline-flex items-center rounded-lg bg-surface p-0.5 text-xs font-medium"
-      role="navigation"
-      aria-label={label}
-    >
-      <span
-        aria-hidden
-        className={cn(
-          "pointer-events-none absolute inset-y-0.5 left-0.5 w-[calc(50%-2px)] rounded bg-accent transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
-          activeIndex === 1 ? "translate-x-full" : "translate-x-0",
-        )}
-      />
-      {LOCALES.map((locale) => (
-        <Link
-          key={locale}
-          href={hrefFor(locale)}
-          scroll={false}
-          onClick={(event: MouseEvent<HTMLAnchorElement>) => {
-            if (locale === lang) {
-              event.preventDefault();
-              return;
-            }
-            handleClick();
-          }}
-          className={cn(
-            "relative z-10 rounded px-1.5 py-1 uppercase tracking-wide transition-colors duration-300",
-            locale === lang
-              ? "text-accent-fg"
-              : "text-muted hover:text-foreground",
-          )}
-          hrefLang={locale}
-          aria-current={locale === lang ? "true" : undefined}
+    <div ref={rootRef} className="relative" role="navigation" aria-label={label}>
+      <button
+        type="button"
+        className="inline-flex items-center gap-1.5 rounded-full bg-amber-400 px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-neutral-900"
+        aria-expanded={open}
+        aria-haspopup="listbox"
+        onClick={() => setOpen((value) => !value)}
+      >
+        <Flag />
+        {lang}
+        <span aria-hidden>▾</span>
+      </button>
+      {open ? (
+        <ul
+          role="listbox"
+          className="absolute top-full right-0 z-50 mt-1 min-w-full overflow-hidden rounded-md border border-neutral-200 bg-white shadow-md"
         >
-          {locale}
-        </Link>
-      ))}
+          {LOCALES.map((locale) => (
+            <li key={locale} role="option" aria-selected={locale === lang}>
+              <Link
+                href={hrefFor(locale)}
+                scroll={false}
+                hrefLang={locale}
+                onClick={(event: MouseEvent<HTMLAnchorElement>) => {
+                  if (locale === lang) {
+                    event.preventDefault();
+                    setOpen(false);
+                    return;
+                  }
+                  handleClick();
+                  setOpen(false);
+                }}
+                className={cn(
+                  "flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-bold uppercase",
+                  locale === lang
+                    ? "bg-amber-50 text-neutral-900"
+                    : "text-neutral-700 hover:bg-neutral-50",
+                )}
+              >
+                {locale === "ru" ? <RuFlag /> : <UaFlag />}
+                {locale}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : null}
     </div>
   );
 }

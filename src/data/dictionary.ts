@@ -42,6 +42,7 @@ export interface Dictionary {
     discountOffer: string;
     urgency: string;
     disclaimer: string;
+    phoneHint: string;
     name: string;
     phone: string;
     submit: string;
@@ -411,17 +412,17 @@ const DICTIONARY_UK: Dictionary = {
   },
   header: {
     brand: "KAISER",
-    tagline: "Офіційний представник / Продаж, сервіс та ремонт по всій Україні",
+    tagline: "Надійне обладнання для складської логістики",
     navLabel: "Основна навігація",
     nav: {
-      about: "Про компанію",
+      about: "Про обладнання",
       catalog: "Каталог",
       promos: "Акції",
-      services: "Послуги",
+      services: "Про сервіс",
       reviews: "Відгуки",
       contacts: "Контакти",
     },
-    phone: "+380 (98) 154-09-82",
+    phone: "+380 50 407 08 24",
     requestCall: "Замовити дзвінок",
     language: "Мова",
     openMenu: "Відкрити меню",
@@ -434,6 +435,7 @@ const DICTIONARY_UK: Dictionary = {
     discountOffer: "Отримайте знижку 3% при купівлі від 3 одиниць*",
     urgency: "Тільки до 20 серпня!",
     disclaimer: "* Детальну інформацію уточнюйте у менеджера",
+    phoneHint: "тел.",
     name: "Ім’я",
     phone: "Телефон",
     submit: "Замовити",
@@ -837,17 +839,17 @@ const DICTIONARY_RU: Dictionary = {
   },
   header: {
     brand: "KAISER",
-    tagline: "Официальный представитель / Продажа, сервис и ремонт по всей Украине",
+    tagline: "Надёжное оборудование для складской логистики",
     navLabel: "Основная навигация",
     nav: {
-      about: "О компании",
+      about: "Про оборудование",
       catalog: "Каталог",
       promos: "Акции",
-      services: "Услуги",
+      services: "Про сервис",
       reviews: "Отзывы",
       contacts: "Контакты",
     },
-    phone: "+380 (98) 154-09-82",
+    phone: "+380 50 407 08 24",
     requestCall: "Заказать звонок",
     language: "Язык",
     openMenu: "Открыть меню",
@@ -860,6 +862,7 @@ const DICTIONARY_RU: Dictionary = {
     discountOffer: "Получите скидку 3% при покупке от 3 единиц*",
     urgency: "Только до 20 августа!",
     disclaimer: "* Детальную информацию уточняйте у менеджера",
+    phoneHint: "тел.",
     name: "Имя",
     phone: "Телефон",
     submit: "Заказать",
