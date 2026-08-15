@@ -42,7 +42,7 @@ function PartnerLogo({ name, imageSrc }: { name: string; imageSrc: string }) {
 }
 
 const FIELD_CLASS =
-  "h-12 rounded-full border-neutral-200 bg-white px-5 text-sm shadow-none focus:border-amber-400 focus:ring-0 focus:outline-none";
+  "h-12 rounded-none border-neutral-200 bg-white px-3.5 text-sm shadow-none focus:border-amber-400 focus:ring-0 focus:outline-none";
 
 export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
   const [fullName, setFullName] = useState("");
@@ -78,7 +78,7 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
     <section className={cn("bg-neutral-50 py-12", className)}>
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
         <ScrollReveal>
-          <div className="relative overflow-hidden rounded-2xl bg-white shadow-sm">
+          <div className="relative overflow-hidden rounded-none border border-neutral-200/80 bg-white shadow-xs">
             <div
               className="pointer-events-none absolute bottom-0 left-0 z-0 hidden h-full w-[22%] md:block lg:w-[24%]"
               aria-hidden
@@ -146,14 +146,14 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
                       error={errors.phone}
                       onBlur={handleBlur}
                       onValueChange={setPhone}
-                      className="h-12 rounded-full border-neutral-200 bg-white shadow-none focus-within:border-amber-400 focus-within:ring-0"
+                      className="h-12 rounded-none border-neutral-200 bg-white shadow-none focus-within:border-amber-400 focus-within:ring-0"
                     />
                   </div>
                   <div className="w-full sm:flex-1">
                     <Button
                       type="submit"
                       size="lg"
-                      className="h-12 w-full rounded-full bg-amber-400 px-5 text-xs font-bold text-white uppercase shadow-none hover:bg-amber-500 sm:text-sm"
+                      className="h-12 w-full rounded-none bg-amber-400 px-5 text-xs font-bold text-white uppercase shadow-none hover:bg-amber-500 sm:text-sm"
                     >
                       {copy.submit}
                     </Button>
