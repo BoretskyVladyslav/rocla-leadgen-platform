@@ -76,35 +76,35 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
 
   return (
     <section className={cn("bg-neutral-50 py-12", className)}>
-      <div className="mx-auto w-full max-w-[1400px] px-2 sm:px-4">
+      <div className="mx-auto w-full max-w-[1440px] px-2 sm:px-3">
         <ScrollReveal>
           <div className="relative overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-xs">
             <div
-              className="pointer-events-none absolute bottom-0 left-0 z-0 hidden h-full w-[22%] md:block lg:w-[24%]"
+              className="pointer-events-none absolute bottom-0 left-0 z-0 hidden h-52 w-44 sm:h-64 sm:w-56 md:block md:h-72 md:w-64 lg:h-80 lg:w-72"
               aria-hidden
             >
               <Image
                 src="/images/delivery/boxes-left.jpg"
                 alt=""
                 fill
-                sizes="(min-width: 1280px) 280px, (min-width: 768px) 200px, 0px"
+                sizes="(min-width: 1024px) 288px, (min-width: 768px) 256px, 0px"
                 className="max-h-none max-w-none object-contain object-left-bottom"
               />
             </div>
             <div
-              className="pointer-events-none absolute right-0 bottom-0 z-0 hidden h-full w-[22%] md:block lg:w-[24%]"
+              className="pointer-events-none absolute right-0 bottom-0 z-0 hidden h-52 w-44 sm:h-64 sm:w-56 md:block md:h-72 md:w-64 lg:h-80 lg:w-72"
               aria-hidden
             >
               <Image
                 src="/images/delivery/boxes-right.jpg"
                 alt=""
                 fill
-                sizes="(min-width: 1280px) 280px, (min-width: 768px) 200px, 0px"
+                sizes="(min-width: 1024px) 288px, (min-width: 768px) 256px, 0px"
                 className="max-h-none max-w-none object-contain object-right-bottom"
               />
             </div>
 
-            <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-6 py-10 text-center sm:px-10 sm:py-12 md:px-16">
+            <div className="relative z-10 mx-auto flex max-w-2xl flex-col items-center px-6 py-10 text-center sm:px-8 sm:py-12 md:px-10 lg:px-4">
               <h2 className="text-2xl font-extrabold tracking-wide text-neutral-900 uppercase sm:text-3xl">
                 {copy.title}
               </h2>
