@@ -16,7 +16,7 @@ export function SeoTextAccordion({ copy, className }: SeoTextAccordionProps) {
 
   return (
     <section className={cn("bg-neutral-50 py-6", className)}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <ScrollReveal>
           <h2 className="mb-4 text-2xl font-bold text-neutral-900">
             {copy.title}

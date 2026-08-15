@@ -76,7 +76,7 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
 
   return (
     <section className={cn("bg-neutral-50 py-12", className)}>
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <div className="mx-auto w-full max-w-[1400px] px-2 sm:px-4">
         <ScrollReveal>
           <div className="relative overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-xs">
             <div
