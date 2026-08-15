@@ -36,9 +36,12 @@ export interface Dictionary {
     closeMenu: string;
   };
   hero: {
-    title: string;
-    titleHighlights: string[];
-    subtitle: string;
+    titleLine1: string;
+    titleLine2: string;
+    marketTitle: string;
+    discountOffer: string;
+    urgency: string;
+    disclaimer: string;
     name: string;
     phone: string;
     submit: string;
@@ -425,10 +428,12 @@ const DICTIONARY_UK: Dictionary = {
     closeMenu: "Закрити меню",
   },
   hero: {
-    title: "ТЕХНІКА ДЛЯ СКЛАДУ НІМЕЦЬКА ЯКІСТЬ",
-    titleHighlights: ["НІМЕЦЬКА ЯКІСТЬ"],
-    subtitle:
-      "Офіційний дилер. Гарантія 3 роки. Сервіс 24/7. В наявності по всій Україні.",
+    titleLine1: "ТЕХНІКА ДЛЯ СКЛАДУ",
+    titleLine2: "НІМЕЦЬКА ЯКІСТЬ",
+    marketTitle: "20 РОКІВ НА РИНКУ В УКРАЇНІ",
+    discountOffer: "Отримайте знижку 3% при купівлі від 3 одиниць*",
+    urgency: "Тільки до 20 серпня!",
+    disclaimer: "* Детальну інформацію уточнюйте у менеджера",
     name: "Ім’я",
     phone: "Телефон",
     submit: "Замовити",
@@ -849,10 +854,12 @@ const DICTIONARY_RU: Dictionary = {
     closeMenu: "Закрыть меню",
   },
   hero: {
-    title: "ТЕХНИКА ДЛЯ СКЛАДА НЕМЕЦКОЕ КАЧЕСТВО",
-    titleHighlights: ["НЕМЕЦКОЕ КАЧЕСТВО"],
-    subtitle:
-      "Официальный дилер. Гарантия 3 года. Сервис 24/7. В наличии по всей Украине.",
+    titleLine1: "ТЕХНИКА ДЛЯ СКЛАДА",
+    titleLine2: "НЕМЕЦКОЕ КАЧЕСТВО",
+    marketTitle: "20 ЛЕТ НА РЫНКЕ В УКРАИНЕ",
+    discountOffer: "Получите скидку 3% при покупке от 3 единиц*",
+    urgency: "Только до 20 августа!",
+    disclaimer: "* Детальную информацию уточняйте у менеджера",
     name: "Имя",
     phone: "Телефон",
     submit: "Заказать",

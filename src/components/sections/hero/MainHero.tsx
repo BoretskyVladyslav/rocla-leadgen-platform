@@ -16,49 +16,6 @@ export interface MainHeroProps {
   copy: Dictionary["hero"];
 }
 
-function HighlightedTitle({
-  title,
-  highlights,
-}: {
-  title: string;
-  highlights: string[];
-}) {
-  type Chunk = { text: string; accent: boolean };
-  let chunks: Chunk[] = [{ text: title, accent: false }];
-
-  for (const highlight of highlights) {
-    const next: Chunk[] = [];
-    for (const chunk of chunks) {
-      if (chunk.accent) {
-        next.push(chunk);
-        continue;
-      }
-      const parts = chunk.text.split(highlight);
-      parts.forEach((part, index) => {
-        if (part) next.push({ text: part, accent: false });
-        if (index < parts.length - 1) {
-          next.push({ text: highlight, accent: true });
-        }
-      });
-    }
-    chunks = next;
-  }
-
-  return (
-    <>
-      {chunks.map((chunk, index) =>
-        chunk.accent ? (
-          <span key={`${chunk.text}-${index}`} className="text-amber-500">
-            {chunk.text}
-          </span>
-        ) : (
-          <span key={`${chunk.text}-${index}`}>{chunk.text}</span>
-        ),
-      )}
-    </>
-  );
-}
-
 export function MainHero({ copy }: MainHeroProps) {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
@@ -91,40 +48,32 @@ export function MainHero({ copy }: MainHeroProps) {
 
   return (
     <section className="scroll-mt-20 border-b border-border bg-white">
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:items-stretch lg:gap-x-10 lg:gap-y-8 lg:py-16">
-        <ScrollReveal className="order-1 flex flex-col gap-3 lg:col-start-1 lg:row-start-1">
-          <h1 className="max-w-3xl text-3xl font-bold uppercase tracking-tight text-heading sm:text-4xl lg:text-5xl lg:leading-[1.08]">
-            <HighlightedTitle
-              title={copy.title}
-              highlights={copy.titleHighlights}
-            />
-          </h1>
-          <p className="text-base font-semibold leading-relaxed text-muted sm:text-lg">
-            {copy.subtitle}
-          </p>
-        </ScrollReveal>
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-stretch gap-8 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:gap-x-10 lg:py-16">
+        <ScrollReveal className="order-1 flex h-full min-h-0 flex-col justify-between gap-6 lg:min-h-[640px]">
+          <div className="flex flex-col gap-3">
+            <h1 className="text-3xl font-extrabold uppercase leading-tight tracking-tight text-amber-500 sm:text-4xl md:text-5xl">
+              <span className="block">{copy.titleLine1}</span>
+              <span className="block">{copy.titleLine2}</span>
+            </h1>
+            <div className="mx-auto my-4 h-1 w-16 bg-amber-400 md:mx-0" />
+            <p className="mt-2 text-xl font-black tracking-wide text-neutral-900 md:text-2xl">
+              {copy.marketTitle}
+            </p>
+            <p className="mt-2 text-base font-medium text-neutral-800 md:text-lg">
+              {copy.discountOffer}
+            </p>
+            <p className="mt-1 text-lg font-black text-neutral-900 md:text-xl">
+              {copy.urgency}
+            </p>
+            <p className="mt-3 text-xs text-neutral-500 italic">
+              {copy.disclaimer}
+            </p>
+          </div>
 
-        <ScrollReveal
-          delay={0.1}
-          className="relative order-3 mx-auto h-full w-full min-w-0 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:max-w-none"
-        >
-          <MediaImage
-            src={copy.imageSrc}
-            alt={copy.imageAlt}
-            aspect={false}
-            fit="cover"
-            priority
-            objectPosition="object-center"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="h-full min-h-[320px] rounded-none border border-gray-200 bg-surface shadow-sm sm:min-h-[420px] lg:min-h-[640px]"
-          />
-        </ScrollReveal>
-
-        <ScrollReveal className="order-4 lg:col-start-1 lg:row-start-2 lg:self-end">
           <form
             id="hero-form"
             onSubmit={handleSubmit}
-            className="scroll-mt-24"
+            className="scroll-mt-24 w-full"
             noValidate
           >
             {status === "success" ? (
@@ -132,7 +81,7 @@ export function MainHero({ copy }: MainHeroProps) {
                 {copy.success}
               </p>
             ) : (
-              <div className="flex flex-col gap-4 items-center justify-between md:flex-row">
+              <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
                 <div className="w-full md:flex-1">
                   <Input
                     id="hero-fullName"
@@ -173,6 +122,22 @@ export function MainHero({ copy }: MainHeroProps) {
               </div>
             )}
           </form>
+        </ScrollReveal>
+
+        <ScrollReveal
+          delay={0.1}
+          className="relative order-2 mx-auto h-full w-full min-w-0 lg:max-w-none"
+        >
+          <MediaImage
+            src={copy.imageSrc}
+            alt={copy.imageAlt}
+            aspect={false}
+            fit="cover"
+            priority
+            objectPosition="object-center"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="h-full min-h-[320px] rounded-none border border-gray-200 bg-surface shadow-sm sm:min-h-[420px] lg:min-h-[640px]"
+          />
         </ScrollReveal>
       </div>
     </section>
