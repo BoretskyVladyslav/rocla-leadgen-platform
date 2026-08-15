@@ -29,13 +29,13 @@ export function WarehouseContacts({ copy }: WarehouseContactsProps) {
 
   return (
     <section id="contact" className="scroll-mt-20 bg-white py-16">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>
 
-        <div className="mt-8 grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
-          <div className="lg:col-span-5">
+        <div className="mt-8 grid grid-cols-1 items-stretch gap-6 lg:grid-cols-12 lg:gap-8">
+          <div className="lg:col-span-4">
             <p className="font-serif text-2xl font-bold uppercase tracking-[0.14em] text-heading">
               {copy.brand}
             </p>
@@ -95,8 +95,8 @@ export function WarehouseContacts({ copy }: WarehouseContactsProps) {
             </div>
           </div>
 
-          <div className="lg:col-span-7">
-            <div className="relative h-[340px] w-full overflow-hidden rounded-none border border-neutral-200 shadow-xs sm:h-[380px]">
+          <div className="lg:col-span-8">
+            <div className="relative h-full min-h-[350px] w-full overflow-hidden rounded-2xl border border-neutral-200 shadow-xs sm:min-h-[380px] lg:min-h-[420px]">
               <iframe
                 key={selected.id}
                 title={`${selected.city}, ${selected.address}`}
