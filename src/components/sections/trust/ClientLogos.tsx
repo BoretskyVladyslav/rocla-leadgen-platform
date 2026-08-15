@@ -44,27 +44,35 @@ export function ClientLogos({ copy, className }: ClientLogosProps) {
   const logos = [...copy.logos, ...copy.logos];
 
   return (
-    <section className={cn("bg-neutral-50 pt-4 pb-6", className)}>
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
-        <ScrollReveal>
-          <h2 className="section-heading mb-3">{copy.title}</h2>
-        </ScrollReveal>
+    <section className={cn(className)}>
+      <div className="bg-neutral-100 py-3 text-center">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+          <ScrollReveal>
+            <h2 className="text-sm font-bold tracking-wider text-neutral-800 uppercase md:text-base">
+              {copy.title}
+            </h2>
+          </ScrollReveal>
+        </div>
+      </div>
 
-        <div className="group/marquee overflow-hidden select-none">
-          <ul
-            className="logo-marquee flex w-max whitespace-nowrap py-1 group-hover/marquee:[animation-play-state:paused]"
-            aria-label={copy.title}
-          >
-            {logos.map((logo, index) => (
-              <li
-                key={`${logo.name}-${index}`}
-                className="mx-3 inline-flex h-24 w-44 shrink-0 items-center justify-center rounded-2xl border border-neutral-200 bg-white p-4 shadow-xs transition-shadow hover:shadow-md md:w-52"
-                aria-hidden={index >= copy.logos.length}
-              >
-                <LogoMark name={logo.name} imageSrc={logo.imageSrc} />
-              </li>
-            ))}
-          </ul>
+      <div className="bg-white py-4 md:py-6">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+          <div className="group/marquee overflow-hidden select-none">
+            <ul
+              className="logo-marquee flex w-max whitespace-nowrap py-1 group-hover/marquee:[animation-play-state:paused]"
+              aria-label={copy.title}
+            >
+              {logos.map((logo, index) => (
+                <li
+                  key={`${logo.name}-${index}`}
+                  className="mx-3 inline-flex h-24 w-44 shrink-0 items-center justify-center rounded-2xl border border-neutral-200 bg-white p-4 shadow-xs transition-shadow hover:shadow-md md:w-52"
+                  aria-hidden={index >= copy.logos.length}
+                >
+                  <LogoMark name={logo.name} imageSrc={logo.imageSrc} />
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
