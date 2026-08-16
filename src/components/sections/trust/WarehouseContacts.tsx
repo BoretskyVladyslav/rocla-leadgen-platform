@@ -36,8 +36,9 @@ export function WarehouseContacts({ copy }: WarehouseContactsProps) {
 
         <div className="mt-8 grid grid-cols-1 items-stretch gap-6 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4">
-            <p className="font-serif text-2xl font-bold uppercase tracking-[0.14em] text-heading">
-              {copy.brand}
+            <p className="font-sans text-2xl font-extrabold uppercase tracking-tight md:text-3xl">
+              <span className="text-amber-500">{copy.brand.slice(0, 1)}</span>
+              <span className="text-neutral-900">{copy.brand.slice(1)}</span>
             </p>
             <p className="mt-1 text-sm text-neutral-500">{copy.subtitle}</p>
             <div className="mt-3 flex flex-col gap-1 text-sm font-semibold text-neutral-800">

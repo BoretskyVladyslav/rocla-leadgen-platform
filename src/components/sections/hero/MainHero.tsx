@@ -50,7 +50,7 @@ export function MainHero({ copy }: MainHeroProps) {
     <section className="scroll-mt-20 border-b border-border bg-white">
       <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-stretch lg:grid-cols-2">
         <ScrollReveal className="order-1 flex flex-col items-center justify-center px-4 py-10 text-center sm:px-6 lg:min-h-[640px] lg:py-12">
-          <h1 className="text-4xl font-black uppercase leading-tight text-orange-600 sm:text-5xl">
+          <h1 className="text-4xl font-black uppercase leading-tight text-amber-500 sm:text-5xl">
             <span className="block">{copy.titleLine1}</span>
             <span className="block">{copy.titleLine2}</span>
           </h1>

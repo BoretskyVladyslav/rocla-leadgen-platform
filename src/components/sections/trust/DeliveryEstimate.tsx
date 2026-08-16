@@ -35,7 +35,7 @@ function PartnerLogo({ name, imageSrc }: { name: string; imageSrc: string }) {
       alt={name}
       width={120}
       height={32}
-      className="h-6 w-auto max-w-[90px] object-contain opacity-70 grayscale"
+      className="h-6 w-auto max-w-[90px] object-contain grayscale transition duration-300 group-hover:grayscale-0"
       onError={() => setFailed(true)}
     />
   );
@@ -169,7 +169,7 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
                 {copy.partners.map((partner) => (
                   <li
                     key={partner.name}
-                    className="flex h-7 shrink-0 items-center justify-center"
+                    className="group flex h-7 shrink-0 items-center justify-center"
                   >
                     <PartnerLogo
                       name={partner.name}

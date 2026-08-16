@@ -28,7 +28,7 @@ export function Header({ lang, copy }: HeaderProps) {
             <span className="text-amber-500">{copy.brand.slice(0, 1)}</span>
             <span className="text-neutral-900">{copy.brand.slice(1)}</span>
           </span>
-          <span className="mt-0.5 block max-w-[11.5rem] text-[9px] leading-snug text-muted sm:max-w-[16rem] sm:text-[10px] lg:max-w-[18rem]">
+          <span className="mt-0.5 block max-w-[14rem] text-[11px] font-medium leading-tight text-neutral-600 sm:max-w-[20rem] sm:text-xs">
             {copy.tagline}
           </span>
         </Link>

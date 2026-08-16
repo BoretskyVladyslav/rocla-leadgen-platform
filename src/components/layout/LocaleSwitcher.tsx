@@ -35,8 +35,6 @@ function RuFlag() {
 export function LocaleSwitcher({ lang, label }: LocaleSwitcherProps) {
   const pathname = usePathname();
   const [hash, setHash] = useState("");
-  const [open, setOpen] = useState(false);
-  const rootRef = useRef<HTMLDivElement>(null);
   const prevPath = useRef(pathname);
 
   useEffect(() => {
@@ -68,17 +66,6 @@ export function LocaleSwitcher({ lang, label }: LocaleSwitcherProps) {
     });
   }, [pathname]);
 
-  useEffect(() => {
-    if (!open) return;
-    function onPointerDown(event: PointerEvent) {
-      if (!rootRef.current?.contains(event.target as Node)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("pointerdown", onPointerDown);
-    return () => document.removeEventListener("pointerdown", onPointerDown);
-  }, [open]);
-
   function hrefFor(locale: string) {
     const segments = pathname.split("/");
     if (segments.length > 1) {
@@ -92,55 +79,40 @@ export function LocaleSwitcher({ lang, label }: LocaleSwitcherProps) {
     sessionStorage.setItem(SCROLL_KEY, String(window.scrollY));
   }
 
-  const Flag = lang === "ru" ? RuFlag : UaFlag;
-
   return (
-    <div ref={rootRef} className="relative" role="navigation" aria-label={label}>
-      <button
-        type="button"
-        className="inline-flex items-center gap-1.5 rounded-full bg-amber-400 px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-neutral-900"
-        aria-expanded={open}
-        aria-haspopup="listbox"
-        onClick={() => setOpen((value) => !value)}
-      >
-        <Flag />
-        {lang}
-        <span aria-hidden>▾</span>
-      </button>
-      {open ? (
-        <ul
-          role="listbox"
-          className="absolute top-full right-0 z-50 mt-1 min-w-full overflow-hidden rounded-md border border-neutral-200 bg-white shadow-md"
-        >
-          {LOCALES.map((locale) => (
-            <li key={locale} role="option" aria-selected={locale === lang}>
-              <Link
-                href={hrefFor(locale)}
-                scroll={false}
-                hrefLang={locale}
-                onClick={(event: MouseEvent<HTMLAnchorElement>) => {
-                  if (locale === lang) {
-                    event.preventDefault();
-                    setOpen(false);
-                    return;
-                  }
-                  handleClick();
-                  setOpen(false);
-                }}
-                className={cn(
-                  "flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-bold uppercase",
-                  locale === lang
-                    ? "bg-amber-50 text-neutral-900"
-                    : "text-neutral-700 hover:bg-neutral-50",
-                )}
-              >
-                {locale === "ru" ? <RuFlag /> : <UaFlag />}
-                {locale}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      ) : null}
+    <div
+      className="inline-flex overflow-hidden rounded-md border border-neutral-200 bg-white"
+      role="navigation"
+      aria-label={label}
+    >
+      {LOCALES.map((locale) => {
+        const active = locale === lang;
+        return (
+          <Link
+            key={locale}
+            href={hrefFor(locale)}
+            scroll={false}
+            hrefLang={locale}
+            aria-current={active ? "page" : undefined}
+            onClick={(event: MouseEvent<HTMLAnchorElement>) => {
+              if (locale === lang) {
+                event.preventDefault();
+                return;
+              }
+              handleClick();
+            }}
+            className={cn(
+              "inline-flex items-center gap-1.5 rounded-sm px-2.5 py-1 text-xs font-bold uppercase tracking-wide transition-colors",
+              active
+                ? "bg-amber-400 text-neutral-900"
+                : "text-neutral-500 hover:text-neutral-800",
+            )}
+          >
+            {active ? (locale === "ru" ? <RuFlag /> : <UaFlag />) : null}
+            {locale}
+          </Link>
+        );
+      })}
     </div>
   );
 }

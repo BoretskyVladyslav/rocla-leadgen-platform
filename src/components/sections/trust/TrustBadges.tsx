@@ -39,7 +39,7 @@ export function TrustBadges({ copy }: TrustBadgesProps) {
           <StaggerReveal className="grid grid-cols-1 gap-x-12 gap-y-6 md:grid-cols-2 lg:gap-y-8">
             {copy.items.map((item) => (
               <StaggerItem key={item.label}>
-                <div className="flex items-start gap-4 rounded-none p-2 transition-colors hover:bg-neutral-50/80">
+                <div className="flex items-start gap-4 rounded-none p-2">
                   <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[#FFCC00] bg-amber-50 text-amber-500">
                     <CheckIcon />
                   </span>
