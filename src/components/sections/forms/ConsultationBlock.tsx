@@ -74,12 +74,12 @@ export function ConsultationBlock({ copy, className }: ConsultationBlockProps) {
     <section
       id="consultation"
       className={cn(
-        "relative scroll-mt-20 overflow-hidden border-y border-border bg-[#eef5f8]",
+        "relative w-full scroll-mt-20 overflow-hidden bg-slate-50",
         className,
       )}
     >
-      <div className="mx-auto grid w-full max-w-7xl items-start gap-8 px-4 pt-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,28rem)_auto] lg:gap-x-8 lg:pt-14 lg:pr-4">
-        <ScrollReveal className="flex flex-col self-start lg:max-w-sm">
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-end gap-8 px-4 sm:px-6 lg:grid-cols-3 lg:gap-x-10">
+        <ScrollReveal className="flex flex-col self-start pt-12 pb-12 lg:pt-14 lg:pb-14">
           <h2 className="text-2xl font-bold tracking-tight text-heading sm:text-3xl">
             {copy.title}
           </h2>
@@ -96,15 +96,18 @@ export function ConsultationBlock({ copy, className }: ConsultationBlockProps) {
           </ul>
         </ScrollReveal>
 
-        <ScrollReveal delay={0.06} className="w-full max-w-md self-start justify-self-center lg:justify-self-stretch">
+        <ScrollReveal
+          delay={0.06}
+          className="w-full self-start pt-0 pb-12 lg:pt-14 lg:pb-14"
+        >
           {status === "success" ? (
-            <p className="rounded-3xl border border-border bg-white px-8 py-10 text-center text-sm font-semibold text-heading shadow-sm">
+            <p className="py-4 text-center text-sm font-semibold text-heading">
               {copy.success}
             </p>
           ) : (
             <form
               onSubmit={handleSubmit}
-              className="flex w-full flex-col gap-2 rounded-3xl border border-border bg-white p-8 shadow-sm"
+              className="flex w-full flex-col gap-2"
               noValidate
             >
               <Input
@@ -147,7 +150,7 @@ export function ConsultationBlock({ copy, className }: ConsultationBlockProps) {
           )}
         </ScrollReveal>
 
-        <div className="relative justify-self-end self-end">
+        <div className="relative flex justify-center self-end lg:justify-end">
           <Image
             src="/images/manager.png"
             alt={copy.imageAlt}

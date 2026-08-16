@@ -82,10 +82,7 @@ export default async function ProductPage({
       />
       <ProductTabs product={product} copy={dict.product} />
       <ProductAdvantages copy={dict.product.advantages} />
-      <ConsultationBlock
-        copy={dict.consultation}
-        className="bg-sky-50/50"
-      />
+      <ConsultationBlock copy={dict.consultation} />
       <RelatedProductsCarousel
         lang={lang}
         products={related}
