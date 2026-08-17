@@ -19,11 +19,11 @@ function ChevronDivider() {
   return (
     <svg
       aria-hidden
-      viewBox="0 0 16 56"
+      className="h-full w-4 shrink-0 fill-current text-white"
+      viewBox="0 0 16 48"
       preserveAspectRatio="none"
-      className="h-full w-4 shrink-0 self-stretch text-white"
     >
-      <polygon points="0,0 2,0 16,28 2,56 0,56" fill="currentColor" />
+      <path d="M0 0 L10 24 L0 48 L6 48 L16 24 L6 0 Z" />
     </svg>
   );
 }
@@ -58,67 +58,62 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
   const showThumbs = thumbs.length > 0;
 
   return (
-    <div
-      className={cn(
-        "grid grid-cols-1 gap-6 lg:items-start lg:gap-8",
-        showThumbs
-          ? "lg:grid-cols-[auto_minmax(0,1fr)_minmax(0,1.2fr)]"
-          : "lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]",
-      )}
-    >
-      {showThumbs ? (
-        <ul className="order-2 flex flex-row items-start justify-start gap-2.5 self-start lg:order-1 lg:flex-col">
-          {thumbs.map((image, index) => (
-            <li key={image.thumbKey} className="shrink-0">
-              <button
-                type="button"
-                onClick={() => setActiveThumb(index)}
-                aria-label={`${copy.thumbPlaceholder} ${index + 1}`}
-                aria-pressed={index === activeThumb}
-                className={cn(
-                  "relative block h-14 w-14 cursor-pointer overflow-hidden rounded-md border transition-all md:h-16 md:w-16",
-                  index === activeThumb
-                    ? "border-amber-500 ring-2 ring-amber-500/20"
-                    : "border-neutral-200 opacity-90 hover:opacity-100",
-                )}
-              >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  sizes="64px"
-                  loading="lazy"
-                  className="object-cover"
-                />
-              </button>
-            </li>
-          ))}
-        </ul>
-      ) : null}
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:items-start lg:gap-8">
+      <div className="flex min-w-0 items-start gap-2.5">
+        {showThumbs ? (
+          <ul className="mt-0 flex shrink-0 flex-row justify-start gap-2 self-start pt-0 lg:flex-col">
+            {thumbs.map((image, index) => (
+              <li key={image.thumbKey} className="shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setActiveThumb(index)}
+                  aria-label={`${copy.thumbPlaceholder} ${index + 1}`}
+                  aria-pressed={index === activeThumb}
+                  className={cn(
+                    "relative mt-0 block h-14 w-14 cursor-pointer overflow-hidden rounded-md border pt-0 transition-all md:h-16 md:w-16",
+                    index === activeThumb
+                      ? "border-amber-500 ring-2 ring-amber-500/20"
+                      : "border-neutral-200 opacity-90 hover:opacity-100",
+                  )}
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    sizes="64px"
+                    loading="lazy"
+                    className="object-cover"
+                  />
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : null}
 
-      <div className="order-1 min-w-0 self-start lg:order-2">
-        <div className="relative mx-auto aspect-square w-full max-h-[340px] overflow-hidden rounded-lg border border-gray-100 bg-gray-50">
-          {activeImage?.src ? (
-            <Image
-              key={`${activeImage.src}-${activeThumb}`}
-              src={activeImage.src}
-              alt={activeImage.alt ?? product.name ?? copy.imagePlaceholder}
-              fill
-              sizes="(max-width: 1024px) 100vw, 360px"
-              className="object-cover object-center"
-              priority
-            />
-          ) : (
-            <MediaPlaceholder
-              aspect="1/1"
-              label={product.name ?? copy.imagePlaceholder}
-              bordered={false}
-            />
-          )}
+        <div className="min-w-0 flex-1 self-start">
+          <div className="relative aspect-square w-full max-h-[340px] overflow-hidden rounded-lg border border-gray-100 bg-gray-50">
+            {activeImage?.src ? (
+              <Image
+                key={`${activeImage.src}-${activeThumb}`}
+                src={activeImage.src}
+                alt={activeImage.alt ?? product.name ?? copy.imagePlaceholder}
+                fill
+                sizes="(max-width: 1024px) 100vw, 360px"
+                className="object-cover object-center"
+                priority
+              />
+            ) : (
+              <MediaPlaceholder
+                aspect="1/1"
+                label={product.name ?? copy.imagePlaceholder}
+                bordered={false}
+              />
+            )}
+          </div>
         </div>
       </div>
 
-      <div className="order-3 flex min-w-0 flex-col gap-4">
+      <div className="flex min-w-0 flex-col gap-4">
         <div className="flex flex-col gap-1.5">
           <h1 className="text-2xl font-bold tracking-tight text-heading uppercase sm:text-3xl sm:leading-[1.15]">
             {product.name}
@@ -152,17 +147,17 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
 
         <HashLink
           href="#consultation"
-          className="inline-flex w-full items-stretch overflow-hidden rounded-md bg-[#F9BC06] shadow-sm transition-all hover:bg-amber-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F9BC06] focus-visible:ring-offset-2 cta-glow cta-shine"
+          className="flex h-12 w-full items-stretch overflow-hidden rounded-sm bg-[#F9BC06] shadow-sm transition-colors hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F9BC06] focus-visible:ring-offset-2 md:h-14"
         >
           {product.priceLabel ? (
             <>
-              <span className="flex shrink-0 items-center px-4 py-3 text-lg font-bold tabular-nums text-red-700 md:text-xl">
+              <span className="flex shrink-0 items-center justify-center bg-[#F9BC06] px-4 text-lg font-extrabold tabular-nums text-red-700 md:text-xl">
                 {product.priceLabel}
               </span>
               <ChevronDivider />
             </>
           ) : null}
-          <span className="flex flex-1 items-center justify-center px-6 py-3 text-sm font-bold tracking-wide text-[#1A2E3B] uppercase md:text-base">
+          <span className="flex flex-1 items-center justify-center px-6 text-sm font-bold tracking-wide text-[#1A2E3B] uppercase md:text-base">
             {copy.buyCta}
           </span>
         </HashLink>
