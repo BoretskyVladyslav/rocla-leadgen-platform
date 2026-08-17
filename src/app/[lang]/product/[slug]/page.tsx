@@ -79,13 +79,9 @@ export default async function ProductPage({
               },
             ]}
           />
-          <ProductHero product={product} copy={dict.product} />
-          <ClientLogos
-            copy={dict.clients}
-            variant="compact"
-            className="mt-4"
-          />
         </div>
+        <ProductHero product={product} copy={dict.product} />
+        <ClientLogos copy={dict.clients} variant="compact" />
       </section>
       <ProductTabs product={product} copy={dict.product} />
       <ProductAdvantages copy={dict.product.advantages} />
