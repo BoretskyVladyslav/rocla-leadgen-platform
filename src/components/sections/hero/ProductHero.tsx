@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
 import { HashLink } from "@/components/layout/HashLink";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
@@ -15,6 +14,19 @@ export interface ProductHeroProps {
 }
 
 const THUMB_COUNT = 4;
+
+function ChevronDivider() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 16 56"
+      preserveAspectRatio="none"
+      className="h-full w-4 shrink-0 self-stretch text-white"
+    >
+      <polygon points="0,0 2,0 16,28 2,56 0,56" fill="currentColor" />
+    </svg>
+  );
+}
 
 function buildThumbs(gallery: ProductImage[]) {
   if (gallery.length === 0) return [];
@@ -55,7 +67,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
       )}
     >
       {showThumbs ? (
-        <ul className="order-2 flex flex-row items-start justify-start gap-2.5 lg:order-1 lg:flex-col">
+        <ul className="order-2 flex flex-row items-start justify-start gap-2.5 self-start lg:order-1 lg:flex-col">
           {thumbs.map((image, index) => (
             <li key={image.thumbKey} className="shrink-0">
               <button
@@ -84,7 +96,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
         </ul>
       ) : null}
 
-      <div className="order-1 min-w-0 lg:order-2">
+      <div className="order-1 min-w-0 self-start lg:order-2">
         <div className="relative mx-auto aspect-square w-full max-h-[340px] overflow-hidden rounded-lg border border-gray-100 bg-gray-50">
           {activeImage?.src ? (
             <Image
@@ -132,30 +144,27 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
           </dl>
         ) : null}
 
-        {product.priceLabel ? (
-          <div className="flex flex-wrap items-baseline justify-center gap-3 pt-1 sm:justify-start">
-            {hasDiscount ? (
-              <p className="text-base tabular-nums text-gray-400 line-through">
-                {product.compareAtPriceLabel}
-              </p>
-            ) : null}
-            <p className="text-2xl font-bold tracking-tight tabular-nums text-red-600 md:text-3xl">
-              {product.priceLabel}
-            </p>
-          </div>
+        {hasDiscount ? (
+          <p className="text-base tabular-nums text-gray-400 line-through md:text-lg">
+            {product.compareAtPriceLabel}
+          </p>
         ) : null}
 
         <HashLink
           href="#consultation"
-          className="inline-flex w-full items-center justify-center gap-3 rounded-md bg-amber-400 px-6 py-3.5 text-sm font-bold tracking-wide text-gray-900 uppercase shadow-sm transition-all hover:bg-amber-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 cta-glow cta-shine"
+          className="inline-flex w-full items-stretch overflow-hidden rounded-md bg-[#F9BC06] shadow-sm transition-all hover:bg-amber-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F9BC06] focus-visible:ring-offset-2 cta-glow cta-shine"
         >
           {product.priceLabel ? (
-            <span className="shrink-0 tabular-nums">
-              {product.priceLabel.toUpperCase()}
-            </span>
+            <>
+              <span className="flex shrink-0 items-center px-4 py-3 text-lg font-bold tabular-nums text-red-700 md:text-xl">
+                {product.priceLabel}
+              </span>
+              <ChevronDivider />
+            </>
           ) : null}
-          <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
-          <span>{copy.buyCta}</span>
+          <span className="flex flex-1 items-center justify-center px-6 py-3 text-sm font-bold tracking-wide text-[#1A2E3B] uppercase md:text-base">
+            {copy.buyCta}
+          </span>
         </HashLink>
       </div>
     </div>

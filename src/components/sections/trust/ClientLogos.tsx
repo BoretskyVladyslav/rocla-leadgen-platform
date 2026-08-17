@@ -54,22 +54,23 @@ export function ClientLogos({
   if (variant === "compact") {
     return (
       <section
-        className={cn("flex flex-col gap-4 py-3 sm:flex-row sm:items-center", className)}
+        className={cn(
+          "flex flex-col gap-4 py-3 sm:flex-row sm:items-center",
+          className,
+        )}
         aria-label={copy.title}
       >
-        <p className="shrink-0 text-sm font-bold tracking-wider text-gray-700 uppercase md:text-base">
+        <p className="shrink-0 text-base font-extrabold tracking-wider text-gray-800 uppercase md:text-lg">
           {copy.title}
         </p>
-        <ul className="flex min-w-0 flex-1 flex-wrap items-center gap-2.5 md:gap-3">
+        <ul className="flex min-w-0 flex-1 flex-wrap items-center gap-x-5 gap-y-3 md:gap-x-7">
           {copy.logos.map((logo) => (
             <li key={logo.name} className="shrink-0">
-              <div className="flex h-12 cursor-pointer items-center justify-center rounded-lg border border-gray-100 bg-white p-2.5 shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-md md:h-14">
-                <LogoMark
-                  name={logo.name}
-                  imageSrc={logo.imageSrc}
-                  className="max-h-8"
-                />
-              </div>
+              <LogoMark
+                name={logo.name}
+                imageSrc={logo.imageSrc}
+                className="h-10 max-h-none w-auto cursor-pointer object-contain opacity-75 grayscale transition-all duration-200 hover:opacity-100 hover:grayscale-0 md:h-14"
+              />
             </li>
           ))}
         </ul>
