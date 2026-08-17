@@ -82,7 +82,7 @@ export interface Dictionary {
   };
   clients: {
     title: string;
-    logos: Array<{ name: string; imageSrc: string | null }>;
+    logos: Array<{ name: string; imageSrc: string }>;
   };
   caseStudy: {
     title: string;
@@ -100,7 +100,7 @@ export interface Dictionary {
     submit: string;
     success: string;
     partnersTitle: string;
-    partners: Array<{ name: string; imageSrc: string | null }>;
+    partners: Array<{ name: string; imageSrc: string }>;
     errors: {
       fullName: string;
       phone: string;

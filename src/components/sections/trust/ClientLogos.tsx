@@ -17,13 +17,13 @@ function LogoMark({
   imageSrc,
 }: {
   name: string;
-  imageSrc: string | null;
+  imageSrc: string;
 }) {
-  const [failed, setFailed] = useState(!imageSrc);
+  const [failed, setFailed] = useState(false);
 
-  if (failed || !imageSrc) {
+  if (failed) {
     return (
-      <span className="text-center text-sm font-extrabold uppercase tracking-wide text-heading">
+      <span className="text-center text-xs font-bold uppercase tracking-wide text-heading sm:text-sm">
         {name}
       </span>
     );
@@ -44,20 +44,26 @@ function LogoMark({
 }
 
 export function ClientLogos({ copy, className }: ClientLogosProps) {
+  const logos = [...copy.logos, ...copy.logos];
+
   return (
     <section className={cn("w-full bg-[#F4F6F8] pb-12", className)}>
       <div className={PAGE_CONTAINER}>
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>
+      </div>
+
+      <div className="group/marquee mt-8 overflow-hidden select-none [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
         <ul
-          className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-5"
+          className="logo-marquee flex w-max items-center whitespace-nowrap py-1 group-hover/marquee:[animation-play-state:paused]"
           aria-label={copy.title}
         >
-          {copy.logos.map((logo) => (
+          {logos.map((logo, index) => (
             <li
-              key={logo.name}
-              className="flex h-24 w-full items-center justify-center rounded-lg border border-gray-200 bg-white p-4"
+              key={`${logo.name}-${index}`}
+              className="mx-2 flex h-24 w-48 flex-shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white p-4"
+              aria-hidden={index >= copy.logos.length}
             >
               <LogoMark name={logo.name} imageSrc={logo.imageSrc} />
             </li>
