@@ -60,7 +60,7 @@ export function Header({ lang, copy }: HeaderProps) {
           </a>
           <HashLink
             href={`/${lang}#hero-form`}
-            className="inline-flex items-center bg-amber-400 px-4 py-2 text-xs font-bold uppercase tracking-wide text-neutral-900 rounded-sm transition-colors hover:bg-amber-500"
+            className="inline-flex items-center bg-accent px-4 py-2 text-xs font-bold uppercase tracking-wide text-accent-fg rounded-sm transition-colors hover:bg-accent-hover"
           >
             {copy.requestCall}
           </HashLink>

@@ -57,7 +57,7 @@ export function ProductOrderForm({
 
   return (
     <section id="order" className="bg-surface-muted">
-      <div className="mx-auto w-full max-w-xl px-4 py-20 sm:px-6 lg:py-28">
+      <div className="mx-auto w-full max-w-xl px-4 py-10 sm:px-6 md:py-14">
         <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-accent-alt">
           {copy.eyebrow}
         </p>

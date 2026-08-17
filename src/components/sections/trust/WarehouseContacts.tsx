@@ -29,7 +29,7 @@ export function WarehouseContacts({ copy }: WarehouseContactsProps) {
   const maps = mapsUrls(selected.city, selected.address);
 
   return (
-    <section id="contact" className="scroll-mt-20 bg-white py-14">
+    <section id="contact" className="scroll-mt-20 bg-white py-10 md:py-14">
       <div className={PAGE_CONTAINER}>
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
@@ -71,7 +71,7 @@ export function WarehouseContacts({ copy }: WarehouseContactsProps) {
                         "w-full rounded-lg px-4 py-2.5 text-left text-sm font-bold transition-all",
                         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2",
                         active
-                          ? "bg-[#FFCC00] text-neutral-900 shadow-xs"
+                          ? "bg-accent text-accent-fg shadow-xs"
                           : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200",
                       )}
                     >

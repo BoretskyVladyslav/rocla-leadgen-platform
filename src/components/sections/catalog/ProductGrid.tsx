@@ -33,7 +33,7 @@ export function ProductGrid({
 }: ProductGridProps) {
   return (
     <section id={sectionId} className="scroll-mt-20 bg-surface-muted">
-      <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
+      <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 md:py-14">
         <ScrollReveal>
           {!title ? (
             <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-accent-alt">

@@ -28,17 +28,17 @@ function CheckIcon() {
 
 export function TrustBadges({ copy }: TrustBadgesProps) {
   return (
-    <section id="about" className="w-full scroll-mt-20 bg-[#F4F6F8] py-12">
+    <section id="about" className="w-full scroll-mt-20 bg-[#F5F5F5] py-10 md:py-14">
       <div id="services" className={`${PAGE_CONTAINER} scroll-mt-20`}>
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>
-        <div className="mt-10 w-full rounded-lg border border-gray-100 bg-white p-8 shadow-sm sm:p-12">
+        <div className="mt-6 w-full rounded-lg border border-gray-100 bg-white p-6 shadow-sm md:p-8">
           <StaggerReveal className="grid grid-cols-1 gap-x-12 gap-y-6 md:grid-cols-2 lg:gap-y-8">
             {copy.items.map((item) => (
               <StaggerItem key={item.label}>
                 <div className="flex items-start gap-4 p-2">
-                  <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[#FFCC00] bg-amber-50 text-amber-500">
+                  <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-accent bg-amber-50 text-amber-500">
                     <CheckIcon />
                   </span>
                   <div>

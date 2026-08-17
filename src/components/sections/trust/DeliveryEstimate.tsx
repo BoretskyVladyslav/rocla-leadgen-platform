@@ -157,7 +157,7 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
                     <Button
                       type="submit"
                       size="lg"
-                      className="h-12 w-full rounded-lg bg-amber-400 px-5 text-xs font-bold text-white uppercase shadow-none hover:bg-amber-500 sm:text-sm"
+                      className="h-12 w-full rounded-lg bg-accent px-5 text-xs font-bold text-accent-fg uppercase shadow-none hover:bg-accent-hover sm:text-sm"
                     >
                       {copy.submit}
                     </Button>

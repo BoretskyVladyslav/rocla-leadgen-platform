@@ -69,7 +69,7 @@ export function FaqAccordion({ copy, embedded = false }: FaqAccordionProps) {
         <h2 className={embedded ? "text-left text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl" : "section-heading"}>
           {copy.title}
         </h2>
-        <ul className="mt-10">
+        <ul className="mt-6">
           {copy.items.map((item, index) => {
             const isOpen = openIndex === index;
             const triggerId = `${item.id ?? `faq-${index}`}-trigger`;
@@ -131,7 +131,7 @@ export function FaqAccordion({ copy, embedded = false }: FaqAccordionProps) {
   }
 
   return (
-    <section className="bg-white py-16">
+    <section className="bg-white py-10 md:py-14">
       <div className="mx-auto w-full max-w-4xl px-4 sm:px-6">{body}</div>
     </section>
   );

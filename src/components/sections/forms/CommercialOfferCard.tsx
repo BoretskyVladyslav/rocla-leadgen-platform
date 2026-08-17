@@ -64,7 +64,7 @@ export function CommercialOfferCard({ copy, className }: CommercialOfferCardProp
   }
 
   const cardClassName = cn(
-    "flex h-full flex-col justify-between gap-4 rounded-3xl border border-neutral-200/80 bg-white p-6 shadow-xs sm:p-8",
+    "flex h-full flex-col justify-between gap-4 rounded-3xl border border-neutral-200/80 bg-white p-6 shadow-xs md:p-8",
     className,
   );
 

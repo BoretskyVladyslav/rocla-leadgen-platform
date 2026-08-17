@@ -25,7 +25,7 @@ const ICONS: Record<
 export function ProductAdvantages({ copy }: ProductAdvantagesProps) {
   return (
     <section className="bg-white">
-      <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 md:py-24">
+      <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 md:py-14">
         <ScrollReveal>
           <ul className="grid grid-cols-2 gap-6 lg:grid-cols-4 lg:gap-8">
             {copy.map((item) => {

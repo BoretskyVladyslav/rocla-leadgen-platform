@@ -8,11 +8,11 @@ export interface PdpFaqOfferProps {
 }
 
 const CARD_CLASS =
-  "bg-white rounded-3xl p-6 sm:p-8 border border-neutral-200/80 shadow-xs h-full flex flex-col justify-between";
+  "bg-white rounded-3xl p-6 md:p-8 border border-neutral-200/80 shadow-xs h-full flex flex-col justify-between";
 
 export function PdpFaqOffer({ faq, offer }: PdpFaqOfferProps) {
   return (
-    <section className="bg-sky-50/50 py-16 md:py-24">
+    <section className="bg-[#F2F7FA] py-10 md:py-14">
       <div className="mx-auto grid w-full max-w-7xl items-stretch gap-8 px-4 sm:px-6 lg:grid-cols-2">
         <div className={CARD_CLASS}>
           <FaqAccordion copy={faq} embedded />

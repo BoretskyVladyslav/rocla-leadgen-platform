@@ -47,14 +47,14 @@ export function ClientLogos({ copy, className }: ClientLogosProps) {
   const logos = [...copy.logos, ...copy.logos];
 
   return (
-    <section className={cn("w-full bg-[#F4F6F8] pb-12", className)}>
+    <section className={cn("w-full bg-[#F5F5F5] pb-6", className)}>
       <div className={PAGE_CONTAINER}>
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>
       </div>
 
-      <div className="group/marquee mt-8 overflow-hidden select-none [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+      <div className="group/marquee mt-4 overflow-hidden select-none [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
         <ul
           className="logo-marquee flex w-max items-center whitespace-nowrap py-1 group-hover/marquee:[animation-play-state:paused]"
           aria-label={copy.title}

@@ -76,10 +76,7 @@ export default async function ProductPage({
         ]}
       />
       <ProductHero product={product} copy={dict.product} />
-      <ClientLogos
-        copy={dict.clients}
-        className="bg-purple-50/50 py-16 md:py-24"
-      />
+      <ClientLogos copy={dict.clients} />
       <ProductTabs product={product} copy={dict.product} />
       <ProductAdvantages copy={dict.product.advantages} />
       <ConsultationBlock copy={dict.consultation} />
@@ -90,20 +87,11 @@ export default async function ProductPage({
         title={dict.product.relatedTitle}
         orderCta={dict.product.orderCta}
       />
-      <DeliveryEstimate
-        copy={dict.delivery}
-        className="py-16 md:py-24"
-      />
+      <DeliveryEstimate copy={dict.delivery} />
       <VideoReviews copy={dict.videos} />
-      <ReviewsCarousel
-        copy={dict.reviews}
-        className="bg-yellow-50/30 py-16 md:py-24"
-      />
+      <ReviewsCarousel copy={dict.reviews} />
       <PdpFaqOffer faq={dict.faq} offer={dict.product.commercialOffer} />
-      <SeoTextAccordion
-        copy={dict.seoText}
-        className="bg-rose-50/30 py-16 md:py-24"
-      />
+      <SeoTextAccordion copy={dict.seoText} />
     </>
   );
 }

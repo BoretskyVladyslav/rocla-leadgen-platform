@@ -54,7 +54,7 @@ export function MainHero({ copy }: MainHeroProps) {
             <span className="block">{copy.titleLine1}</span>
             <span className="block">{copy.titleLine2}</span>
           </h1>
-          <div className="mx-auto my-3 h-1 w-12 bg-amber-400" />
+          <div className="mx-auto my-3 h-1 w-12 bg-accent" />
           <p className="mt-2 text-xl font-bold text-neutral-900">
             {copy.marketTitle}
           </p>
@@ -112,7 +112,7 @@ export function MainHero({ copy }: MainHeroProps) {
                     <Button
                       type="submit"
                       size="lg"
-                      className="h-12 w-full rounded-md bg-amber-400 font-bold uppercase text-neutral-900 hover:bg-amber-500"
+                      className="h-12 w-full rounded-md bg-accent font-bold uppercase text-accent-fg hover:bg-accent-hover"
                     >
                       {copy.submit}
                     </Button>

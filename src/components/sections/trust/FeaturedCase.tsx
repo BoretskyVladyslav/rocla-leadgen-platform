@@ -9,9 +9,9 @@ export interface FeaturedCaseProps {
 
 export function FeaturedCase({ copy }: FeaturedCaseProps) {
   return (
-    <section className="bg-[#F4F6F8] pb-14">
+    <section className="bg-[#F5F5F5] pb-10 md:pb-14">
       <div className={PAGE_CONTAINER}>
-        <div className="grid w-full items-center gap-10 rounded-lg border border-gray-100 bg-white p-8 shadow-sm sm:p-12 lg:grid-cols-2 lg:gap-12">
+        <div className="grid w-full items-center gap-10 rounded-lg border border-gray-100 bg-white p-6 shadow-sm md:p-8 lg:grid-cols-2 lg:gap-12">
           <ScrollReveal className="mx-auto min-w-0 w-full max-w-[420px]">
             <MediaImage
               src={copy.imageSrc}
@@ -24,7 +24,7 @@ export function FeaturedCase({ copy }: FeaturedCaseProps) {
             />
           </ScrollReveal>
           <ScrollReveal delay={0.08} className="flex flex-col justify-center">
-            <h2 className="text-2xl font-bold tracking-wide text-neutral-900 uppercase md:text-3xl">
+            <h2 className="text-xl font-bold tracking-wide text-neutral-900 uppercase whitespace-normal lg:text-2xl lg:whitespace-nowrap">
               {copy.title}
             </h2>
             <p className="mt-2 mb-4 text-base font-semibold text-amber-500 md:text-lg">

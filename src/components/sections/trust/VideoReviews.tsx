@@ -15,7 +15,7 @@ export function VideoReviews({ copy, className }: VideoReviewsProps) {
   return (
     <section
       id="videos"
-      className={cn("scroll-mt-20 bg-purple-50/50 py-16 md:py-24", className)}
+      className={cn("scroll-mt-20 bg-purple-50/50 py-10 md:py-14", className)}
     >
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
         <ScrollReveal>

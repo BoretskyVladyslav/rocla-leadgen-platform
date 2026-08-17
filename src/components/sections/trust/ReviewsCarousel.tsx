@@ -45,7 +45,7 @@ export function ReviewsCarousel({ copy, className }: ReviewsCarouselProps) {
   });
 
   return (
-    <section id="reviews" className={cn("scroll-mt-20 bg-white py-14", className)}>
+    <section id="reviews" className={cn("scroll-mt-20 bg-white py-10 md:py-14", className)}>
       <div className={PAGE_CONTAINER}>
         <ScrollReveal>
           <div className="mb-8 flex flex-row items-end justify-between gap-4">
@@ -137,7 +137,7 @@ function ReviewCard({
     >
       <div className="mb-4 flex flex-1 flex-col justify-start overflow-hidden">
         <div className="flex items-start justify-between gap-3">
-          <p className="inline-block w-fit rounded-md bg-[#FFCC00]/20 px-2.5 py-1 text-xs font-bold text-neutral-900">
+          <p className="inline-block w-fit rounded-md bg-accent/20 px-2.5 py-1 text-xs font-bold text-neutral-900">
             {item.company}
           </p>
           {item.date ? (

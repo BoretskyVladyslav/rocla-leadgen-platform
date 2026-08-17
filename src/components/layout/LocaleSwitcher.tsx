@@ -104,7 +104,7 @@ export function LocaleSwitcher({ lang, label }: LocaleSwitcherProps) {
             className={cn(
               "inline-flex items-center gap-1.5 rounded-sm px-2.5 py-1 text-xs font-bold uppercase tracking-wide transition-colors",
               active
-                ? "bg-amber-400 text-neutral-900"
+                ? "bg-accent text-accent-fg"
                 : "text-neutral-500 hover:text-neutral-800",
             )}
           >
