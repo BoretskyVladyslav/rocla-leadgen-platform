@@ -27,7 +27,7 @@ function CheckIcon() {
 
 export function TrustBadges({ copy }: TrustBadgesProps) {
   return (
-    <section id="about" className="w-full scroll-mt-20 bg-white py-12">
+    <section id="about" className="w-full scroll-mt-20 bg-[#F4F6F8] py-12">
       <div
         id="services"
         className="mx-auto w-full max-w-7xl scroll-mt-20 px-4 sm:px-6"
@@ -35,25 +35,27 @@ export function TrustBadges({ copy }: TrustBadgesProps) {
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>
-        <StaggerReveal className="mt-10 grid grid-cols-1 gap-x-12 gap-y-6 md:grid-cols-2 lg:gap-y-8">
-          {copy.items.map((item) => (
-            <StaggerItem key={item.label}>
-              <div className="flex items-start gap-4 p-2">
-                <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[#FFCC00] bg-amber-50 text-amber-500">
-                  <CheckIcon />
-                </span>
-                <div>
-                  <h3 className="mb-1 text-base font-bold text-neutral-900 md:text-lg">
-                    {item.label}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-neutral-600">
-                    {item.description}
-                  </p>
+        <div className="mt-10 rounded-lg border border-gray-100 bg-white p-8 shadow-sm sm:p-10">
+          <StaggerReveal className="grid grid-cols-1 gap-x-12 gap-y-6 md:grid-cols-2 lg:gap-y-8">
+            {copy.items.map((item) => (
+              <StaggerItem key={item.label}>
+                <div className="flex items-start gap-4 p-2">
+                  <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[#FFCC00] bg-amber-50 text-amber-500">
+                    <CheckIcon />
+                  </span>
+                  <div>
+                    <h3 className="mb-1 text-base font-bold text-neutral-900 md:text-lg">
+                      {item.label}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-neutral-600">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </StaggerItem>
-          ))}
-        </StaggerReveal>
+              </StaggerItem>
+            ))}
+          </StaggerReveal>
+        </div>
       </div>
     </section>
   );

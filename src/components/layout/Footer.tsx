@@ -70,7 +70,7 @@ export function Footer({ lang, copy }: FooterProps) {
   const telHref = `tel:${copy.phone.replace(/[^\d+]/g, "")}`;
 
   return (
-    <footer className="bg-[#1a1a1a] text-white">
+    <footer className="bg-[#1E1E1E] text-white">
       <div className="mx-auto w-full max-w-7xl px-4 pt-12 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-10 md:hidden">
           <BrandColumn copy={copy} />

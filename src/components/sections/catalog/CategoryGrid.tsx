@@ -26,7 +26,7 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
   const hasMore = copy.items.length > MOBILE_PREVIEW;
 
   return (
-    <section id="catalog" className="scroll-mt-20 bg-neutral-50/80 py-10">
+    <section id="catalog" className="scroll-mt-20 bg-white py-10">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
@@ -43,7 +43,7 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
               : `/${lang}#contact`;
             const hiddenOnMobile = !expanded && index >= MOBILE_PREVIEW;
             const tileClassName =
-              "group flex h-full flex-col rounded-none border-2 border-[#FFCC00] bg-white pb-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl";
+              "group flex h-full flex-col rounded-none border-2 border-[#F59E0B] bg-white pb-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl";
 
             const cardBody = (
               <>

@@ -36,40 +36,32 @@ function LogoMark({
       height={48}
       sizes="160px"
       loading="lazy"
-      className="h-auto max-h-12 w-auto object-contain"
+      className="h-auto max-h-10 w-auto object-contain"
       onError={() => setFailed(true)}
     />
   );
 }
 
 export function ClientLogos({ copy, className }: ClientLogosProps) {
-  const logos = [...copy.logos, ...copy.logos];
-
   return (
-    <section className={cn("w-full bg-[#F8F9FA] py-10 md:py-12", className)}>
+    <section className={cn("w-full bg-[#F4F6F8] pb-12", className)}>
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>
-      </div>
-
-      <div className="mt-8 w-full">
-        <div className="group/marquee overflow-hidden select-none [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-          <ul
-            className="logo-marquee flex w-max whitespace-nowrap py-1 group-hover/marquee:[animation-play-state:paused]"
-            aria-label={copy.title}
-          >
-            {logos.map((logo, index) => (
-              <li
-                key={`${logo.name}-${index}`}
-                className="mx-3 inline-flex h-24 w-44 shrink-0 items-center justify-center rounded-2xl border border-neutral-200 bg-white p-4 shadow-xs transition-shadow hover:shadow-md md:w-52"
-                aria-hidden={index >= copy.logos.length}
-              >
-                <LogoMark name={logo.name} imageSrc={logo.imageSrc} />
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul
+          className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5"
+          aria-label={copy.title}
+        >
+          {copy.logos.map((logo) => (
+            <li
+              key={logo.name}
+              className="flex h-20 items-center justify-center rounded-lg border border-gray-200 bg-white p-4"
+            >
+              <LogoMark name={logo.name} imageSrc={logo.imageSrc} />
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
