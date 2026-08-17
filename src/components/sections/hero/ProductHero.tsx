@@ -2,15 +2,26 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import { HashLink } from "@/components/layout/HashLink";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
 import { cn } from "@/lib/utils";
-import type { Product } from "@/types/product";
+import type { Product, ProductImage } from "@/types/product";
 
 export interface ProductHeroProps {
   product: Product;
   copy: Dictionary["product"];
+}
+
+const THUMB_COUNT = 4;
+
+function buildThumbs(gallery: ProductImage[]) {
+  if (gallery.length === 0) return [];
+  return Array.from({ length: THUMB_COUNT }, (_, index) => {
+    const image = gallery[index % gallery.length];
+    return { ...image, thumbKey: `${image.src}-${index}` };
+  });
 }
 
 export function ProductHero({ product, copy }: ProductHeroProps) {
@@ -19,9 +30,10 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
     : product.imageSrc
       ? [{ src: product.imageSrc, alt: product.imageAlt ?? product.name }]
       : [];
-  const thumbs = gallery.slice(0, 4);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const activeImage = gallery[activeIndex] ?? gallery[0];
+  const thumbs = buildThumbs(gallery);
+  const [activeThumb, setActiveThumb] = useState(0);
+  const activeImage =
+    gallery.length > 0 ? gallery[activeThumb % gallery.length] : undefined;
   const hasDiscount = Boolean(
     product.compareAtPriceLabel && product.priceLabel,
   );
@@ -31,29 +43,29 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
     )
     .slice(0, 6);
 
-  const showThumbs = thumbs.length > 1;
+  const showThumbs = thumbs.length > 0;
 
   return (
     <div
       className={cn(
-        "grid grid-cols-1 gap-6 lg:items-center lg:gap-8",
+        "grid grid-cols-1 gap-6 lg:items-start lg:gap-8",
         showThumbs
           ? "lg:grid-cols-[auto_minmax(0,1fr)_minmax(0,1.2fr)]"
           : "lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]",
       )}
     >
       {showThumbs ? (
-        <ul className="order-2 flex gap-2 lg:order-1 lg:flex-col">
+        <ul className="order-2 flex flex-row items-start justify-start gap-2.5 lg:order-1 lg:flex-col">
           {thumbs.map((image, index) => (
-            <li key={image.src} className="shrink-0">
+            <li key={image.thumbKey} className="shrink-0">
               <button
                 type="button"
-                onClick={() => setActiveIndex(index)}
+                onClick={() => setActiveThumb(index)}
                 aria-label={`${copy.thumbPlaceholder} ${index + 1}`}
-                aria-pressed={index === activeIndex}
+                aria-pressed={index === activeThumb}
                 className={cn(
                   "relative block h-14 w-14 cursor-pointer overflow-hidden rounded-md border transition-all md:h-16 md:w-16",
-                  index === activeIndex
+                  index === activeThumb
                     ? "border-amber-500 ring-2 ring-amber-500/20"
                     : "border-neutral-200 opacity-90 hover:opacity-100",
                 )}
@@ -76,7 +88,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
         <div className="relative mx-auto aspect-square w-full max-h-[340px] overflow-hidden rounded-lg border border-gray-100 bg-gray-50">
           {activeImage?.src ? (
             <Image
-              key={activeImage.src}
+              key={`${activeImage.src}-${activeThumb}`}
               src={activeImage.src}
               alt={activeImage.alt ?? product.name ?? copy.imagePlaceholder}
               fill
@@ -121,13 +133,13 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
         ) : null}
 
         {product.priceLabel ? (
-          <div className="flex flex-wrap items-baseline gap-3 pt-1">
+          <div className="flex flex-wrap items-baseline justify-center gap-3 pt-1 sm:justify-start">
             {hasDiscount ? (
-              <p className="text-sm tabular-nums text-muted line-through">
+              <p className="text-base tabular-nums text-gray-400 line-through">
                 {product.compareAtPriceLabel}
               </p>
             ) : null}
-            <p className="text-2xl font-bold tracking-tight tabular-nums text-red-600 sm:text-3xl">
+            <p className="text-2xl font-bold tracking-tight tabular-nums text-red-600 md:text-3xl">
               {product.priceLabel}
             </p>
           </div>
@@ -135,16 +147,15 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
 
         <HashLink
           href="#consultation"
-          className="inline-flex h-12 w-full items-center justify-between gap-3 rounded-lg bg-accent px-5 text-sm font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 cta-glow cta-shine sm:px-6"
+          className="inline-flex w-full items-center justify-center gap-3 rounded-md bg-amber-400 px-6 py-3.5 text-sm font-bold tracking-wide text-gray-900 uppercase shadow-sm transition-all hover:bg-amber-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 cta-glow cta-shine"
         >
           {product.priceLabel ? (
             <span className="shrink-0 tabular-nums">
               {product.priceLabel.toUpperCase()}
             </span>
-          ) : (
-            <span />
-          )}
-          <span className="text-right">{copy.buyCta}</span>
+          ) : null}
+          <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+          <span>{copy.buyCta}</span>
         </HashLink>
       </div>
     </div>
