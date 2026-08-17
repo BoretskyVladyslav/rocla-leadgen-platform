@@ -56,10 +56,13 @@ export function ClientLogos({
 
     return (
       <section
-        className={cn("flex items-center gap-2 py-3 md:gap-4", className)}
+        className={cn(
+          "mx-auto flex max-w-5xl flex-nowrap items-center gap-4 overflow-hidden py-3",
+          className,
+        )}
         aria-label={copy.compactTitle}
       >
-        <p className="max-w-[80px] shrink-0 text-xs font-extrabold leading-tight text-gray-800 uppercase md:text-sm">
+        <p className="max-w-[60px] shrink-0 text-[10px] font-bold leading-tight text-gray-700 uppercase md:text-xs">
           {headingWords.map((word, index) => (
             <span key={`${word}-${index}`}>
               {index > 0 ? <br /> : null}
@@ -67,13 +70,13 @@ export function ClientLogos({
             </span>
           ))}
         </p>
-        <ul className="flex w-full min-w-0 flex-nowrap items-center justify-between gap-2 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] md:gap-4 lg:overflow-hidden [&::-webkit-scrollbar]:hidden">
+        <ul className="flex min-w-0 w-full flex-nowrap items-center justify-start gap-3 overflow-hidden">
           {copy.logos.map((logo) => (
-            <li key={logo.name} className="shrink-0 lg:min-w-0 lg:shrink">
+            <li key={logo.name} className="min-w-0 shrink">
               <LogoMark
                 name={logo.name}
                 imageSrc={logo.imageSrc}
-                className="h-10 max-h-none w-auto max-w-[110px] object-contain opacity-80 grayscale transition-all duration-200 hover:opacity-100 hover:grayscale-0 md:h-12 md:max-w-[130px] lg:h-14"
+                className="h-5 max-h-none w-auto max-w-[70px] object-contain opacity-60 grayscale transition-all duration-200 hover:opacity-100 md:h-6"
               />
             </li>
           ))}
