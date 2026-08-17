@@ -82,6 +82,7 @@ export interface Dictionary {
   };
   clients: {
     title: string;
+    compactTitle: string;
     logos: Array<{ name: string; imageSrc: string }>;
   };
   caseStudy: {
@@ -564,6 +565,7 @@ const DICTIONARY_UK: Dictionary = {
   },
   clients: {
     title: "Наші постійні клієнти",
+    compactTitle: "Наші клієнти",
     logos: getClientLogos("uk"),
   },
   caseStudy: {
@@ -991,6 +993,7 @@ const DICTIONARY_RU: Dictionary = {
   },
   clients: {
     title: "Наши постоянные клиенты",
+    compactTitle: "Наши клиенты",
     logos: getClientLogos("ru"),
   },
   caseStudy: {
