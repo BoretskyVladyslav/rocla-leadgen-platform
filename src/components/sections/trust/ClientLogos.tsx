@@ -10,14 +10,17 @@ import type { Dictionary } from "@/data/dictionary";
 export interface ClientLogosProps {
   copy: Dictionary["clients"];
   className?: string;
+  variant?: "marquee" | "compact";
 }
 
 function LogoMark({
   name,
   imageSrc,
+  className,
 }: {
   name: string;
   imageSrc: string;
+  className?: string;
 }) {
   const [failed, setFailed] = useState(false);
 
@@ -37,13 +40,44 @@ function LogoMark({
       height={48}
       sizes="160px"
       loading="lazy"
-      className="h-auto max-h-10 w-auto object-contain"
+      className={cn("h-auto max-h-10 w-auto object-contain", className)}
       onError={() => setFailed(true)}
     />
   );
 }
 
-export function ClientLogos({ copy, className }: ClientLogosProps) {
+export function ClientLogos({
+  copy,
+  className,
+  variant = "marquee",
+}: ClientLogosProps) {
+  if (variant === "compact") {
+    return (
+      <section
+        className={cn(
+          "flex flex-wrap items-center gap-x-6 gap-y-3 py-3",
+          className,
+        )}
+        aria-label={copy.title}
+      >
+        <p className="shrink-0 text-sm font-semibold text-heading">
+          {copy.title}
+        </p>
+        <ul className="flex min-w-0 flex-1 flex-wrap items-center gap-x-5 gap-y-2">
+          {copy.logos.map((logo) => (
+            <li key={logo.name} className="shrink-0">
+              <LogoMark
+                name={logo.name}
+                imageSrc={logo.imageSrc}
+                className="max-h-8 opacity-70 grayscale"
+              />
+            </li>
+          ))}
+        </ul>
+      </section>
+    );
+  }
+
   const logos = [...copy.logos, ...copy.logos];
 
   return (

@@ -44,7 +44,7 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
             <li key={`${item.label}-${index}`} className="flex items-center gap-1.5">
               {index > 0 ? (
                 <span aria-hidden className="text-border">
-                  /
+                  &gt;
                 </span>
               ) : null}
               {item.href && !isLast ? (

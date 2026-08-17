@@ -19,6 +19,7 @@ import {
   LOCALES,
   PRODUCT_SLUGS,
 } from "@/data/products";
+import { PAGE_CONTAINER } from "@/lib/layout";
 
 export function generateStaticParams() {
   return LOCALES.flatMap((lang) =>
@@ -55,28 +56,39 @@ export default async function ProductPage({
 
   return (
     <>
-      <Breadcrumbs
-        items={[
-          {
-            label: crumbs.home,
-            href: `/${lang}`,
-            icon: <Home className="h-4 w-4" />,
-          },
-          {
-            label: crumbs.catalog,
-            href: `/${lang}#catalog`,
-          },
-          {
-            label: crumbs.category,
-            href: `/${lang}#catalog`,
-          },
-          {
-            label: product.name,
-          },
-        ]}
-      />
-      <ProductHero product={product} copy={dict.product} />
-      <ClientLogos copy={dict.clients} />
+      <section className="py-6 md:py-8">
+        <div className={PAGE_CONTAINER}>
+          <div className="rounded-xl border border-border bg-white p-6 shadow-sm lg:p-8">
+            <Breadcrumbs
+              className="bg-transparent px-0 py-0 pb-4 text-xs [&_ol]:max-w-none [&_ol]:px-0 [&_ol]:py-0 [&_ol]:text-xs"
+              items={[
+                {
+                  label: crumbs.home,
+                  href: `/${lang}`,
+                  icon: <Home className="h-3.5 w-3.5" />,
+                },
+                {
+                  label: crumbs.catalog,
+                  href: `/${lang}#catalog`,
+                },
+                {
+                  label: crumbs.category,
+                  href: `/${lang}#catalog`,
+                },
+                {
+                  label: product.name,
+                },
+              ]}
+            />
+            <ProductHero product={product} copy={dict.product} />
+          </div>
+          <ClientLogos
+            copy={dict.clients}
+            variant="compact"
+            className="mt-4"
+          />
+        </div>
+      </section>
       <ProductTabs product={product} copy={dict.product} />
       <ProductAdvantages copy={dict.product.advantages} />
       <ConsultationBlock copy={dict.consultation} />
