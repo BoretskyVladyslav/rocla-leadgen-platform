@@ -92,7 +92,7 @@ export default async function ProductPage({
       />
       <DeliveryEstimate
         copy={dict.delivery}
-        className="bg-emerald-50/50 py-16 md:py-24"
+        className="py-16 md:py-24"
       />
       <VideoReviews copy={dict.videos} />
       <ReviewsCarousel

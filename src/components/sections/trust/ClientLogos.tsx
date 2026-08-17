@@ -46,7 +46,7 @@ export function ClientLogos({ copy, className }: ClientLogosProps) {
   return (
     <section className={cn(className)}>
       <div className="bg-neutral-100 py-3 text-center">
-        <div className="mx-auto w-full max-w-[1400px] px-2 sm:px-4">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
           <ScrollReveal>
             <h2 className="text-sm font-bold tracking-wider text-neutral-800 uppercase md:text-base">
               {copy.title}
@@ -56,7 +56,7 @@ export function ClientLogos({ copy, className }: ClientLogosProps) {
       </div>
 
       <div className="bg-white py-4 md:py-6">
-        <div className="mx-auto w-full max-w-[1400px] px-2 sm:px-4">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
           <div className="group/marquee overflow-hidden select-none [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
             <ul
               className="logo-marquee flex w-max whitespace-nowrap py-1 group-hover/marquee:[animation-play-state:paused]"
