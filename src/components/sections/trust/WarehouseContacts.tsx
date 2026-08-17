@@ -103,7 +103,7 @@ export function WarehouseContacts({ copy }: WarehouseContactsProps) {
                 key={selected.id}
                 title={`${selected.city}, ${selected.address}`}
                 src={maps.embed}
-                className="h-full w-full border-0 grayscale invert hue-rotate-180 saturate-[180%] brightness-90 contrast-110"
+                className="h-full w-full border-0"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
