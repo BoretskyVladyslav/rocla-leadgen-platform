@@ -45,7 +45,7 @@ export function ReviewsCarousel({ copy, className }: ReviewsCarouselProps) {
   });
 
   return (
-    <section id="reviews" className={cn("scroll-mt-20 bg-white py-10 md:py-14", className)}>
+    <section id="reviews" className={cn("scroll-mt-20 bg-[#F5F5F5] py-10 md:py-14", className)}>
       <div className={PAGE_CONTAINER}>
         <ScrollReveal>
           <div className="mb-8 flex flex-row items-end justify-between gap-4">
