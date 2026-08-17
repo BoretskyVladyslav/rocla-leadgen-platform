@@ -59,9 +59,9 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
 
   return (
     <div className="mx-auto grid w-full grid-cols-1 items-stretch gap-6 lg:grid-cols-2">
-      <div className="flex h-full items-start gap-4 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+      <div className="flex h-full min-h-[440px] flex-col items-start gap-4 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm md:min-h-[480px] lg:flex-row">
         {showThumbs ? (
-          <ul className="flex shrink-0 flex-col gap-2.5">
+          <ul className="grid w-full shrink-0 grid-cols-4 gap-2.5 lg:flex lg:w-auto lg:flex-col">
             {thumbs.map((image, index) => (
               <li key={image.thumbKey} className="shrink-0">
                 <button
@@ -70,7 +70,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
                   aria-label={`${copy.thumbPlaceholder} ${index + 1}`}
                   aria-pressed={index === activeThumb}
                   className={cn(
-                    "relative block h-14 w-14 cursor-pointer overflow-hidden rounded-md border transition-all md:h-16 md:w-16",
+                    "relative block aspect-square h-16 w-16 cursor-pointer overflow-hidden rounded-lg border transition-all md:h-20 md:w-20",
                     index === activeThumb
                       ? "border-amber-500 ring-2 ring-amber-500/20"
                       : "border-neutral-200 opacity-90 hover:opacity-100",
@@ -80,7 +80,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
                     src={image.src}
                     alt={image.alt}
                     fill
-                    sizes="64px"
+                    sizes="80px"
                     loading="lazy"
                     className="object-cover"
                   />
@@ -90,7 +90,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
           </ul>
         ) : null}
 
-        <div className="relative h-[380px] min-w-0 w-full overflow-hidden rounded-xl bg-gray-50 md:h-[420px]">
+        <div className="relative h-[400px] min-w-0 w-full overflow-hidden rounded-xl bg-gray-50 md:h-[450px]">
           {activeImage?.src ? (
             <Image
               key={`${activeImage.src}-${activeThumb}`}
@@ -112,7 +112,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
         </div>
       </div>
 
-      <div className="flex h-full flex-col justify-between rounded-2xl border border-gray-100 bg-white p-6 shadow-sm md:p-8">
+      <div className="flex h-full min-h-[440px] flex-col justify-between rounded-2xl border border-gray-100 bg-white p-6 shadow-sm md:min-h-[480px] md:p-8">
         <div className="flex min-w-0 flex-col gap-4">
           <div className="flex flex-col gap-1.5">
             <h1 className="text-2xl font-bold tracking-tight text-heading uppercase sm:text-3xl sm:leading-[1.15]">
