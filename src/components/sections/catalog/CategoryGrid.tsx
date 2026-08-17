@@ -27,7 +27,7 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
   const hasMore = copy.items.length > MOBILE_PREVIEW;
 
   return (
-    <section id="catalog" className="scroll-mt-20 bg-white py-10 md:py-14">
+    <section id="catalog" className="scroll-mt-20 bg-[#F5F5F5] py-10 md:py-14">
       <div className={PAGE_CONTAINER}>
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
@@ -44,11 +44,11 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
               : `/${lang}#contact`;
             const hiddenOnMobile = !expanded && index >= MOBILE_PREVIEW;
             const tileClassName =
-              "group flex h-full flex-col rounded-none border-2 border-accent bg-white p-4 md:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl";
+              "group flex aspect-[4/5] min-h-[320px] h-full flex-col items-center justify-between rounded-none border border-[#FBBA00] bg-white px-4 py-8 md:rounded-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl";
 
             const cardBody = (
               <>
-                <h3 className="pb-2 text-center text-sm font-bold tracking-wide text-neutral-900 uppercase sm:text-base">
+                <h3 className="shrink-0 text-center text-sm font-bold tracking-wide text-neutral-900 uppercase sm:text-base">
                   {item.title}
                 </h3>
                 <MediaImage
@@ -57,7 +57,7 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
                   aspect={false}
                   fit="contain"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
-                  className="flex h-48 w-full items-center justify-center bg-white sm:h-56 [&_img]:object-contain [&_img]:transition-transform [&_img]:duration-300 group-hover:[&_img]:scale-105"
+                  className="mt-4 flex min-h-0 w-full flex-1 items-center justify-center bg-white [&_img]:object-contain [&_img]:p-4 [&_img]:transition-transform [&_img]:duration-300 group-hover:[&_img]:scale-105"
                 />
               </>
             );
