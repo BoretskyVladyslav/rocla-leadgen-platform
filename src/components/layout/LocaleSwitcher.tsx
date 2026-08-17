@@ -2,11 +2,24 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { useEffect, useRef, useSyncExternalStore, type MouseEvent } from "react";
 import { LOCALES } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 const SCROLL_KEY = "rocla-locale-scroll-y";
+
+function subscribeHash(onChange: () => void) {
+  window.addEventListener("hashchange", onChange);
+  return () => window.removeEventListener("hashchange", onChange);
+}
+
+function getHashSnapshot() {
+  return window.location.hash;
+}
+
+function getServerHashSnapshot() {
+  return "";
+}
 
 export interface LocaleSwitcherProps {
   lang: string;
@@ -34,17 +47,12 @@ function RuFlag() {
 
 export function LocaleSwitcher({ lang, label }: LocaleSwitcherProps) {
   const pathname = usePathname();
-  const [hash, setHash] = useState("");
+  const hash = useSyncExternalStore(
+    subscribeHash,
+    getHashSnapshot,
+    getServerHashSnapshot,
+  );
   const prevPath = useRef(pathname);
-
-  useEffect(() => {
-    setHash(window.location.hash);
-    function onHashChange() {
-      setHash(window.location.hash);
-    }
-    window.addEventListener("hashchange", onHashChange);
-    return () => window.removeEventListener("hashchange", onHashChange);
-  }, []);
 
   useEffect(() => {
     if (prevPath.current === pathname) return;
