@@ -30,11 +30,11 @@ export function TrustBadges({ copy }: TrustBadgesProps) {
   return (
     <section id="about" className="w-full scroll-mt-20 bg-[#F5F5F5] py-10 md:py-14">
       <div id="services" className={`${PAGE_CONTAINER} scroll-mt-20`}>
-        <ScrollReveal>
-          <h2 className="section-heading">{copy.title}</h2>
-        </ScrollReveal>
-        <div className="mt-6 w-full rounded-lg border border-gray-100 bg-white p-6 shadow-sm md:p-8">
-          <StaggerReveal className="grid grid-cols-1 gap-x-12 gap-y-6 md:grid-cols-2 lg:gap-y-8">
+        <div className="w-full rounded-lg border border-gray-100 bg-white p-6 shadow-sm md:p-8">
+          <ScrollReveal>
+            <h2 className="section-heading">{copy.title}</h2>
+          </ScrollReveal>
+          <StaggerReveal className="mt-6 grid grid-cols-1 gap-x-12 gap-y-6 md:grid-cols-2 lg:gap-y-8">
             {copy.items.map((item) => (
               <StaggerItem key={item.label}>
                 <div className="flex items-start gap-4 p-2">
