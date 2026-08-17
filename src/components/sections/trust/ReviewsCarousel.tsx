@@ -156,7 +156,7 @@ function ReviewCard({
         aspect={false}
         fit="cover"
         objectPosition="object-top"
-        sizes="(max-width: 640px) 20rem, (max-width: 1024px) 50vw, 33vw"
+        sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 400px"
         className="mt-auto h-80 w-full rounded-xl bg-neutral-100 [&_img]:transition-transform [&_img]:duration-300 hover:[&_img]:scale-105"
       />
     </article>

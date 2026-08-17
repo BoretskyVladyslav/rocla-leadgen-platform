@@ -34,6 +34,8 @@ function LogoMark({
       alt={name}
       width={160}
       height={48}
+      sizes="160px"
+      loading="lazy"
       className="h-auto max-h-12 w-auto object-contain"
       onError={() => setFailed(true)}
     />

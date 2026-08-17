@@ -157,6 +157,7 @@ export function ConsultationBlock({ copy, className }: ConsultationBlockProps) {
             width={480}
             height={720}
             sizes="(max-width: 1280px) 260px, 300px"
+            loading="lazy"
             className="h-[400px] w-auto object-contain object-bottom lg:h-[460px] xl:h-[500px]"
           />
         </div>

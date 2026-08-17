@@ -55,7 +55,7 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
                   alt={item.imageAlt}
                   aspect={false}
                   fit="contain"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
                   className="flex h-48 w-full items-center justify-center bg-white p-4 sm:h-56 [&_img]:object-contain [&_img]:transition-transform [&_img]:duration-300 group-hover:[&_img]:scale-105"
                 />
               </>

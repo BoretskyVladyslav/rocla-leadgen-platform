@@ -67,6 +67,7 @@ export function MediaImage({
         fill
         sizes={sizes}
         priority={priority}
+        loading={priority ? "eager" : "lazy"}
         onError={() => setFailed(true)}
         className={cn(
           fit === "contain" ? "object-contain p-2" : "object-cover",

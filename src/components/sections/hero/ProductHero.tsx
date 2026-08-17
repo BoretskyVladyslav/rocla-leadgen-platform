@@ -56,6 +56,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
                       alt={image.alt}
                       fill
                       sizes="80px"
+                      loading="lazy"
                       className="h-full w-full object-cover"
                     />
                   </button>

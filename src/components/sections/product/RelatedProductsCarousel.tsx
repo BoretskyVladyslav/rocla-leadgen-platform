@@ -126,7 +126,7 @@ export function RelatedProductsCarousel({
                       alt={product.images?.[0]?.alt ?? product.imageAlt ?? product.name}
                       aspect="4/3"
                       fit="contain"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 25vw"
+                      sizes="(max-width: 640px) 280px, (max-width: 1280px) 33vw, 280px"
                       className="h-full w-full rounded-t-2xl rounded-b-none bg-white"
                     />
                   </Link>

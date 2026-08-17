@@ -35,6 +35,8 @@ function PartnerLogo({ name, imageSrc }: { name: string; imageSrc: string }) {
       alt={name}
       width={120}
       height={32}
+      sizes="90px"
+      loading="lazy"
       className="h-6 w-auto max-w-[90px] object-contain grayscale transition duration-300 group-hover:grayscale-0"
       onError={() => setFailed(true)}
     />
@@ -88,6 +90,7 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
                 alt=""
                 fill
                 sizes="(min-width: 1280px) 280px, (min-width: 768px) 200px, 0px"
+                loading="lazy"
                 className="max-h-none max-w-none object-contain object-left-bottom"
               />
             </div>
@@ -100,6 +103,7 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
                 alt=""
                 fill
                 sizes="(min-width: 1280px) 280px, (min-width: 768px) 200px, 0px"
+                loading="lazy"
                 className="max-h-none max-w-none object-contain object-right-bottom"
               />
             </div>
