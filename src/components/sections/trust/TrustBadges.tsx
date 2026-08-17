@@ -6,6 +6,7 @@ import {
   StaggerReveal,
 } from "@/components/motion/StaggerReveal";
 import type { Dictionary } from "@/data/dictionary";
+import { PAGE_CONTAINER } from "@/lib/layout";
 
 export interface TrustBadgesProps {
   copy: Dictionary["advantages"];
@@ -28,14 +29,11 @@ function CheckIcon() {
 export function TrustBadges({ copy }: TrustBadgesProps) {
   return (
     <section id="about" className="w-full scroll-mt-20 bg-[#F4F6F8] py-12">
-      <div
-        id="services"
-        className="mx-auto w-full max-w-7xl scroll-mt-20 px-4 sm:px-6"
-      >
+      <div id="services" className={`${PAGE_CONTAINER} scroll-mt-20`}>
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>
-        <div className="mt-10 rounded-lg border border-gray-100 bg-white p-8 shadow-sm sm:p-10">
+        <div className="mt-10 w-full rounded-lg border border-gray-100 bg-white p-8 shadow-sm sm:p-12">
           <StaggerReveal className="grid grid-cols-1 gap-x-12 gap-y-6 md:grid-cols-2 lg:gap-y-8">
             {copy.items.map((item) => (
               <StaggerItem key={item.label}>

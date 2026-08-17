@@ -4,6 +4,7 @@ import { useId, useState } from "react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import type { Dictionary } from "@/data/dictionary";
 import { cn } from "@/lib/utils";
+import { PAGE_CONTAINER } from "@/lib/layout";
 
 export interface SeoTextAccordionProps {
   copy: Dictionary["seoText"];
@@ -16,7 +17,7 @@ export function SeoTextAccordion({ copy, className }: SeoTextAccordionProps) {
 
   return (
     <section className={cn("border-t border-gray-100 bg-white py-8", className)}>
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <div className={PAGE_CONTAINER}>
         <ScrollReveal>
           <h2 className="mb-4 text-2xl font-bold text-neutral-900">
             {copy.title}

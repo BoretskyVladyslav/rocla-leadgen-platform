@@ -18,10 +18,16 @@ export interface DeliveryEstimateProps {
   className?: string;
 }
 
-function PartnerLogo({ name, imageSrc }: { name: string; imageSrc: string }) {
-  const [failed, setFailed] = useState(false);
+function PartnerLogo({
+  name,
+  imageSrc,
+}: {
+  name: string;
+  imageSrc: string | null;
+}) {
+  const [failed, setFailed] = useState(!imageSrc);
 
-  if (failed) {
+  if (failed || !imageSrc) {
     return (
       <span className="text-xs font-bold uppercase tracking-[0.18em] text-muted/70">
         {name}

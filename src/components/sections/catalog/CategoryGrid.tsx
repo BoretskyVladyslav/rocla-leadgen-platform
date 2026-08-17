@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/Button";
 import { MediaImage } from "@/components/ui/MediaImage";
 import type { Dictionary } from "@/data/dictionary";
 import { cn } from "@/lib/utils";
+import { PAGE_CONTAINER } from "@/lib/layout";
 
 export interface CategoryGridProps {
   lang: string;
@@ -27,7 +28,7 @@ export function CategoryGrid({ lang, copy }: CategoryGridProps) {
 
   return (
     <section id="catalog" className="scroll-mt-20 bg-white py-10">
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <div className={PAGE_CONTAINER}>
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>

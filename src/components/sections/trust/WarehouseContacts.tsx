@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import type { Dictionary } from "@/data/dictionary";
 import { cn } from "@/lib/utils";
+import { PAGE_CONTAINER } from "@/lib/layout";
 
 export interface WarehouseContactsProps {
   copy: Dictionary["branches"];
@@ -29,7 +30,7 @@ export function WarehouseContacts({ copy }: WarehouseContactsProps) {
 
   return (
     <section id="contact" className="scroll-mt-20 bg-white py-14">
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <div className={PAGE_CONTAINER}>
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>
@@ -102,7 +103,7 @@ export function WarehouseContacts({ copy }: WarehouseContactsProps) {
                 key={selected.id}
                 title={`${selected.city}, ${selected.address}`}
                 src={maps.embed}
-                className="h-full w-full border-0"
+                className="h-full w-full border-0 grayscale sepia hue-rotate-[190deg] saturate-[400%] contrast-[90%] brightness-[85%]"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />

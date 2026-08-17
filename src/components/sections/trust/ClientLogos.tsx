@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { PAGE_CONTAINER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 import type { Dictionary } from "@/data/dictionary";
 
@@ -16,13 +17,13 @@ function LogoMark({
   imageSrc,
 }: {
   name: string;
-  imageSrc: string;
+  imageSrc: string | null;
 }) {
-  const [failed, setFailed] = useState(false);
+  const [failed, setFailed] = useState(!imageSrc);
 
-  if (failed) {
+  if (failed || !imageSrc) {
     return (
-      <span className="text-center text-xs font-bold uppercase tracking-wide text-heading sm:text-sm">
+      <span className="text-center text-sm font-extrabold uppercase tracking-wide text-heading">
         {name}
       </span>
     );
@@ -45,18 +46,18 @@ function LogoMark({
 export function ClientLogos({ copy, className }: ClientLogosProps) {
   return (
     <section className={cn("w-full bg-[#F4F6F8] pb-12", className)}>
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <div className={PAGE_CONTAINER}>
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
         </ScrollReveal>
         <ul
-          className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5"
+          className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-5"
           aria-label={copy.title}
         >
           {copy.logos.map((logo) => (
             <li
               key={logo.name}
-              className="flex h-20 items-center justify-center rounded-lg border border-gray-200 bg-white p-4"
+              className="flex h-24 w-full items-center justify-center rounded-lg border border-gray-200 bg-white p-4"
             >
               <LogoMark name={logo.name} imageSrc={logo.imageSrc} />
             </li>

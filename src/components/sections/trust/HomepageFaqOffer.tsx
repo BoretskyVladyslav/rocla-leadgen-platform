@@ -1,6 +1,7 @@
 import { CommercialOfferCard } from "@/components/sections/forms/CommercialOfferCard";
 import { FaqAccordion } from "@/components/sections/trust/FaqAccordion";
 import type { Dictionary } from "@/data/dictionary";
+import { PAGE_CONTAINER } from "@/lib/layout";
 
 export interface HomepageFaqOfferProps {
   faq: Dictionary["faq"];
@@ -13,7 +14,7 @@ const CARD_CLASS =
 export function HomepageFaqOffer({ faq, offer }: HomepageFaqOfferProps) {
   return (
     <section className="bg-[#F0F4F8] py-14">
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-stretch gap-8 px-4 sm:px-6 lg:grid-cols-2">
+      <div className={`${PAGE_CONTAINER} grid grid-cols-1 items-stretch gap-8 lg:grid-cols-2`}>
         <div className={CARD_CLASS}>
           <FaqAccordion copy={faq} embedded />
         </div>

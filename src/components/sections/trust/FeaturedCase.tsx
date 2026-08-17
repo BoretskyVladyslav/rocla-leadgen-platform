@@ -1,6 +1,7 @@
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { MediaImage } from "@/components/ui/MediaImage";
 import type { Dictionary } from "@/data/dictionary";
+import { PAGE_CONTAINER } from "@/lib/layout";
 
 export interface FeaturedCaseProps {
   copy: Dictionary["caseStudy"];
@@ -9,8 +10,8 @@ export interface FeaturedCaseProps {
 export function FeaturedCase({ copy }: FeaturedCaseProps) {
   return (
     <section className="bg-[#F4F6F8] pb-14">
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
-        <div className="grid w-full items-center gap-10 rounded-lg border border-gray-100 bg-white p-8 shadow-sm sm:p-10 lg:grid-cols-2 lg:gap-12">
+      <div className={PAGE_CONTAINER}>
+        <div className="grid w-full items-center gap-10 rounded-lg border border-gray-100 bg-white p-8 shadow-sm sm:p-12 lg:grid-cols-2 lg:gap-12">
           <ScrollReveal className="mx-auto min-w-0 w-full max-w-[420px]">
             <MediaImage
               src={copy.imageSrc}

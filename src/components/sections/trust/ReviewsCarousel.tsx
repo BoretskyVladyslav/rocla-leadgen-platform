@@ -11,6 +11,7 @@ import { MediaImage } from "@/components/ui/MediaImage";
 import type { Dictionary } from "@/data/dictionary";
 import { useCarouselTrack } from "@/hooks/useCarouselTrack";
 import { cn } from "@/lib/utils";
+import { PAGE_CONTAINER } from "@/lib/layout";
 
 export interface ReviewsCarouselProps {
   copy: Dictionary["reviews"];
@@ -45,7 +46,7 @@ export function ReviewsCarousel({ copy, className }: ReviewsCarouselProps) {
 
   return (
     <section id="reviews" className={cn("scroll-mt-20 bg-white py-14", className)}>
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <div className={PAGE_CONTAINER}>
         <ScrollReveal>
           <div className="mb-8 flex flex-row items-end justify-between gap-4">
             <h2 className="text-left text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">
