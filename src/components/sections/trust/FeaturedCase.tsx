@@ -9,7 +9,7 @@ export interface FeaturedCaseProps {
 export function FeaturedCase({ copy }: FeaturedCaseProps) {
   return (
     <section className="bg-neutral-50/80 py-16">
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
         <div className="grid w-full items-center gap-10 rounded-none border border-neutral-200/80 bg-white p-8 shadow-xs sm:p-12 lg:grid-cols-2 lg:gap-12">
           <ScrollReveal className="mx-auto min-w-0 w-full max-w-[420px]">
             <MediaImage

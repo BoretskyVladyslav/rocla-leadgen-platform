@@ -30,7 +30,7 @@ export function TrustBadges({ copy }: TrustBadgesProps) {
     <section id="about" className="scroll-mt-20 bg-neutral-50/80 py-8">
       <div
         id="services"
-        className="mx-auto w-full max-w-6xl scroll-mt-20 px-4 sm:px-6"
+        className="mx-auto w-full max-w-7xl scroll-mt-20 px-4 sm:px-6"
       >
         <ScrollReveal>
           <h2 className="section-heading">{copy.title}</h2>
