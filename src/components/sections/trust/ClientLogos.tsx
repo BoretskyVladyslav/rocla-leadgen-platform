@@ -57,16 +57,16 @@ export function ClientLogos({
         className={cn("flex items-center gap-4 py-3", className)}
         aria-label={copy.title}
       >
-        <p className="max-w-[110px] shrink-0 text-xs font-extrabold leading-tight text-gray-800 uppercase md:text-sm">
+        <p className="max-w-[100px] shrink-0 text-xs font-extrabold leading-tight text-gray-800 uppercase md:text-sm">
           {copy.title}
         </p>
-        <ul className="flex w-full min-w-0 flex-nowrap items-center justify-between gap-4 overflow-x-auto md:overflow-visible">
+        <ul className="flex w-full min-w-0 flex-nowrap items-center justify-between gap-3 overflow-x-auto md:gap-5 md:overflow-visible">
           {copy.logos.map((logo) => (
             <li key={logo.name} className="shrink-0">
               <LogoMark
                 name={logo.name}
                 imageSrc={logo.imageSrc}
-                className="h-7 max-h-none max-w-[90px] w-auto cursor-pointer object-contain opacity-80 grayscale transition-all duration-200 hover:opacity-100 hover:grayscale-0 md:h-9"
+                className="h-10 max-h-none max-w-[120px] w-auto cursor-pointer object-contain opacity-80 grayscale transition-all duration-200 hover:opacity-100 hover:grayscale-0 md:h-12"
               />
             </li>
           ))}

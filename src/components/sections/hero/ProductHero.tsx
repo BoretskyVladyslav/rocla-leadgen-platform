@@ -58,7 +58,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
   const showThumbs = thumbs.length > 0;
 
   return (
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:items-start lg:gap-8">
+    <div className="grid grid-cols-1 gap-8 md:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:items-start lg:gap-16">
       <div className="flex min-w-0 items-start gap-2.5">
         {showThumbs ? (
           <ul className="mt-0 flex shrink-0 flex-row justify-start gap-2 self-start pt-0 lg:flex-col">
@@ -139,10 +139,17 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
           </dl>
         ) : null}
 
-        {hasDiscount ? (
-          <p className="text-base tabular-nums text-gray-400 line-through md:text-lg">
-            {product.compareAtPriceLabel}
-          </p>
+        {product.priceLabel ? (
+          <div className="flex flex-wrap items-baseline">
+            {hasDiscount ? (
+              <p className="mr-4 text-base font-medium tabular-nums text-gray-400 line-through md:text-lg">
+                {product.compareAtPriceLabel}
+              </p>
+            ) : null}
+            <p className="text-2xl font-extrabold tabular-nums text-red-600 md:text-3xl">
+              {product.priceLabel}
+            </p>
+          </div>
         ) : null}
 
         <HashLink

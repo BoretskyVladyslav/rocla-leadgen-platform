@@ -58,28 +58,28 @@ export default async function ProductPage({
     <>
       <section className="py-6 md:py-8">
         <div className={PAGE_CONTAINER}>
-          <div className="rounded-xl border border-border bg-white p-6 shadow-sm lg:p-8">
-            <Breadcrumbs
-              className="bg-transparent px-0 py-0 pb-4 text-xs [&_ol]:max-w-none [&_ol]:px-0 [&_ol]:py-0 [&_ol]:text-xs"
-              items={[
-                {
-                  label: crumbs.home,
-                  href: `/${lang}`,
-                  icon: <Home className="h-3.5 w-3.5" />,
-                },
-                {
-                  label: crumbs.catalog,
-                  href: `/${lang}#catalog`,
-                },
-                {
-                  label: crumbs.category,
-                  href: `/${lang}#catalog`,
-                },
-                {
-                  label: product.name,
-                },
-              ]}
-            />
+          <Breadcrumbs
+            className="mb-4 bg-transparent px-0 py-0 text-xs text-gray-500 md:text-sm [&_ol]:max-w-none [&_ol]:px-0 [&_ol]:py-0 [&_ol]:text-inherit"
+            items={[
+              {
+                label: crumbs.home,
+                href: `/${lang}`,
+                icon: <Home className="h-3.5 w-3.5" />,
+              },
+              {
+                label: crumbs.catalog,
+                href: `/${lang}#catalog`,
+              },
+              {
+                label: crumbs.category,
+                href: `/${lang}#catalog`,
+              },
+              {
+                label: product.name,
+              },
+            ]}
+          />
+          <div className="rounded-xl border border-border bg-white p-8 shadow-sm md:p-10">
             <ProductHero product={product} copy={dict.product} />
           </div>
           <ClientLogos
