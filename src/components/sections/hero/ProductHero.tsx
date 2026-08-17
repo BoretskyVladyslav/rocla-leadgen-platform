@@ -60,7 +60,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
   return (
     <div className="mx-auto max-w-5xl rounded-xl border border-gray-100 bg-white p-5 shadow-sm md:p-6">
       <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2">
-        <div className="flex min-w-0 items-start gap-2">
+        <div className="flex min-w-0 items-center justify-center gap-3">
           {showThumbs ? (
             <ul className="flex shrink-0 flex-row gap-1.5 md:flex-col">
               {thumbs.map((image, index) => (
@@ -153,7 +153,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
           >
             {product.priceLabel ? (
               <>
-                <span className="flex shrink-0 items-center justify-center px-3 text-xs font-extrabold tabular-nums text-red-700 md:text-sm">
+                <span className="flex shrink-0 items-center justify-center px-3 text-sm font-extrabold tabular-nums !text-red-700 md:text-base">
                   {product.priceLabel}
                 </span>
                 <ChevronDivider />
