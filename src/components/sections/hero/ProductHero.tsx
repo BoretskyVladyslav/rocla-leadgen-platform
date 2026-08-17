@@ -19,7 +19,7 @@ function ChevronDivider() {
   return (
     <svg
       aria-hidden
-      className="h-full w-3 shrink-0 fill-current text-white md:w-4"
+      className="h-full w-4 shrink-0 fill-current text-white"
       viewBox="0 0 16 48"
       preserveAspectRatio="none"
     >
@@ -58,111 +58,120 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
   const showThumbs = thumbs.length > 0;
 
   return (
-    <div className="mx-auto max-w-5xl rounded-xl border border-gray-100 bg-white p-5 shadow-sm md:p-6">
-      <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2">
-        <div className="flex min-w-0 items-center justify-center gap-3">
-          {showThumbs ? (
-            <ul className="flex shrink-0 flex-row gap-1.5 md:flex-col">
-              {thumbs.map((image, index) => (
-                <li key={image.thumbKey} className="shrink-0">
-                  <button
-                    type="button"
-                    onClick={() => setActiveThumb(index)}
-                    aria-label={`${copy.thumbPlaceholder} ${index + 1}`}
-                    aria-pressed={index === activeThumb}
-                    className={cn(
-                      "relative block h-10 w-10 overflow-hidden rounded border border-gray-200 md:h-11 md:w-11",
-                      index === activeThumb && "border-amber-500",
-                    )}
-                  >
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      sizes="44px"
-                      loading="lazy"
-                      className="object-cover"
-                    />
-                  </button>
-                </li>
-              ))}
-            </ul>
-          ) : null}
-
-          <div className="relative flex h-[240px] w-full items-center justify-center p-2 md:h-[280px]">
-            {activeImage?.src ? (
-              <Image
-                key={`${activeImage.src}-${activeThumb}`}
-                src={activeImage.src}
-                alt={activeImage.alt ?? product.name ?? copy.imagePlaceholder}
-                fill
-                sizes="(max-width: 768px) 100vw, 480px"
-                className="object-contain p-2"
-                priority
-              />
-            ) : (
-              <MediaPlaceholder
-                aspect="4/3"
-                label={product.name ?? copy.imagePlaceholder}
-                bordered={false}
-                className="h-full max-h-full"
-              />
-            )}
-          </div>
-        </div>
-
-        <div className="flex min-w-0 flex-col justify-start gap-3">
-          <div>
-            <h1 className="text-lg font-black leading-tight text-gray-900 uppercase md:text-xl">
-              {product.name}
-            </h1>
-            <p className="-mt-1 text-xs text-gray-400">
-              {copy.skuLabel}: {product.sku}
-            </p>
-          </div>
-
-          {quickSpecs.length > 0 ? (
-            <dl className="my-1 grid grid-cols-2 gap-x-4 gap-y-1.5 py-1 text-xs text-gray-600">
-              {quickSpecs.map((spec) => (
-                <div key={spec.label} className="flex min-w-0 items-baseline justify-between gap-2">
-                  <dt className="truncate">{spec.label}</dt>
-                  <dd className="shrink-0 font-semibold tabular-nums text-gray-800">
-                    {spec.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          ) : null}
-
-          {product.priceLabel ? (
-            <div className="flex flex-wrap items-baseline gap-3">
-              {hasDiscount ? (
-                <p className="text-sm tabular-nums text-gray-400 line-through">
-                  {product.compareAtPriceLabel}
-                </p>
-              ) : null}
-              <p className="text-xl font-black tabular-nums text-red-600 md:text-2xl">
-                {product.priceLabel}
-              </p>
-            </div>
-          ) : null}
-
-          <HashLink
-            href="#consultation"
-            className="flex h-10 w-full items-stretch overflow-hidden rounded-sm bg-[#F9BC06] shadow-sm transition-colors hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F9BC06] focus-visible:ring-offset-2 md:h-11"
-          >
-            {product.priceLabel ? (
-              <>
-                <span className="flex shrink-0 items-center justify-center px-3 text-sm font-extrabold tabular-nums !text-red-700 md:text-base">
-                  {product.priceLabel}
-                </span>
-                <ChevronDivider />
-              </>
+    <div className="mx-auto max-w-6xl px-4">
+      <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm md:p-8">
+        <div className="grid w-full grid-cols-1 items-stretch gap-8 lg:grid-cols-2">
+          <div className="flex h-full w-full items-start gap-4">
+            {showThumbs ? (
+              <ul className="flex w-14 shrink-0 flex-col gap-2 md:w-16">
+                {thumbs.map((image, index) => (
+                  <li key={image.thumbKey}>
+                    <button
+                      type="button"
+                      onClick={() => setActiveThumb(index)}
+                      aria-label={`${copy.thumbPlaceholder} ${index + 1}`}
+                      aria-pressed={index === activeThumb}
+                      className={cn(
+                        "relative block aspect-square h-14 w-14 cursor-pointer overflow-hidden rounded-md border md:h-16 md:w-16",
+                        index === activeThumb
+                          ? "border-amber-500"
+                          : "border-gray-200",
+                      )}
+                    >
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        fill
+                        sizes="64px"
+                        loading="lazy"
+                        className="object-cover"
+                      />
+                    </button>
+                  </li>
+                ))}
+              </ul>
             ) : null}
-            <span className="flex flex-1 items-center justify-center px-4 text-xs font-bold tracking-wide text-[#1A2E3B] uppercase md:text-sm">
-              {copy.buyCta}
-            </span>
-          </HashLink>
+
+            <div className="relative h-[320px] min-w-0 flex-1 overflow-hidden rounded-xl border border-gray-100 bg-gray-50 md:h-[380px]">
+              {activeImage?.src ? (
+                <Image
+                  key={`${activeImage.src}-${activeThumb}`}
+                  src={activeImage.src}
+                  alt={activeImage.alt ?? product.name ?? copy.imagePlaceholder}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="h-full w-full object-cover object-center"
+                  priority
+                />
+              ) : (
+                <MediaPlaceholder
+                  aspect="4/3"
+                  label={product.name ?? copy.imagePlaceholder}
+                  bordered={false}
+                  className="h-full"
+                />
+              )}
+            </div>
+          </div>
+
+          <div className="flex h-full flex-col justify-between gap-4">
+            <div className="flex min-w-0 flex-col gap-2">
+              <h1 className="text-xl font-bold text-gray-900 uppercase md:text-2xl">
+                {product.name}
+              </h1>
+              <p className="text-xs text-gray-400">
+                {copy.skuLabel}: {product.sku}
+              </p>
+
+              {quickSpecs.length > 0 ? (
+                <dl className="my-2 grid grid-cols-2 gap-x-6 gap-y-2 text-sm text-gray-600">
+                  {quickSpecs.map((spec) => (
+                    <div
+                      key={spec.label}
+                      className="flex min-w-0 items-baseline justify-between gap-2"
+                    >
+                      <dt className="truncate">{spec.label}</dt>
+                      <dd className="shrink-0 font-semibold tabular-nums text-gray-800">
+                        {spec.value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              ) : null}
+            </div>
+
+            <div className="flex flex-col gap-4">
+              {product.priceLabel ? (
+                <div className="flex flex-wrap items-baseline gap-3">
+                  {hasDiscount ? (
+                    <p className="text-base tabular-nums text-gray-400 line-through">
+                      {product.compareAtPriceLabel}
+                    </p>
+                  ) : null}
+                  <p className="text-2xl font-extrabold tabular-nums text-red-600 md:text-3xl">
+                    {product.priceLabel}
+                  </p>
+                </div>
+              ) : null}
+
+              <HashLink
+                href="#consultation"
+                className="flex h-12 w-full items-stretch overflow-hidden rounded bg-[#F9BC06] md:h-14"
+              >
+                {product.priceLabel ? (
+                  <>
+                    <span className="flex items-center justify-center px-4 text-base font-extrabold tabular-nums !text-red-700 md:text-lg">
+                      {product.priceLabel}
+                    </span>
+                    <ChevronDivider />
+                  </>
+                ) : null}
+                <span className="flex flex-1 items-center justify-center text-sm font-bold tracking-wide text-[#1A2E3B] uppercase md:text-base">
+                  {copy.buyCta}
+                </span>
+              </HashLink>
+            </div>
+          </div>
         </div>
       </div>
     </div>

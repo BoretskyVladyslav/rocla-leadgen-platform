@@ -57,12 +57,12 @@ export function ClientLogos({
     return (
       <section
         className={cn(
-          "mx-auto flex w-full max-w-5xl items-center gap-4 py-3",
+          "mx-auto mt-4 flex w-full max-w-6xl items-center justify-between gap-4 rounded-xl bg-[#F0F4F8] px-6 py-4",
           className,
         )}
         aria-label={copy.compactTitle}
       >
-        <p className="max-w-[60px] shrink-0 text-[10px] font-bold leading-tight text-gray-700 uppercase md:text-xs">
+        <p className="max-w-[80px] shrink-0 text-xs font-extrabold leading-tight tracking-tight text-gray-800 uppercase md:text-sm">
           {headingWords.map((word, index) => (
             <span key={`${word}-${index}`}>
               {index > 0 ? <br /> : null}
@@ -70,13 +70,13 @@ export function ClientLogos({
             </span>
           ))}
         </p>
-        <ul className="flex w-full min-w-0 flex-1 items-center justify-between gap-4">
+        <ul className="flex w-full min-w-0 items-center justify-between gap-4 overflow-hidden">
           {copy.logos.map((logo) => (
             <li key={logo.name} className="shrink-0">
               <LogoMark
                 name={logo.name}
                 imageSrc={logo.imageSrc}
-                className="h-7 max-h-none w-auto max-w-[90px] object-contain opacity-75 grayscale transition-all duration-200 hover:opacity-100 md:h-8"
+                className="h-8 max-h-none w-auto max-w-[110px] shrink-0 object-contain opacity-80 grayscale transition-all hover:opacity-100 hover:grayscale-0 md:h-10"
               />
             </li>
           ))}
