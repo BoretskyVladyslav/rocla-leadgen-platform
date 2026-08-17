@@ -79,9 +79,7 @@ export default async function ProductPage({
               },
             ]}
           />
-          <div className="rounded-xl border border-border bg-white p-8 shadow-sm md:p-10">
-            <ProductHero product={product} copy={dict.product} />
-          </div>
+          <ProductHero product={product} copy={dict.product} />
           <ClientLogos
             copy={dict.clients}
             variant="compact"
