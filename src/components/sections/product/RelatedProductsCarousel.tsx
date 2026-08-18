@@ -154,15 +154,19 @@ export function RelatedProductsCarousel({
                     />
                   </Link>
                   <div className="flex flex-1 flex-col bg-white p-4">
-                    <Link href={href} draggable={false}>
-                      <h3 className="text-base font-bold tracking-tight text-gray-900 transition-colors hover:text-heading sm:text-lg">
+                    {product.sku ? (
+                      <p className="text-xs font-medium tracking-wide text-gray-400">
                         {product.sku}
+                      </p>
+                    ) : null}
+                    <Link href={href} draggable={false}>
+                      <h3 className="mt-0.5 text-base font-bold tracking-tight text-gray-900 transition-colors hover:text-heading sm:text-lg">
+                        {product.name}
                       </h3>
                     </Link>
-                    <p className="mt-0.5 text-sm text-gray-700">{product.name}</p>
-                    <dl className="mt-3 flex flex-1 flex-col justify-start gap-1.5">
+                    <dl className="mt-3 flex flex-1 flex-col justify-start">
                       {capacity ? (
-                        <div className="flex items-center justify-between gap-3 text-sm">
+                        <div className="flex items-center justify-between gap-3 border-b border-gray-100 py-2 text-sm">
                           <dt className="text-gray-500">{copy.capacityLabel}</dt>
                           <dd className="font-bold tabular-nums text-gray-900">
                             {capacity}
@@ -170,7 +174,7 @@ export function RelatedProductsCarousel({
                         </div>
                       ) : null}
                       {liftHeight ? (
-                        <div className="flex items-center justify-between gap-3 text-sm">
+                        <div className="flex items-center justify-between gap-3 py-2 text-sm">
                           <dt className="text-gray-500">{copy.liftHeightLabel}</dt>
                           <dd className="font-bold tabular-nums text-gray-900">
                             {liftHeight}
