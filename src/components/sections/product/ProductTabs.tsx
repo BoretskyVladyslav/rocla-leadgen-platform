@@ -33,36 +33,40 @@ export function ProductTabs({ product, copy }: ProductTabsProps) {
   return (
     <section className="pt-8">
       <div className="mx-auto max-w-[1200px] px-4">
-        <div className="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
-          <div
-            role="tablist"
-            aria-label={copy.tabs.description}
-            className="flex overflow-x-auto bg-gray-50/70"
+        <div
+          role="tablist"
+          aria-label={copy.tabs.description}
+          className="flex gap-2 overflow-x-auto"
+        >
+          <TabButton
+            id="description"
+            active={active === "description"}
+            onClick={() => setActive("description")}
           >
-            <TabButton
-              id="description"
-              active={active === "description"}
-              onClick={() => setActive("description")}
-            >
-              {copy.tabs.description}
-            </TabButton>
-            <TabButton
-              id="specifications"
-              active={active === "specifications"}
-              onClick={() => setActive("specifications")}
-            >
-              {copy.tabs.specifications}
-            </TabButton>
-            <TabButton
-              id="delivery"
-              active={active === "delivery"}
-              onClick={() => setActive("delivery")}
-            >
-              {copy.tabs.delivery}
-            </TabButton>
-            <div className="min-w-0 flex-1 border-b border-gray-200" aria-hidden />
-          </div>
+            {copy.tabs.description}
+          </TabButton>
+          <TabButton
+            id="specifications"
+            active={active === "specifications"}
+            onClick={() => setActive("specifications")}
+          >
+            {copy.tabs.specifications}
+          </TabButton>
+          <TabButton
+            id="delivery"
+            active={active === "delivery"}
+            onClick={() => setActive("delivery")}
+          >
+            {copy.tabs.delivery}
+          </TabButton>
+        </div>
 
+        <div
+          className={cn(
+            "rounded-b-xl rounded-tr-xl border border-gray-200 bg-white shadow-sm",
+            active !== "description" && "rounded-tl-xl",
+          )}
+        >
           <div className="px-5 py-6 sm:px-8 sm:py-7">
             {active === "description" ? (
               <div
@@ -78,7 +82,10 @@ export function ProductTabs({ product, copy }: ProductTabsProps) {
                 {hasExtra ? (
                   <div
                     id={extraId}
-                    className={cn("mt-4 space-y-4", expanded ? "block" : "hidden")}
+                    className={cn(
+                      "mt-4 space-y-4",
+                      expanded ? "block" : "hidden",
+                    )}
                     hidden={!expanded}
                   >
                     {rest.map((paragraph) => (
@@ -185,10 +192,10 @@ function TabButton({
       aria-controls={`panel-${id}`}
       onClick={onClick}
       className={cn(
-        "shrink-0 whitespace-nowrap border-r border-gray-200 px-5 py-3 text-sm uppercase tracking-wide transition-colors",
+        "shrink-0 whitespace-nowrap px-5 py-3 text-sm uppercase tracking-wide transition-colors",
         active
-          ? "bg-white font-bold text-gray-900"
-          : "border-b border-gray-200 bg-transparent font-medium text-gray-600 hover:text-gray-900",
+          ? "relative z-10 -mb-px rounded-t-lg border-t border-x border-gray-200 bg-white font-bold text-gray-900"
+          : "rounded-t-lg bg-gray-100/80 font-medium text-gray-600 hover:bg-gray-200/70 hover:text-gray-900",
       )}
     >
       {children}
