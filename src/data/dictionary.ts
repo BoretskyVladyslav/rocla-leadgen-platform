@@ -657,7 +657,7 @@ const DICTIONARY_UK: Dictionary = {
     title: "Відеоогляди",
     subtitle:
       "Короткі огляди техніки KAISER: збірка, гідровузол і робота на складі.",
-    youtubeCta: "Дивитися більше на YouTube",
+    youtubeCta: "Дивитися всі відео",
     youtubeHref: "https://www.youtube.com",
     items: [
       {
@@ -1134,7 +1134,7 @@ const DICTIONARY_RU: Dictionary = {
     title: "Видеообзоры",
     subtitle:
       "Короткие обзоры техники KAISER: сборка, гидроузел и работа на складе.",
-    youtubeCta: "Перейти на канал",
+    youtubeCta: "Смотреть все видео",
     youtubeHref: "https://www.youtube.com",
     items: [
       {
