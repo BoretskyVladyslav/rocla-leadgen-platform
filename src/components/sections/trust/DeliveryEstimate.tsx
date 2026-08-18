@@ -2,6 +2,14 @@
 
 import { useState, type FormEvent, type FocusEvent } from "react";
 import Image from "next/image";
+import {
+  BadgeCheck,
+  BadgePercent,
+  Headset,
+  ShieldCheck,
+  Wrench,
+  type LucideIcon,
+} from "lucide-react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -42,6 +50,17 @@ function PartnerLogo({ name, imageSrc }: { name: string; imageSrc: string }) {
     />
   );
 }
+
+const TRUST_ICONS: Record<
+  Dictionary["delivery"]["trustFactors"][number]["id"],
+  LucideIcon
+> = {
+  experience: ShieldCheck,
+  warranty: BadgeCheck,
+  service: Wrench,
+  prices: BadgePercent,
+  approach: Headset,
+};
 
 const FIELD_CLASS =
   "h-12 rounded-lg border border-neutral-300 bg-white px-3.5 text-sm shadow-none focus:border-amber-400 focus:ring-0 focus:outline-none";
@@ -185,6 +204,24 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
             </div>
           </div>
         </ScrollReveal>
+        <ul className="mt-6 grid grid-cols-2 gap-6 border-t border-gray-100 py-6 md:grid-cols-3 lg:grid-cols-5">
+          {copy.trustFactors.map((item) => {
+            const Icon = TRUST_ICONS[item.id];
+            return (
+              <li key={item.id} className="flex items-center gap-3">
+                <Icon
+                  className="h-7 w-7 shrink-0 text-gray-900"
+                  strokeWidth={1.75}
+                  aria-hidden
+                />
+                <div className="min-w-0">
+                  <p className="text-sm font-bold text-gray-900">{item.title}</p>
+                  <p className="text-xs text-gray-500">{item.subtitle}</p>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );

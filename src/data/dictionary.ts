@@ -102,6 +102,11 @@ export interface Dictionary {
     success: string;
     partnersTitle: string;
     partners: Array<{ name: string; imageSrc: string }>;
+    trustFactors: Array<{
+      id: "experience" | "warranty" | "service" | "prices" | "approach";
+      title: string;
+      subtitle: string;
+    }>;
     errors: {
       fullName: string;
       phone: string;
@@ -595,6 +600,33 @@ const DICTIONARY_UK: Dictionary = {
     success: "Заявку прийнято. Менеджер зателефонує.",
     partnersTitle: "Нам довіряють:",
     partners: getClientLogos("uk"),
+    trustFactors: [
+      {
+        id: "experience",
+        title: "10 років на ринку",
+        subtitle: "Досвід та надійність",
+      },
+      {
+        id: "warranty",
+        title: "Офіційна гарантія",
+        subtitle: "На всю техніку",
+      },
+      {
+        id: "service",
+        title: "Сервісний центр",
+        subtitle: "Обслуговування і ремонт",
+      },
+      {
+        id: "prices",
+        title: "Вигідні ціни",
+        subtitle: "Прямий імпортер",
+      },
+      {
+        id: "approach",
+        title: "Індивідуальний підхід",
+        subtitle: "Допомога експертів",
+      },
+    ],
     errors: {
       fullName: "Вкажіть ім’я (мінімум 2 символи).",
       phone: "Вкажіть телефон у форматі +380 (XX) XXX-XX-XX.",
@@ -1045,6 +1077,33 @@ const DICTIONARY_RU: Dictionary = {
     success: "Заявка принята. Менеджер перезвонит.",
     partnersTitle: "Нам доверяют:",
     partners: getClientLogos("ru"),
+    trustFactors: [
+      {
+        id: "experience",
+        title: "10 лет на рынке",
+        subtitle: "Опыт и надёжность",
+      },
+      {
+        id: "warranty",
+        title: "Официальная гарантия",
+        subtitle: "На всю технику",
+      },
+      {
+        id: "service",
+        title: "Сервисный центр",
+        subtitle: "Обслуживание и ремонт",
+      },
+      {
+        id: "prices",
+        title: "Выгодные цены",
+        subtitle: "Прямой импортёр",
+      },
+      {
+        id: "approach",
+        title: "Индивидуальный подход",
+        subtitle: "Помощь экспертов",
+      },
+    ],
     errors: {
       fullName: "Укажите имя (минимум 2 символа).",
       phone: "Укажите телефон в формате +380 (XX) XXX-XX-XX.",
