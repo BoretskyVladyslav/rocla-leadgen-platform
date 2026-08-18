@@ -53,27 +53,35 @@ export function ClientLogos({
 }: ClientLogosProps) {
   if (variant === "compact") {
     const headingWords = copy.compactTitle.split(" ");
-    const logos = copy.logos.slice(0, 6);
+    const logos = [7, 8, 2, 4, 6, 1].flatMap((index) => {
+      const logo = copy.logos[index];
+      return logo ? [logo] : [];
+    });
 
     return (
       <section
         className={cn(
-          "w-full border-t border-b border-[#E2DCF0] bg-[#EDE9F7] py-4 lg:py-5",
+          "w-full border-t border-b border-[#E2DCF0] bg-[#EDE9F7] py-5 lg:py-6",
           className,
         )}
         aria-label={copy.compactTitle}
       >
         <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-6 px-4">
-          <p className="shrink-0 text-xs font-bold whitespace-nowrap text-gray-900 uppercase md:text-sm">
-            {headingWords.join(" ")}
+          <p className="shrink-0 text-lg leading-tight font-bold text-gray-900 lg:text-xl">
+            {headingWords.map((word, index) => (
+              <span key={`${word}-${index}`}>
+                {index > 0 ? <br /> : null}
+                {word}
+              </span>
+            ))}
           </p>
-          <ul className="flex flex-1 items-center justify-between gap-4 opacity-75 grayscale transition-all hover:opacity-100">
+          <ul className="flex min-w-0 flex-1 items-center justify-between gap-5 opacity-75 grayscale transition-all hover:opacity-100">
             {logos.map((logo) => (
               <li key={logo.name} className="shrink-0">
                 <LogoMark
                   name={logo.name}
                   imageSrc={logo.imageSrc}
-                  className="h-7 max-h-none w-auto max-w-[100px] shrink-0 object-contain md:h-8"
+                  className="h-10 max-h-none w-auto max-w-[140px] shrink-0 object-contain mix-blend-multiply md:h-12"
                 />
               </li>
             ))}

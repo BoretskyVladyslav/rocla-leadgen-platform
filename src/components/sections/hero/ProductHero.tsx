@@ -36,6 +36,25 @@ function pickHeroSpecs(specs: ProductSpec[]) {
   }).slice(0, 8);
 }
 
+function ChevronDivider() {
+  return (
+    <svg
+      aria-hidden
+      className="-ml-px h-full w-4 shrink-0 overflow-visible"
+      viewBox="0 0 16 52"
+      preserveAspectRatio="none"
+    >
+      <path d="M0 0 L15 26 L0 52" fill="#f59e0b" />
+      <path
+        d="M0 0 L15 26 L0 52"
+        fill="none"
+        stroke="white"
+        strokeWidth="2"
+      />
+    </svg>
+  );
+}
+
 function buildThumbs(gallery: ProductImage[]) {
   if (gallery.length === 0) return [];
   return Array.from({ length: THUMB_COUNT }, (_, index) => {
@@ -62,8 +81,8 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
   const showThumbs = thumbs.length > 0;
 
   return (
-    <div className="mx-auto grid max-w-[1200px] grid-cols-1 items-stretch gap-6 px-4 lg:grid-cols-2 lg:gap-8">
-      <div className="flex h-[380px] gap-4 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm lg:p-8">
+    <div className="mx-auto grid max-w-[1200px] grid-cols-1 items-stretch gap-4 px-4 lg:grid-cols-2">
+      <div className="flex h-[380px] gap-3 rounded-xl border border-gray-100 bg-white p-5 shadow-sm lg:p-6">
         {showThumbs ? (
           <ul className="flex w-16 shrink-0 flex-col gap-3">
             {thumbs.map((image, index) => (
@@ -116,7 +135,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
         </div>
       </div>
 
-      <div className="flex h-[380px] flex-col justify-between rounded-2xl border border-gray-100 bg-white p-6 shadow-sm lg:p-8">
+      <div className="flex h-[380px] flex-col rounded-xl border border-gray-100 bg-white p-5 shadow-sm lg:p-6">
         <div>
           <h1 className="text-xl leading-tight font-bold text-gray-900 uppercase lg:text-2xl">
             {product.name}
@@ -142,7 +161,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
           ) : null}
         </div>
 
-        <div>
+        <div className="mt-6">
           {product.priceLabel ? (
             <div className="mb-2 flex items-baseline gap-4">
               {hasDiscount ? (
@@ -158,12 +177,15 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
 
           <HashLink
             href="#consultation"
-            className="flex h-12 w-full items-stretch overflow-hidden rounded-lg bg-amber-400 shadow-sm transition-all hover:bg-amber-500 md:h-13"
+            className="flex h-12 w-full items-stretch overflow-hidden rounded-md bg-amber-400 shadow-[0_4px_12px_rgba(245,158,11,0.28)] transition-colors hover:bg-amber-500 md:h-13"
           >
             {product.priceLabel ? (
-              <span className="flex h-full shrink-0 items-center bg-amber-500 px-4 text-sm font-extrabold tabular-nums !text-red-700 [clip-path:polygon(0_0,100%_0,calc(100%-12px)_50%,100%_100%,0_100%)] md:text-base">
-                {product.priceLabel}
-              </span>
+              <>
+                <span className="flex h-full shrink-0 items-center bg-amber-500 px-5 text-sm font-extrabold tabular-nums !text-red-700 md:text-base">
+                  {product.priceLabel}
+                </span>
+                <ChevronDivider />
+              </>
             ) : null}
             <span className="flex flex-1 items-center justify-center pl-2 text-xs font-bold tracking-wide text-gray-900 uppercase md:text-sm">
               {copy.buyCta}
