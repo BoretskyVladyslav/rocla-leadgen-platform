@@ -23,23 +23,25 @@ const ICONS: Record<
 
 export function ProductAdvantages({ copy }: ProductAdvantagesProps) {
   return (
-    <section className="mt-8 border-t border-amber-200/80 bg-gradient-to-b from-[#F6D56B] via-[#FBE8A8] to-white py-7">
-      <ul className="mx-auto grid max-w-[1200px] grid-cols-1 gap-6 px-4 sm:grid-cols-2 lg:grid-cols-4">
+    <section className="mt-8 border-t border-[#E8DCC0]/50 bg-gradient-to-b from-[#F7F1E3] via-[#FBF8F1] to-white py-8">
+      <ul className="mx-auto grid max-w-[1200px] grid-cols-1 gap-x-6 gap-y-7 px-4 sm:grid-cols-2 lg:grid-cols-4">
         {copy.map((item) => {
           const Icon = ICONS[item.id];
           return (
             <li
               key={item.id}
-              className="flex origin-left items-center gap-3.5 transition-transform duration-200 hover:scale-105"
+              className="flex origin-left items-center gap-3 transition-transform duration-200 hover:scale-[1.03]"
             >
               <Icon
-                className="h-9 w-9 shrink-0 text-amber-600"
-                strokeWidth={2.25}
+                className="h-8 w-8 shrink-0 text-[#C5A35A]"
+                strokeWidth={1.35}
                 aria-hidden
               />
-              <div className="min-w-0">
+              <div className="min-w-0 leading-snug">
                 <p className="text-sm font-bold text-gray-900">{item.title}</p>
-                <p className="text-sm text-gray-500">{item.subtitle}</p>
+                <p className="mt-0.5 text-sm leading-relaxed text-gray-500">
+                  {item.subtitle}
+                </p>
               </div>
             </li>
           );
