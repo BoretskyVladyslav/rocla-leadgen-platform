@@ -36,7 +36,7 @@ export function ProductTabs({ product, copy }: ProductTabsProps) {
         <div
           role="tablist"
           aria-label={copy.tabs.description}
-          className="flex gap-2 overflow-x-auto"
+          className="flex flex-wrap items-end gap-2.5"
         >
           <TabButton
             id="description"
@@ -63,7 +63,7 @@ export function ProductTabs({ product, copy }: ProductTabsProps) {
 
         <div
           className={cn(
-            "rounded-b-xl rounded-tr-xl border border-gray-200 bg-white shadow-sm",
+            "h-auto overflow-visible rounded-b-xl rounded-tr-xl border border-gray-200 bg-white shadow-sm",
             active !== "description" && "rounded-tl-xl",
           )}
         >
@@ -192,10 +192,10 @@ function TabButton({
       aria-controls={`panel-${id}`}
       onClick={onClick}
       className={cn(
-        "shrink-0 whitespace-nowrap px-5 py-3 text-sm uppercase tracking-wide transition-colors",
+        "shrink-0 whitespace-nowrap px-5 py-2.5 text-sm font-bold uppercase tracking-wide transition-colors",
         active
-          ? "relative z-10 -mb-px rounded-t-lg border-t border-x border-gray-200 bg-white font-bold text-gray-900"
-          : "rounded-t-lg bg-gray-100/80 font-medium text-gray-600 hover:bg-gray-200/70 hover:text-gray-900",
+          ? "relative z-10 -mb-px rounded-t-lg border-t border-x border-gray-200 bg-white text-gray-900"
+          : "rounded-t-lg border border-gray-200 bg-gray-100 text-gray-600 hover:bg-gray-200/80 hover:text-gray-900",
       )}
     >
       {children}
