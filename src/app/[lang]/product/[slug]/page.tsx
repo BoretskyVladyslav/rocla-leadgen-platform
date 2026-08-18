@@ -19,7 +19,6 @@ import {
   LOCALES,
   PRODUCT_SLUGS,
 } from "@/data/products";
-import { PAGE_CONTAINER } from "@/lib/layout";
 
 export function generateStaticParams() {
   return LOCALES.flatMap((lang) =>
@@ -56,8 +55,8 @@ export default async function ProductPage({
 
   return (
     <>
-      <section className="py-6 md:py-8">
-        <div className={PAGE_CONTAINER}>
+      <section className="w-full bg-[#F0F5FA] pt-4 pb-8">
+        <div className="mx-auto max-w-[1200px] px-4">
           <Breadcrumbs
             className="mb-4 bg-transparent px-0 py-0 text-xs text-gray-500 md:text-sm [&_ol]:max-w-none [&_ol]:px-0 [&_ol]:py-0 [&_ol]:text-inherit"
             items={[
@@ -79,10 +78,10 @@ export default async function ProductPage({
               },
             ]}
           />
+          <ProductHero product={product} copy={dict.product} />
         </div>
-        <ProductHero product={product} copy={dict.product} />
-        <ClientLogos copy={dict.clients} variant="compact" />
       </section>
+      <ClientLogos copy={dict.clients} variant="compact" />
       <ProductTabs product={product} copy={dict.product} />
       <ProductAdvantages copy={dict.product.advantages} />
       <ConsultationBlock copy={dict.consultation} />

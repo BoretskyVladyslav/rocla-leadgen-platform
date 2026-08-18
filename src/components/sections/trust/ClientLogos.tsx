@@ -53,34 +53,34 @@ export function ClientLogos({
 }: ClientLogosProps) {
   if (variant === "compact") {
     const headingWords = copy.compactTitle.split(" ");
+    const logos = copy.logos.slice(0, 6);
 
     return (
       <section
-        className={cn(
-          "mx-auto -mt-2 flex w-full max-w-6xl items-center justify-between gap-6 rounded-b-lg bg-[#ECEBF8] px-6 py-4",
-          className,
-        )}
+        className={cn("w-full bg-[#EBEAF4] py-3", className)}
         aria-label={copy.compactTitle}
       >
-        <p className="max-w-[80px] shrink-0 text-xs font-extrabold leading-tight text-gray-900 uppercase md:text-sm">
-          {headingWords.map((word, index) => (
-            <span key={`${word}-${index}`}>
-              {index > 0 ? <br /> : null}
-              {word}
-            </span>
-          ))}
-        </p>
-        <ul className="flex w-full min-w-0 items-center justify-between gap-6 overflow-hidden">
-          {copy.logos.slice(0, 6).map((logo) => (
-            <li key={logo.name} className="shrink-0">
-              <LogoMark
-                name={logo.name}
-                imageSrc={logo.imageSrc}
-                className="h-9 max-h-none w-auto max-w-[130px] object-contain opacity-90 grayscale transition-opacity hover:opacity-100 md:h-11"
-              />
-            </li>
-          ))}
-        </ul>
+        <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-4 px-4">
+          <p className="shrink-0 text-xs leading-tight font-extrabold text-gray-900 uppercase">
+            {headingWords.map((word, index) => (
+              <span key={`${word}-${index}`}>
+                {index > 0 ? <br /> : null}
+                {word}
+              </span>
+            ))}
+          </p>
+          <ul className="flex w-full min-w-0 items-center justify-between gap-6">
+            {logos.map((logo) => (
+              <li key={logo.name} className="shrink">
+                <LogoMark
+                  name={logo.name}
+                  imageSrc={logo.imageSrc}
+                  className="h-6 max-h-none w-auto max-w-[100px] shrink object-contain opacity-75 grayscale transition-opacity hover:opacity-100 md:h-7"
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
     );
   }
