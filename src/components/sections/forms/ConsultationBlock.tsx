@@ -64,8 +64,8 @@ export function ConsultationBlock({ copy, className }: ConsultationBlockProps) {
       id="consultation"
       className={cn("scroll-mt-20 px-4 py-8", className)}
     >
-      <div className="mx-auto max-w-[1200px] overflow-hidden rounded-2xl bg-[#F0F5FA]">
-        <div className="grid grid-cols-1 items-end lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)_minmax(220px,280px)]">
+      <div className="mx-auto max-w-[1200px] overflow-hidden rounded-2xl bg-[#E2F0FB]">
+        <div className="grid grid-cols-1 items-stretch lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)_minmax(220px,280px)]">
           <div className="px-6 py-8 sm:px-8 lg:px-10 lg:py-10">
             <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-[1.75rem]">
               {copy.title}
@@ -147,7 +147,7 @@ export function ConsultationBlock({ copy, className }: ConsultationBlockProps) {
             )}
           </div>
 
-          <div className="relative flex min-h-[260px] items-end justify-center lg:min-h-0 lg:justify-end">
+          <div className="relative min-h-[260px] overflow-hidden lg:min-h-0">
             <Image
               src={copy.imageSrc}
               alt={copy.imageAlt}
@@ -155,7 +155,7 @@ export function ConsultationBlock({ copy, className }: ConsultationBlockProps) {
               height={720}
               sizes="(max-width: 1024px) 220px, 280px"
               loading="lazy"
-              className="h-[280px] w-auto object-contain object-bottom lg:h-[320px]"
+              className="pointer-events-none absolute right-0 bottom-[-1.75rem] block h-[300px] w-auto max-w-none object-contain object-bottom lg:right-2 lg:h-[360px]"
             />
           </div>
         </div>
