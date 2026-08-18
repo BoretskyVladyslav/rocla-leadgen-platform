@@ -6,7 +6,7 @@ import { HashLink } from "@/components/layout/HashLink";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
 import { cn } from "@/lib/utils";
-import type { Product, ProductImage } from "@/types/product";
+import type { Product, ProductImage, ProductSpec } from "@/types/product";
 
 export interface ProductHeroProps {
   product: Product;
@@ -14,6 +14,27 @@ export interface ProductHeroProps {
 }
 
 const THUMB_COUNT = 4;
+
+const HERO_SPEC_MATCHERS = [
+  ["тип візка", "тип тележки"],
+  ["вантажопідйомність", "грузоподъёмность", "грузоподъемность"],
+  ["довжина вил", "длина вил"],
+  ["висота підйому", "высота подъёма", "высота подъема"],
+  ["ширина вил", "ширина вил"],
+  ["вага", "вес"],
+  ["матеріал", "материал"],
+  ["гарантія", "гарантия"],
+] as const;
+
+function pickHeroSpecs(specs: ProductSpec[]) {
+  return HERO_SPEC_MATCHERS.flatMap((keys) => {
+    const match = specs.find((spec) => {
+      const label = spec.label.toLowerCase();
+      return keys.some((key) => label.includes(key));
+    });
+    return match ? [match] : [];
+  }).slice(0, 8);
+}
 
 function ChevronDivider() {
   return (
@@ -49,19 +70,15 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
   const hasDiscount = Boolean(
     product.compareAtPriceLabel && product.priceLabel,
   );
-  const quickSpecs = (product.specs ?? [])
-    .filter(
-      (spec) => spec.label.toLowerCase() !== copy.skuLabel.toLowerCase(),
-    )
-    .slice(0, 8);
+  const quickSpecs = pickHeroSpecs(product.specs ?? []);
 
   const showThumbs = thumbs.length > 0;
 
   return (
-    <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-12">
-      <div className="flex h-[380px] gap-4 rounded-xl bg-white p-5 shadow-sm lg:col-span-7">
+    <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
+      <div className="flex h-[340px] items-start gap-3 rounded-xl border border-gray-100 bg-white p-5 shadow-sm">
         {showThumbs ? (
-          <ul className="flex w-12 shrink-0 flex-col gap-2">
+          <ul className="flex shrink-0 flex-col gap-2">
             {thumbs.map((image, index) => (
               <li key={image.thumbKey}>
                 <button
@@ -70,7 +87,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
                   aria-label={`${copy.thumbPlaceholder} ${index + 1}`}
                   aria-pressed={index === activeThumb}
                   className={cn(
-                    "relative block h-12 w-12 cursor-pointer overflow-hidden rounded border",
+                    "relative block h-12 w-12 shrink-0 cursor-pointer overflow-hidden rounded border object-cover",
                     index === activeThumb
                       ? "border-amber-500"
                       : "border-gray-200",
@@ -90,15 +107,15 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
           </ul>
         ) : null}
 
-        <div className="relative flex h-full min-w-0 flex-1 items-center justify-center p-4">
+        <div className="relative flex h-full min-w-0 flex-1 items-center justify-center overflow-hidden rounded-lg p-2">
           {activeImage?.src ? (
             <Image
               key={`${activeImage.src}-${activeThumb}`}
               src={activeImage.src}
               alt={activeImage.alt ?? product.name ?? copy.imagePlaceholder}
               fill
-              sizes="(max-width: 1024px) 100vw, 58vw"
-              className="max-h-full object-contain rounded-lg"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="max-h-full max-w-full object-contain"
               priority
             />
           ) : (
@@ -112,17 +129,17 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
         </div>
       </div>
 
-      <div className="flex min-h-[380px] flex-col justify-start rounded-xl bg-white p-6 shadow-sm lg:col-span-5">
-        <div className="flex flex-col gap-0">
-          <h1 className="text-xl leading-tight font-bold text-gray-900 uppercase">
+      <div className="flex h-[340px] flex-col justify-between rounded-xl border border-gray-100 bg-white p-5 shadow-sm md:p-6">
+        <div>
+          <h1 className="text-lg font-bold tracking-tight text-gray-900 uppercase">
             {product.name}
           </h1>
-          <p className="mt-1 mb-4 text-xs text-gray-400">
+          <p className="mt-0.5 mb-2 text-xs text-gray-400">
             {copy.skuLabel}: {product.sku}
           </p>
 
           {quickSpecs.length > 0 ? (
-            <dl className="mb-6 grid grid-cols-2 gap-x-4 gap-y-2 text-xs text-gray-700">
+            <dl className="mb-2 grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-gray-600">
               {quickSpecs.map((spec) => (
                 <div
                   key={spec.label}
@@ -136,11 +153,13 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
               ))}
             </dl>
           ) : null}
+        </div>
 
+        <div>
           {product.priceLabel ? (
             <div className="mb-2 flex items-baseline gap-4">
               {hasDiscount ? (
-                <p className="text-sm font-bold text-gray-400 line-through">
+                <p className="text-sm font-bold text-gray-500 line-through">
                   {product.compareAtPriceLabel}
                 </p>
               ) : null}
@@ -152,7 +171,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
 
           <HashLink
             href="#consultation"
-            className="flex h-12 w-full items-stretch overflow-hidden rounded bg-[#F9BC06] shadow-sm"
+            className="flex h-11 w-full items-stretch overflow-hidden rounded bg-[#F9BC06] shadow-sm"
           >
             {product.priceLabel ? (
               <>
