@@ -96,7 +96,7 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
   }
 
   return (
-    <section className={cn("w-full bg-white py-12", className)}>
+    <section className={cn("w-full bg-white pt-12 pb-8", className)}>
       <div className="mx-auto w-full max-w-[1400px] px-3 sm:px-4 lg:px-6">
         <ScrollReveal>
           <div className="relative overflow-hidden">
@@ -127,7 +127,7 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
               />
             </div>
 
-            <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-6 py-10 text-center sm:px-10 sm:py-12 md:px-16">
+            <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-6 pt-10 pb-6 text-center sm:px-10 sm:pt-12 sm:pb-6 md:px-16">
               <h2 className="text-2xl font-extrabold tracking-wide text-neutral-900 uppercase sm:text-3xl">
                 {copy.title}
               </h2>
@@ -204,25 +204,25 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
             </div>
           </div>
         </ScrollReveal>
-        <ul className="mt-6 grid grid-cols-2 gap-6 border-t border-gray-100 py-6 md:grid-cols-3 lg:grid-cols-5">
-          {copy.trustFactors.map((item) => {
-            const Icon = TRUST_ICONS[item.id];
-            return (
-              <li key={item.id} className="flex items-center gap-3">
-                <Icon
-                  className="h-7 w-7 shrink-0 text-gray-900"
-                  strokeWidth={1.75}
-                  aria-hidden
-                />
-                <div className="min-w-0">
-                  <p className="text-sm font-bold text-gray-900">{item.title}</p>
-                  <p className="text-xs text-gray-500">{item.subtitle}</p>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
       </div>
+      <ul className="mx-auto mt-1 grid max-w-[1200px] grid-cols-2 gap-6 border-t border-gray-100 px-4 pt-4 pb-2 md:grid-cols-3 lg:grid-cols-5">
+        {copy.trustFactors.map((item) => {
+          const Icon = TRUST_ICONS[item.id];
+          return (
+            <li key={item.id} className="flex items-center gap-3">
+              <Icon
+                className="h-7 w-7 shrink-0 text-gray-900"
+                strokeWidth={1.75}
+                aria-hidden
+              />
+              <div className="min-w-0">
+                <p className="text-sm font-bold text-gray-900">{item.title}</p>
+                <p className="text-xs text-gray-500">{item.subtitle}</p>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
     </section>
   );
 }
