@@ -88,9 +88,7 @@ export default async function ProductPage({
       <RelatedProductsCarousel
         lang={lang}
         products={related}
-        copy={dict.catalog}
-        title={dict.product.relatedTitle}
-        orderCta={dict.product.orderCta}
+        copy={dict.product}
       />
       <DeliveryEstimate copy={dict.delivery} />
       <VideoReviews copy={dict.videos} />

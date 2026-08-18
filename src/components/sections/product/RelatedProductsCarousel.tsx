@@ -14,22 +14,42 @@ import {
 import { MediaImage } from "@/components/ui/MediaImage";
 import type { Dictionary } from "@/data/dictionary";
 import { useCarouselTrack } from "@/hooks/useCarouselTrack";
-import type { Product } from "@/types/product";
+import type { Product, ProductSpec } from "@/types/product";
 import { cn } from "@/lib/utils";
 
 export interface RelatedProductsCarouselProps {
   lang: string;
   products: Product[];
-  copy: Dictionary["catalog"];
-  title: string;
-  orderCta: string;
+  copy: Dictionary["product"];
+}
+
+const CAPACITY_KEYS = [
+  "вантажопідйомність",
+  "грузоподъёмность",
+  "грузоподъемность",
+];
+const LIFT_KEYS = [
+  "висота підйому",
+  "высота подъёма",
+  "высота подъема",
+];
+
+function findSpecValue(specs: ProductSpec[] | undefined, keys: string[]) {
+  return specs?.find((spec) => {
+    const label = spec.label.toLowerCase();
+    return keys.some((key) => label.includes(key));
+  })?.value;
+}
+
+function formatPrice(label?: string) {
+  if (!label) return null;
+  return label.replace(/₴/g, "грн").trim();
 }
 
 export function RelatedProductsCarousel({
   lang,
   products,
-  title,
-  orderCta,
+  copy,
 }: RelatedProductsCarouselProps) {
   const getKey = useCallback(
     (product: Product) => product.images?.[0]?.src ?? product.slug,
@@ -62,7 +82,7 @@ export function RelatedProductsCarousel({
         <ScrollReveal>
           <div className="mb-8 flex flex-row items-end justify-between gap-4">
             <h2 className="text-left text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">
-              {title}
+              {copy.relatedTitle}
             </h2>
             <div className="flex shrink-0 items-center gap-2">
               <button
@@ -95,7 +115,10 @@ export function RelatedProductsCarousel({
           {...dragHandlers}
         >
           {loopedItems.map(({ item: product, key }) => {
-            const badges = (product.specs ?? []).slice(0, 3);
+            const href = `/${lang}/product/${product.slug}`;
+            const capacity = findSpecValue(product.specs, CAPACITY_KEYS);
+            const liftHeight = findSpecValue(product.specs, LIFT_KEYS);
+            const price = formatPrice(product.priceLabel);
 
             return (
               <motion.li
@@ -117,7 +140,7 @@ export function RelatedProductsCarousel({
                   {...cardHover}
                 >
                   <Link
-                    href={`/${lang}/product/${product.slug}`}
+                    href={href}
                     className="block overflow-hidden rounded-t-2xl rounded-b-none bg-white"
                     draggable={false}
                   >
@@ -130,46 +153,47 @@ export function RelatedProductsCarousel({
                       className="h-full w-full rounded-t-2xl rounded-b-none bg-white"
                     />
                   </Link>
-                  <div className="flex flex-1 flex-col gap-3 bg-neutral-50 p-4">
-                    <Link
-                      href={`/${lang}/product/${product.slug}`}
-                      draggable={false}
-                    >
-                      <h3 className="text-base font-bold tracking-tight text-foreground transition-colors hover:text-heading sm:text-lg">
-                        {product.name}
+                  <div className="flex flex-1 flex-col bg-white p-4">
+                    <Link href={href} draggable={false}>
+                      <h3 className="text-base font-bold tracking-tight text-gray-900 transition-colors hover:text-heading sm:text-lg">
+                        {product.sku}
                       </h3>
                     </Link>
-                    <p className="flex-1 text-sm leading-relaxed text-muted">
-                      {product.summary}
-                    </p>
-                    {badges.length > 0 ? (
-                      <ul className="flex flex-wrap gap-2">
-                        {badges.map((spec) => (
-                          <li key={spec.label} className="badge-status-outline">
-                            {spec.value}
-                          </li>
-                        ))}
-                      </ul>
-                    ) : null}
-                    {product.priceLabel ? (
-                      <div className="flex flex-wrap items-baseline gap-2 border-t border-border pt-3">
-                        {product.compareAtPriceLabel ? (
-                          <span className="text-sm tabular-nums text-muted line-through">
-                            {product.compareAtPriceLabel}
-                          </span>
-                        ) : null}
-                        <span className="text-base font-bold tabular-nums text-accent-alt">
-                          {product.priceLabel}
+                    <p className="mt-0.5 text-sm text-gray-700">{product.name}</p>
+                    <dl className="mt-3 flex flex-1 flex-col justify-start gap-1.5">
+                      {capacity ? (
+                        <div className="flex items-center justify-between gap-3 text-sm">
+                          <dt className="text-gray-500">{copy.capacityLabel}</dt>
+                          <dd className="font-bold tabular-nums text-gray-900">
+                            {capacity}
+                          </dd>
+                        </div>
+                      ) : null}
+                      {liftHeight ? (
+                        <div className="flex items-center justify-between gap-3 text-sm">
+                          <dt className="text-gray-500">{copy.liftHeightLabel}</dt>
+                          <dd className="font-bold tabular-nums text-gray-900">
+                            {liftHeight}
+                          </dd>
+                        </div>
+                      ) : null}
+                    </dl>
+                    <div className="mt-4 flex items-center justify-between gap-3">
+                      {price ? (
+                        <span className="text-base font-bold tabular-nums text-gray-900">
+                          {price}
                         </span>
-                      </div>
-                    ) : null}
-                    <MotionLink
-                      href={`/${lang}/product/${product.slug}`}
-                      className="mt-1 inline-flex h-11 w-full items-center justify-center rounded-lg bg-accent px-5 text-sm font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-                      draggable={false}
-                    >
-                      {orderCta}
-                    </MotionLink>
+                      ) : (
+                        <span />
+                      )}
+                      <MotionLink
+                        href={href}
+                        className="inline-flex h-9 shrink-0 items-center justify-center rounded-md bg-accent px-3.5 text-xs font-bold uppercase tracking-wide text-accent-fg transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                        draggable={false}
+                      >
+                        {copy.detailsCta}
+                      </MotionLink>
+                    </div>
                   </div>
                 </motion.article>
               </motion.li>

@@ -225,6 +225,9 @@ export interface Dictionary {
     orderCta: string;
     skuLabel: string;
     relatedTitle: string;
+    detailsCta: string;
+    capacityLabel: string;
+    liftHeightLabel: string;
     specifications: string;
     imagePlaceholder: string;
     thumbPlaceholder: string;
@@ -705,6 +708,9 @@ const DICTIONARY_UK: Dictionary = {
     orderCta: "Замовити",
     skuLabel: "Артикул",
     relatedTitle: "Схожі товари",
+    detailsCta: "Детальніше",
+    capacityLabel: "Вантажопідйомність",
+    liftHeightLabel: "Висота підйому",
     specifications: "Характеристики",
     imagePlaceholder: "Зображення відсутнє",
     thumbPlaceholder: "Мініатюра",
@@ -1152,6 +1158,9 @@ const DICTIONARY_RU: Dictionary = {
     orderCta: "Заказать",
     skuLabel: "Артикул",
     relatedTitle: "Похожие товары",
+    detailsCta: "Подробнее",
+    capacityLabel: "Грузоподъёмность",
+    liftHeightLabel: "Высота подъёма",
     specifications: "Характеристики",
     imagePlaceholder: "Изображение отсутствует",
     thumbPlaceholder: "Миниатюра",
