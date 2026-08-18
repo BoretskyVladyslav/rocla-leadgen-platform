@@ -6,15 +6,21 @@ import { cn } from "@/lib/utils";
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
+  compact?: boolean;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  function Input({ id, label, error, className, ...props }, ref) {
+  function Input({ id, label, error, compact, className, ...props }, ref) {
     const reactId = useId();
     const inputId = id ?? reactId;
 
     return (
-      <div className="flex w-full flex-col gap-1.5 text-sm">
+      <div
+        className={cn(
+          "flex w-full flex-col text-sm",
+          compact ? "gap-1" : "gap-1.5",
+        )}
+      >
         {label ? (
           <label
             htmlFor={inputId}
@@ -38,13 +44,19 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           aria-invalid={error ? true : undefined}
           {...props}
         />
-        <div className="relative min-h-[1.25rem]">
-          {error ? (
-            <span className="absolute inset-x-0 top-0 text-xs text-red-600">
-              {error}
-            </span>
-          ) : null}
-        </div>
+        {compact ? (
+          error ? (
+            <span className="text-xs text-red-600">{error}</span>
+          ) : null
+        ) : (
+          <div className="relative min-h-[1.25rem]">
+            {error ? (
+              <span className="absolute inset-x-0 top-0 text-xs text-red-600">
+                {error}
+              </span>
+            ) : null}
+          </div>
+        )}
       </div>
     );
   },

@@ -194,14 +194,13 @@ export interface Dictionary {
     benefits: string[];
     fullName: string;
     phone: string;
-    email: string;
+    comment: string;
     submit: string;
     success: string;
     imageSrc: string;
     imageAlt: string;
     errors: {
       fullName: string;
-      email: string;
       phone: string;
     };
   };
@@ -771,22 +770,22 @@ const DICTIONARY_UK: Dictionary = {
   },
   consultation: {
     title: "Потрібна допомога з вибором?",
-    subtitle: "* Зв'яжіться з нашим менеджером",
+    subtitle:
+      "Наші спеціалісти допоможуть підібрати оптимальне обладнання.",
     benefits: [
-      "Допоможемо підібрати під ваші задачі",
-      "Індивідуальний розрахунок вартості",
-      "Відповідь протягом 15 хвилин",
+      "Безкоштовна консультація",
+      "Індивідуальний підхід",
+      "Розрахунок вартості за 5 хвилин",
     ],
-    fullName: "Ім’я",
-    phone: "Телефон",
-    email: "Email",
+    fullName: "Ваше ім'я",
+    phone: "Телефон*",
+    comment: "Коментар (необов'язково)",
     submit: "Отримати консультацію",
     success: "Заявку прийнято. Менеджер зателефонує.",
     imageSrc: "/images/manager.png",
     imageAlt: "Менеджер KAISER",
     errors: {
       fullName: "Вкажіть ім’я (мінімум 2 символи).",
-      email: "Вкажіть коректний email.",
       phone: "Вкажіть телефон у форматі +380 (XX) XXX-XX-XX.",
     },
   },
@@ -1218,22 +1217,22 @@ const DICTIONARY_RU: Dictionary = {
   },
   consultation: {
     title: "Нужна помощь с выбором?",
-    subtitle: "* Свяжитесь с нашим менеджером",
+    subtitle:
+      "Наши специалисты помогут подобрать оптимальное оборудование.",
     benefits: [
-      "Поможем подобрать под ваши задачи",
-      "Индивидуальный расчет стоимости",
-      "Ответ в течение 15 минут",
+      "Бесплатная консультация",
+      "Индивидуальный подход",
+      "Расчет стоимости за 5 минут",
     ],
-    fullName: "Имя",
-    phone: "Телефон",
-    email: "Email",
+    fullName: "Ваше имя",
+    phone: "Телефон*",
+    comment: "Комментарий (необязательно)",
     submit: "Получить консультацию",
     success: "Заявку приняли. Менеджер перезвонит.",
     imageSrc: "/images/manager.png",
     imageAlt: "Менеджер KAISER",
     errors: {
       fullName: "Укажите имя (минимум 2 символа).",
-      email: "Укажите корректный email.",
       phone: "Укажите телефон в формате +380 (XX) XXX-XX-XX.",
     },
   },

@@ -2,14 +2,14 @@
 
 import { useState, type FormEvent, type FocusEvent } from "react";
 import Image from "next/image";
-import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { PhoneInput } from "@/components/ui/PhoneInput";
 import type { Dictionary } from "@/data/dictionary";
 import {
-  validateLeadFields,
-  type LeadFieldErrors,
+  validateCallbackFields,
+  type CallbackFieldErrors,
 } from "@/lib/validation";
 import { cn } from "@/lib/utils";
 
@@ -18,148 +18,146 @@ export interface ConsultationBlockProps {
   className?: string;
 }
 
-function CheckIcon() {
-  return (
-    <svg className="h-4 w-4 text-accent-fg" viewBox="0 0 16 16" fill="none" aria-hidden>
-      <path
-        d="M3.5 8.2 6.4 11l6.1-6.5"
-        stroke="currentColor"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
 export function ConsultationBlock({ copy, className }: ConsultationBlockProps) {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [errors, setErrors] = useState<LeadFieldErrors>({});
+  const [comment, setComment] = useState("");
+  const [errors, setErrors] = useState<CallbackFieldErrors>({});
   const [status, setStatus] = useState<"idle" | "success">("idle");
 
-  function validateField(field: keyof LeadFieldErrors) {
-    const next = validateLeadFields(
-      { fullName, email, phone },
+  function validateField(field: keyof CallbackFieldErrors) {
+    const next = validateCallbackFields(
+      { fullName, phone },
       copy.errors,
     );
     setErrors((prev) => ({ ...prev, [field]: next[field] }));
   }
 
   function handleBlur(event: FocusEvent<HTMLInputElement>) {
-    const name = event.target.name as keyof LeadFieldErrors;
-    if (name === "fullName" || name === "email" || name === "phone") {
+    const name = event.target.name as keyof CallbackFieldErrors;
+    if (name === "fullName" || name === "phone") {
       validateField(name);
     }
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const nextErrors = validateLeadFields(
-      { fullName, email, phone },
+    const nextErrors = validateCallbackFields(
+      { fullName, phone },
       copy.errors,
     );
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
-    console.info("consultation", { fullName, phone, email });
+    console.info("consultation", { fullName, phone, comment });
     setStatus("success");
     setFullName("");
     setPhone("");
-    setEmail("");
+    setComment("");
   }
+
+  const inputClass =
+    "h-11 rounded-md border-gray-200 shadow-none focus:border-gray-300 focus:shadow-md focus:ring-0 focus-visible:border-gray-300 focus-visible:ring-0 focus-within:border-gray-300 focus-within:shadow-md focus-within:ring-0";
 
   return (
     <section
       id="consultation"
-      className={cn(
-        "relative w-full scroll-mt-20 overflow-hidden bg-slate-50",
-        className,
-      )}
+      className={cn("scroll-mt-20 px-4 py-8", className)}
     >
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-end gap-8 px-4 sm:px-6 lg:grid-cols-3 lg:gap-x-10">
-        <ScrollReveal className="flex flex-col self-start pt-12 pb-12 lg:pt-14 lg:pb-14">
-          <h2 className="text-2xl font-bold tracking-tight text-heading sm:text-3xl">
-            {copy.title}
-          </h2>
-          <p className="mt-1 mb-6 text-xs text-neutral-500">{copy.subtitle}</p>
-          <ul className="flex flex-col gap-3">
-            {copy.benefits.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm text-foreground sm:text-base">
-                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent shadow-sm">
-                  <CheckIcon />
-                </span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </ScrollReveal>
-
-        <ScrollReveal
-          delay={0.06}
-          className="w-full self-start pt-0 pb-12 lg:pt-14 lg:pb-14"
-        >
-          {status === "success" ? (
-            <p className="py-4 text-center text-sm font-semibold text-heading">
-              {copy.success}
+      <div className="mx-auto max-w-[1200px] overflow-hidden rounded-2xl bg-[#F0F5FA]">
+        <div className="grid grid-cols-1 items-end lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)_minmax(220px,280px)]">
+          <div className="px-6 py-8 sm:px-8 lg:px-10 lg:py-10">
+            <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-[1.75rem]">
+              {copy.title}
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-gray-700">
+              {copy.subtitle}
             </p>
-          ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="flex w-full flex-col gap-2"
-              noValidate
-            >
-              <Input
-                id="consultation-fullName"
-                label={copy.fullName}
-                name="fullName"
-                required
-                value={fullName}
-                error={errors.fullName}
-                onBlur={handleBlur}
-                onChange={(e) => setFullName(e.target.value)}
-                className="h-auto py-3.5 px-4 text-base"
-              />
-              <PhoneInput
-                id="consultation-phone"
-                label={copy.phone}
-                name="phone"
-                required
-                value={phone}
-                error={errors.phone}
-                onBlur={handleBlur}
-                onValueChange={setPhone}
-                className="h-auto min-h-12 py-1"
-              />
-              <Input
-                id="consultation-email"
-                label={copy.email}
-                name="email"
-                type="email"
-                value={email}
-                error={errors.email}
-                onBlur={handleBlur}
-                onChange={(e) => setEmail(e.target.value)}
-                className="h-auto py-3.5 px-4 text-base"
-              />
-              <Button type="submit" size="lg" className="mt-2 h-14 w-full text-base font-bold">
-                {copy.submit}
-              </Button>
-            </form>
-          )}
-        </ScrollReveal>
+            <ul className="mt-6 flex flex-col gap-3">
+              {copy.benefits.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-center gap-3 text-sm text-gray-800 sm:text-[15px]"
+                >
+                  <span className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[#C5A35A] text-[#C5A35A]">
+                    <Check className="h-3 w-3" strokeWidth={2.2} aria-hidden />
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        <div className="relative flex justify-center self-end lg:justify-end">
-          <Image
-            src="/images/manager.png"
-            alt={copy.imageAlt}
-            width={480}
-            height={720}
-            sizes="(max-width: 1280px) 260px, 300px"
-            loading="lazy"
-            className="h-[400px] w-auto object-contain object-bottom lg:h-[460px] xl:h-[500px]"
-          />
+          <div className="px-6 pb-8 sm:px-8 lg:px-4 lg:py-10">
+            {status === "success" ? (
+              <p className="py-4 text-center text-sm font-semibold text-gray-900">
+                {copy.success}
+              </p>
+            ) : (
+              <form
+                onSubmit={handleSubmit}
+                className="flex w-full flex-col gap-2.5"
+                noValidate
+              >
+                <Input
+                  id="consultation-fullName"
+                  name="fullName"
+                  compact
+                  required
+                  autoComplete="name"
+                  placeholder={copy.fullName}
+                  aria-label={copy.fullName}
+                  value={fullName}
+                  error={errors.fullName}
+                  onBlur={handleBlur}
+                  onChange={(e) => setFullName(e.target.value)}
+                  className={inputClass}
+                />
+                <PhoneInput
+                  id="consultation-phone"
+                  name="phone"
+                  compact
+                  required
+                  value={phone}
+                  error={errors.phone}
+                  onBlur={handleBlur}
+                  onValueChange={setPhone}
+                  aria-label={copy.phone}
+                  className={cn(inputClass, "overflow-hidden")}
+                />
+                <Input
+                  id="consultation-comment"
+                  name="comment"
+                  compact
+                  autoComplete="off"
+                  placeholder={copy.comment}
+                  aria-label={copy.comment}
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  className={inputClass}
+                />
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="mt-1 h-12 w-full text-sm font-bold"
+                >
+                  {copy.submit}
+                </Button>
+              </form>
+            )}
+          </div>
+
+          <div className="relative flex min-h-[260px] items-end justify-center lg:min-h-0 lg:justify-end">
+            <Image
+              src={copy.imageSrc}
+              alt={copy.imageAlt}
+              width={480}
+              height={720}
+              sizes="(max-width: 1024px) 220px, 280px"
+              loading="lazy"
+              className="h-[280px] w-auto object-contain object-bottom lg:h-[320px]"
+            />
+          </div>
         </div>
       </div>
     </section>

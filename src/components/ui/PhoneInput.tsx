@@ -24,6 +24,7 @@ export interface PhoneInputProps
   > {
   label?: string;
   error?: string;
+  compact?: boolean;
   value: string;
   onValueChange: (value: string) => void;
 }
@@ -32,6 +33,7 @@ export function PhoneInput({
   id,
   label,
   error,
+  compact,
   value,
   onValueChange,
   placeholder = UA_PHONE_PLACEHOLDER,
@@ -91,7 +93,12 @@ export function PhoneInput({
   }
 
   return (
-    <div className="flex w-full flex-col gap-1.5 text-sm">
+    <div
+      className={cn(
+        "flex w-full flex-col text-sm",
+        compact ? "gap-1" : "gap-1.5",
+      )}
+    >
       {label ? (
         <label
           htmlFor={inputId}
@@ -138,13 +145,19 @@ export function PhoneInput({
           {...props}
         />
       </div>
-      <div className="relative min-h-[1.25rem]">
-        {error ? (
-          <span className="absolute inset-x-0 top-0 text-xs text-red-600">
-            {error}
-          </span>
-        ) : null}
-      </div>
+      {compact ? (
+        error ? (
+          <span className="text-xs text-red-600">{error}</span>
+        ) : null
+      ) : (
+        <div className="relative min-h-[1.25rem]">
+          {error ? (
+            <span className="absolute inset-x-0 top-0 text-xs text-red-600">
+              {error}
+            </span>
+          ) : null}
+        </div>
+      )}
     </div>
   );
 }
