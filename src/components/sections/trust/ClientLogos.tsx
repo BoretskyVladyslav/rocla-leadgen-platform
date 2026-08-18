@@ -40,7 +40,7 @@ function LogoMark({
       height={72}
       sizes="240px"
       loading="lazy"
-      className={cn("h-auto max-h-10 w-auto object-contain", className)}
+      className={cn("h-auto w-auto object-contain", className)}
       onError={() => setFailed(true)}
     />
   );
@@ -78,7 +78,7 @@ export function ClientLogos({
                 <LogoMark
                   name={logo.name}
                   imageSrc={logo.imageSrc}
-                  className="h-12 max-h-none w-auto max-w-[168px] shrink-0 object-contain opacity-80 grayscale mix-blend-multiply transition-[filter,opacity] hover:opacity-100 hover:grayscale-0 md:h-16"
+                  className="h-12 w-auto max-h-none max-w-[168px] shrink-0 object-contain opacity-80 grayscale mix-blend-multiply transition-[filter,opacity] hover:opacity-100 hover:grayscale-0 md:h-16"
                 />
               </li>
             ))}
