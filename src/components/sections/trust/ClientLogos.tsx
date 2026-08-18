@@ -36,9 +36,9 @@ function LogoMark({
     <Image
       src={imageSrc}
       alt={name}
-      width={160}
-      height={48}
-      sizes="160px"
+      width={240}
+      height={72}
+      sizes="240px"
       loading="lazy"
       className={cn("h-auto max-h-10 w-auto object-contain", className)}
       onError={() => setFailed(true)}
@@ -60,13 +60,10 @@ export function ClientLogos({
 
     return (
       <section
-        className={cn(
-          "w-full border-t border-b border-[#E2DCF0] bg-[#EDE9F7] py-5 lg:py-6",
-          className,
-        )}
+        className={cn("w-full bg-white py-5 lg:py-6", className)}
         aria-label={copy.compactTitle}
       >
-        <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-6 px-4">
+        <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-8 px-4">
           <p className="shrink-0 text-lg leading-tight font-bold text-gray-900 lg:text-xl">
             {headingWords.map((word, index) => (
               <span key={`${word}-${index}`}>
@@ -75,13 +72,13 @@ export function ClientLogos({
               </span>
             ))}
           </p>
-          <ul className="flex min-w-0 flex-1 items-center justify-between gap-5 opacity-75 grayscale transition-all hover:opacity-100">
+          <ul className="flex min-w-0 flex-1 items-center justify-between gap-6">
             {logos.map((logo) => (
               <li key={logo.name} className="shrink-0">
                 <LogoMark
                   name={logo.name}
                   imageSrc={logo.imageSrc}
-                  className="h-10 max-h-none w-auto max-w-[140px] shrink-0 object-contain mix-blend-multiply md:h-12"
+                  className="h-12 max-h-none w-auto max-w-[168px] shrink-0 object-contain opacity-80 grayscale mix-blend-multiply transition-[filter,opacity] hover:opacity-100 hover:grayscale-0 md:h-16"
                 />
               </li>
             ))}
