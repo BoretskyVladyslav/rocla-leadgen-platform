@@ -36,19 +36,6 @@ function pickHeroSpecs(specs: ProductSpec[]) {
   }).slice(0, 8);
 }
 
-function ChevronDivider() {
-  return (
-    <svg
-      aria-hidden
-      className="h-full w-4 shrink-0 fill-current text-white"
-      viewBox="0 0 16 48"
-      preserveAspectRatio="none"
-    >
-      <path d="M0 0 L10 24 L0 48 L6 48 L16 24 L6 0 Z" />
-    </svg>
-  );
-}
-
 function buildThumbs(gallery: ProductImage[]) {
   if (gallery.length === 0) return [];
   return Array.from({ length: THUMB_COUNT }, (_, index) => {
@@ -75,10 +62,10 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
   const showThumbs = thumbs.length > 0;
 
   return (
-    <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
-      <div className="flex h-[340px] items-start gap-3 rounded-xl border border-gray-100 bg-white p-5 shadow-sm">
+    <div className="mx-auto grid max-w-[1200px] grid-cols-1 items-stretch gap-6 px-4 lg:grid-cols-2 lg:gap-8">
+      <div className="flex h-[380px] gap-4 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm lg:p-8">
         {showThumbs ? (
-          <ul className="flex shrink-0 flex-col gap-2">
+          <ul className="flex w-16 shrink-0 flex-col gap-3">
             {thumbs.map((image, index) => (
               <li key={image.thumbKey}>
                 <button
@@ -87,19 +74,19 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
                   aria-label={`${copy.thumbPlaceholder} ${index + 1}`}
                   aria-pressed={index === activeThumb}
                   className={cn(
-                    "relative block h-12 w-12 shrink-0 cursor-pointer overflow-hidden rounded border object-cover",
+                    "relative block h-16 w-16 cursor-pointer overflow-hidden rounded-lg border-2 transition-all",
                     index === activeThumb
-                      ? "border-amber-500"
-                      : "border-gray-200",
+                      ? "border-amber-400"
+                      : "border-transparent hover:border-gray-200",
                   )}
                 >
                   <Image
                     src={image.src}
                     alt={image.alt}
                     fill
-                    sizes="48px"
+                    sizes="64px"
                     loading="lazy"
-                    className="object-cover"
+                    className="h-full w-full object-cover"
                   />
                 </button>
               </li>
@@ -107,7 +94,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
           </ul>
         ) : null}
 
-        <div className="relative flex h-full min-w-0 flex-1 items-center justify-center overflow-hidden rounded-lg p-2">
+        <div className="relative flex h-full min-w-0 flex-1 items-center justify-center overflow-hidden rounded-xl bg-white p-2">
           {activeImage?.src ? (
             <Image
               key={`${activeImage.src}-${activeThumb}`}
@@ -129,29 +116,29 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
         </div>
       </div>
 
-      <div className="flex h-[340px] flex-col justify-between rounded-xl border border-gray-100 bg-white p-5 shadow-sm md:p-6">
+      <div className="flex h-[380px] flex-col justify-between rounded-2xl border border-gray-100 bg-white p-6 shadow-sm lg:p-8">
         <div>
-          <h1 className="text-lg font-bold tracking-tight text-gray-900 uppercase">
+          <h1 className="text-xl leading-tight font-bold text-gray-900 uppercase lg:text-2xl">
             {product.name}
           </h1>
-          <p className="mt-0.5 mb-2 text-xs text-gray-400">
+          <p className="mt-1 mb-3 text-xs text-gray-400">
             {copy.skuLabel}: {product.sku}
           </p>
 
           {quickSpecs.length > 0 ? (
-            <dl className="mb-2 grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-gray-600">
+            <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-xs text-gray-700">
               {quickSpecs.map((spec) => (
                 <div
                   key={spec.label}
-                  className="flex min-w-0 items-baseline justify-between gap-2"
+                  className="flex min-w-0 items-center justify-between gap-2"
                 >
-                  <dt className="truncate">{spec.label}</dt>
-                  <dd className="shrink-0 font-semibold tabular-nums text-gray-800">
+                  <span className="truncate text-gray-500">{spec.label}</span>
+                  <span className="shrink-0 font-bold tabular-nums text-gray-900">
                     {spec.value}
-                  </dd>
+                  </span>
                 </div>
               ))}
-            </dl>
+            </div>
           ) : null}
         </div>
 
@@ -159,11 +146,11 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
           {product.priceLabel ? (
             <div className="mb-2 flex items-baseline gap-4">
               {hasDiscount ? (
-                <p className="text-sm font-bold text-gray-500 line-through">
+                <p className="text-sm font-bold text-gray-400 line-through">
                   {product.compareAtPriceLabel}
                 </p>
               ) : null}
-              <p className="text-2xl font-black tabular-nums text-red-600">
+              <p className="text-2xl font-black tabular-nums text-red-600 lg:text-3xl">
                 {product.priceLabel}
               </p>
             </div>
@@ -171,17 +158,14 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
 
           <HashLink
             href="#consultation"
-            className="flex h-11 w-full items-stretch overflow-hidden rounded bg-[#F9BC06] shadow-sm"
+            className="flex h-12 w-full items-stretch overflow-hidden rounded-lg bg-amber-400 shadow-sm transition-all hover:bg-amber-500 md:h-13"
           >
             {product.priceLabel ? (
-              <>
-                <span className="flex items-center justify-center px-4 text-base font-extrabold tabular-nums !text-red-700">
-                  {product.priceLabel}
-                </span>
-                <ChevronDivider />
-              </>
+              <span className="flex h-full shrink-0 items-center bg-amber-500 px-4 text-sm font-extrabold tabular-nums !text-red-700 [clip-path:polygon(0_0,100%_0,calc(100%-12px)_50%,100%_100%,0_100%)] md:text-base">
+                {product.priceLabel}
+              </span>
             ) : null}
-            <span className="flex flex-1 items-center justify-center text-sm font-bold text-gray-900 uppercase">
+            <span className="flex flex-1 items-center justify-center pl-2 text-xs font-bold tracking-wide text-gray-900 uppercase md:text-sm">
               {copy.buyCta}
             </span>
           </HashLink>

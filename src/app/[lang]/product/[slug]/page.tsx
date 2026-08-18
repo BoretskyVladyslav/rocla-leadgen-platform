@@ -78,8 +78,8 @@ export default async function ProductPage({
               },
             ]}
           />
-          <ProductHero product={product} copy={dict.product} />
         </div>
+        <ProductHero product={product} copy={dict.product} />
       </section>
       <ClientLogos copy={dict.clients} variant="compact" />
       <ProductTabs product={product} copy={dict.product} />

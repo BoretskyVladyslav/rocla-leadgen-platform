@@ -57,25 +57,23 @@ export function ClientLogos({
 
     return (
       <section
-        className={cn("w-full bg-[#EBEAF4] py-3", className)}
+        className={cn(
+          "w-full border-t border-b border-[#E2DCF0] bg-[#EDE9F7] py-4 lg:py-5",
+          className,
+        )}
         aria-label={copy.compactTitle}
       >
-        <div className="mx-auto flex max-w-[1200px] items-center justify-start gap-4 px-4">
-          <p className="max-w-[70px] shrink-0 text-xs leading-tight font-black text-gray-800 uppercase">
-            {headingWords.map((word, index) => (
-              <span key={`${word}-${index}`}>
-                {index > 0 ? <br /> : null}
-                {word}
-              </span>
-            ))}
+        <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-6 px-4">
+          <p className="shrink-0 text-xs font-bold whitespace-nowrap text-gray-900 uppercase md:text-sm">
+            {headingWords.join(" ")}
           </p>
-          <ul className="flex shrink-0 flex-nowrap items-center gap-2 md:gap-3">
+          <ul className="flex flex-1 items-center justify-between gap-4 opacity-75 grayscale transition-all hover:opacity-100">
             {logos.map((logo) => (
               <li key={logo.name} className="shrink-0">
                 <LogoMark
                   name={logo.name}
                   imageSrc={logo.imageSrc}
-                  className="h-8 max-h-none w-auto max-w-[120px] object-contain opacity-85 grayscale transition-opacity hover:opacity-100 md:h-10"
+                  className="h-7 max-h-none w-auto max-w-[100px] shrink-0 object-contain md:h-8"
                 />
               </li>
             ))}
