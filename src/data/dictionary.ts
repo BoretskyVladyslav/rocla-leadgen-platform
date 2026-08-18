@@ -233,11 +233,14 @@ export interface Dictionary {
       description: string;
       specifications: string;
       delivery: string;
+      readMore: string;
+      readLess: string;
     };
     deliveryBullets: string[];
     advantages: Array<{
-      id: "quality" | "delivery" | "return" | "support";
-      label: string;
+      id: "stock" | "shipping" | "payment" | "warranty";
+      title: string;
+      subtitle: string;
     }>;
     commercialOffer: {
       title: string;
@@ -709,18 +712,37 @@ const DICTIONARY_UK: Dictionary = {
     tabs: {
       description: "Опис",
       specifications: "Характеристики",
-      delivery: "Доставка",
+      delivery: "Доставка та оплата",
+      readMore: "Читати далі",
+      readLess: "Згорнути",
     },
     deliveryBullets: [
       "Доставка по Києву в день звернення після підтвердження замовлення.",
       "По Україні — від 1 дня після оплати, з повним комплектом документів.",
       "Самовивіз зі складів у Києві, Дніпрі, Харкові, Одесі та Львові.",
+      "Оплата: готівка, картка, безготівковий розрахунок з ПДВ.",
     ],
     advantages: [
-      { id: "quality", label: "Гарантія якості" },
-      { id: "delivery", label: "Швидка доставка" },
-      { id: "return", label: "Просте повернення" },
-      { id: "support", label: "Підтримка 24/7" },
+      {
+        id: "stock",
+        title: "Склад в Україні.",
+        subtitle: "Товар в наявності.",
+      },
+      {
+        id: "shipping",
+        title: "Відправка в день замовлення.",
+        subtitle: "При замовленні до 15:00.",
+      },
+      {
+        id: "payment",
+        title: "Будь-яка форма оплати.",
+        subtitle: "Безготівковий розрахунок з ПДВ.",
+      },
+      {
+        id: "warranty",
+        title: "Гарантія та сервіс.",
+        subtitle: "Підтримка 24/7.",
+      },
     ],
     commercialOffer: {
       title: "Отримати комерційну пропозицію",
@@ -1137,18 +1159,37 @@ const DICTIONARY_RU: Dictionary = {
     tabs: {
       description: "Описание",
       specifications: "Характеристики",
-      delivery: "Доставка",
+      delivery: "Доставка и оплата",
+      readMore: "Читать далее",
+      readLess: "Свернуть",
     },
     deliveryBullets: [
       "Доставка по Киеву в день обращения после подтверждения заказа.",
       "По Украине — от 1 дня после оплаты, с полным комплектом документов.",
       "Самовывоз со складов в Киеве, Днепре, Харькове, Одессе и Львове.",
+      "Оплата: наличные, карта, безналичный расчёт с НДС.",
     ],
     advantages: [
-      { id: "quality", label: "Гарантия качества" },
-      { id: "delivery", label: "Быстрая доставка" },
-      { id: "return", label: "Простой возврат" },
-      { id: "support", label: "Поддержка 24/7" },
+      {
+        id: "stock",
+        title: "Склад в Украине.",
+        subtitle: "Товар в наличии.",
+      },
+      {
+        id: "shipping",
+        title: "Отправка в день заказа.",
+        subtitle: "При заказе до 15:00.",
+      },
+      {
+        id: "payment",
+        title: "Любая форма оплаты.",
+        subtitle: "Безналичный расчёт с НДС.",
+      },
+      {
+        id: "warranty",
+        title: "Гарантия и сервис.",
+        subtitle: "Поддержка 24/7.",
+      },
     ],
     commercialOffer: {
       title: "Получить коммерческое предложение",

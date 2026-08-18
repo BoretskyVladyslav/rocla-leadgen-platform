@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { ChevronRight } from "lucide-react";
+import { useId, useState, type ReactNode } from "react";
 import type { Dictionary } from "@/data/dictionary";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/types/product";
@@ -14,6 +15,8 @@ type TabId = "description" | "specifications" | "delivery";
 
 export function ProductTabs({ product, copy }: ProductTabsProps) {
   const [active, setActive] = useState<TabId>("description");
+  const [expanded, setExpanded] = useState(false);
+  const extraId = useId();
   const paragraphs =
     product.descriptionParagraphs && product.descriptionParagraphs.length > 0
       ? product.descriptionParagraphs
@@ -23,63 +26,91 @@ export function ProductTabs({ product, copy }: ProductTabsProps) {
   const bullets = product.descriptionBullets ?? [];
   const specs = product.specs ?? [];
   const deliveryBullets = copy.deliveryBullets ?? [];
+  const preview = paragraphs[0];
+  const rest = paragraphs.slice(1);
+  const hasExtra = rest.length > 0 || bullets.length > 0;
 
   return (
-    <section className="border-t border-border bg-white py-10 md:py-14">
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
-        <div>
-          <div className="bg-neutral-100 px-2 pt-2">
-            <div
-              role="tablist"
-              aria-label={copy.specifications}
-              className="flex flex-wrap gap-1 border-b border-neutral-200"
+    <section className="pt-8">
+      <div className="mx-auto max-w-[1200px] px-4">
+        <div className="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
+          <div
+            role="tablist"
+            aria-label={copy.tabs.description}
+            className="flex overflow-x-auto bg-gray-50/70"
+          >
+            <TabButton
+              id="description"
+              active={active === "description"}
+              onClick={() => setActive("description")}
             >
-              <TabButton
-                id="description"
-                active={active === "description"}
-                onClick={() => setActive("description")}
-              >
-                {copy.tabs.description}
-              </TabButton>
-              <TabButton
-                id="specifications"
-                active={active === "specifications"}
-                onClick={() => setActive("specifications")}
-              >
-                {copy.tabs.specifications}
-              </TabButton>
-              <TabButton
-                id="delivery"
-                active={active === "delivery"}
-                onClick={() => setActive("delivery")}
-              >
-                {copy.tabs.delivery}
-              </TabButton>
-            </div>
+              {copy.tabs.description}
+            </TabButton>
+            <TabButton
+              id="specifications"
+              active={active === "specifications"}
+              onClick={() => setActive("specifications")}
+            >
+              {copy.tabs.specifications}
+            </TabButton>
+            <TabButton
+              id="delivery"
+              active={active === "delivery"}
+              onClick={() => setActive("delivery")}
+            >
+              {copy.tabs.delivery}
+            </TabButton>
+            <div className="min-w-0 flex-1 border-b border-gray-200" aria-hidden />
           </div>
 
-          <div className="border border-t-0 border-neutral-200 bg-white p-5 sm:p-7">
+          <div className="px-5 py-6 sm:px-8 sm:py-7">
             {active === "description" ? (
               <div
                 role="tabpanel"
                 id="panel-description"
                 aria-labelledby="tab-description"
-                className="flex flex-col gap-4"
               >
-                {paragraphs.map((paragraph) => (
-                  <p
-                    key={paragraph.slice(0, 48)}
-                    className="text-base leading-relaxed text-muted"
-                  >
-                    {paragraph}
+                {preview ? (
+                  <p className="text-[15px] leading-relaxed text-gray-600">
+                    {preview}
                   </p>
-                ))}
-                {bullets.length > 0 ? (
-                  <ul className="mt-2 list-disc space-y-2 pl-5 text-base text-foreground">
-                    {bullets.map((bullet) => (
-                      <li key={bullet}>{bullet}</li>
+                ) : null}
+                {hasExtra ? (
+                  <div
+                    id={extraId}
+                    className={cn("mt-4 space-y-4", expanded ? "block" : "hidden")}
+                    hidden={!expanded}
+                  >
+                    {rest.map((paragraph) => (
+                      <p
+                        key={paragraph.slice(0, 48)}
+                        className="text-[15px] leading-relaxed text-gray-600"
+                      >
+                        {paragraph}
+                      </p>
                     ))}
-                  </ul>
+                    {bullets.length > 0 ? (
+                      <ul className="list-disc space-y-2 pl-5 text-[15px] text-gray-800">
+                        {bullets.map((bullet) => (
+                          <li key={bullet}>{bullet}</li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </div>
+                ) : null}
+                {hasExtra ? (
+                  <button
+                    type="button"
+                    className="mt-4 inline-flex cursor-pointer items-center gap-1 text-sm font-semibold text-[#0284c7] hover:underline"
+                    aria-expanded={expanded}
+                    aria-controls={extraId}
+                    onClick={() => setExpanded((prev) => !prev)}
+                  >
+                    {expanded ? copy.tabs.readLess : copy.tabs.readMore}
+                    {expanded ? null : (
+                      <ChevronRight className="h-3.5 w-3.5" aria-hidden />
+                    )}
+                  </button>
                 ) : null}
               </div>
             ) : null}
@@ -95,17 +126,17 @@ export function ProductTabs({ product, copy }: ProductTabsProps) {
                     {specs.map((spec) => (
                       <div
                         key={spec.label}
-                        className="grid grid-cols-[1fr_auto] gap-4 border-b border-border px-2 py-3 text-sm odd:bg-neutral-50"
+                        className="grid grid-cols-[1fr_auto] gap-4 border-b border-gray-100 px-2 py-3 text-sm odd:bg-gray-50"
                       >
-                        <dt className="font-medium text-muted">{spec.label}</dt>
-                        <dd className="text-right font-semibold tabular-nums text-foreground">
+                        <dt className="font-medium text-gray-500">{spec.label}</dt>
+                        <dd className="text-right font-semibold tabular-nums text-gray-900">
                           {spec.value}
                         </dd>
                       </div>
                     ))}
                   </dl>
                 ) : (
-                  <p className="text-sm text-muted">{copy.imagePlaceholder}</p>
+                  <p className="text-sm text-gray-500">{copy.imagePlaceholder}</p>
                 )}
               </div>
             ) : null}
@@ -117,15 +148,13 @@ export function ProductTabs({ product, copy }: ProductTabsProps) {
                 aria-labelledby="tab-delivery"
               >
                 {deliveryBullets.length > 0 ? (
-                  <ul className="list-disc space-y-2 pl-5 text-base text-foreground">
+                  <ul className="list-disc space-y-2 pl-5 text-[15px] text-gray-800">
                     {deliveryBullets.map((bullet) => (
                       <li key={bullet}>{bullet}</li>
                     ))}
                   </ul>
                 ) : (
-                  <p className="text-sm text-muted">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </p>
+                  <p className="text-sm text-gray-500">{copy.imagePlaceholder}</p>
                 )}
               </div>
             ) : null}
@@ -156,10 +185,10 @@ function TabButton({
       aria-controls={`panel-${id}`}
       onClick={onClick}
       className={cn(
-        "-mb-px px-4 py-3 text-sm font-bold uppercase tracking-wide transition-colors",
+        "shrink-0 whitespace-nowrap border-r border-gray-200 px-5 py-3 text-sm uppercase tracking-wide transition-colors",
         active
-          ? "rounded-t-md border border-b-0 border-neutral-200 bg-white text-heading"
-          : "rounded-t-md border border-transparent bg-transparent text-muted hover:text-heading",
+          ? "bg-white font-bold text-gray-900"
+          : "border-b border-gray-200 bg-transparent font-medium text-gray-600 hover:text-gray-900",
       )}
     >
       {children}
