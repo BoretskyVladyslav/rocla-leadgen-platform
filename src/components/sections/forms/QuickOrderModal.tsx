@@ -24,7 +24,6 @@ import {
   validateLeadFields,
   type LeadFieldErrors,
 } from "@/lib/validation";
-import { cn } from "@/lib/utils";
 import {
   ACCEPTED_UPLOAD_ACCEPT,
   MAX_UPLOAD_BYTES,
@@ -39,6 +38,11 @@ export interface QuickOrderModalProps {
   copy: Dictionary["product"]["quickOrder"];
   product: Product;
 }
+
+const CATALOG_ISOLATED_SRC = "/images/catalog/gidravlicheskie-telezhki.jpg";
+
+const fieldClassName =
+  "h-10 rounded-md border border-gray-300 px-3 py-2 text-sm shadow-none focus:border-gray-400 focus:ring-0 focus-visible:border-gray-400 focus-visible:ring-0";
 
 type OrderErrors = LeadFieldErrors & { file?: string };
 
@@ -82,11 +86,9 @@ function toFilePayload(file: File): FilePayload {
 }
 
 function productGallery(product: Product): ProductImage[] {
-  if (product.images?.length) return product.images;
-  if (product.imageSrc) {
-    return [{ src: product.imageSrc, alt: product.imageAlt ?? product.name }];
-  }
-  return [];
+  return [
+    { src: CATALOG_ISOLATED_SRC, alt: product.name },
+  ];
 }
 
 export function QuickOrderModal({
@@ -104,7 +106,6 @@ export function QuickOrderModal({
     product.sku,
     copy.skuLabel,
   );
-  const [activeThumb, setActiveThumb] = useState(0);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -112,8 +113,7 @@ export function QuickOrderModal({
   const [errors, setErrors] = useState<OrderErrors>({});
   const [status, setStatus] = useState<"idle" | "success">("idle");
 
-  const activeImage =
-    gallery.length > 0 ? gallery[activeThumb % gallery.length] : undefined;
+  const activeImage = gallery[0];
   const specsHeading = copy.specsHeading.replace("{name}", product.name);
 
   const resetAndClose = useCallback(() => {
@@ -123,7 +123,6 @@ export function QuickOrderModal({
     setRawFile(null);
     setErrors({});
     setStatus("idle");
-    setActiveThumb(0);
     if (fileInputRef.current) fileInputRef.current.value = "";
     onClose();
   }, [onClose]);
@@ -254,20 +253,20 @@ export function QuickOrderModal({
           <>
             <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-2">
               <div>
-                <div className="relative overflow-hidden rounded-lg border border-gray-100 bg-white">
+                <div className="relative w-full bg-white">
                   {activeImage?.src ? (
-                    <div className="relative aspect-[4/3] w-full">
+                    <div className="relative h-[260px] w-full">
                       <Image
                         key={activeImage.src}
                         src={activeImage.src}
                         alt={activeImage.alt ?? product.name}
                         fill
                         sizes="(max-width: 768px) 100vw, 28rem"
-                        className="object-contain p-4"
+                        className="object-contain object-center"
                       />
                     </div>
                   ) : (
-                    <div className="flex aspect-[4/3] items-center justify-center bg-gray-50 text-sm text-gray-400">
+                    <div className="flex h-[260px] w-full items-center justify-center text-sm text-gray-400">
                       {product.name}
                     </div>
                   )}
@@ -275,43 +274,16 @@ export function QuickOrderModal({
                     {copy.hitBadge}
                   </span>
                 </div>
-                {gallery.length > 1 ? (
-                  <ul className="mt-3 flex flex-wrap gap-2">
-                    {gallery.map((image, index) => (
-                      <li key={`${image.src}-${index}`}>
-                        <button
-                          type="button"
-                          onClick={() => setActiveThumb(index)}
-                          aria-label={`${product.name} ${index + 1}`}
-                          aria-pressed={index === activeThumb}
-                          className={cn(
-                            "relative h-16 w-16 overflow-hidden rounded-md border-2 bg-white",
-                            index === activeThumb
-                              ? "border-amber-400"
-                              : "border-gray-200 hover:border-gray-300",
-                          )}
-                        >
-                          <Image
-                            src={image.src}
-                            alt=""
-                            fill
-                            sizes="64px"
-                            className="object-contain p-1"
-                          />
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                ) : gallery.length === 1 ? (
+                {gallery[0] ? (
                   <ul className="mt-3 flex gap-2">
                     <li>
-                      <div className="relative h-16 w-16 overflow-hidden rounded-md border-2 border-amber-400 bg-white">
+                      <div className="relative h-16 w-16 overflow-hidden rounded-md border border-gray-200 bg-white">
                         <Image
                           src={gallery[0].src}
                           alt=""
                           fill
                           sizes="64px"
-                          className="object-contain p-1"
+                          className="object-contain object-center p-1"
                         />
                       </div>
                     </li>
@@ -352,21 +324,23 @@ export function QuickOrderModal({
                 </dl>
 
                 {product.priceLabel ? (
-                  <div className="mt-5 flex flex-wrap items-baseline gap-3">
-                    <span className="text-sm text-gray-700">{copy.priceLabel}</span>
+                  <div className="mt-5 flex flex-wrap items-baseline">
+                    <span className="mr-3 text-sm text-gray-700">
+                      {copy.priceLabel}
+                    </span>
                     {product.compareAtPriceLabel ? (
-                      <span className="text-sm font-medium text-gray-400 line-through">
+                      <span className="mr-3 text-sm text-gray-500 line-through">
                         {product.compareAtPriceLabel}
                       </span>
                     ) : null}
-                    <span className="text-xl font-bold tabular-nums text-red-700">
+                    <span className="text-xl font-bold tabular-nums text-red-600">
                       {product.priceLabel}
                     </span>
                   </div>
                 ) : null}
 
                 {product.summary ? (
-                  <p className="mt-4 border-y border-gray-200 py-3 text-sm leading-relaxed text-gray-600">
+                  <p className="mt-4 border-t border-gray-200 pt-3 text-sm leading-relaxed text-gray-600">
                     {product.summary}
                   </p>
                 ) : null}
@@ -390,6 +364,7 @@ export function QuickOrderModal({
                   error={errors.fullName}
                   onBlur={handleBlur}
                   onChange={(e) => setFullName(e.target.value)}
+                  className={fieldClassName}
                 />
                 <Input
                   id="quick-order-email"
@@ -403,6 +378,7 @@ export function QuickOrderModal({
                   error={errors.email}
                   onBlur={handleBlur}
                   onChange={(e) => setEmail(e.target.value)}
+                  className={fieldClassName}
                 />
                 <PhoneInput
                   id="quick-order-phone"
@@ -414,10 +390,11 @@ export function QuickOrderModal({
                   error={errors.phone}
                   onBlur={handleBlur}
                   onValueChange={setPhone}
+                  className="h-10 rounded-md border-gray-300 shadow-none focus-within:border-gray-400 focus-within:ring-0"
                 />
               </div>
               <div className="mt-4 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-                <div className="min-w-0 flex-1">
+                <div className="flex min-w-0 flex-1 flex-col gap-1">
                   <label
                     htmlFor={fileInputId}
                     className="text-sm font-medium text-gray-700"
@@ -431,18 +408,16 @@ export function QuickOrderModal({
                     type="file"
                     accept={ACCEPTED_UPLOAD_ACCEPT}
                     onChange={handleFileChange}
-                    className="mt-1 block w-full text-sm text-gray-600 file:mr-3 file:rounded-md file:border file:border-gray-300 file:bg-white file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-gray-800"
+                    className="block w-full text-sm text-gray-600 file:mr-3 file:rounded-md file:border file:border-gray-300 file:bg-white file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-gray-800"
                   />
                   {errors.file ? (
-                    <span className="mt-1 block text-xs text-red-600">
-                      {errors.file}
-                    </span>
+                    <span className="text-xs text-red-600">{errors.file}</span>
                   ) : null}
                 </div>
                 <Button
                   type="submit"
                   size="lg"
-                  className="h-12 w-full shrink-0 bg-amber-400 px-10 font-bold tracking-wide text-gray-900 uppercase shadow-none hover:bg-amber-400 hover:opacity-90 md:w-auto"
+                  className="w-full shrink-0 rounded-md bg-[#F9BC06] px-10 py-3 font-bold tracking-wider text-black uppercase shadow-none hover:bg-[#e5ac05] md:w-auto"
                 >
                   {copy.submit}
                 </Button>
