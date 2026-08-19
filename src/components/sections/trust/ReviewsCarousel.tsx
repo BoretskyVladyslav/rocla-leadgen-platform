@@ -8,6 +8,7 @@ import {
   staggerItem,
 } from "@/components/motion/variants";
 import { MediaImage } from "@/components/ui/MediaImage";
+import { Button } from "@/components/ui/Button";
 import type { Dictionary } from "@/data/dictionary";
 import { useCarouselTrack } from "@/hooks/useCarouselTrack";
 import { cn } from "@/lib/utils";
@@ -45,14 +46,22 @@ export function ReviewsCarousel({ copy, className }: ReviewsCarouselProps) {
   });
 
   return (
-    <section id="reviews" className={cn("scroll-mt-20 bg-[#F5F5F5] py-10 md:py-14", className)}>
-      <div className={PAGE_CONTAINER}>
+    <section id="reviews" className={cn("scroll-mt-20 bg-[#F5F5F5] py-10 md:py-14 xl:py-[16px]", className)}>
+      <div className={`${PAGE_CONTAINER} xl:px-[68px]`}>
         <ScrollReveal>
-          <div className="mb-8 flex flex-row items-end justify-between gap-4">
+          <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <h2 className="text-left text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">
               {copy.title}
             </h2>
-            <div className="flex shrink-0 items-center gap-2">
+            <div className="flex shrink-0 items-center gap-3">
+              <Button
+                type="button"
+                size="md"
+                className="h-11 px-5 text-xs sm:text-sm"
+                onClick={() => console.info("submit-review")}
+              >
+                {copy.submitCta}
+              </Button>
               <button
                 type="button"
                 aria-label={copy.prevLabel}

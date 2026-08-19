@@ -131,6 +131,7 @@ export interface Dictionary {
     title: string;
     prevLabel: string;
     nextLabel: string;
+    submitCta: string;
     items: Array<{
       id: string;
       company: string;
@@ -652,6 +653,7 @@ const DICTIONARY_UK: Dictionary = {
     title: "Відгуки наших клієнтів",
     prevLabel: "Попередній відгук",
     nextLabel: "Наступний відгук",
+    submitCta: "Надіслати відгук",
     items: getReviews("uk"),
   },
   videos: {
@@ -1130,6 +1132,7 @@ const DICTIONARY_RU: Dictionary = {
     title: "Отзывы наших клиентов",
     prevLabel: "Предыдущий отзыв",
     nextLabel: "Следующий отзыв",
+    submitCta: "Отправить отзыв",
     items: getReviews("ru"),
   },
   videos: {

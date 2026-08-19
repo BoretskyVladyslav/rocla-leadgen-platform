@@ -16,8 +16,8 @@ const CARD_CLASS =
 
 export function PdpFaqOffer({ lang, faq, offer }: PdpFaqOfferProps) {
   return (
-    <section className="bg-[#F2F7FA] py-10 md:py-14">
-      <div className={`${PAGE_CONTAINER} grid items-stretch gap-8 lg:grid-cols-2`}>
+    <section className="bg-[#F2F7FA] py-10 md:py-14 xl:py-[22px]">
+      <div className={`${PAGE_CONTAINER} grid items-stretch gap-8 xl:px-[68px] lg:grid-cols-2`}>
         <div className={CARD_CLASS}>
           <FaqAccordion copy={faq} embedded />
           <HashLink

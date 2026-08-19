@@ -78,7 +78,7 @@ export function RelatedProductsCarousel({
   if (products.length === 0) return null;
 
   return (
-    <section id="related" className="scroll-mt-20 bg-amber-50/30 py-10 md:py-14">
+    <section id="related" className="scroll-mt-20 bg-amber-50/30 py-10 md:py-14 xl:pt-[18px] xl:pb-[68px]">
       <div className={PAGE_CONTAINER}>
         <ScrollReveal>
           <div className="mb-8 flex flex-row items-end justify-between gap-4">
@@ -128,10 +128,10 @@ export function RelatedProductsCarousel({
                 variants={staggerItem}
                 className={cn(
                   "flex h-auto self-stretch",
-                  "w-[min(100%,17.5rem)] shrink-0 snap-start",
-                  "sm:w-[calc(50%-0.625rem)]",
-                  "lg:w-[calc((100%-3.75rem)/3)]",
-                  "xl:w-[calc((100%-5rem)/4)]",
+                  "w-full min-w-0 shrink-0 snap-start",
+                  "sm:w-[calc((100%-1.25rem)/2)]",
+                  "lg:w-[calc((100%-2.5rem)/3)]",
+                  "xl:w-[calc((100%-3.75rem)/4)]",
                 )}
               >
                 <motion.article

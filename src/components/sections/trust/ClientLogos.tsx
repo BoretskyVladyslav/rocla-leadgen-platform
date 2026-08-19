@@ -60,7 +60,7 @@ export function ClientLogos({
 
     return (
       <section
-        className={cn("w-full bg-white py-6", className)}
+        className={cn("w-full bg-white py-6 xl:py-[35px]", className)}
         aria-label={copy.compactTitle}
       >
         <div className={`${PAGE_CONTAINER} flex items-center justify-between gap-8`}>

@@ -24,7 +24,7 @@ const ICONS: Record<
 
 export function ProductAdvantages({ copy }: ProductAdvantagesProps) {
   return (
-    <section className="border-t border-[#E8DCC0]/50 bg-gradient-to-b from-[#F7F1E3] via-[#FBF8F1] to-white py-10 md:py-14">
+    <section className="border-t border-[#E8DCC0]/50 bg-gradient-to-b from-[#F7F1E3] via-[#FBF8F1] to-white py-10 md:py-14 xl:py-[37px]">
       <ul className={`${PAGE_CONTAINER} grid grid-cols-1 gap-x-6 gap-y-7 sm:grid-cols-2 lg:grid-cols-4`}>
         {copy.map((item) => {
           const Icon = ICONS[item.id];

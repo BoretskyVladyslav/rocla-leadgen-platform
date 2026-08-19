@@ -97,8 +97,8 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
   }
 
   return (
-    <section className={cn("w-full bg-white py-10 md:py-14", className)}>
-      <div className="relative w-full overflow-hidden">
+    <section className={cn("w-full bg-white", className)}>
+      <div className="relative w-full overflow-hidden py-10 md:py-14">
         <div
           className="pointer-events-none absolute inset-y-0 left-0 z-0 hidden w-[22%] md:block lg:w-[24%]"
           aria-hidden
@@ -206,7 +206,7 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
           </ScrollReveal>
         </div>
       </div>
-      <ul className={`${PAGE_CONTAINER} mt-1 grid grid-cols-2 gap-6 border-t border-gray-100 pt-4 pb-2 md:grid-cols-3 lg:grid-cols-5`}>
+      <ul className={`${PAGE_CONTAINER} mt-1 grid grid-cols-2 gap-6 border-t border-gray-100 pt-4 pb-2 md:grid-cols-3 lg:grid-cols-5 xl:px-[68px] xl:py-[21px]`}>
         {copy.trustFactors.map((item) => {
           const Icon = TRUST_ICONS[item.id];
           return (

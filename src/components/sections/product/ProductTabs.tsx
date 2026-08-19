@@ -32,7 +32,7 @@ export function ProductTabs({ product, copy }: ProductTabsProps) {
   const hasExtra = rest.length > 0 || bullets.length > 0;
 
   return (
-    <section className="py-10 md:py-14">
+    <section className="py-10 md:py-14 xl:pt-[30px] xl:pb-[22px]">
       <div className={PAGE_CONTAINER}>
         <div
           role="tablist"
