@@ -189,7 +189,25 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
               <p className="mt-2 text-xs font-bold tracking-wider text-neutral-400 uppercase">
                 {copy.partnersTitle}
               </p>
-              <ul className="mt-3 flex w-full flex-nowrap items-center justify-center gap-4 overflow-x-auto sm:gap-6">
+              <div className="mt-3 w-full overflow-hidden md:hidden">
+                <ul
+                  className="logo-marquee flex w-max items-center gap-6 py-1"
+                  aria-hidden
+                >
+                  {[...copy.partners, ...copy.partners].map((partner, index) => (
+                    <li
+                      key={`${partner.name}-${index}`}
+                      className="flex h-7 shrink-0 items-center justify-center"
+                    >
+                      <PartnerLogo
+                        name={partner.name}
+                        imageSrc={partner.imageSrc}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <ul className="mt-3 hidden w-full flex-nowrap items-center justify-center gap-6 md:flex">
                 {copy.partners.map((partner) => (
                   <li
                     key={partner.name}
