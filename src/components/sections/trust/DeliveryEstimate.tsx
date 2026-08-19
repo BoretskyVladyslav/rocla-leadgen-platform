@@ -128,7 +128,7 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
 
         <div className={`${PAGE_CONTAINER} relative z-10`}>
           <ScrollReveal>
-            <div className="mx-auto flex max-w-3xl flex-col items-center px-6 pt-10 pb-6 text-center sm:px-10 sm:pt-12 sm:pb-6 md:px-16">
+            <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-0 pt-8 pb-6 text-center sm:px-10 sm:pt-12 sm:pb-6 md:px-16">
               <h2 className="text-2xl font-extrabold tracking-wide text-neutral-900 uppercase sm:text-3xl">
                 {copy.title}
               </h2>

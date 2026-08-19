@@ -63,8 +63,8 @@ export function ClientLogos({
         className={cn("w-full bg-white py-6 xl:py-[35px]", className)}
         aria-label={copy.compactTitle}
       >
-        <div className={`${PAGE_CONTAINER} flex items-center justify-between gap-8`}>
-          <p className="shrink-0 text-lg leading-tight font-bold text-gray-900 lg:text-xl">
+        <div className={`${PAGE_CONTAINER} flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-8`}>
+          <p className="shrink-0 text-base leading-tight font-bold text-gray-900 md:text-lg lg:text-xl">
             {headingWords.map((word, index) => (
               <span key={`${word}-${index}`}>
                 {index > 0 ? <br /> : null}
@@ -72,13 +72,13 @@ export function ClientLogos({
               </span>
             ))}
           </p>
-          <ul className="flex min-w-0 flex-1 items-center justify-between gap-6">
+          <ul className="flex min-w-0 items-center gap-4 overflow-x-auto pb-1 md:flex-1 md:justify-between md:gap-6 md:overflow-visible md:pb-0">
             {logos.map((logo) => (
               <li key={logo.name} className="shrink-0">
                 <LogoMark
                   name={logo.name}
                   imageSrc={logo.imageSrc}
-                  className="h-12 w-auto max-h-none max-w-[168px] shrink-0 object-contain opacity-80 grayscale mix-blend-multiply transition-[filter,opacity] hover:opacity-100 hover:grayscale-0 md:h-16"
+                  className="h-8 w-auto max-h-none max-w-[120px] shrink-0 object-contain opacity-80 grayscale mix-blend-multiply transition-[filter,opacity] hover:opacity-100 hover:grayscale-0 md:h-12 md:max-w-[168px] lg:h-16"
                 />
               </li>
             ))}

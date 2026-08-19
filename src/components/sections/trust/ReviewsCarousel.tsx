@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { motion } from "framer-motion";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import {
@@ -9,6 +9,7 @@ import {
 } from "@/components/motion/variants";
 import { MediaImage } from "@/components/ui/MediaImage";
 import { Button } from "@/components/ui/Button";
+import { ReviewSubmitModal } from "@/components/sections/trust/ReviewSubmitModal";
 import type { Dictionary } from "@/data/dictionary";
 import { useCarouselTrack } from "@/hooks/useCarouselTrack";
 import { cn } from "@/lib/utils";
@@ -23,6 +24,7 @@ type ReviewItem = Dictionary["reviews"]["items"][number];
 
 export function ReviewsCarousel({ copy, className }: ReviewsCarouselProps) {
   const items = copy.items;
+  const [modalOpen, setModalOpen] = useState(false);
   const getKey = useCallback(
     (item: ReviewItem) => item.id,
     [],
@@ -49,19 +51,11 @@ export function ReviewsCarousel({ copy, className }: ReviewsCarouselProps) {
     <section id="reviews" className={cn("scroll-mt-20 bg-[#F5F5F5] py-10 md:py-14 xl:py-[16px]", className)}>
       <div className={`${PAGE_CONTAINER} xl:px-[68px]`}>
         <ScrollReveal>
-          <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="mb-6 flex flex-row items-end justify-between gap-4 md:mb-8">
             <h2 className="text-left text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">
               {copy.title}
             </h2>
-            <div className="flex shrink-0 items-center gap-3">
-              <Button
-                type="button"
-                size="md"
-                className="h-11 px-5 text-xs sm:text-sm"
-                onClick={() => console.info("submit-review")}
-              >
-                {copy.submitCta}
-              </Button>
+            <div className="flex shrink-0 items-center gap-2">
               <button
                 type="button"
                 aria-label={copy.prevLabel}
@@ -97,7 +91,7 @@ export function ReviewsCarousel({ copy, className }: ReviewsCarouselProps) {
               data-review-card
               variants={staggerItem}
               className={cn(
-                "w-[min(100%,20rem)] shrink-0 snap-start",
+                "w-[82%] shrink-0 snap-start",
                 "sm:w-[calc(50%-0.75rem)]",
                 "lg:w-[calc((100%-3rem)/3)]",
               )}
@@ -125,7 +119,23 @@ export function ReviewsCarousel({ copy, className }: ReviewsCarouselProps) {
             />
           ))}
         </div>
+
+        <div className="mx-auto mt-8 flex justify-center">
+          <Button
+            type="button"
+            size="lg"
+            onClick={() => setModalOpen(true)}
+          >
+            {copy.submitCta}
+          </Button>
+        </div>
       </div>
+
+      <ReviewSubmitModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        copy={copy}
+      />
     </section>
   );
 }
@@ -167,7 +177,7 @@ function ReviewCard({
         fit="cover"
         objectPosition="object-top"
         sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 400px"
-        className="mt-auto h-80 w-full rounded-xl bg-neutral-100 [&_img]:transition-transform [&_img]:duration-300 hover:[&_img]:scale-105"
+        className="mt-auto h-52 w-full rounded-xl bg-neutral-100 sm:h-80 [&_img]:transition-transform [&_img]:duration-300 hover:[&_img]:scale-105"
       />
     </article>
   );

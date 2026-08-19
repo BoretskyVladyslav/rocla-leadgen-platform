@@ -12,7 +12,7 @@ export interface PdpFaqOfferProps {
 }
 
 const CARD_CLASS =
-  "bg-white rounded-2xl p-6 md:p-8 border border-gray-200 shadow-sm h-full flex flex-col justify-between";
+  "bg-white rounded-2xl p-4 md:p-6 xl:p-8 border border-gray-200 shadow-sm h-full flex flex-col justify-between";
 
 export function PdpFaqOffer({ lang, faq, offer }: PdpFaqOfferProps) {
   return (

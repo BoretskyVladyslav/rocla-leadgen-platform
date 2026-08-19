@@ -128,7 +128,7 @@ export function RelatedProductsCarousel({
                 variants={staggerItem}
                 className={cn(
                   "flex h-auto self-stretch",
-                  "w-full min-w-0 shrink-0 snap-start",
+                  "w-[82%] min-w-0 shrink-0 snap-start",
                   "sm:w-[calc((100%-1.25rem)/2)]",
                   "lg:w-[calc((100%-2.5rem)/3)]",
                   "xl:w-[calc((100%-3.75rem)/4)]",

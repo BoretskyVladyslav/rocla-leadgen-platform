@@ -84,7 +84,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
 
   return (
     <div className={`${PAGE_CONTAINER} grid grid-cols-1 items-stretch gap-4 lg:grid-cols-2`}>
-      <div className="flex h-[380px] gap-2 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+      <div className="flex h-[300px] gap-2 rounded-2xl border border-gray-200 bg-white p-3 shadow-sm sm:h-[380px] sm:p-4">
         {showThumbs ? (
           <ul className="flex w-14 shrink-0 flex-col gap-1.5">
             {thumbs.map((image, index) => (
@@ -139,7 +139,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
         </div>
       </div>
 
-      <div className="flex h-[380px] flex-col justify-between rounded-2xl border border-gray-200 bg-white p-5 shadow-sm lg:p-6">
+      <div className="flex h-auto flex-col justify-between rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:h-[380px] sm:p-5 lg:p-6">
         <div>
           <h1 className="text-xl leading-tight font-bold text-gray-900 uppercase lg:text-2xl">
             {product.name}

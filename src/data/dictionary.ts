@@ -132,6 +132,18 @@ export interface Dictionary {
     prevLabel: string;
     nextLabel: string;
     submitCta: string;
+    modalTitle: string;
+    modalName: string;
+    modalPhone: string;
+    modalMessage: string;
+    modalSubmit: string;
+    modalSuccess: string;
+    modalClose: string;
+    errors: {
+      fullName: string;
+      phone: string;
+      message: string;
+    };
     items: Array<{
       id: string;
       company: string;
@@ -654,6 +666,18 @@ const DICTIONARY_UK: Dictionary = {
     prevLabel: "Попередній відгук",
     nextLabel: "Наступний відгук",
     submitCta: "Надіслати відгук",
+    modalTitle: "Залишити відгук",
+    modalName: "Ім’я",
+    modalPhone: "Телефон",
+    modalMessage: "Ваш відгук",
+    modalSubmit: "Надіслати",
+    modalSuccess: "Дякуємо! Відгук надіслано.",
+    modalClose: "Закрити",
+    errors: {
+      fullName: "Вкажіть ім’я (мінімум 2 символи).",
+      phone: "Вкажіть коректний номер телефону.",
+      message: "Напишіть відгук.",
+    },
     items: getReviews("uk"),
   },
   videos: {
@@ -1133,6 +1157,18 @@ const DICTIONARY_RU: Dictionary = {
     prevLabel: "Предыдущий отзыв",
     nextLabel: "Следующий отзыв",
     submitCta: "Отправить отзыв",
+    modalTitle: "Оставить отзыв",
+    modalName: "Имя",
+    modalPhone: "Телефон",
+    modalMessage: "Ваш отзыв",
+    modalSubmit: "Отправить",
+    modalSuccess: "Спасибо! Отзыв отправлен.",
+    modalClose: "Закрыть",
+    errors: {
+      fullName: "Укажите имя (минимум 2 символа).",
+      phone: "Укажите корректный номер телефона.",
+      message: "Напишите отзыв.",
+    },
     items: getReviews("ru"),
   },
   videos: {

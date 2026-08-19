@@ -30,15 +30,15 @@ export function VideoReviews({ copy, className }: VideoReviewsProps) {
           </div>
         </ScrollReveal>
 
-        <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:pb-0 lg:grid-cols-4 [&::-webkit-scrollbar]:hidden">
           {copy.items.map((item, index) => (
-            <li key={item.title} className="flex justify-center">
+            <li key={item.title} className="w-[72%] shrink-0 snap-start sm:flex sm:w-full sm:justify-center">
               <ScrollReveal delay={index * 0.05} className="w-full max-w-[240px]">
                 <a
                   href={copy.youtubeHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative mx-auto block aspect-[9/16] min-h-[380px] max-w-[240px] overflow-hidden rounded-2xl border border-gray-200 bg-dark shadow-sm transition-all duration-300 hover:shadow-md"
+                  className="group relative mx-auto block aspect-[9/16] min-h-[320px] max-w-[240px] overflow-hidden rounded-2xl border border-gray-200 bg-dark shadow-sm transition-all duration-300 hover:shadow-md sm:min-h-[380px]"
                 >
                   <MediaImage
                     src={item.imageSrc}
