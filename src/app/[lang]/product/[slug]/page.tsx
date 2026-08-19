@@ -94,7 +94,7 @@ export default async function ProductPage({
       <DeliveryEstimate copy={dict.delivery} />
       <VideoReviews copy={dict.videos} />
       <ReviewsCarousel copy={dict.reviews} />
-      <PdpFaqOffer faq={dict.faq} offer={dict.product.commercialOffer} />
+      <PdpFaqOffer lang={lang} faq={dict.faq} offer={dict.product.commercialOffer} />
       <SeoTextAccordion copy={dict.seoText} />
     </>
   );

@@ -13,7 +13,7 @@ const CARD_CLASS =
 
 export function HomepageFaqOffer({ faq, offer }: HomepageFaqOfferProps) {
   return (
-    <section className="bg-[#F2F7FA] py-10 md:py-14">
+    <section id="faq" className="scroll-mt-20 bg-[#F2F7FA] py-10 md:py-14">
       <div className={`${PAGE_CONTAINER} grid grid-cols-1 items-stretch gap-8 lg:grid-cols-2`}>
         <div className={CARD_CLASS}>
           <FaqAccordion copy={faq} embedded />

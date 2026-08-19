@@ -155,6 +155,7 @@ export interface Dictionary {
   };
   faq: {
     title: string;
+    seeAll: string;
     items: Array<{ id?: string; question: string; answer: string }>;
   };
   leadForm: {
@@ -688,6 +689,7 @@ const DICTIONARY_UK: Dictionary = {
   },
   faq: {
     title: "Часті запитання",
+    seeAll: "Дивитися всі питання",
     items: getFaq("uk"),
   },
   leadForm: {
@@ -1165,6 +1167,7 @@ const DICTIONARY_RU: Dictionary = {
   },
   faq: {
     title: "Часто задаваемые вопросы",
+    seeAll: "Смотреть все вопросы",
     items: getFaq("ru"),
   },
   leadForm: {

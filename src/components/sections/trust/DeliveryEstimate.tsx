@@ -98,37 +98,37 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
 
   return (
     <section className={cn("w-full bg-white py-10 md:py-14", className)}>
-      <div className={PAGE_CONTAINER}>
-        <ScrollReveal>
-          <div className="relative overflow-hidden">
-            <div
-              className="pointer-events-none absolute bottom-0 left-0 z-0 hidden h-full w-[22%] md:block lg:w-[24%]"
-              aria-hidden
-            >
-              <Image
-                src="/images/delivery/boxes-left.jpg"
-                alt=""
-                fill
-                sizes="(min-width: 1280px) 280px, (min-width: 768px) 200px, 0px"
-                loading="lazy"
-                className="max-h-none max-w-none object-contain object-left-bottom"
-              />
-            </div>
-            <div
-              className="pointer-events-none absolute right-0 bottom-0 z-0 hidden h-full w-[22%] md:block lg:w-[24%]"
-              aria-hidden
-            >
-              <Image
-                src="/images/delivery/boxes-right.jpg"
-                alt=""
-                fill
-                sizes="(min-width: 1280px) 280px, (min-width: 768px) 200px, 0px"
-                loading="lazy"
-                className="max-h-none max-w-none object-contain object-right-bottom"
-              />
-            </div>
+      <div className="relative w-full overflow-hidden">
+        <div
+          className="pointer-events-none absolute inset-y-0 left-0 z-0 hidden w-[22%] md:block lg:w-[24%]"
+          aria-hidden
+        >
+          <Image
+            src="/images/delivery/boxes-left.jpg"
+            alt=""
+            fill
+            sizes="(min-width: 1280px) 280px, (min-width: 768px) 200px, 0px"
+            loading="lazy"
+            className="max-h-none max-w-none object-contain object-left-bottom"
+          />
+        </div>
+        <div
+          className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-[22%] md:block lg:w-[24%]"
+          aria-hidden
+        >
+          <Image
+            src="/images/delivery/boxes-right.jpg"
+            alt=""
+            fill
+            sizes="(min-width: 1280px) 280px, (min-width: 768px) 200px, 0px"
+            loading="lazy"
+            className="max-h-none max-w-none object-contain object-right-bottom"
+          />
+        </div>
 
-            <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-6 pt-10 pb-6 text-center sm:px-10 sm:pt-12 sm:pb-6 md:px-16">
+        <div className={`${PAGE_CONTAINER} relative z-10`}>
+          <ScrollReveal>
+            <div className="mx-auto flex max-w-3xl flex-col items-center px-6 pt-10 pb-6 text-center sm:px-10 sm:pt-12 sm:pb-6 md:px-16">
               <h2 className="text-2xl font-extrabold tracking-wide text-neutral-900 uppercase sm:text-3xl">
                 {copy.title}
               </h2>
@@ -203,8 +203,8 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
                 ))}
               </ul>
             </div>
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
+        </div>
       </div>
       <ul className={`${PAGE_CONTAINER} mt-1 grid grid-cols-2 gap-6 border-t border-gray-100 pt-4 pb-2 md:grid-cols-3 lg:grid-cols-5`}>
         {copy.trustFactors.map((item) => {

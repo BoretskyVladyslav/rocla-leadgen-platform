@@ -108,7 +108,7 @@ export function RelatedProductsCarousel({
 
         <motion.ul
           ref={trackRef}
-          className={cn("will-change-transform", trackClassName)}
+          className={cn("items-stretch will-change-transform", trackClassName)}
           variants={staggerContainer}
           initial="hidden"
           whileInView="show"
@@ -127,6 +127,7 @@ export function RelatedProductsCarousel({
                 data-related-card
                 variants={staggerItem}
                 className={cn(
+                  "flex h-auto self-stretch",
                   "w-[min(100%,17.5rem)] shrink-0 snap-start",
                   "sm:w-[calc(50%-0.625rem)]",
                   "lg:w-[calc((100%-3.75rem)/3)]",
@@ -135,14 +136,14 @@ export function RelatedProductsCarousel({
               >
                 <motion.article
                   className={cn(
-                    "flex h-full flex-col overflow-hidden",
+                    "flex h-full w-full flex-col overflow-hidden",
                     cardHoverClassName,
                   )}
                   {...cardHover}
                 >
                   <Link
                     href={href}
-                    className="block overflow-hidden rounded-t-2xl rounded-b-none bg-white"
+                    className="block shrink-0 overflow-hidden rounded-t-2xl rounded-b-none bg-white"
                     draggable={false}
                   >
                     <MediaImage
@@ -154,36 +155,30 @@ export function RelatedProductsCarousel({
                       className="h-full w-full rounded-t-2xl rounded-b-none bg-white"
                     />
                   </Link>
-                  <div className="flex flex-1 flex-col bg-white p-4">
-                    {product.sku ? (
-                      <p className="text-xs font-medium tracking-wide text-gray-400">
-                        {product.sku}
-                      </p>
-                    ) : null}
+                  <div className="flex min-h-0 flex-1 flex-col bg-white p-4">
+                    <p className="min-h-4 text-xs font-medium tracking-wide text-gray-400">
+                      {product.sku ?? "\u00a0"}
+                    </p>
                     <Link href={href} draggable={false}>
-                      <h3 className="mt-0.5 text-base font-bold tracking-tight text-gray-900 transition-colors hover:text-heading sm:text-lg">
+                      <h3 className="mt-0.5 line-clamp-2 min-h-[48px] text-base leading-snug font-bold tracking-tight text-gray-900 transition-colors hover:text-heading sm:text-lg">
                         {product.name}
                       </h3>
                     </Link>
-                    <dl className="mt-3 flex flex-1 flex-col justify-start">
-                      {capacity ? (
-                        <div className="flex items-center justify-between gap-3 border-b border-gray-100 py-2 text-sm">
-                          <dt className="text-gray-500">{copy.capacityLabel}</dt>
-                          <dd className="font-bold tabular-nums text-gray-900">
-                            {capacity}
-                          </dd>
-                        </div>
-                      ) : null}
-                      {liftHeight ? (
-                        <div className="flex items-center justify-between gap-3 py-2 text-sm">
-                          <dt className="text-gray-500">{copy.liftHeightLabel}</dt>
-                          <dd className="font-bold tabular-nums text-gray-900">
-                            {liftHeight}
-                          </dd>
-                        </div>
-                      ) : null}
+                    <dl className="mt-3 shrink-0">
+                      <div className="flex h-9 items-center justify-between gap-3 border-b border-gray-100 text-sm">
+                        <dt className="text-gray-500">{copy.capacityLabel}</dt>
+                        <dd className="font-bold tabular-nums text-gray-900">
+                          {capacity ?? "—"}
+                        </dd>
+                      </div>
+                      <div className="flex h-9 items-center justify-between gap-3 text-sm">
+                        <dt className="text-gray-500">{copy.liftHeightLabel}</dt>
+                        <dd className="font-bold tabular-nums text-gray-900">
+                          {liftHeight ?? "—"}
+                        </dd>
+                      </div>
                     </dl>
-                    <div className="mt-4 flex items-center justify-between gap-3">
+                    <div className="mt-auto flex items-center justify-between gap-3 pt-4">
                       {price ? (
                         <span className="text-base font-bold tabular-nums text-gray-900">
                           {price}
