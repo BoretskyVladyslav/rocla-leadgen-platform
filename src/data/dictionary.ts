@@ -245,14 +245,25 @@ export interface Dictionary {
     buyCta: string;
     quickOrder: {
       title: string;
+      specsHeading: string;
+      hitBadge: string;
+      skuLabel: string;
+      stockLabel: string;
+      inStock: string;
+      priceLabel: string;
       name: string;
+      email: string;
       phone: string;
+      filesLabel: string;
       submit: string;
       success: string;
       close: string;
       errors: {
         fullName: string;
+        email: string;
         phone: string;
+        fileType: string;
+        fileSize: string;
       };
     };
     orderCta: string;
@@ -783,14 +794,25 @@ const DICTIONARY_UK: Dictionary = {
     buyCta: "Замовити зі знижкою",
     quickOrder: {
       title: "Замовити зі знижкою",
-      name: "Ім’я",
-      phone: "Телефон",
-      submit: "Надіслати заявку",
+      specsHeading: "Технічні характеристики {name}",
+      hitBadge: "ХІТ",
+      skuLabel: "Артикул",
+      stockLabel: "Наявність",
+      inStock: "В наявності",
+      priceLabel: "Ціна:",
+      name: "Ім’я:*",
+      email: "Email:*",
+      phone: "Телефон:*",
+      filesLabel: "Можете надіслати реквізити:",
+      submit: "Замовити",
       success: "Дякуємо! Заявку надіслано. Менеджер зателефонує.",
       close: "Закрити",
       errors: {
         fullName: "Вкажіть ім’я (мінімум 2 символи).",
+        email: "Вкажіть коректний email.",
         phone: "Вкажіть коректний номер телефону.",
+        fileType: "Лише PDF, JPG або PNG.",
+        fileSize: "Файл перевищує 10 МБ.",
       },
     },
     orderCta: "Замовити",
@@ -1288,14 +1310,25 @@ const DICTIONARY_RU: Dictionary = {
     buyCta: "Заказать со скидкой",
     quickOrder: {
       title: "Заказать со скидкой",
-      name: "Имя",
-      phone: "Телефон",
-      submit: "Отправить заявку",
+      specsHeading: "Технические характеристики {name}",
+      hitBadge: "ХИТ",
+      skuLabel: "Артикул",
+      stockLabel: "Наличие",
+      inStock: "В наличии",
+      priceLabel: "Цена:",
+      name: "Имя:*",
+      email: "Email:*",
+      phone: "Телефон:*",
+      filesLabel: "Можете отправить реквизиты:",
+      submit: "Заказать",
       success: "Спасибо! Заявка отправлена. Менеджер перезвонит.",
       close: "Закрыть",
       errors: {
         fullName: "Укажите имя (минимум 2 символа).",
+        email: "Укажите корректный email.",
         phone: "Укажите корректный номер телефона.",
+        fileType: "Только PDF, JPG или PNG.",
+        fileSize: "Файл превышает 10 МБ.",
       },
     },
     orderCta: "Заказать",

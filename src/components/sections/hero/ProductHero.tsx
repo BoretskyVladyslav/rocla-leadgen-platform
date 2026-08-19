@@ -220,8 +220,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
         open={orderOpen}
         onClose={() => setOrderOpen(false)}
         copy={copy.quickOrder}
-        productSlug={product.slug}
-        productName={product.name}
+        product={product}
       />
     </div>
   );
