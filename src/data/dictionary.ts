@@ -159,6 +159,8 @@ export interface Dictionary {
     subtitle: string;
     youtubeCta: string;
     youtubeHref: string;
+    prevLabel: string;
+    nextLabel: string;
     items: Array<{
       title: string;
       imageSrc: string;
@@ -686,6 +688,8 @@ const DICTIONARY_UK: Dictionary = {
       "Короткі огляди техніки KAISER: збірка, гідровузол і робота на складі.",
     youtubeCta: "Дивитися всі відео",
     youtubeHref: "https://www.youtube.com",
+    prevLabel: "Попереднє відео",
+    nextLabel: "Наступне відео",
     items: [
       {
         title: "Збірка гідравлічної рокли",
@@ -1177,6 +1181,8 @@ const DICTIONARY_RU: Dictionary = {
       "Короткие обзоры техники KAISER: сборка, гидроузел и работа на складе.",
     youtubeCta: "Смотреть все видео",
     youtubeHref: "https://www.youtube.com",
+    prevLabel: "Предыдущее видео",
+    nextLabel: "Следующее видео",
     items: [
       {
         title: "Сборка гидравлической роклы",

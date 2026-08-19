@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import { ArrowRight, Play } from "lucide-react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { MediaImage } from "@/components/ui/MediaImage";
@@ -13,6 +14,15 @@ export interface VideoReviewsProps {
 }
 
 export function VideoReviews({ copy, className }: VideoReviewsProps) {
+  const trackRef = useRef<HTMLUListElement>(null);
+
+  function scrollByDir(direction: -1 | 1) {
+    const el = trackRef.current;
+    if (!el) return;
+    const amount = Math.max(el.clientWidth * 0.75, 180);
+    el.scrollBy({ left: direction * amount, behavior: "smooth" });
+  }
+
   return (
     <section
       id="videos"
@@ -20,17 +30,38 @@ export function VideoReviews({ copy, className }: VideoReviewsProps) {
     >
       <div className={PAGE_CONTAINER}>
         <ScrollReveal>
-          <div className="mx-auto max-w-2xl text-center">
+          <div className="relative mx-auto max-w-2xl text-center">
             <h2 className="section-heading">{copy.title}</h2>
             {copy.subtitle ? (
               <p className="mt-3 text-base leading-relaxed text-muted">
                 {copy.subtitle}
               </p>
             ) : null}
+            <div className="mt-4 flex justify-center gap-2 sm:hidden">
+              <button
+                type="button"
+                aria-label={copy.prevLabel}
+                onClick={() => scrollByDir(-1)}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-lg border-2 border-dark bg-white text-lg font-bold text-heading shadow-sm"
+              >
+                ←
+              </button>
+              <button
+                type="button"
+                aria-label={copy.nextLabel}
+                onClick={() => scrollByDir(1)}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-lg border-2 border-dark bg-white text-lg font-bold text-heading shadow-sm"
+              >
+                →
+              </button>
+            </div>
           </div>
         </ScrollReveal>
 
-        <ul className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:pb-0 lg:grid-cols-4 [&::-webkit-scrollbar]:hidden">
+        <ul
+          ref={trackRef}
+          className="mt-6 flex snap-x snap-mandatory gap-2 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] sm:mt-8 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:pb-0 lg:grid-cols-4 [&::-webkit-scrollbar]:hidden"
+        >
           {copy.items.map((item, index) => (
             <li key={item.title} className="w-[72%] shrink-0 snap-start sm:flex sm:w-full sm:justify-center">
               <ScrollReveal delay={index * 0.05} className="w-full max-w-[240px]">
