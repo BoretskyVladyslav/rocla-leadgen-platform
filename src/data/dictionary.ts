@@ -243,6 +243,18 @@ export interface Dictionary {
     eyebrow: string;
     requestQuote: string;
     buyCta: string;
+    quickOrder: {
+      title: string;
+      name: string;
+      phone: string;
+      submit: string;
+      success: string;
+      close: string;
+      errors: {
+        fullName: string;
+        phone: string;
+      };
+    };
     orderCta: string;
     skuLabel: string;
     relatedTitle: string;
@@ -769,6 +781,18 @@ const DICTIONARY_UK: Dictionary = {
     eyebrow: "Товар",
     requestQuote: "Запит ціни",
     buyCta: "Замовити зі знижкою",
+    quickOrder: {
+      title: "Замовити зі знижкою",
+      name: "Ім’я",
+      phone: "Телефон",
+      submit: "Надіслати заявку",
+      success: "Дякуємо! Заявку надіслано. Менеджер зателефонує.",
+      close: "Закрити",
+      errors: {
+        fullName: "Вкажіть ім’я (мінімум 2 символи).",
+        phone: "Вкажіть коректний номер телефону.",
+      },
+    },
     orderCta: "Замовити",
     skuLabel: "Артикул",
     relatedTitle: "Схожі товари",
@@ -1262,6 +1286,18 @@ const DICTIONARY_RU: Dictionary = {
     eyebrow: "Товар",
     requestQuote: "Запрос цены",
     buyCta: "Заказать со скидкой",
+    quickOrder: {
+      title: "Заказать со скидкой",
+      name: "Имя",
+      phone: "Телефон",
+      submit: "Отправить заявку",
+      success: "Спасибо! Заявка отправлена. Менеджер перезвонит.",
+      close: "Закрыть",
+      errors: {
+        fullName: "Укажите имя (минимум 2 символа).",
+        phone: "Укажите корректный номер телефона.",
+      },
+    },
     orderCta: "Заказать",
     skuLabel: "Артикул",
     relatedTitle: "Похожие товары",

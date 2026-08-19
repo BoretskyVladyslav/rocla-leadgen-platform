@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { HashLink } from "@/components/layout/HashLink";
+import { QuickOrderModal } from "@/components/sections/forms/QuickOrderModal";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
 import { PAGE_CONTAINER } from "@/lib/layout";
@@ -71,6 +71,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
   ];
   const thumbs = buildThumbs(gallery);
   const [activeThumb, setActiveThumb] = useState(0);
+  const [orderOpen, setOrderOpen] = useState(false);
   const activeImage =
     gallery.length > 0 ? gallery[activeThumb % gallery.length] : undefined;
   const hasDiscount = Boolean(
@@ -195,9 +196,10 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
             </div>
           ) : null}
 
-          <HashLink
-            href="#consultation"
-            className="flex h-12 w-full items-stretch overflow-hidden rounded-md bg-[#F9BC06] shadow-sm transition-opacity hover:opacity-90 md:h-13"
+          <button
+            type="button"
+            onClick={() => setOrderOpen(true)}
+            className="flex h-12 w-full cursor-pointer items-stretch overflow-hidden rounded-md bg-[#F9BC06] shadow-sm transition-opacity hover:opacity-90 md:h-13"
           >
             {product.priceLabel ? (
               <>
@@ -210,9 +212,17 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
             <span className="flex flex-1 items-center justify-center pl-2 text-xs font-bold tracking-wide text-gray-900 uppercase md:text-sm">
               {copy.buyCta}
             </span>
-          </HashLink>
+          </button>
         </div>
       </div>
+
+      <QuickOrderModal
+        open={orderOpen}
+        onClose={() => setOrderOpen(false)}
+        copy={copy.quickOrder}
+        productSlug={product.slug}
+        productName={product.name}
+      />
     </div>
   );
 }
