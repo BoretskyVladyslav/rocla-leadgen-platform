@@ -5,6 +5,7 @@ import Image from "next/image";
 import { HashLink } from "@/components/layout/HashLink";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import type { Dictionary } from "@/data/dictionary";
+import { PAGE_CONTAINER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 import type { Product, ProductImage, ProductSpec } from "@/types/product";
 
@@ -82,8 +83,8 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
   const showThumbs = thumbs.length > 0;
 
   return (
-    <div className="mx-auto grid max-w-[1200px] grid-cols-1 items-stretch gap-4 px-4 lg:grid-cols-2">
-      <div className="flex h-[380px] gap-2 rounded-xl border border-gray-100 bg-white p-4 shadow-sm">
+    <div className={`${PAGE_CONTAINER} grid grid-cols-1 items-stretch gap-4 lg:grid-cols-2`}>
+      <div className="flex h-[380px] gap-2 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
         {showThumbs ? (
           <ul className="flex w-14 shrink-0 flex-col gap-1.5">
             {thumbs.map((image, index) => (
@@ -138,7 +139,7 @@ export function ProductHero({ product, copy }: ProductHeroProps) {
         </div>
       </div>
 
-      <div className="flex h-[380px] flex-col justify-between rounded-xl border border-gray-100 bg-white p-5 shadow-sm lg:p-6">
+      <div className="flex h-[380px] flex-col justify-between rounded-2xl border border-gray-200 bg-white p-5 shadow-sm lg:p-6">
         <div>
           <h1 className="text-xl leading-tight font-bold text-gray-900 uppercase lg:text-2xl">
             {product.name}

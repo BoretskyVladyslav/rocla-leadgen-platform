@@ -13,6 +13,7 @@ import { SeoTextAccordion } from "@/components/sections/trust/SeoTextAccordion";
 import { VideoReviews } from "@/components/sections/trust/VideoReviews";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { getDictionary } from "@/data/dictionary";
+import { PAGE_CONTAINER } from "@/lib/layout";
 import {
   getProductBySlug,
   getProducts,
@@ -55,8 +56,8 @@ export default async function ProductPage({
 
   return (
     <>
-      <section className="w-full bg-[#F0F5FA] pt-4 pb-8">
-        <div className="mx-auto max-w-[1200px] px-4">
+      <section className="w-full bg-[#F0F5FA] pt-4 pb-10 md:pb-14">
+        <div className={PAGE_CONTAINER}>
           <Breadcrumbs
             className="mb-4 bg-transparent px-0 py-0 text-xs text-gray-500 md:text-sm [&_ol]:max-w-none [&_ol]:px-0 [&_ol]:py-0 [&_ol]:text-inherit"
             items={[

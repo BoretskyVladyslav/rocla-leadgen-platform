@@ -3,6 +3,7 @@
 import { ChevronRight } from "lucide-react";
 import { useId, useState, type ReactNode } from "react";
 import type { Dictionary } from "@/data/dictionary";
+import { PAGE_CONTAINER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/types/product";
 
@@ -31,8 +32,8 @@ export function ProductTabs({ product, copy }: ProductTabsProps) {
   const hasExtra = rest.length > 0 || bullets.length > 0;
 
   return (
-    <section className="pt-8">
-      <div className="mx-auto max-w-[1200px] px-4">
+    <section className="py-10 md:py-14">
+      <div className={PAGE_CONTAINER}>
         <div
           role="tablist"
           aria-label={copy.tabs.description}
@@ -63,8 +64,8 @@ export function ProductTabs({ product, copy }: ProductTabsProps) {
 
         <div
           className={cn(
-            "h-auto overflow-visible rounded-b-xl rounded-tr-xl border border-gray-200 bg-white shadow-sm",
-            active !== "description" && "rounded-tl-xl",
+            "h-auto overflow-visible rounded-b-2xl rounded-tr-2xl border border-gray-200 bg-white shadow-sm",
+            active !== "description" && "rounded-tl-2xl",
           )}
         >
           <div className="px-5 py-6 sm:px-8 sm:py-7">

@@ -11,6 +11,7 @@ import {
   validateCallbackFields,
   type CallbackFieldErrors,
 } from "@/lib/validation";
+import { PAGE_CONTAINER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 
 export interface ConsultationBlockProps {
@@ -62,10 +63,11 @@ export function ConsultationBlock({ copy, className }: ConsultationBlockProps) {
   return (
     <section
       id="consultation"
-      className={cn("scroll-mt-20 px-4 py-8", className)}
+      className={cn("scroll-mt-20 py-10 md:py-14", className)}
     >
-      <div className="mx-auto max-w-[1200px] overflow-hidden rounded-2xl bg-[#E2F0FB]">
-        <div className="grid grid-cols-1 items-stretch lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)_minmax(220px,280px)]">
+      <div className={PAGE_CONTAINER}>
+        <div className="overflow-hidden rounded-2xl border border-gray-200/80 bg-[#E2F0FB]">
+          <div className="grid grid-cols-1 items-stretch lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)_minmax(220px,280px)]">
           <div className="px-6 py-8 sm:px-8 lg:px-10 lg:py-10">
             <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-[1.75rem]">
               {copy.title}
@@ -155,8 +157,9 @@ export function ConsultationBlock({ copy, className }: ConsultationBlockProps) {
               height={720}
               sizes="(max-width: 1024px) 220px, 280px"
               loading="lazy"
-              className="pointer-events-none absolute right-0 bottom-[-1.75rem] block h-[300px] w-auto max-w-none object-contain object-bottom lg:right-2 lg:h-[360px]"
+              className="pointer-events-none absolute right-0 bottom-0 block h-[300px] w-auto max-w-none object-contain object-bottom lg:h-[360px]"
             />
+          </div>
           </div>
         </div>
       </div>

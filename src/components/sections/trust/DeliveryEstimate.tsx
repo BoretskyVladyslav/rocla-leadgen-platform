@@ -19,6 +19,7 @@ import {
   validateCallbackFields,
   type CallbackFieldErrors,
 } from "@/lib/validation";
+import { PAGE_CONTAINER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 
 export interface DeliveryEstimateProps {
@@ -96,8 +97,8 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
   }
 
   return (
-    <section className={cn("w-full bg-white pt-12 pb-8", className)}>
-      <div className="mx-auto w-full max-w-[1400px] px-3 sm:px-4 lg:px-6">
+    <section className={cn("w-full bg-white py-10 md:py-14", className)}>
+      <div className={PAGE_CONTAINER}>
         <ScrollReveal>
           <div className="relative overflow-hidden">
             <div
@@ -205,13 +206,13 @@ export function DeliveryEstimate({ copy, className }: DeliveryEstimateProps) {
           </div>
         </ScrollReveal>
       </div>
-      <ul className="mx-auto mt-1 grid max-w-[1200px] grid-cols-2 gap-6 border-t border-gray-100 px-4 pt-4 pb-2 md:grid-cols-3 lg:grid-cols-5">
+      <ul className={`${PAGE_CONTAINER} mt-1 grid grid-cols-2 gap-6 border-t border-gray-100 pt-4 pb-2 md:grid-cols-3 lg:grid-cols-5`}>
         {copy.trustFactors.map((item) => {
           const Icon = TRUST_ICONS[item.id];
           return (
-            <li key={item.id} className="flex items-center gap-3">
+            <li key={item.id} className="flex items-start gap-3">
               <Icon
-                className="h-7 w-7 shrink-0 text-gray-900"
+                className="mt-0.5 h-7 w-7 shrink-0 text-gray-900"
                 strokeWidth={1.75}
                 aria-hidden
               />

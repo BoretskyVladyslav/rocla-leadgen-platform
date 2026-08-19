@@ -60,10 +60,10 @@ export function ClientLogos({
 
     return (
       <section
-        className={cn("w-full bg-white py-5 lg:py-6", className)}
+        className={cn("w-full bg-white py-6", className)}
         aria-label={copy.compactTitle}
       >
-        <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-8 px-4">
+        <div className={`${PAGE_CONTAINER} flex items-center justify-between gap-8`}>
           <p className="shrink-0 text-lg leading-tight font-bold text-gray-900 lg:text-xl">
             {headingWords.map((word, index) => (
               <span key={`${word}-${index}`}>

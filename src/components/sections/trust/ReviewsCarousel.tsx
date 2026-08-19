@@ -131,7 +131,7 @@ function ReviewCard({
   return (
     <article
       className={cn(
-        "flex h-full flex-col justify-between rounded-2xl border border-neutral-200 bg-white p-5 shadow-xs transition-shadow hover:shadow-md",
+        "flex h-full flex-col justify-between rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md",
         active && "border-accent shadow-md",
       )}
     >

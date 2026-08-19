@@ -15,6 +15,7 @@ import { MediaImage } from "@/components/ui/MediaImage";
 import type { Dictionary } from "@/data/dictionary";
 import { useCarouselTrack } from "@/hooks/useCarouselTrack";
 import type { Product, ProductSpec } from "@/types/product";
+import { PAGE_CONTAINER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 
 export interface RelatedProductsCarouselProps {
@@ -78,7 +79,7 @@ export function RelatedProductsCarousel({
 
   return (
     <section id="related" className="scroll-mt-20 bg-amber-50/30 py-10 md:py-14">
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <div className={PAGE_CONTAINER}>
         <ScrollReveal>
           <div className="mb-8 flex flex-row items-end justify-between gap-4">
             <h2 className="text-left text-2xl font-bold uppercase tracking-[0.08em] text-heading sm:text-3xl">

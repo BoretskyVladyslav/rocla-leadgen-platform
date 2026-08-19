@@ -4,6 +4,7 @@ import { ArrowRight, Play } from "lucide-react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { MediaImage } from "@/components/ui/MediaImage";
 import type { Dictionary } from "@/data/dictionary";
+import { PAGE_CONTAINER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 
 export interface VideoReviewsProps {
@@ -17,7 +18,7 @@ export function VideoReviews({ copy, className }: VideoReviewsProps) {
       id="videos"
       className={cn("scroll-mt-20 bg-white py-10 md:py-14", className)}
     >
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <div className={PAGE_CONTAINER}>
         <ScrollReveal>
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="section-heading">{copy.title}</h2>
@@ -29,7 +30,7 @@ export function VideoReviews({ copy, className }: VideoReviewsProps) {
           </div>
         </ScrollReveal>
 
-        <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {copy.items.map((item, index) => (
             <li key={item.title} className="flex justify-center">
               <ScrollReveal delay={index * 0.05} className="w-full max-w-[240px]">
@@ -37,7 +38,7 @@ export function VideoReviews({ copy, className }: VideoReviewsProps) {
                   href={copy.youtubeHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative mx-auto block aspect-[9/16] min-h-[380px] max-w-[240px] overflow-hidden rounded-2xl border border-gray-200 bg-dark shadow-md transition-all duration-300 hover:shadow-xl"
+                  className="group relative mx-auto block aspect-[9/16] min-h-[380px] max-w-[240px] overflow-hidden rounded-2xl border border-gray-200 bg-dark shadow-sm transition-all duration-300 hover:shadow-md"
                 >
                   <MediaImage
                     src={item.imageSrc}
