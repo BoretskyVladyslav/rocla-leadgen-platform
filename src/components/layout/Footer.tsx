@@ -2,6 +2,7 @@ import { Clock, Mail, Phone } from "lucide-react";
 import { HashLink } from "@/components/layout/HashLink";
 import { MotionLink } from "@/components/motion/MotionLink";
 import type { Dictionary } from "@/data/dictionary";
+import { PAGE_CONTAINER } from "@/lib/layout";
 
 export interface FooterProps {
   lang: string;
@@ -71,7 +72,7 @@ export function Footer({ lang, copy }: FooterProps) {
 
   return (
     <footer className="bg-[#1A1A1A] text-white">
-      <div className="mx-auto w-full max-w-7xl px-4 pt-12 sm:px-6 lg:px-8">
+      <div className={`${PAGE_CONTAINER} pt-12`}>
         <div className="flex flex-col gap-10 md:hidden">
           <BrandColumn copy={copy} />
           <div className="grid grid-cols-2 gap-6">

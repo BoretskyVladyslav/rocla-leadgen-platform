@@ -3,6 +3,7 @@ import { HashLink } from "@/components/layout/HashLink";
 import { LocaleSwitcher } from "@/components/layout/LocaleSwitcher";
 import { MobileMenu } from "@/components/layout/MobileMenu";
 import type { Dictionary } from "@/data/dictionary";
+import { PAGE_CONTAINER } from "@/lib/layout";
 
 export interface HeaderProps {
   lang: string;
@@ -22,7 +23,7 @@ export function Header({ lang, copy }: HeaderProps) {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-white">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+      <div className={`${PAGE_CONTAINER} flex items-center justify-between gap-3 py-3`}>
         <Link href={`/${lang}`} className="min-w-0 shrink leading-tight">
           <span className="block font-sans text-2xl font-extrabold uppercase tracking-tight md:text-3xl">
             <span className="text-amber-500">{copy.brand.slice(0, 1)}</span>
